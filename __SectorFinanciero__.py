@@ -1,4 +1,4 @@
-from PyOBD import *
+from PyOBD.PyOBD import *
 from librerias import *
 
 
