@@ -7,7 +7,11 @@ import pandas as pd
 from pytz import timezone
 urllib3.disable_warnings()
 from librerias import *
-import ssl
+from urllib3.exceptions import InsecureRequestWarning
+from urllib3 import disable_warnings
+
+disable_warnings(InsecureRequestWarning)
+
 
 
 class openBYMAdata():
@@ -24,7 +28,10 @@ class openBYMAdata():
         self.__filter_columns_fixedIncome=["symbol","settlementType","quantityBid","bidPrice","offerPrice","quantityOffer","settlementPrice","closingPrice","imbalance","openingPrice","tradingHighPrice","tradingLowPrice","previousClosingPrice","volumeAmount","volume","numberOfOrders","tradeHour","securityType","maturityDate"]
 
         self.__s = requests.session()
-        self.__s.get('https://open.bymadata.com.ar/#/dashboard', verify=ssl.CERT_NONE)
+        self.__s.get('https://open.bymadata.com.ar/#/dashboard', verify=False)
+        with urllib3.PoolManager(ssl_context=ctx) as http:
+            req = http.request("GET", "your_url")
+            data_to_work_with = req .data
 
         self.__headers = {
             'Connection': 'keep-alive',
