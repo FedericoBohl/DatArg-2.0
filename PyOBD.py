@@ -7,11 +7,37 @@ import pandas as pd
 from pytz import timezone
 urllib3.disable_warnings()
 from librerias import *
-from urllib3.exceptions import InsecureRequestWarning
-from urllib3 import disable_warnings
+import ssl
+import io
 
-disable_warnings(InsecureRequestWarning)
 
+class CustomHttpAdapter(requests.adapters.HTTPAdapter):
+    # "Transport adapter" that allows us to use custom ssl_context.
+
+    def __init__(self, ssl_context=None, **kwargs):
+        self.ssl_context = ssl_context
+        super().__init__(**kwargs)
+
+    def init_poolmanager(self, connections, maxsize, block=False):
+        self.poolmanager = urllib3.poolmanager.PoolManager(
+            num_pools=connections,
+            maxsize=maxsize,
+            block=block,
+            ssl_context=self.ssl_context,
+        )
+
+
+def get_legacy_session():
+    ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
+    ctx.options |= 0x4  # OP_LEGACY_SERVER_CONNECT
+    session = requests.session()
+    session.mount("https://", CustomHttpAdapter(ctx))
+    return session
+
+
+URL = "https://open.bymadata.com.ar/assets/api/langs/es.json"
+res = get_legacy_session().get(URL)
+st.write(res)
 
 
 class openBYMAdata():
@@ -45,7 +71,7 @@ class openBYMAdata():
             'Referer': 'https://open.bymadata.com.ar/',
             'Accept-Language': 'es-US,es-419;q=0.9,es;q=0.8,en;q=0.7',
         }
-        response = self.__s.get('https://open.bymadata.com.ar/assets/api/langs/es.json')
+        response = self.__s.get('https://open.bymadata.com.ar/assets/api/langs/es.json', headers=self.__headers)
         self.__diction=json.loads(response.text)
 
     def isworkingDay(self):
