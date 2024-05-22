@@ -10,4 +10,4 @@ matplotlib
 streamlit_js_eval
 streamlit_javascript 
 user_agents
-PyOBD @ git+https://github.com/franco-lamas/PyOBD@main
+git+https://github.com/franco-lamas/PyOBD
