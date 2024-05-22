@@ -97,20 +97,19 @@ def load_datos_bolsa():
     return PyOBD.indices(),PyOBD.get_bonds(),PyOBD.get_short_term_bonds(),PyOBD.get_corporateBonds(),PyOBD.get_bluechips(),PyOBD.get_galpones(),PyOBD.get_cedears()
 
 def show_data():
-    if (st.button('Recargar datos') or ('first_load' not in S)):
-        indice, bonos_gob, letras, bonos_cor, acc_merv, acc_gen, cede= load_datos_bolsa()
-        first_load=True
-    st.metric('Merval',indice.loc[1,'last'],f'{round(indice.loc[1,"change"]*100,2)}%')
+    if (st.button('Recargar datos') or ('bonos_cor' not in S)):
+        S.indice, S.bonos_gob, S.letras, S.bonos_cor, S.acc_merv, S.acc_gen, S.cede= load_datos_bolsa()
+    st.metric('Merval',S.indice.loc[1,'last'],f'{round(S.indice.loc[1,"change"]*100,2)}%')
     bonos, acciones, cedears= st.tabs(["Bonos", "Acciones",'Cedears'])
     with bonos:
         st.header("Bonos")
-        st.write(bonos_gob)
+        st.write(S.bonos_gob)
         st.header("Letras de corto plazo")
-        st.write(letras)
+        st.write(S.letras)
         st.header("Bonos Corporativos")
-        st.write(bonos_cor)
+        st.write(S.bonos_cor)
     with acciones: 
-        fig_merv,fig_gen=make_acciones(acc_merv,acc_gen)
+        fig_merv,fig_gen=make_acciones(S.acc_merv,S.acc_gen)
         container=st.container(border=True)
         if container.radio('¿Que panel desea ver?' , options=['Merval','Panel General'] , horizontal=True, index=0 , key='which_merv') == 'Merval':
             st.markdown("""<h2 style='text-align: center; color: #404040; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>Merval</h2>""", unsafe_allow_html=True)
@@ -119,7 +118,7 @@ def show_data():
             st.markdown("""<h2 style='text-align: center; color: #404040; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>Panel General</h2>""", unsafe_allow_html=True)
             st.plotly_chart(fig_gen, use_container_width=True)
     with cedears:
-        make_cedears(cede)
+        make_cedears(S.cede)
 
 
 
