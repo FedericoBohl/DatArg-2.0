@@ -2,7 +2,6 @@ git+https://github.com/franco-lamas/PyOBD
 pandas
 plotly
 fredapi
-requests
 numpy
 bs4
 openpyxl
