@@ -39,8 +39,8 @@ if is_session_pc:
 
     S.pbi_men=get_pbi()
 
-    with t_bcra:
-        make_BCRA_web()
+    #with t_bcra:
+    #    make_BCRA_web()
     with t_Merv:
         make_merv()
 
