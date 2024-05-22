@@ -1,3 +1,4 @@
+git+https://github.com/franco-lamas/PyOBD
 pandas
 plotly
 fredapi
@@ -10,4 +11,3 @@ matplotlib
 streamlit_js_eval
 streamlit_javascript 
 user_agents
-git+https://github.com/franco-lamas/PyOBD
