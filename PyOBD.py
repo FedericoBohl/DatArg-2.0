@@ -45,7 +45,7 @@ class openBYMAdata():
             'Referer': 'https://open.bymadata.com.ar/',
             'Accept-Language': 'es-US,es-419;q=0.9,es;q=0.8,en;q=0.7',
         }
-        response = self.__s.get('https://open.bymadata.com.ar/assets/api/langs/es.json', headers=self.__headers)
+        response = self.__s.get('https://open.bymadata.com.ar/assets/api/langs/es.json')
         self.__diction=json.loads(response.text)
 
     def isworkingDay(self):
