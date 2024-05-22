@@ -24,7 +24,7 @@ class openBYMAdata():
         self.__filter_columns_fixedIncome=["symbol","settlementType","quantityBid","bidPrice","offerPrice","quantityOffer","settlementPrice","closingPrice","imbalance","openingPrice","tradingHighPrice","tradingLowPrice","previousClosingPrice","volumeAmount","volume","numberOfOrders","tradeHour","securityType","maturityDate"]
 
         self.__s = requests.session()
-        self.__s.get('https://open.bymadata.com.ar/#/dashboard', verify='/home/adminuser/venv/lib/python3.12/site-packages/urllib3/connectionpool.py')
+        self.__s.get('https://open.bymadata.com.ar/#/dashboard', verify=False)
 
         self.__headers = {
             'Connection': 'keep-alive',
