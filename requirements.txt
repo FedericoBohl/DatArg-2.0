@@ -9,4 +9,4 @@ pytz
 matplotlib
 streamlit_js_eval
 streamlit_javascript 
-time
+user_agents
