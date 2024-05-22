@@ -98,19 +98,19 @@ def load_datos_bolsa():
 
 def show_data():
     if (st.button('Recargar datos') or ('first_load' not in S)):
-        S.indice, S.bonos_gob, S.letras, S.bonos_cor, S.acc_merv, S.acc_gen, S.cede= load_datos_bolsa()
-        S.first_load=True
-    st.metric('Merval',S.indice.loc[1,'last'],f'{round(S.indice.loc[1,"change"]*100,2)}%')
+        indice, bonos_gob, letras, bonos_cor, acc_merv, acc_gen, cede= load_datos_bolsa()
+        first_load=True
+    st.metric('Merval',indice.loc[1,'last'],f'{round(indice.loc[1,"change"]*100,2)}%')
     bonos, acciones, cedears= st.tabs(["Bonos", "Acciones",'Cedears'])
     with bonos:
         st.header("Bonos")
-        st.write(S.bonos_gob)
+        st.write(bonos_gob)
         st.header("Letras de corto plazo")
-        st.write(S.letras)
+        st.write(letras)
         st.header("Bonos Corporativos")
-        st.write(S.bonos_cor)
+        st.write(bonos_cor)
     with acciones: 
-        fig_merv,fig_gen=make_acciones(S.acc_merv,S.acc_gen)
+        fig_merv,fig_gen=make_acciones(acc_merv,acc_gen)
         container=st.container(border=True)
         if container.radio('¿Que panel desea ver?' , options=['Merval','Panel General'] , horizontal=True, index=0 , key='which_merv') == 'Merval':
             st.markdown("""<h2 style='text-align: center; color: #404040; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>Merval</h2>""", unsafe_allow_html=True)
@@ -119,7 +119,7 @@ def show_data():
             st.markdown("""<h2 style='text-align: center; color: #404040; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>Panel General</h2>""", unsafe_allow_html=True)
             st.plotly_chart(fig_gen, use_container_width=True)
     with cedears:
-        make_cedears(S.cede)
+        make_cedears(cede)
 
 
 
