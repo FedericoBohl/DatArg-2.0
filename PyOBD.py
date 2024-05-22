@@ -5,10 +5,7 @@ import urllib3
 import numpy as np
 import pandas as pd
 from pytz import timezone
-urllib3.disable_warnings()
-from librerias import *
-import ssl
-import io
+
 
 class openBYMAdata():
 
