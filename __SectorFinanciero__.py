@@ -1,7 +1,6 @@
 from PyOBD import openBYMAdata
 from librerias import *
 
-
 @st.cache_data(show_spinner=False)
 def make_cedears(data_now : pd.DataFrame):
     with st.container(border=True):
