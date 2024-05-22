@@ -1,0 +1,7 @@
+[server]
+enableCORS = false
+headless = true
+port = 8080
+enableXsrfProtection = true
+certfile = /path/to/certificate.crt
+keyfile = /path/to/privatekey.key

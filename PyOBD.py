@@ -10,36 +10,6 @@ from librerias import *
 import ssl
 import io
 
-
-class CustomHttpAdapter(requests.adapters.HTTPAdapter):
-    # "Transport adapter" that allows us to use custom ssl_context.
-
-    def __init__(self, ssl_context=None, **kwargs):
-        self.ssl_context = ssl_context
-        super().__init__(**kwargs)
-
-    def init_poolmanager(self, connections, maxsize, block=False):
-        self.poolmanager = urllib3.poolmanager.PoolManager(
-            num_pools=connections,
-            maxsize=maxsize,
-            block=block,
-            ssl_context=self.ssl_context,
-        )
-
-
-def get_legacy_session():
-    ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
-    ctx.options |= 0x4  # OP_LEGACY_SERVER_CONNECT
-    session = requests.session()
-    session.mount("https://", CustomHttpAdapter(ctx))
-    return session
-
-
-URL = "https://open.bymadata.com.ar/assets/api/langs/es.json"
-res = get_legacy_session().get(URL)
-st.write(res)
-
-
 class openBYMAdata():
 
     def __init__(self):
@@ -54,7 +24,7 @@ class openBYMAdata():
         self.__filter_columns_fixedIncome=["symbol","settlementType","quantityBid","bidPrice","offerPrice","quantityOffer","settlementPrice","closingPrice","imbalance","openingPrice","tradingHighPrice","tradingLowPrice","previousClosingPrice","volumeAmount","volume","numberOfOrders","tradeHour","securityType","maturityDate"]
 
         self.__s = requests.session()
-        self.__s.get('https://open.bymadata.com.ar/#/dashboard', verify=False)
+        self.__s.get('https://open.bymadata.com.ar/#/dashboard', verify='/home/adminuser/venv/lib/python3.12/site-packages/urllib3/connectionpool.py')
 
         self.__headers = {
             'Connection': 'keep-alive',
