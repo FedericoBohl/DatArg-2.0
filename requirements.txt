@@ -1,0 +1,10 @@
+pandas
+plotly
+fredapi
+requests
+numpy
+bs4
+openpyxl
+pytz
+matplotlib
+streamlit_js_eval
