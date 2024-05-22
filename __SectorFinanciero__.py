@@ -40,7 +40,7 @@ def make_cedears(data_now : pd.DataFrame):
     st.markdown("""<h2 style='text-align: center; color: #404040; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>S&P 500 en Cedears</h2>""", unsafe_allow_html=True)
     st.plotly_chart(fig,use_container_width=True)
 
-@st.cache_data(show_spinner=False, experimental_allow_widgets=True)
+@st.cache_data(show_spinner=False)
 def make_acciones(data_now_merv : pd.DataFrame , data_now_gen : pd.DataFrame):
     data=pd.read_csv('data_bolsa/bolsa_arg.csv',delimiter=';')
     data_merv=pd.merge(data_now_merv,data,on='symbol').dropna()
