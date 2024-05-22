@@ -75,7 +75,7 @@ pio.templates["Oficial"] = go.layout.Template(
 )
 pio.templates.default = "Oficial"
 
-#@st.cache_data(ex)
+@st.cache_data()
 def page_info():
     page_width = streamlit_js_eval(js_expressions='window.innerWidth', key='WIDTH',  want_output = True)
     ua_string = st_javascript("""window.navigator.userAgent;""")
@@ -121,7 +121,7 @@ def get_data(id:str|list[str],start_date:str,col_list:list[str]|str|None=None):
             df.rename(columns={1:result["meta"][1]["field"]["description"]},inplace=True)
     return df[~df.index.duplicated(keep='first')]
 
-@st.cache_resource(show_spinner=False)
+@st.cache_data(show_spinner=False)
 def get_pbi():
     data=[450307.061,
     451549.5601,

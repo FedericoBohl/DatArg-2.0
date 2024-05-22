@@ -91,7 +91,7 @@ def make_acciones(data_now_merv : pd.DataFrame , data_now_gen : pd.DataFrame):
     fig_gen.update_layout(margin=dict(l=1, r=1, t=10, b=1))
     return fig_merv,fig_gen
 
-@st.cache_data(show_spinner=False)
+#@st.cache_data(show_spinner=False)
 def load_datos_bolsa():
     PyOBD=openBYMAdata()
     return PyOBD.indices(),PyOBD.get_bonds(),PyOBD.get_short_term_bonds(),PyOBD.get_corporateBonds(),PyOBD.get_bluechips(),PyOBD.get_galpones(),PyOBD.get_cedears()
