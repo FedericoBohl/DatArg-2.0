@@ -29,9 +29,6 @@ class openBYMAdata():
 
         self.__s = requests.session()
         self.__s.get('https://open.bymadata.com.ar/#/dashboard', verify=False)
-        with urllib3.PoolManager(ssl_context=ctx) as http:
-            req = http.request("GET", "your_url")
-            data_to_work_with = req .data
 
         self.__headers = {
             'Connection': 'keep-alive',
