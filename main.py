@@ -41,8 +41,8 @@ if is_session_pc:
 
     with t_bcra:
         make_BCRA_web()
-    with t_Merv:
-        make_merv()
+    #with t_Merv:
+        #make_merv()
 
 
 
