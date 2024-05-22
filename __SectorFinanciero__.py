@@ -97,7 +97,7 @@ def load_datos_bolsa():
     return PyOBD.indices(),PyOBD.get_bonds(),PyOBD.get_short_term_bonds(),PyOBD.get_corporateBonds(),PyOBD.get_bluechips(),PyOBD.get_galpones(),PyOBD.get_cedears()
 
 def show_data():
-    if ('first_load' not in S) or (st.button('Recargar datos')):
+    if (st.button('Recargar datos') or ('first_load' not in S)):
         S.indice, S.bonos_gob, S.letras, S.bonos_cor, S.acc_merv, S.acc_gen, S.cede= load_datos_bolsa()
         S.first_load=True
     st.metric('Merval',S.indice.loc[1,'last'],f'{round(S.indice.loc[1,"change"]*100,2)}%')
