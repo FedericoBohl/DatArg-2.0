@@ -1,4 +1,4 @@
-from PyOBD.PyOBD.PyOBD import openBYMAdata
+from PyOBD import *
 from librerias import *
 
 
