@@ -60,72 +60,72 @@ def plot_BM(escala, bcra: pd.DataFrame):
     st.plotly_chart(fig,use_container_width=True)
 
 @st.cache_data(show_spinner=False,experimental_allow_widgets=True)
-def plot_pasivos_rem(escala,bcra: pd.DataFrame,tasas: pd.DataFrame):
+def plot_pasivos_rem(escala,bcra: pd.DataFrame,tasas: pd.DataFrame): # El botón de BM está andando mal
     st.subheader("Pases Netos   &   LELIQ/LEBAC")
-    if not st.checkbox("%BM",value=False,key="BM_bcra"):
-        fig = make_subplots(rows=2, cols=1, specs=[[{"secondary_y": True}], [{"secondary_y": True}]])
-        fig.add_trace(go.Bar(x=bcra.index, y=(bcra["LeLiq"]), name='LELIQ', marker_color='navy'), row=1, col=1, secondary_y=False)
-        fig.add_trace(go.Bar(x=bcra.index, y=(bcra["LEBAC-NOBAC"]), name='LEBAC', marker_color='gray'), row=1, col=1, secondary_y=False)
-        fig.add_trace(go.Scatter(x=tasas.index, y=tasas["Tasa de Politica Monetaria"], name="Tasa Pol. Mon.", marker_color='red', line=dict(width=3)), row=1, col=1, secondary_y=True)
-        fig.add_trace(go.Scatter(x=bcra.index, y=bcra["Pases Netos"], name='Pases Netos', marker_color="rgb(139,224,164)", line=dict(width=3), fill='tozeroy'), row=2, col=1, secondary_y=False)
-        fig.add_trace(go.Scatter(x=tasas.index, y=tasas["Tasa Pases Pasivos (1 dia)"], name="Tasa Pasiva", marker_color="orange", line=dict(width=3)), row=2, col=1, secondary_y=True)                
-        fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),height=600, barmode="relative", legend=dict(
-            orientation="h",
-            yanchor="top",  # Cambiado a 'top'
-            y=1.2,          # Cambiado a 1.0
-            xanchor="center",
-            x=0.5,
-            bordercolor='black',
-            borderwidth=2
-        ))
-        fig.update_yaxes( row=1, col=1, showgrid=False, zeroline=True, showline=True)
-        fig.update_yaxes( row=2, col=1, showgrid=False, zeroline=True, showline=True)
-        # Configurar el primer subgráfico para ocultar el eje x
-        fig.update_xaxes(
-            title_text='',
-            visible=False,
-            row=1,
-            col=1
-        )
-        if escala=="***Millones de ARS***":
-            fig['layout']['yaxis']['title']='Millones de ARS'
-            fig['layout']['yaxis']['type']='log'
-        elif escala=="***Millones de USD-Oficial***":
-            fig['layout']['yaxis']['title']='Millones de USD-Oficial (TC Oficial)'
-        else:
-            fig['layout']['yaxis']['title']='PP del PBI'
-        fig['layout']['yaxis2']['title']='%-Tasa'
-    else: 
-        fig = make_subplots(rows=2, cols=1, specs=[[{"secondary_y": True}], [{"secondary_y": True}]])
-        fig.add_trace(go.Bar(x=bcra.index, y=(bcra["LeLiq"]/bcra["BM"]), name='LELIQ', marker_color='navy'), row=1, col=1, secondary_y=False)
-        fig.add_trace(go.Bar(x=bcra.index, y=(bcra["LEBAC-NOBAC"]/bcra["BM"]), name='LEBAC', marker_color='gray'), row=1, col=1, secondary_y=False)
-        fig.add_trace(go.Scatter(x=tasas.index, y=tasas["Tasa de Politica Monetaria"], name="Tasa Pol. Mon.", marker_color='red', line=dict(width=3)), row=1, col=1, secondary_y=True)
-        fig.add_trace(go.Scatter(x=bcra.index, y=(bcra["Pases Netos"]/bcra["BM"]), name='Pases Netos', marker_color="rgb(139,224,164)", line=dict(width=3), fill='tozeroy'), row=2, col=1, secondary_y=False)
-        fig.add_trace(go.Scatter(x=tasas.index, y=tasas["Tasa Pases Pasivos (1 dia)"], name="Tasa Pasiva", marker_color="orange", line=dict(width=3)), row=2, col=1, secondary_y=True)                
+    #if not st.checkbox("%BM",value=False,key="BM_bcra"):
+    fig = make_subplots(rows=2, cols=1, specs=[[{"secondary_y": True}], [{"secondary_y": True}]])
+    fig.add_trace(go.Bar(x=bcra.index, y=(bcra["LeLiq"]), name='LELIQ', marker_color='navy'), row=1, col=1, secondary_y=False)
+    fig.add_trace(go.Bar(x=bcra.index, y=(bcra["LEBAC-NOBAC"]), name='LEBAC', marker_color='gray'), row=1, col=1, secondary_y=False)
+    fig.add_trace(go.Scatter(x=tasas.index, y=tasas["Tasa de Politica Monetaria"], name="Tasa Pol. Mon.", marker_color='red', line=dict(width=3)), row=1, col=1, secondary_y=True)
+    fig.add_trace(go.Scatter(x=bcra.index, y=bcra["Pases Netos"], name='Pases Netos', marker_color="rgb(139,224,164)", line=dict(width=3), fill='tozeroy'), row=2, col=1, secondary_y=False)
+    fig.add_trace(go.Scatter(x=tasas.index, y=tasas["Tasa Pases Pasivos (1 dia)"], name="Tasa Pasiva", marker_color="orange", line=dict(width=3)), row=2, col=1, secondary_y=True)                
+    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),height=600, barmode="relative", legend=dict(
+        orientation="h",
+        yanchor="top",  # Cambiado a 'top'
+        y=1.2,          # Cambiado a 1.0
+        xanchor="center",
+        x=0.5,
+        bordercolor='black',
+        borderwidth=2
+    ))
+    fig.update_yaxes( row=1, col=1, showgrid=False, zeroline=True, showline=True)
+    fig.update_yaxes( row=2, col=1, showgrid=False, zeroline=True, showline=True)
+    # Configurar el primer subgráfico para ocultar el eje x
+    fig.update_xaxes(
+        title_text='',
+        visible=False,
+        row=1,
+        col=1
+    )
+    if escala=="***Millones de ARS***":
+        fig['layout']['yaxis']['title']='Millones de ARS'
+        fig['layout']['yaxis']['type']='log'
+    elif escala=="***Millones de USD-Oficial***":
+        fig['layout']['yaxis']['title']='Millones de USD-Oficial (TC Oficial)'
+    else:
+        fig['layout']['yaxis']['title']='PP del PBI'
+    fig['layout']['yaxis2']['title']='%-Tasa'
+    #else: 
+    #    fig = make_subplots(rows=2, cols=1, specs=[[{"secondary_y": True}], [{"secondary_y": True}]])
+    #    fig.add_trace(go.Bar(x=bcra.index, y=(bcra["LeLiq"]/bcra["BM"]), name='LELIQ', marker_color='navy'), row=1, col=1, secondary_y=False)
+    #    fig.add_trace(go.Bar(x=bcra.index, y=(bcra["LEBAC-NOBAC"]/bcra["BM"]), name='LEBAC', marker_color='gray'), row=1, col=1, secondary_y=False)
+    #    fig.add_trace(go.Scatter(x=tasas.index, y=tasas["Tasa de Politica Monetaria"], name="Tasa Pol. Mon.", marker_color='red', line=dict(width=3)), row=1, col=1, secondary_y=True)
+    #    fig.add_trace(go.Scatter(x=bcra.index, y=(bcra["Pases Netos"]/bcra["BM"]), name='Pases Netos', marker_color="rgb(139,224,164)", line=dict(width=3), fill='tozeroy'), row=2, col=1, secondary_y=False)
+    #    fig.add_trace(go.Scatter(x=tasas.index, y=tasas["Tasa Pases Pasivos (1 dia)"], name="Tasa Pasiva", marker_color="orange", line=dict(width=3)), row=2, col=1, secondary_y=True)                
 
-        fig.update_layout(margin=dict(l=1, r=1, t=75, b=1),height=600, barmode="relative", legend=dict(
-            orientation="h",
-            yanchor="top",  # Cambiado a 'top'
-            y=1.2,          # Cambiado a 1.0
-            xanchor="center",
-            x=0.5,
-            bordercolor='black',
-            borderwidth=2
-        ))
-        fig.update_yaxes(row=1, col=1, showgrid=False, zeroline=True, showline=True)
-        fig.update_yaxes(row=2, col=1, showgrid=False, zeroline=True, showline=True)
+    #    fig.update_layout(margin=dict(l=1, r=1, t=75, b=1),height=600, barmode="relative", legend=dict(
+    #        orientation="h",
+    #        yanchor="top",  # Cambiado a 'top'
+    #        y=1.2,          # Cambiado a 1.0
+    #        xanchor="center",
+    #        x=0.5,
+    #        bordercolor='black',
+    #        borderwidth=2
+    #    ))
+    #    fig.update_yaxes(row=1, col=1, showgrid=False, zeroline=True, showline=True)
+    #    fig.update_yaxes(row=2, col=1, showgrid=False, zeroline=True, showline=True)
 
-        # Configurar el primer subgráfico para ocultar el eje x
-        fig.update_xaxes(
-            title_text='',
-            visible=False,
-            row=1,
-            col=1
-        )
-        fig['layout']['yaxis']['title']='Puntos de la BM'
-        fig['layout']['yaxis2']['title']='%-Tasa'
-        fig['layout']['yaxis3']['title']='Puntos de la BM'
-        fig['layout']['yaxis4']['title']='%-Tasa'
+    #    # Configurar el primer subgráfico para ocultar el eje x
+    #    fig.update_xaxes(
+    #        title_text='',
+    #        visible=False,
+    #        row=1,
+    #        col=1
+    #    )
+    #    fig['layout']['yaxis']['title']='Puntos de la BM'
+    #    fig['layout']['yaxis2']['title']='%-Tasa'
+    #    fig['layout']['yaxis3']['title']='Puntos de la BM'
+    #    fig['layout']['yaxis4']['title']='%-Tasa'
     st.plotly_chart(fig,use_container_width=True)
         
 @st.cache_data(show_spinner=False)
@@ -215,18 +215,18 @@ def plot_depositos(escala, bcra:pd.DataFrame, tasas: pd.DataFrame)->None:
         fig['layout']['yaxis']['title']='PP del PBI'
     st.plotly_chart(fig,use_container_width=True)
 
-@st.cache_data(show_spinner=False, experimental_allow_widgets=True)
+@st.cache_data(show_spinner=False)
 def plot_reservas(reservas): # Está andando medio mal, no reacciona bien con el botón
     st.subheader("Reservas Internacionales & Tipo de Cambio Real Bilateral")
     fig = make_subplots(specs=[[{"secondary_y": True}]])
-    if st.checkbox("Post Convertibilidad",value=True,key='reservas_post'):
-        fig.add_trace(go.Scatter(x=reservas.loc["Jan-2002":].index, y=reservas.loc["Jan-2002":]["TCR"], name="TCR", marker_color="rgb(220, 20, 60)", line=dict(width=3.5,dash="dashdot")), secondary_y=False)
-        fig.add_trace(go.Scatter(x=reservas.loc["Jan-2002":].index, y=reservas["TCR"].ewm(span=12, adjust=False).mean().loc["Jan-2002":], name="EMA(12)-TCR", marker_color="darkgreen", line=dict(width=2.5,dash="dash")), secondary_y=False)
-        fig.add_trace(go.Scatter(x=reservas.loc["Jan-2002":].index, y=reservas.loc["Jan-2002":]["Res Int"], name="Reservas Internacionales", marker_color="royalblue", line=dict(width=3),fill="tozeroy"), secondary_y=True)
-    else:
-        fig.add_trace(go.Scatter(x=reservas.index, y=reservas["Res Int"], name="Reservas Internacionales", marker_color="royalblue", line=dict(width=3),fill="tozeroy"), secondary_y=True)
-        fig.add_trace(go.Scatter(x=reservas.index, y=reservas["TCR"], name="TCR", marker_color="rgb(220, 20, 60)", line=dict(width=3.5,dash="dashdot")), secondary_y=False)
-        fig.add_trace(go.Scatter(x=reservas.index, y=reservas["TCR"].ewm(span=12, adjust=False).mean(), name="EMA(12)-TCR", marker_color="darkgreen", line=dict(width=2.5,dash="dash")), secondary_y=False)
+    #if st.checkbox("Post Convertibilidad",value=True,key='reservas_post'):
+    fig.add_trace(go.Scatter(x=reservas.loc["Jan-2002":].index, y=reservas.loc["Jan-2002":]["TCR"], name="TCR", marker_color="rgb(220, 20, 60)", line=dict(width=3.5,dash="dashdot")), secondary_y=False)
+    fig.add_trace(go.Scatter(x=reservas.loc["Jan-2002":].index, y=reservas["TCR"].ewm(span=12, adjust=False).mean().loc["Jan-2002":], name="EMA(12)-TCR", marker_color="darkgreen", line=dict(width=2.5,dash="dash")), secondary_y=False)
+    fig.add_trace(go.Scatter(x=reservas.loc["Jan-2002":].index, y=reservas.loc["Jan-2002":]["Res Int"], name="Reservas Internacionales", marker_color="royalblue", line=dict(width=3),fill="tozeroy"), secondary_y=True)
+    #else:
+    #    fig.add_trace(go.Scatter(x=reservas.index, y=reservas["Res Int"], name="Reservas Internacionales", marker_color="royalblue", line=dict(width=3),fill="tozeroy"), secondary_y=True)
+    #    fig.add_trace(go.Scatter(x=reservas.index, y=reservas["TCR"], name="TCR", marker_color="rgb(220, 20, 60)", line=dict(width=3.5,dash="dashdot")), secondary_y=False)
+    #    fig.add_trace(go.Scatter(x=reservas.index, y=reservas["TCR"].ewm(span=12, adjust=False).mean(), name="EMA(12)-TCR", marker_color="darkgreen", line=dict(width=2.5,dash="dash")), secondary_y=False)
     
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),
         height=450, 
