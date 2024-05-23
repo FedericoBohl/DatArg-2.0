@@ -16,7 +16,7 @@ while True:
 if is_session_pc:
     try:
         create_widget(w_barra_stocks,height=80,width=page_width)
-    except:page_width=1000
+    except:page_width=2000
 
 
     col1,col2=st.columns((0.1,0.9))
