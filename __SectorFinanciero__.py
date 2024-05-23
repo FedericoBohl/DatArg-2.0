@@ -95,7 +95,7 @@ def make_acciones(data_now_merv : pd.DataFrame , data_now_gen : pd.DataFrame):
 def show_data():
     PyOBD=openBYMAdata()
     indice=PyOBD.indices()
-    st.metric('Merval',S.indice.loc[1,'last'],f'{round(S.indice.loc[1,"change"]*100,2)}%')
+    st.metric('Merval',indice.loc[1,'last'],f'{round(indice.loc[1,"change"]*100,2)}%')
     bonos, acciones, cedears= st.tabs(["Bonos", "Acciones",'Cedears'])
     with bonos:
         st.header("Bonos")
