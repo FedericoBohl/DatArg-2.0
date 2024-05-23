@@ -128,22 +128,15 @@ def GetBYMA():
         #No estoy seguro que son
         data = '{"page_number":1, "page_size":500, "Content-Type":"application/json"}'
         response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/bnown/seriesHistoricas/iamc/bonos', headers=__headers, data=data)
-        st.write(__diction)
         bonos_iamc = json.loads(response.text)
         df_bonos_iamc = pd.DataFrame(bonos_iamc['data'])
-        st.write(df_bonos_iamc)
         colList=df_bonos_iamc.columns.values
         error=0
-        st.write(colList)
-        st.divider()
         for i in range(len(colList)):
             try:
                 colList[i]=__diction[colList[i]]
-                st.write(__diction[colList[i]])
             except:
                 error=error+1
-        st.divider()
-        st.write(colList)
         df_bonos_iamc.columns=colList
         df_iamc= df_bonos_iamc.drop(["notas"],axis=1)
         return df_indice,df_bonos_gob,df_letras,df_bonos_cor,df_merval,df_general,df_cedears,df_iamc
