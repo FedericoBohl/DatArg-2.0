@@ -108,7 +108,7 @@ def make_merv():
         st.divider()
         st.subheader("ejemplo de filtrado de bonos")
         st.selectbox('Buscador de Bonos',options=df_iamc['Especie'].to_dict().values(),key='bonobuscado')
-        st.write(df_iamc.iloc[2])
+        st.write(df_iamc.loc[df_iamc['Especie']==S.bonobuscado])
     with acciones: 
         fig_merv,fig_gen=make_acciones(df_merval,df_general)
         container=st.container(border=True)
