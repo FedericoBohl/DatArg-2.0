@@ -128,6 +128,7 @@ def GetBYMA():
         #No estoy seguro que son
         data = '{"page_number":1, "page_size":500, "Content-Type":"application/json"}'
         response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/bnown/seriesHistoricas/iamc/bonos', headers=__headers, data=data)
+        st.write(response)
         bonos_iamc = json.loads(response.text)
         df_bonos_iamc = pd.DataFrame(bonos_iamc['data'])
         df_bonos_iamc
