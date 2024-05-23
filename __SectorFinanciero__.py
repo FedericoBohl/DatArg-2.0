@@ -1,4 +1,4 @@
-from PyOBD import openBYMAdata
+from GetBYMA import GetBYMA
 from librerias import *
 
 @st.cache_data(show_spinner=False)
@@ -92,20 +92,19 @@ def make_acciones(data_now_merv : pd.DataFrame , data_now_gen : pd.DataFrame):
     return fig_merv,fig_gen
 
 
-def show_data():
-    PyOBD=openBYMAdata()
-    indice=PyOBD.indices()
-    st.metric('Merval',indice.loc[1,'last'],f'{round(indice.loc[1,"change"]*100,2)}%')
+def make_merv():
+    df_indice,df_bonos_gob,df_letras,df_bonos_cor,df_merval,df_general,df_cedears=GetBYMA()
+    st.metric('Merval',df_indice.loc[1,'last'],f'{round(df_indice.loc[1,"change"]*100,2)}%')
     bonos, acciones, cedears= st.tabs(["Bonos", "Acciones",'Cedears'])
     with bonos:
         st.header("Bonos")
-        st.write(PyOBD.get_bonds())
+        st.write(df_bonos_gob)
         st.header("Letras de corto plazo")
-        st.write(PyOBD.get_short_term_bonds())
+        st.write(df_letras)
         st.header("Bonos Corporativos")
-        st.write(PyOBD.get_corporateBonds())
+        st.write(df_bonos_cor)
     with acciones: 
-        fig_merv,fig_gen=make_acciones(PyOBD.get_bluechips(),PyOBD.get_galpones())
+        fig_merv,fig_gen=make_acciones(df_merval,df_general)
         container=st.container(border=True)
         if container.radio('¿Que panel desea ver?' , options=['Merval','Panel General'] , horizontal=True, index=0 , key='which_merv') == 'Merval':
             st.markdown("""<h2 style='text-align: center; color: #404040; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>Merval</h2>""", unsafe_allow_html=True)
@@ -114,9 +113,4 @@ def show_data():
             st.markdown("""<h2 style='text-align: center; color: #404040; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>Panel General</h2>""", unsafe_allow_html=True)
             st.plotly_chart(fig_gen, use_container_width=True)
     with cedears:
-        make_cedears(PyOBD.get_cedears())
-
-
-
-def make_merv():
-    show_data()
+        make_cedears(df_cedears)
