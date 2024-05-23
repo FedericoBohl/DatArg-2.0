@@ -131,9 +131,10 @@ def GetBYMA():
         st.write(__diction)
         bonos_iamc = json.loads(response.text)
         df_bonos_iamc = pd.DataFrame(bonos_iamc['data'])
-        df_bonos_iamc
+        st.write(df_bonos_iamc)
         colList=df_bonos_iamc.columns.values
         error=0
+        st.write(colList)
         for i in range(len(colList)):
             try:
                 colList[i]=__diction[colList[i]]
