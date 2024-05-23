@@ -143,6 +143,7 @@ def GetBYMA():
             except:
                 error=error+1
         st.divider()
+        st.write(colList)
         df_bonos_iamc.columns=colList
         df_iamc= df_bonos_iamc.drop(["notas"],axis=1)
         return df_indice,df_bonos_gob,df_letras,df_bonos_cor,df_merval,df_general,df_cedears,df_iamc
