@@ -97,6 +97,47 @@ def make_merv():
     st.metric('Merval',df_indice.loc[1,'last'],f'{round(df_indice.loc[1,"change"]*100,2)}%')
     bonos, acciones, cedears= st.tabs(["Bonos", "Acciones",'Cedears'])
     with bonos:
+        c1_1,c2_1,c3_1=st.columns(3)
+        with c1_1:
+            st.header('Bonos Ley Nacional')
+            t_1_nac,t_2_nac,t_3_nac=st.tabs(['Panel','Curva','Buscador'])
+            with t_1_nac: st.subheader('Panel')
+            with t_2_nac: st.subheader('Curva')
+            with t_3_nac: st.dataframe(df_bonos_gob['symbol','last','change','volume','expiration'])#Filtrar por rango
+        with c2_2:
+            st.header('Bonos Ley Extrangera')
+            t_1_ex,t_2_ex,t_3_ex=st.tabs(['Panel','Curva','Buscador'])
+            with t_1_ex: st.subheader('Panel')
+            with t_2_ex: st.subheader('Curva')
+            with t_3_ex: st.dataframe(df_bonos_gob['symbol','last','change','volume','expiration'])#Idem
+        with c3_1:
+            st.header('Bonos ajustados por CER')
+            t_1_c,t_2_c,t_3_c=st.tabs(['Panel','Curva','Buscador'])
+            with t_1_c: st.subheader('Panel')
+            with t_2_c: st.subheader('Curva')
+            with t_3_c: st.dataframe(df_bonos_gob['symbol','last','change','volume','expiration'])#Idem
+        c1_2,c2_2=st.columns(2)
+        with c1_2:
+            st.header('Letras')
+            t_1_l,t_2_l,t_3_l=st.tabs(['Panel','Curva','Buscador'])
+            with t_1_l: st.subheader('Panel')
+            with t_2_l: st.subheader('Curva')
+            with t_3_l: st.dataframe(df_letras['symbol','last','change','volume','expiration'])
+        with c2_2:
+            st.header('Bonos Corporativos')
+            t_1_cor,t_2_cor,t_3_cor=st.tabs(['Panel','Curva','Buscador'])
+            with t_1_cor: st.subheader('Panel')
+            with t_2_cor: st.subheader('Curva')
+            with t_3_cor: st.dataframe(df_bonos_cor['symbol','last','change','volume','expiration'])
+        st.header('Información de los bonos')
+        c1_3,c2_3=st.columns((0.7,0.3))
+        with c1_3:st.dataframe(df_iamc)
+        with c2_3:
+            st.subheader('Filtado de bono')
+            st.selectbox('Buscador de Bonos',options=df_iamc['Especie'].to_dict().values(),key='bonobuscado')
+            st.write(df_iamc.loc[df_iamc['Especie']==S.bonobuscado].transpose())
+
+        st.divider()
         st.header("Bonos")
         st.write(df_bonos_gob)
         st.header("Letras de corto plazo")
@@ -105,10 +146,6 @@ def make_merv():
         st.write(df_bonos_cor)
         st.header("IAMC??")
         st.write(df_iamc)
-        st.divider()
-        st.subheader("ejemplo de filtrado de bonos")
-        st.selectbox('Buscador de Bonos',options=df_iamc['Especie'].to_dict().values(),key='bonobuscado')
-        st.write(df_iamc.loc[df_iamc['Especie']==S.bonobuscado].transpose())
     with acciones: 
         fig_merv,fig_gen=make_acciones(df_merval,df_general)
         container=st.container(border=True)
