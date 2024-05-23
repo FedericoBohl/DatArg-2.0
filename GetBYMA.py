@@ -135,9 +135,11 @@ def GetBYMA():
         colList=df_bonos_iamc.columns.values
         error=0
         st.write(colList)
+        st.divider()
         for i in range(len(colList)):
             try:
                 colList[i]=__diction[colList[i]]
+                st.write(__diction[colList[i]])
             except:
                 error=error+1
         df_bonos_iamc.columns=colList
