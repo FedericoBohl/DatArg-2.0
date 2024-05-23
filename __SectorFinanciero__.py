@@ -104,7 +104,7 @@ def make_merv():
             with t_1_nac: st.subheader('Panel')
             with t_2_nac: st.subheader('Curva')
             with t_3_nac: st.dataframe(df_bonos_gob[['symbol','last','change','volume','expiration']])#Filtrar por rango
-        with c2_2:
+        with c2_1:
             st.header('Bonos Ley Extrangera')
             t_1_ex,t_2_ex,t_3_ex=st.tabs(['Panel','Curva','Buscador'])
             with t_1_ex: st.subheader('Panel')
