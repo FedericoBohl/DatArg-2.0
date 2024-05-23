@@ -98,6 +98,7 @@ def make_merv():
     bonos, acciones, cedears= st.tabs(["Bonos", "Acciones",'Cedears'])
     with bonos:
         c1_1,c2_1,c3_1=st.columns(3)
+        #Los dataframes deberían tener de index el ticker del bono para hacer el filtrado más simple
         with c1_1:
             st.header('Bonos Ley Nacional')
             t_1_nac,t_2_nac,t_3_nac=st.tabs(['Panel','Curva','Buscador'])
@@ -129,9 +130,10 @@ def make_merv():
             with t_1_cor: st.subheader('Panel')
             with t_2_cor: st.subheader('Curva')
             with t_3_cor: st.dataframe(df_bonos_cor[['symbol','last','change','volume','expiration']])
-        st.header('Información de los bonos')
         c1_3,c2_3=st.columns((0.7,0.3))
-        with c1_3:st.dataframe(df_iamc)
+        with c1_3:
+            st.header('Información de los bonos')
+            st.dataframe(df_iamc)
         with c2_3:
             st.subheader('Filtado de bono')
             st.selectbox('Buscador de Bonos',options=df_iamc['Especie'].to_dict().values(),key='bonobuscado')
