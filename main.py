@@ -45,6 +45,7 @@ if is_session_pc:
     with t_Merv:
         #make_merv()
         df_indice,df_bonos_gob,df_letras,df_bonos_cor,df_merval,df_general,df_cedears=GetBYMA()
+        df_indice
 
 
 

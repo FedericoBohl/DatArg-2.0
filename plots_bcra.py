@@ -216,7 +216,7 @@ def plot_depositos(escala, bcra:pd.DataFrame, tasas: pd.DataFrame)->None:
     st.plotly_chart(fig,use_container_width=True)
 
 @st.cache_data(show_spinner=False, experimental_allow_widgets=True)
-def plot_reservas(reservas):
+def plot_reservas(reservas): # Está andando medio mal, no reacciona bien con el botón
     st.subheader("Reservas Internacionales & Tipo de Cambio Real Bilateral")
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     if st.checkbox("Post Convertibilidad",value=True,key='reservas_post'):
