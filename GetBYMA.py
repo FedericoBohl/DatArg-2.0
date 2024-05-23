@@ -125,23 +125,20 @@ def GetBYMA():
         df = __convert_to_numeric_columns(df, __numeric_columns)
         df_bonos_cor= df
     
-        return df_indice,df_bonos_gob,df_letras,df_bonos_cor,df_merval,df_general,df_cedears
-
-
-
-def iamc_bonds(self):
-    data = '{"page_number":1, "page_size":500, "Content-Type":"application/json"}'
-    response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/bnown/seriesHistoricas/iamc/bonos', headers=__headers, data=data)
-    bonos_iamc = json.loads(response.text)
-    df_bonos_iamc = pd.DataFrame(bonos_iamc['data'])
-    df_bonos_iamc
-    colList=df_bonos_iamc.columns.values
-    error=0
-    for i in range(len(colList)):
-        try:
-            colList[i]=__diction[colList[i]]
-        except:
-            error=error+1
-    df_bonos_iamc.columns=colList
-    return df_bonos_iamc.drop(["notas"],axis=1)
+        #No estoy seguro que son
+        data = '{"page_number":1, "page_size":500, "Content-Type":"application/json"}'
+        response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/bnown/seriesHistoricas/iamc/bonos', headers=__headers, data=data)
+        bonos_iamc = json.loads(response.text)
+        df_bonos_iamc = pd.DataFrame(bonos_iamc['data'])
+        df_bonos_iamc
+        colList=df_bonos_iamc.columns.values
+        error=0
+        for i in range(len(colList)):
+            try:
+                colList[i]=__diction[colList[i]]
+            except:
+                error=error+1
+        df_bonos_iamc.columns=colList
+        df_iamc= df_bonos_iamc.drop(["notas"],axis=1)
+        return df_indice,df_bonos_gob,df_letras,df_bonos_cor,df_merval,df_general,df_cedears,df_iamc
 

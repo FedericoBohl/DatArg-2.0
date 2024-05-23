@@ -93,7 +93,7 @@ def make_acciones(data_now_merv : pd.DataFrame , data_now_gen : pd.DataFrame):
 
 
 def make_merv():
-    df_indice,df_bonos_gob,df_letras,df_bonos_cor,df_merval,df_general,df_cedears=GetBYMA()
+    df_indice,df_bonos_gob,df_letras,df_bonos_cor,df_merval,df_general,df_cedears, df_iamc=GetBYMA()
     st.metric('Merval',df_indice.loc[1,'last'],f'{round(df_indice.loc[1,"change"]*100,2)}%')
     bonos, acciones, cedears= st.tabs(["Bonos", "Acciones",'Cedears'])
     with bonos:
@@ -103,6 +103,8 @@ def make_merv():
         st.write(df_letras)
         st.header("Bonos Corporativos")
         st.write(df_bonos_cor)
+        st.header("IAMC??")
+        st.write(df_iamc)
     with acciones: 
         fig_merv,fig_gen=make_acciones(df_merval,df_general)
         container=st.container(border=True)
