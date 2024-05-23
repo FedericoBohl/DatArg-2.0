@@ -75,7 +75,7 @@ pio.templates["Oficial"] = go.layout.Template(
 )
 pio.templates.default = "Oficial"
 
-@st.cache_data()
+@st.cache_data(experimental_allow_widgets=True)
 def page_info():
     page_width = streamlit_js_eval(js_expressions='window.innerWidth', key='WIDTH',  want_output = True)
     ua_string = st_javascript("""window.navigator.userAgent;""")
