@@ -107,32 +107,32 @@ def make_merv():
             t_1_nac,t_2_nac,t_3_nac=st.tabs(['Panel','Curva','Buscador'])
             with t_1_nac: st.subheader('Panel')
             with t_2_nac: st.subheader('Curva')
-            with t_3_nac: st.dataframe(S.df_bonos_gob[['symbol','last','change','volume','expiration']])#Filtrar por rango
+            with t_3_nac: st.dataframe(S.df_bonos_gob[['last','change','volume','expiration']])#Filtrar por rango
         with c2_1:
             st.header('Bonos Ley Extrangera')
             t_1_ex,t_2_ex,t_3_ex=st.tabs(['Panel','Curva','Buscador'])
             with t_1_ex: st.subheader('Panel')
             with t_2_ex: st.subheader('Curva')
-            with t_3_ex: st.dataframe(S.df_bonos_gob[['symbol','last','change','volume','expiration']])#Idem
+            with t_3_ex: st.dataframe(S.df_bonos_gob[['last','change','volume','expiration']])#Idem
         with c3_1:
             st.header('Bonos ajustados por CER')
             t_1_c,t_2_c,t_3_c=st.tabs(['Panel','Curva','Buscador'])
             with t_1_c: st.subheader('Panel')
             with t_2_c: st.subheader('Curva')
-            with t_3_c: st.dataframe(S.df_bonos_gob[['symbol','last','change','volume','expiration']])#Idem
+            with t_3_c: st.dataframe(S.df_bonos_gob[['last','change','volume','expiration']])#Idem
         c1_2,c2_2=st.columns(2)
         with c1_2:
             st.header('Letras')
             t_1_l,t_2_l,t_3_l=st.tabs(['Panel','Curva','Buscador'])
             with t_1_l: st.subheader('Panel')
             with t_2_l: st.subheader('Curva')
-            with t_3_l: st.dataframe(S.df_letras[['symbol','last','change','volume','expiration']])
+            with t_3_l: st.dataframe(S.df_letras[['last','change','volume','expiration']])
         with c2_2:
             st.header('Bonos Corporativos')
             t_1_cor,t_2_cor,t_3_cor=st.tabs(['Panel','Curva','Buscador'])
             with t_1_cor: st.subheader('Panel')
             with t_2_cor: st.subheader('Curva')
-            with t_3_cor: st.dataframe(S.df_bonos_cor[['symbol','last','change','volume','expiration']])
+            with t_3_cor: st.dataframe(S.df_bonos_cor[['last','change','volume','expiration']])
         c1_3,c2_3=st.columns((0.7,0.3))
         with c1_3:
             st.header('Información de los bonos')
