@@ -15,7 +15,7 @@ def __convert_to_numeric_columns(df, columns):
     return df
 
 
-@st.cache_data(show_spinner=False)
+#@st.cache_data(show_spinner=False)
 def GetBYMA():
         __columns_filter=["description","symbol","price","variation","highValue","minValue","previousClosingPrice"]
         __index_columns=["description","symbol","last","change","high","low","previous_close"]
