@@ -145,6 +145,6 @@ def GetBYMA():
                 error=error+1
         df_bonos_iamc.columns=colList
         df_iamc= df_bonos_iamc.drop(["notas"],axis=1)
-        df.set_index('Especie', inplace=True)
+        df_iamc.set_index('Especie', inplace=True)
         return df_indice,df_bonos_gob,df_letras,df_bonos_cor,df_merval,df_general,df_cedears,df_iamc
 
