@@ -143,14 +143,8 @@ def make_merv():
             st.write(S.df_iamc.loc[S.df_iamc.index==S.bonobuscado].transpose())
 
         st.divider()
-        st.header("Bonos")
-        st.write(S.df_bonos_gob)
-        st.header("Letras de corto plazo")
-        st.write(S.df_letras)
-        st.header("Bonos Corporativos")
-        st.write(S.df_bonos_cor)
-        st.header("IAMC??")
-        st.write(S.df_iamc)
+        _=pd.merge(S.df_bonos_gob[['last','change','volume','expiration']],S.df_iamc[['Duración Modificada','TIR Anual']], left_index=True,right_index=True)
+        st.dataframe(_)
     with acciones: 
         fig_merv,fig_gen=make_acciones(S.df_merval,S.df_general)
         container=st.container(border=True)
