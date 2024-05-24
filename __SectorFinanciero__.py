@@ -140,7 +140,7 @@ def make_merv():
         with c2_3:
             st.subheader('Filtado de bono')
             st.selectbox('Buscador de Bonos',options=S.df_iamc['Especie'].to_dict().values(),key='bonobuscado')
-            st.write(S.df_iamc.loc[S.df_iamc['Especie']==S.bonobuscado].transpose())
+            st.write(S.df_iamc.loc[S.df_iamc.index==S.bonobuscado].transpose())
 
         st.divider()
         st.header("Bonos")
