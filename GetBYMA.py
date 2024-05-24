@@ -65,6 +65,7 @@ def GetBYMA():
         df.columns = __securities_columns
         df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
         df = __convert_to_numeric_columns(df, __numeric_columns)
+        df.set_index('symbol', inplace=True)
         df_merval=df
 
         data = '{"excludeZeroPxAndQty":true,"T2":true,"T1":false,"T0":false,"Content-Type":"application/json"}' ## excluir especies sin precio y cantidad, determina plazo de listado
@@ -75,6 +76,7 @@ def GetBYMA():
         df.columns = __securities_columns
         df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
         df = __convert_to_numeric_columns(df, __numeric_columns)
+        df.set_index('symbol', inplace=True)
         df_general= df
 
         data = '{"excludeZeroPxAndQty":false,"T2":true,"T1":false,"T0":false,"Content-Type":"application/json"}' ## excluir especies sin precio y cantidad, determina plazo de listado
@@ -85,6 +87,7 @@ def GetBYMA():
         df.columns = __securities_columns
         df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
         df = __convert_to_numeric_columns(df, __numeric_columns)
+        df.set_index('symbol', inplace=True)
         df_cedears= df
 
 
@@ -97,6 +100,7 @@ def GetBYMA():
         df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
         df.expiration=pd.to_datetime(df.expiration)
         df = __convert_to_numeric_columns(df, __numeric_columns)
+        df.set_index('symbol', inplace=True)
         df_bonos_gob= df
 
         data = '{"excludeZeroPxAndQty":true,"T2":true,"T1":false,"T0":false,"Content-Type":"application/json"}' ## excluir especies sin precio y cantidad, determina plazo de listado
@@ -112,6 +116,7 @@ def GetBYMA():
 
         df.expiration=pd.to_datetime(df.expiration)
         df = __convert_to_numeric_columns(df, numeric_columns)
+        df.set_index('symbol', inplace=True)
         df_letras= df      
 
         data = '{"excludeZeroPxAndQty":true,"T2":true,"T1":false,"T0":false,"Content-Type":"application/json"}' ## excluir especies sin precio y cantidad, determina plazo de listado
@@ -123,6 +128,7 @@ def GetBYMA():
         df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
         df.expiration=pd.to_datetime(df.expiration)
         df = __convert_to_numeric_columns(df, __numeric_columns)
+        df.set_index('symbol', inplace=True)
         df_bonos_cor= df
     
         #No estoy seguro que son
@@ -139,5 +145,6 @@ def GetBYMA():
                 error=error+1
         df_bonos_iamc.columns=colList
         df_iamc= df_bonos_iamc.drop(["notas"],axis=1)
+        df.set_index('Especie', inplace=True)
         return df_indice,df_bonos_gob,df_letras,df_bonos_cor,df_merval,df_general,df_cedears,df_iamc
 
