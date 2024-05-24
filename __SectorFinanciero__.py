@@ -25,7 +25,7 @@ def make_cedears(data_now : pd.DataFrame):
                     hover_name="change",
                     custom_data=["Company",'last',"change"],
                     color='change', 
-                    range_color =[-7,7],color_continuous_scale=colorscale,
+                    range_color =[-6,6],color_continuous_scale=colorscale,
                     labels={'Value': 'Number of Items'},
                     color_continuous_midpoint=0)
     fig.update_traces(marker_line_width = 1.5,marker_line_color=black,
@@ -59,7 +59,7 @@ def make_acciones(data_now_merv : pd.DataFrame , data_now_gen : pd.DataFrame):
                     hover_name="change",
                     custom_data=["Nombre",'last',"change"],
                     color='change', 
-                    range_color =[-5,5],color_continuous_scale=colorscale,
+                    range_color =[-6,6],color_continuous_scale=colorscale,
                     labels={'Value': 'Number of Items'},
                     color_continuous_midpoint=0)
     fig_merv.update_traces(marker_line_width = 1.5,marker_line_color=black,
@@ -80,7 +80,7 @@ def make_acciones(data_now_merv : pd.DataFrame , data_now_gen : pd.DataFrame):
                     hover_name="change",
                     custom_data=["Nombre",'last',"change"],
                     color='change', 
-                    range_color =[-5,5],color_continuous_scale=colorscale,
+                    range_color =[-6,6],color_continuous_scale=colorscale,
                     labels={'Value': 'Number of Items'},
                     color_continuous_midpoint=0)
     fig_gen.update_traces(marker_line_width = 1.5,marker_line_color=black,
