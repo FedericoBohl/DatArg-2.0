@@ -139,7 +139,7 @@ def make_merv():
             st.dataframe(S.df_iamc)
         with c2_3:
             st.subheader('Filtado de bono')
-            st.selectbox('Buscador de Bonos',options=S.df_iamc.index.to_list(),key='bonobuscado')
+            st.selectbox('Buscador de Bonos',options=S.df_iamc.index.to_list(),index='AL30',key='bonobuscado')
             st.write(S.df_iamc.loc[S.df_iamc.index==S.bonobuscado].transpose())
 
         st.divider()
