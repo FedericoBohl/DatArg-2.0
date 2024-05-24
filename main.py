@@ -16,7 +16,6 @@ while True:
 if is_session_pc:
     try:
         components.html(w_barra_stocks,height=80)
-        create_widget(w_barra_stocks,height=80,width=page_width)
     except:page_width=2000
 
 
