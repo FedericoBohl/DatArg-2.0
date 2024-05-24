@@ -39,6 +39,9 @@ def make_cedears(data_now : pd.DataFrame):
     fig.update_layout(margin=dict(l=1, r=1, t=10, b=1))
     st.markdown("""<h2 style='text-align: center; color: #404040; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>S&P 500 en Cedears</h2>""", unsafe_allow_html=True)
     st.plotly_chart(fig,use_container_width=True)
+    st.subheader('Listado de CEDEARS')
+    data.set_index('symbol', inplace=True)
+    st.dataframe(data)
 
 @st.cache_data(show_spinner=False)
 def make_acciones(data_now_merv : pd.DataFrame , data_now_gen : pd.DataFrame):
