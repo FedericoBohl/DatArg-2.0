@@ -53,6 +53,7 @@ def GetBYMA():
         response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/index-price', headers=__headers, data=data, verify=False)
         indices = json.loads(response.text)['data']
         df = pd.DataFrame(indices)
+        st.write(df)
         df = df[__columns_filter].copy()
         df.columns = __index_columns
         df_indice=df
