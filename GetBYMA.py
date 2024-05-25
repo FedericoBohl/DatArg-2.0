@@ -53,7 +53,6 @@ def GetBYMA():
         response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/index-price', headers=__headers, data=data, verify=False)
         indices = json.loads(response.text)['data']
         df = pd.DataFrame(indices)
-        st.write(df)
         df = df[__columns_filter].copy()
         df.columns = __index_columns
         df_indice=df
@@ -62,6 +61,7 @@ def GetBYMA():
         response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/leading-equity', headers=__headers, data=data)
         panel_acciones_lideres = json.loads(response.text)
         df= pd.DataFrame(panel_acciones_lideres['data'])
+        st.write(df)
         df = df[__filter_columns].copy()
         df.columns = __securities_columns
         df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
