@@ -17,7 +17,7 @@ def __convert_to_numeric_columns(df, columns):
 
 #@st.cache_data(show_spinner=False)
 def GetBYMA():
-        __columns_filter=["description","symbol","price","variation","highValue","minValue","previousClosingPrice"]
+        __columns_filter=["description","symbol","price","variation","highValue","minValue","ClosingPrice"]
         __index_columns=["description","symbol","last","change","high","low","previous_close"]
 
         __securities_columns = ['symbol', 'settlement', 'bid_size', 'bid', 'ask', 'ask_size', 'last','close', 'change', 'open', 'high', 'low', 'previous_close', 'turnover', 'volume', 'operations', 'datetime', 'group']
