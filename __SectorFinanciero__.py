@@ -134,7 +134,7 @@ def make_merv():
                 with t_1_l: st.subheader('Panel')
                 with t_2_l: st.subheader('Curva')
                 with t_3_l: st.dataframe(S.df_letras[['last','change','volume','expiration']])
-        if S.df_bonos_cor!=None:
+        if S.df_bonos_cor.all()!=None:
             with c2_2:
                 st.subheader('Bonos Corporativos')
                 t_1_cor,t_2_cor,t_3_cor=st.tabs(['Panel','Curva','Buscador'])
