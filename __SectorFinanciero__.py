@@ -179,11 +179,15 @@ def make_merv():
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
 
     #--------------ARREGLO DE LA EXTRACCIÓN DE DATOS  - 28/05 ------------------------
-    
+    def __convert_to_numeric_columns(df, columns):
+        for col in columns:
+            #df[col] = df[col].apply(lambda x: x.replace('.', '').replace(',','.') if isinstance(x, str) else x)
+            df[col] = pd.to_numeric(df[col].apply(lambda x: np.nan if x == '-' else x))
+        return df
     __columns_filter=["description","symbol","price","variation","highValue","minValue","closingPrice"]
     __index_columns=["description","symbol","last","change","high","low","previous_close"]
 
-    __securities_columns = ['symbol', 'settlement', 'bid_size', 'bid', 'ask', 'ask_size', 'last','close', 'change', 'open', 'high', 'low', 'previous_close', 'turnover', 'volume', 'operations', 'datetime', 'group']
+    __securities_columns = ['symbol','close','previous_close']
     __filter_columns=["symbol","closingPrice","previousClosingPrice"]
     __numeric_columns = ['last', 'open', 'high', 'low', 'volume', 'turnover', 'operations', 'change', 'bid_size', 'bid', 'ask_size', 'ask', 'previous_close']
 
@@ -219,7 +223,6 @@ def make_merv():
     df = df[__filter_columns].copy()
     st.write(df)
     df.columns = __securities_columns
-    df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
     df = __convert_to_numeric_columns(df, __numeric_columns)
     df.set_index('symbol', inplace=True)
     st.dataframe(df)
