@@ -63,6 +63,7 @@ def GetBYMA():
                     df['change']=df['close']/df['previous_close']-1
                 except: df['change']=None
                 df.set_index('symbol', inplace=True)
+                df[~df.index.duplicated(keep='first')]
                 df_merval=df
             except: df_merval=None
 
@@ -90,6 +91,7 @@ def GetBYMA():
                     df['change']=df['close']/df['previous_close']-1
                 except: df['change']=None
                 #df.set_index('symbol', inplace=True)   #Para que pueda filtrar el threemap
+                df[~df.index.duplicated(keep='first')]
                 df_cedears= df
             except: df_cedears=None
 
@@ -136,6 +138,7 @@ def GetBYMA():
                 df.expiration=pd.to_datetime(df.expiration)
                 df = __convert_to_numeric_columns(df, __numeric_columns)
                 df.set_index('symbol', inplace=True)
+                df[~df.index.duplicated(keep='first')]
                 df_bonos_cor= df
             except: df_bonos_cor=None
 
@@ -154,6 +157,8 @@ def GetBYMA():
                 df_bonos_iamc.columns=colList
                 df_iamc= df_bonos_iamc.drop(["notas"],axis=1)
                 df_iamc.set_index('Especie', inplace=True)
+                df_iamc[~df_iamc.index.duplicated(keep='first')]
+                
             except: df_iamc=None
 
             return df_indice,df_bonos_gob,df_letras,df_bonos_cor,df_merval,df_general,df_cedears,df_iamc
