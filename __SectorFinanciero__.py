@@ -215,7 +215,6 @@ def make_merv():
     panel = json.loads(response.text)
     df= pd.DataFrame(panel)
     df = df[__filter_columns].copy()
-    df.columns = __securities_columns
     st.write(df)
     try:
         df['change']=df['close']/df['previous_close']-1
