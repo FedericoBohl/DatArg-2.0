@@ -16,6 +16,7 @@ def make_cedears(data_now : pd.DataFrame):
         with c5:
             st.metric('Dolar Blue/MEP/CCL','-')
     data=pd.read_csv('data_bolsa/bolsa_cedears.csv',delimiter=';')
+    st.write(data)
     data=pd.merge(data_now,data,on='symbol').dropna()
     data['change']=data["change"]*100
     df_grouped = data.groupby(["Sector","symbol"])[["Weigths","change","Company","close"]].min().reset_index()
