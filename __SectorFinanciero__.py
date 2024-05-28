@@ -216,15 +216,20 @@ def make_merv():
     __diction=json.loads(response.text)
     #________________-
     data = '{"excludeZeroPxAndQty":true,"T2":true,"T1":false,"T0":false,"Content-Type":"application/json"}' ## excluir especies sin precio y cantidad, determina plazo de listado
-    response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/public-bonds', headers=__headers, data=data)
-    panel = json.loads(response.text)
-    df = pd.DataFrame(panel['data'])
+    response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/lebacs', headers=__headers, data=data)
+    panel_letras = json.loads(response.text)
+    df = pd.DataFrame(panel_letras['data'])
     st.write(df)
-    df = df[__filter_columns_fixedIncome].copy()
-    df.columns = __fixedIncome_columns
+
+    numeric_columns = ['last', 'open', 'high', 'low', 'volume', 'turnover', 'operations', 'change', 'bid_size', 'bid', 'ask_size', 'ask', 'previous_close']
+    filter_columns_fixedIncome=["symbol","settlementType","quantityBid","bidPrice","offerPrice","quantityOffer","settlementPrice","closingPrice","imbalance","openingPrice","tradingHighPrice","tradingLowPrice","previousClosingPrice","volumeAmount","volume","numberOfOrders","securityType","maturityDate","denominationCcy"]
+    df = df[filter_columns_fixedIncome].copy()
+    fixedIncome_columns = ['symbol', 'settlement', 'bid_size', 'bid', 'ask', 'ask_size', 'last', 'close' ,'change', 'open', 'high', 'low', 'previous_close', 'turnover', 'volume', 'operations', 'group',"expiration","currency"]
+    df.columns = fixedIncome_columns
     df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
+
     df.expiration=pd.to_datetime(df.expiration)
-    df = __convert_to_numeric_columns(df, __numeric_columns)
+    df = __convert_to_numeric_columns(df, numeric_columns)
     df.set_index('symbol', inplace=True)
 
     st.dataframe(df)
