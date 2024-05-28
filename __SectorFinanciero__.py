@@ -190,7 +190,7 @@ def make_merv():
         __filter_columns_fixedIncome=["symbol","settlementType","quantityBid","bidPrice","offerPrice","quantityOffer","settlementPrice","closingPrice","imbalance","openingPrice","tradingHighPrice","tradingLowPrice","previousClosingPrice","volumeAmount","volume","numberOfOrders","tradeHour","securityType","maturityDate"]
 
         __s = requests.session()
-        __s.get('https://open.bymadata.com.ar/#/dashboard', verify=False)
+        __s.get('https://open.bymadata.com.ar/#/dashboard', verify=certifi.where())
 
         __headers = {
             'Connection': 'keep-alive',

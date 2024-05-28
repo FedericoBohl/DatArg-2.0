@@ -22,6 +22,8 @@ import json
 import urllib3
 from pytz import timezone
 
+import certifi
+
 
 
 meses_espanol = {
