@@ -210,10 +210,14 @@ def make_merv():
         response = __s.get('https://open.bymadata.com.ar/assets/api/langs/es.json', headers=__headers)
         __diction=json.loads(response.text)
         #________________-
-        data = '{"Content-Type":"application/json"}'
-        response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/index-price', headers=__headers, data=data, verify=False)
-        indices = json.loads(response.text)['data']
-        df = pd.DataFrame(indices)
-        df = df[__columns_filter].copy()
-        df.columns = __index_columns
+        data = '{"excludeZeroPxAndQty":false,"T2":true,"T1":false,"T0":false,"Content-Type":"application/json"}' ## excluir especies sin precio y cantidad, determina plazo de listado
+        response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/leading-equity', headers=__headers, data=data)
+        panel_acciones_lideres = json.loads(response.text)
+        df= pd.DataFrame(panel_acciones_lideres['data'])
+        st.write(df)
+        df = df[__filter_columns].copy()
+        df.columns = __securities_columns
+        df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
+        df = __convert_to_numeric_columns(df, __numeric_columns)
+        df.set_index('symbol', inplace=True)
         st.dataframe(df)
