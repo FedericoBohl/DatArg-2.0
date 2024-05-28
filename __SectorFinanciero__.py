@@ -216,6 +216,7 @@ def make_merv():
     df= pd.DataFrame(panel)
     df = df[__filter_columns].copy()
     st.write(df)
+    df.columns=['symbol','close','previous_close']
     try:
         df['change']=df['close']/df['previous_close']-1
     except: df['change']=None
