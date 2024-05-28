@@ -180,7 +180,7 @@ def make_merv():
 
     #--------------ARREGLO DE LA EXTRACCIÓN DE DATOS  - 28/05 ------------------------
     def __convert_to_numeric_columns(df, columns):
-        for col in df.columns:
+        for col in columns:
             #df[col] = df[col].apply(lambda x: x.replace('.', '').replace(',','.') if isinstance(x, str) else x)
             df[col] = pd.to_numeric(df[col].apply(lambda x: np.nan if x == '-' else x))
         return df
