@@ -219,6 +219,7 @@ def make_merv():
     response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/general-equity', headers=__headers, data=data)
     panel = json.loads(response.text)
     df= pd.DataFrame(panel['data'])
+    st.write(df)
     df = df[__filter_columns].copy()
     st.write(df)
     df.columns = __securities_columns
