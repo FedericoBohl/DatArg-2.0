@@ -1,11 +1,4 @@
-import json
-import datetime
-import requests
-import urllib3
-import numpy as np
-import pandas as pd
-from pytz import timezone
-import streamlit as st
+from librerias import *
 
 
 def __convert_to_numeric_columns(df, columns):
@@ -160,7 +153,7 @@ def GetBYMA():
                 df_iamc= df_bonos_iamc.drop(["notas"],axis=1)
                 df_iamc.set_index('Especie', inplace=True)
             except: df_iamc=None
-            
+
             return df_indice,df_bonos_gob,df_letras,df_bonos_cor,df_merval,df_general,df_cedears,df_iamc
         except:
              st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
