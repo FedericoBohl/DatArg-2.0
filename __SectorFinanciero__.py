@@ -105,57 +105,68 @@ def make_merv():
     with bonos:
         c1_1,c2_1,c3_1=st.columns(3)
         #Los dataframes deberían tener de index el ticker del bono para hacer el filtrado más simple
-        with c1_1:
-            st.subheader('Bonos Ley Nacional')
-            t_1_nac,t_2_nac,t_3_nac=st.tabs(['Panel','Curva','Buscador'])
-            with t_1_nac: st.subheader('Panel')
-            with t_2_nac: st.subheader('Curva')
-            with t_3_nac: st.dataframe(S.df_bonos_gob[['last','change','volume','expiration']])#Filtrar por rango
-        with c2_1:
-            st.subheader('Bonos Ley Extrangera')
-            t_1_ex,t_2_ex,t_3_ex=st.tabs(['Panel','Curva','Buscador'])
-            with t_1_ex: st.subheader('Panel')
-            with t_2_ex: st.subheader('Curva')
-            with t_3_ex: st.dataframe(S.df_bonos_gob[['last','change','volume','expiration']])#Idem
-        with c3_1:
-            st.subheader('Bonos ajustados por CER')
-            t_1_c,t_2_c,t_3_c=st.tabs(['Panel','Curva','Buscador'])
-            with t_1_c: st.subheader('Panel')
-            with t_2_c: st.subheader('Curva')
-            with t_3_c: st.dataframe(S.df_bonos_gob[['last','change','volume','expiration']])#Idem
+        if S.df_bonos_gob!=None:
+            with c1_1:
+                st.subheader('Bonos Ley Nacional')
+                t_1_nac,t_2_nac,t_3_nac=st.tabs(['Panel','Curva','Buscador'])
+                with t_1_nac: st.subheader('Panel')
+                with t_2_nac: st.subheader('Curva')
+                with t_3_nac: st.dataframe(S.df_bonos_gob[['last','change','volume','expiration']])#Filtrar por rango
+        if S.df_bonos_gob!=None:
+            with c2_1:
+                st.subheader('Bonos Ley Extrangera')
+                t_1_ex,t_2_ex,t_3_ex=st.tabs(['Panel','Curva','Buscador'])
+                with t_1_ex: st.subheader('Panel')
+                with t_2_ex: st.subheader('Curva')
+                with t_3_ex: st.dataframe(S.df_bonos_gob[['last','change','volume','expiration']])#Idem
+        if S.df_bonos_gob!=None:
+            with c3_1:
+                st.subheader('Bonos ajustados por CER')
+                t_1_c,t_2_c,t_3_c=st.tabs(['Panel','Curva','Buscador'])
+                with t_1_c: st.subheader('Panel')
+                with t_2_c: st.subheader('Curva')
+                with t_3_c: st.dataframe(S.df_bonos_gob[['last','change','volume','expiration']])#Idem
         c1_2,c2_2=st.columns(2)
-        with c1_2:
-            st.subheader('Letras')
-            t_1_l,t_2_l,t_3_l=st.tabs(['Panel','Curva','Buscador'])
-            with t_1_l: st.subheader('Panel')
-            with t_2_l: st.subheader('Curva')
-            with t_3_l: st.dataframe(S.df_letras[['last','change','volume','expiration']])
-        with c2_2:
-            st.subheader('Bonos Corporativos')
-            t_1_cor,t_2_cor,t_3_cor=st.tabs(['Panel','Curva','Buscador'])
-            with t_1_cor: st.subheader('Panel')
-            with t_2_cor: st.subheader('Curva')
-            with t_3_cor: st.dataframe(S.df_bonos_cor[['last','change','volume','expiration']])
-        c1_3,c2_3=st.columns((0.7,0.3))
-        with c1_3:
-            st.subheader('Información de los bonos')
-            st.dataframe(S.df_iamc)
-        with c2_3:
-            st.subheader('Filtado de bono')
-            st.selectbox('Buscador de Bonos',options=S.df_iamc.index.to_list(),key='bonobuscado')
-            st.write(S.df_iamc.loc[S.df_iamc.index==S.bonobuscado].transpose())
+        if S.df_letras!=None:
+            with c1_2:
+                st.subheader('Letras')
+                t_1_l,t_2_l,t_3_l=st.tabs(['Panel','Curva','Buscador'])
+                with t_1_l: st.subheader('Panel')
+                with t_2_l: st.subheader('Curva')
+                with t_3_l: st.dataframe(S.df_letras[['last','change','volume','expiration']])
+        if S.df_bonos_cor!=None:
+            with c2_2:
+                st.subheader('Bonos Corporativos')
+                t_1_cor,t_2_cor,t_3_cor=st.tabs(['Panel','Curva','Buscador'])
+                with t_1_cor: st.subheader('Panel')
+                with t_2_cor: st.subheader('Curva')
+                with t_3_cor: st.dataframe(S.df_bonos_cor[['last','change','volume','expiration']])
+        if S.df_iamc!=None:
+            c1_3,c2_3=st.columns((0.7,0.3))
+            with c1_3:
+                st.subheader('Información de los bonos')
+                st.dataframe(S.df_iamc)
+            with c2_3:
+                st.subheader('Filtado de bono')
+                st.selectbox('Buscador de Bonos',options=S.df_iamc.index.to_list(),key='bonobuscado')
+                st.write(S.df_iamc.loc[S.df_iamc.index==S.bonobuscado].transpose())
 
         st.divider()
-        _=pd.merge(S.df_bonos_gob[['last','change','volume','expiration']],S.df_iamc[['Duración Modificada','Tir Anual']], left_index=True,right_index=True)
-        st.dataframe(_)
-    with acciones: 
-        fig_merv,fig_gen=make_acciones(S.df_merval,S.df_general)
-        container=st.container(border=True)
-        if container.radio('¿Que panel desea ver?' , options=['Merval','Panel General'] , horizontal=True, index=0 , key='which_merv') == 'Merval':
-            st.markdown("""<h2 style='text-align: center; color: #404040; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>Merval</h2>""", unsafe_allow_html=True)
-            st.plotly_chart(fig_merv, use_container_width=True)
-        else:
-            st.markdown("""<h2 style='text-align: center; color: #404040; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>Panel General</h2>""", unsafe_allow_html=True)
-            st.plotly_chart(fig_gen, use_container_width=True)
+        #TEST
+        try:
+            _=pd.merge(S.df_bonos_gob[['last','change','volume','expiration']],S.df_iamc[['Duración Modificada','Tir Anual']], left_index=True,right_index=True)
+            st.dataframe(_)
+        except:pass
+    with acciones:
+        if (S.df_merval!=None) and (S.df_general!=None):
+            fig_merv,fig_gen=make_acciones(S.df_merval,S.df_general)
+            container=st.container(border=True)
+            if container.radio('¿Que panel desea ver?' , options=['Merval','Panel General'] , horizontal=True, index=0 , key='which_merv') == 'Merval':
+                st.markdown("""<h2 style='text-align: center; color: #404040; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>Merval</h2>""", unsafe_allow_html=True)
+                st.plotly_chart(fig_merv, use_container_width=True)
+            else:
+                st.markdown("""<h2 style='text-align: center; color: #404040; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>Panel General</h2>""", unsafe_allow_html=True)
+                st.plotly_chart(fig_gen, use_container_width=True)
     with cedears:
-        make_cedears(S.df_cedears)
+        if S.df_cedears!=None:
+            make_cedears(S.df_cedears)

@@ -49,104 +49,118 @@ def GetBYMA():
             response = __s.get('https://open.bymadata.com.ar/assets/api/langs/es.json', headers=__headers)
             __diction=json.loads(response.text)
 
+            try:
+                data = '{"Content-Type":"application/json"}'
+                response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/index-price', headers=__headers, data=data, verify=False)
+                indices = json.loads(response.text)['data']
+                df = pd.DataFrame(indices)
+                df = df[__columns_filter].copy()
+                df.columns = __index_columns
+                df_indice=df
+            except: df_indice=None
 
-            data = '{"Content-Type":"application/json"}'
-            response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/index-price', headers=__headers, data=data, verify=False)
-            indices = json.loads(response.text)['data']
-            df = pd.DataFrame(indices)
-            df = df[__columns_filter].copy()
-            df.columns = __index_columns
-            df_indice=df
+            try:
+                data = '{"excludeZeroPxAndQty":false,"T2":true,"T1":false,"T0":false,"Content-Type":"application/json"}' ## excluir especies sin precio y cantidad, determina plazo de listado
+                response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/leading-equity', headers=__headers, data=data)
+                panel_acciones_lideres = json.loads(response.text)
+                df= pd.DataFrame(panel_acciones_lideres['data'])
+                st.write(df)
+                df = df[__filter_columns].copy()
+                df.columns = __securities_columns
+                df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
+                df = __convert_to_numeric_columns(df, __numeric_columns)
+                df.set_index('symbol', inplace=True)
+                df_merval=df
+            except: df_merval=None
 
-            data = '{"excludeZeroPxAndQty":false,"T2":true,"T1":false,"T0":false,"Content-Type":"application/json"}' ## excluir especies sin precio y cantidad, determina plazo de listado
-            response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/leading-equity', headers=__headers, data=data)
-            panel_acciones_lideres = json.loads(response.text)
-            df= pd.DataFrame(panel_acciones_lideres['data'])
-            st.write(df)
-            df = df[__filter_columns].copy()
-            df.columns = __securities_columns
-            df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
-            df = __convert_to_numeric_columns(df, __numeric_columns)
-            df.set_index('symbol', inplace=True)
-            df_merval=df
+            try:
+                data = '{"excludeZeroPxAndQty":true,"T2":true,"T1":false,"T0":false,"Content-Type":"application/json"}' ## excluir especies sin precio y cantidad, determina plazo de listado
+                response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/general-equity', headers=__headers, data=data)
+                panel = json.loads(response.text)
+                df= pd.DataFrame(panel['data'])
+                df = df[__filter_columns].copy()
+                df.columns = __securities_columns
+                df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
+                df = __convert_to_numeric_columns(df, __numeric_columns)
+                df.set_index('symbol', inplace=True)
+                df_general= df
+            except: df_general=None
+            
+            try:
+                data = '{"excludeZeroPxAndQty":false,"T2":true,"T1":false,"T0":false,"Content-Type":"application/json"}' ## excluir especies sin precio y cantidad, determina plazo de listado
+                response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/cedears', headers=__headers, data=data)
+                panel = json.loads(response.text)
+                df= pd.DataFrame(panel)
+                df = df[__filter_columns].copy()
+                df.columns = __securities_columns
+                df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
+                df = __convert_to_numeric_columns(df, __numeric_columns)
+                df_cedears= df
+            except: df_cedears=None
 
-            data = '{"excludeZeroPxAndQty":true,"T2":true,"T1":false,"T0":false,"Content-Type":"application/json"}' ## excluir especies sin precio y cantidad, determina plazo de listado
-            response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/general-equity', headers=__headers, data=data)
-            panel = json.loads(response.text)
-            df= pd.DataFrame(panel['data'])
-            df = df[__filter_columns].copy()
-            df.columns = __securities_columns
-            df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
-            df = __convert_to_numeric_columns(df, __numeric_columns)
-            df.set_index('symbol', inplace=True)
-            df_general= df
+            try:
+                data = '{"excludeZeroPxAndQty":true,"T2":true,"T1":false,"T0":false,"Content-Type":"application/json"}' ## excluir especies sin precio y cantidad, determina plazo de listado
+                response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/public-bonds', headers=__headers, data=data)
+                panel = json.loads(response.text)
+                df = pd.DataFrame(panel['data'])
+                df = df[__filter_columns_fixedIncome].copy()
+                df.columns = __fixedIncome_columns
+                df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
+                df.expiration=pd.to_datetime(df.expiration)
+                df = __convert_to_numeric_columns(df, __numeric_columns)
+                df.set_index('symbol', inplace=True)
+                df_bonos_gob= df
+            except: df_bonos_gob=None
 
-            data = '{"excludeZeroPxAndQty":false,"T2":true,"T1":false,"T0":false,"Content-Type":"application/json"}' ## excluir especies sin precio y cantidad, determina plazo de listado
-            response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/cedears', headers=__headers, data=data)
-            panel = json.loads(response.text)
-            df= pd.DataFrame(panel)
-            df = df[__filter_columns].copy()
-            df.columns = __securities_columns
-            df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
-            df = __convert_to_numeric_columns(df, __numeric_columns)
-            df_cedears= df
+            try:
+                data = '{"excludeZeroPxAndQty":true,"T2":true,"T1":false,"T0":false,"Content-Type":"application/json"}' ## excluir especies sin precio y cantidad, determina plazo de listado
+                response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/lebacs', headers=__headers, data=data)
+                panel_letras = json.loads(response.text)
+                df = pd.DataFrame(panel_letras['data'])
+                numeric_columns = ['last', 'open', 'high', 'low', 'volume', 'turnover', 'operations', 'change', 'bid_size', 'bid', 'ask_size', 'ask', 'previous_close']
+                filter_columns_fixedIncome=["symbol","settlementType","quantityBid","bidPrice","offerPrice","quantityOffer","settlementPrice","closingPrice","imbalance","openingPrice","tradingHighPrice","tradingLowPrice","previousClosingPrice","volumeAmount","volume","numberOfOrders","securityType","maturityDate","denominationCcy"]
+                df = df[filter_columns_fixedIncome].copy()
+                fixedIncome_columns = ['symbol', 'settlement', 'bid_size', 'bid', 'ask', 'ask_size', 'last', 'close' ,'change', 'open', 'high', 'low', 'previous_close', 'turnover', 'volume', 'operations', 'group',"expiration","currency"]
+                df.columns = fixedIncome_columns
+                df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
 
+                df.expiration=pd.to_datetime(df.expiration)
+                df = __convert_to_numeric_columns(df, numeric_columns)
+                df.set_index('symbol', inplace=True)
+                df_letras= df      
+            except: df_letras=None
 
-            data = '{"excludeZeroPxAndQty":true,"T2":true,"T1":false,"T0":false,"Content-Type":"application/json"}' ## excluir especies sin precio y cantidad, determina plazo de listado
-            response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/public-bonds', headers=__headers, data=data)
-            panel = json.loads(response.text)
-            df = pd.DataFrame(panel['data'])
-            df = df[__filter_columns_fixedIncome].copy()
-            df.columns = __fixedIncome_columns
-            df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
-            df.expiration=pd.to_datetime(df.expiration)
-            df = __convert_to_numeric_columns(df, __numeric_columns)
-            df.set_index('symbol', inplace=True)
-            df_bonos_gob= df
+            try:
+                data = '{"excludeZeroPxAndQty":true,"T2":true,"T1":false,"T0":false,"Content-Type":"application/json"}' ## excluir especies sin precio y cantidad, determina plazo de listado
+                response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/negociable-obligations', headers=__headers, data=data)
+                panel_ons = json.loads(response.text)
+                df= pd.DataFrame(panel_ons)
+                df = df[__filter_columns_fixedIncome].copy()
+                df.columns = __fixedIncome_columns
+                df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
+                df.expiration=pd.to_datetime(df.expiration)
+                df = __convert_to_numeric_columns(df, __numeric_columns)
+                df.set_index('symbol', inplace=True)
+                df_bonos_cor= df
+            except: df_bonos_cor=None
 
-            data = '{"excludeZeroPxAndQty":true,"T2":true,"T1":false,"T0":false,"Content-Type":"application/json"}' ## excluir especies sin precio y cantidad, determina plazo de listado
-            response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/lebacs', headers=__headers, data=data)
-            panel_letras = json.loads(response.text)
-            df = pd.DataFrame(panel_letras['data'])
-            numeric_columns = ['last', 'open', 'high', 'low', 'volume', 'turnover', 'operations', 'change', 'bid_size', 'bid', 'ask_size', 'ask', 'previous_close']
-            filter_columns_fixedIncome=["symbol","settlementType","quantityBid","bidPrice","offerPrice","quantityOffer","settlementPrice","closingPrice","imbalance","openingPrice","tradingHighPrice","tradingLowPrice","previousClosingPrice","volumeAmount","volume","numberOfOrders","securityType","maturityDate","denominationCcy"]
-            df = df[filter_columns_fixedIncome].copy()
-            fixedIncome_columns = ['symbol', 'settlement', 'bid_size', 'bid', 'ask', 'ask_size', 'last', 'close' ,'change', 'open', 'high', 'low', 'previous_close', 'turnover', 'volume', 'operations', 'group',"expiration","currency"]
-            df.columns = fixedIncome_columns
-            df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
-
-            df.expiration=pd.to_datetime(df.expiration)
-            df = __convert_to_numeric_columns(df, numeric_columns)
-            df.set_index('symbol', inplace=True)
-            df_letras= df      
-
-            data = '{"excludeZeroPxAndQty":true,"T2":true,"T1":false,"T0":false,"Content-Type":"application/json"}' ## excluir especies sin precio y cantidad, determina plazo de listado
-            response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/negociable-obligations', headers=__headers, data=data)
-            panel_ons = json.loads(response.text)
-            df= pd.DataFrame(panel_ons)
-            df = df[__filter_columns_fixedIncome].copy()
-            df.columns = __fixedIncome_columns
-            df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
-            df.expiration=pd.to_datetime(df.expiration)
-            df = __convert_to_numeric_columns(df, __numeric_columns)
-            df.set_index('symbol', inplace=True)
-            df_bonos_cor= df
-        
-            #No estoy seguro que son
-            data = '{"page_number":1, "page_size":500, "Content-Type":"application/json"}'
-            response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/bnown/seriesHistoricas/iamc/bonos', headers=__headers, data=data)
-            bonos_iamc = json.loads(response.text)
-            df_bonos_iamc = pd.DataFrame(bonos_iamc['data'])
-            colList=df_bonos_iamc.columns.values
-            error=0
-            for i in range(len(colList)):
-                try:
-                    colList[i]=__diction[colList[i]]
-                except:
-                    error=error+1
-            df_bonos_iamc.columns=colList
-            df_iamc= df_bonos_iamc.drop(["notas"],axis=1)
-            df_iamc.set_index('Especie', inplace=True)
+            try: 
+                data = '{"page_number":1, "page_size":500, "Content-Type":"application/json"}'
+                response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/bnown/seriesHistoricas/iamc/bonos', headers=__headers, data=data)
+                bonos_iamc = json.loads(response.text)
+                df_bonos_iamc = pd.DataFrame(bonos_iamc['data'])
+                colList=df_bonos_iamc.columns.values
+                error=0
+                for i in range(len(colList)):
+                    try:
+                        colList[i]=__diction[colList[i]]
+                    except:
+                        error=error+1
+                df_bonos_iamc.columns=colList
+                df_iamc= df_bonos_iamc.drop(["notas"],axis=1)
+                df_iamc.set_index('Especie', inplace=True)
+            except: df_iamc=None
+            
             return df_indice,df_bonos_gob,df_letras,df_bonos_cor,df_merval,df_general,df_cedears,df_iamc
         except:
              st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
