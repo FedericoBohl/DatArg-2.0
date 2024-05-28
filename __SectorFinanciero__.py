@@ -7,11 +7,11 @@ def make_cedears(data_now : pd.DataFrame):
     with st.container(border=True):
         c1,c2,c3,c4,c5=st.columns(5)
         with c1:
-            st.metric('SPY (ARS)',data_now.loc[data_now['symbol']=='SPY','last'].values[0],f"{data_now.loc[data_now['symbol']=='SPY','change'].values[0]*100:.2f}%")
+            st.metric('SPY (ARS)',data_now.loc[data_now['symbol']=='SPY','close'].values[0],f"{data_now.loc[data_now['symbol']=='SPY','change'].values[0]*100:.2f}%")
         with c2:
-            st.metric('NASDAQ (ARS)',data_now.loc[data_now['symbol']=='QQQ','last'].values[0],f"{data_now.loc[data_now['symbol']=='QQQ','change'].values[0]*100:.2f}%")
+            st.metric('NASDAQ (ARS)',data_now.loc[data_now['symbol']=='QQQ','close'].values[0],f"{data_now.loc[data_now['symbol']=='QQQ','change'].values[0]*100:.2f}%")
         with c3:
-            st.metric('Down Jones (ARS)',data_now.loc[data_now['symbol']=='DIA','last'].values[0],f"{data_now.loc[data_now['symbol']=='DIA','change'].values[0]*100:.2f}%")
+            st.metric('Down Jones (ARS)',data_now.loc[data_now['symbol']=='DIA','close'].values[0],f"{data_now.loc[data_now['symbol']=='DIA','change'].values[0]*100:.2f}%")
         with c4:
             st.metric('Dólar Oficial','-')
         with c5:
@@ -19,12 +19,12 @@ def make_cedears(data_now : pd.DataFrame):
     data=pd.read_csv('data_bolsa/bolsa_cedears.csv',delimiter=';')
     data=pd.merge(data_now,data,on='symbol').dropna()
     data['change']=data["change"]*100
-    df_grouped = data.groupby(["Sector","symbol"])[["Weigths","change","Company","last"]].min().reset_index()
+    df_grouped = data.groupby(["Sector","symbol"])[["Weigths","change","Company","close"]].min().reset_index()
     fig = px.treemap(df_grouped, 
                     path=[px.Constant("CEDEARS"), 'Sector',  'symbol'],
                     values='Weigths',
                     hover_name="change",
-                    custom_data=["Company",'last',"change"],
+                    custom_data=["Company",'close',"change"],
                     color='change', 
                     range_color =[-6,6],color_continuous_scale=colorscale,
                     labels={'Value': 'Number of Items'},
