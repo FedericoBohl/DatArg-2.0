@@ -215,15 +215,16 @@ def make_merv():
     response = __s.get('https://open.bymadata.com.ar/assets/api/langs/es.json', headers=__headers, verify=False)
     __diction=json.loads(response.text)
     #________________-
-    data = '{"excludeZeroPxAndQty":false,"T2":true,"T1":false,"T0":false,"Content-Type":"application/json"}' ## excluir especies sin precio y cantidad, determina plazo de listado
-    response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/cedears', headers=__headers, data=data)
+    data = '{"excludeZeroPxAndQty":true,"T2":true,"T1":false,"T0":false,"Content-Type":"application/json"}' ## excluir especies sin precio y cantidad, determina plazo de listado
+    response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/public-bonds', headers=__headers, data=data)
     panel = json.loads(response.text)
-    df= pd.DataFrame(panel)
-    df = df[__filter_columns].copy()
-    df.columns = __securities_columns
-    try:
-        df['change']=df['close']/df['previous_close']-1
-    except: df['change']=None
+    df = pd.DataFrame(panel['data'])
+    st.write(df)
+    df = df[__filter_columns_fixedIncome].copy()
+    df.columns = __fixedIncome_columns
+    df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
+    df.expiration=pd.to_datetime(df.expiration)
+    df = __convert_to_numeric_columns(df, __numeric_columns)
     df.set_index('symbol', inplace=True)
 
     st.dataframe(df)
