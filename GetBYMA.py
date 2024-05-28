@@ -57,11 +57,11 @@ def GetBYMA():
                 response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/leading-equity', headers=__headers, data=data)
                 panel_acciones_lideres = json.loads(response.text)
                 df= pd.DataFrame(panel_acciones_lideres['data'])
-                st.write(df)
                 df = df[__filter_columns].copy()
                 df.columns = __securities_columns
-                df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
-                df = __convert_to_numeric_columns(df, __numeric_columns)
+                try:
+                    df['change']=df['close']/df['previous_close']-1
+                except: df['change']=None
                 df.set_index('symbol', inplace=True)
                 df_merval=df
             except: df_merval=None
@@ -86,8 +86,10 @@ def GetBYMA():
                 df= pd.DataFrame(panel)
                 df = df[__filter_columns].copy()
                 df.columns = __securities_columns
-                df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
-                df = __convert_to_numeric_columns(df, __numeric_columns)
+                try:
+                    df['change']=df['close']/df['previous_close']-1
+                except: df['change']=None
+                df.set_index('symbol', inplace=True)
                 df_cedears= df
             except: df_cedears=None
 
