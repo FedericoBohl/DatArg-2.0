@@ -209,3 +209,11 @@ def make_merv():
         }
         response = __s.get('https://open.bymadata.com.ar/assets/api/langs/es.json', headers=__headers)
         __diction=json.loads(response.text)
+        #________________-
+        data = '{"Content-Type":"application/json"}'
+        response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/index-price', headers=__headers, data=data, verify=False)
+        indices = json.loads(response.text)['data']
+        df = pd.DataFrame(indices)
+        df = df[__columns_filter].copy()
+        df.columns = __index_columns
+        st.dataframe(df)
