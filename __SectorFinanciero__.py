@@ -83,26 +83,26 @@ def make_acciones(data_now_merv : pd.DataFrame , data_now_gen : pd.DataFrame):
     fig_merv.update_layout(margin=dict(l=1, r=1, t=10, b=1))
 
     #-------------- Fig del General  --------------
-    df_grouped = data_gen.groupby(["Sector","symbol"])[["CAP (MM)","change","Nombre","last"]].min().reset_index()
-    fig_gen = px.treemap(df_grouped, 
-                    path=[px.Constant("Bolsa Argentina"), 'Sector',  'symbol'], #Quite 'Industria', en 3
-                    values='CAP (MM)',
-                    hover_name="change",
-                    custom_data=["Nombre",'last',"change"],
-                    color='change', 
-                    range_color =[-6,6],color_continuous_scale=colorscale,
-                    labels={'Value': 'Number of Items'},
-                    color_continuous_midpoint=0)
-    fig_gen.update_traces(marker_line_width = 1.5,marker_line_color=black,
-        hovertemplate="<br>".join([
-        "<b>Empresa<b>: %{customdata[0]}",
-        "<b>Precio (ARS)<b>: %{customdata[1]}"
-        ])
-        )
-    fig_gen.data[0].texttemplate = "<b>%{label}</b><br>%{customdata[2]}%"
-    fig_gen.update_traces(marker=dict(cornerradius=10))
-    fig_gen.update_layout(margin=dict(l=1, r=1, t=10, b=1))
-    return fig_merv,fig_gen
+    #df_grouped = data_gen.groupby(["Sector","symbol"])[["CAP (MM)","change","Nombre","last"]].min().reset_index()
+    #fig_gen = px.treemap(df_grouped, 
+    #                path=[px.Constant("Bolsa Argentina"), 'Sector',  'symbol'], #Quite 'Industria', en 3
+    #                values='CAP (MM)',
+    #                hover_name="change",
+    #                custom_data=["Nombre",'last',"change"],
+    #                color='change', 
+    #                range_color =[-6,6],color_continuous_scale=colorscale,
+    #                labels={'Value': 'Number of Items'},
+    #                color_continuous_midpoint=0)
+    #fig_gen.update_traces(marker_line_width = 1.5,marker_line_color=black,
+    #    hovertemplate="<br>".join([
+    #    "<b>Empresa<b>: %{customdata[0]}",
+    #    "<b>Precio (ARS)<b>: %{customdata[1]}"
+    #    ])
+    #    )
+    #fig_gen.data[0].texttemplate = "<b>%{label}</b><br>%{customdata[2]}%"
+    #fig_gen.update_traces(marker=dict(cornerradius=10))
+    #fig_gen.update_layout(margin=dict(l=1, r=1, t=10, b=1))
+    return fig_merv,None#,fig_gen
 
 
 def make_merv():
@@ -173,7 +173,7 @@ def make_merv():
             st.dataframe(_)
         except:pass
     with acciones:
-        if (S.df_merval is not None) and (S.df_general is not None):
+        if (S.df_merval is not None):# and (S.df_general is not None):
             fig_merv,fig_gen=make_acciones(S.df_merval,S.df_general)
             container=st.container(border=True)
             if container.radio('¿Que panel desea ver?' , options=['Merval','Panel General'] , horizontal=True, index=0 , key='which_merv') == 'Merval':
@@ -181,7 +181,7 @@ def make_merv():
                 st.plotly_chart(fig_merv, use_container_width=True)
             else:
                 st.markdown("""<h2 style='text-align: center; color: #404040; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>Panel General</h2>""", unsafe_allow_html=True)
-                st.plotly_chart(fig_gen, use_container_width=True)
+                #st.plotly_chart(fig_gen, use_container_width=True)
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     with cedears:
         if S.df_cedears is not None:
