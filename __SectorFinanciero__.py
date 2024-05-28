@@ -218,7 +218,7 @@ def make_merv():
         df = df[__filter_columns].copy()
         st.write(df)
         #df.columns = __securities_columns
-        df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
-        df = __convert_to_numeric_columns(df, __numeric_columns)
-        df.set_index('symbol', inplace=True)
-        st.dataframe(df)
+        #df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
+        #df = __convert_to_numeric_columns(df, __numeric_columns)
+        #df.set_index('symbol', inplace=True)
+        #st.dataframe(df)
