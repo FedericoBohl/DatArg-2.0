@@ -223,6 +223,9 @@ def make_merv():
     df = df[__filter_columns].copy()
     st.write(df)
     df.columns = __securities_columns
-    df = __convert_to_numeric_columns(df, __numeric_columns)
+    try:
+        df['change']=df['close']/df['previous_close']-1
+    except: df['change']=None
+    #df = __convert_to_numeric_columns(df, __numeric_columns)
     df.set_index('symbol', inplace=True)
     st.dataframe(df)
