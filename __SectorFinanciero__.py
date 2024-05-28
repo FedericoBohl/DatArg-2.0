@@ -220,9 +220,10 @@ def make_merv():
     panel = json.loads(response.text)
     df= pd.DataFrame(panel)
     df = df[__filter_columns].copy()
-    st.dataframe(df)
     df.columns = __securities_columns
     try:
         df['change']=df['close']/df['previous_close']-1
     except: df['change']=None
+    df.set_index('symbol', inplace=True)
+
     st.dataframe(df)
