@@ -215,16 +215,13 @@ def make_merv():
     response = __s.get('https://open.bymadata.com.ar/assets/api/langs/es.json', headers=__headers, verify=False)
     __diction=json.loads(response.text)
     #________________-
-    data = '{"excludeZeroPxAndQty":true,"T2":true,"T1":false,"T0":false,"Content-Type":"application/json"}' ## excluir especies sin precio y cantidad, determina plazo de listado
-    response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/general-equity', headers=__headers, data=data)
-    st.write(response.text)
+    data = '{"excludeZeroPxAndQty":false,"T2":true,"T1":false,"T0":false,"Content-Type":"application/json"}' ## excluir especies sin precio y cantidad, determina plazo de listado
+    response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/cedears', headers=__headers, data=data)
     panel = json.loads(response.text)
-    df= pd.DataFrame(panel['data'])
-    st.write(df)
+    df= pd.DataFrame(panel)
     df = df[__filter_columns].copy()
-    st.write(df)
+    st.dataframe(df)
     df.columns = __securities_columns
     df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
     df = __convert_to_numeric_columns(df, __numeric_columns)
-    df.set_index('symbol', inplace=True)
     st.dataframe(df)
