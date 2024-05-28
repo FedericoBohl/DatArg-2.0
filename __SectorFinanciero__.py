@@ -112,6 +112,7 @@ def make_merv():
                 with t_1_nac: st.subheader('Panel')
                 with t_2_nac: st.subheader('Curva')
                 with t_3_nac: st.dataframe(S.df_bonos_gob[['last','change','volume','expiration']])#Filtrar por rango
+        else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
         if S.df_bonos_gob is not None:
             with c2_1:
                 st.subheader('Bonos Ley Extrangera')
@@ -119,6 +120,7 @@ def make_merv():
                 with t_1_ex: st.subheader('Panel')
                 with t_2_ex: st.subheader('Curva')
                 with t_3_ex: st.dataframe(S.df_bonos_gob[['last','change','volume','expiration']])#Idem
+        else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
         if S.df_bonos_gob is not None:
             with c3_1:
                 st.subheader('Bonos ajustados por CER')
@@ -126,6 +128,7 @@ def make_merv():
                 with t_1_c: st.subheader('Panel')
                 with t_2_c: st.subheader('Curva')
                 with t_3_c: st.dataframe(S.df_bonos_gob[['last','change','volume','expiration']])#Idem
+        else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
         c1_2,c2_2=st.columns(2)
         if S.df_letras is not None:
             with c1_2:
@@ -134,6 +137,7 @@ def make_merv():
                 with t_1_l: st.subheader('Panel')
                 with t_2_l: st.subheader('Curva')
                 with t_3_l: st.dataframe(S.df_letras[['last','change','volume','expiration']])
+        else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
         if S.df_bonos_cor.all() is not None:
             with c2_2:
                 st.subheader('Bonos Corporativos')
@@ -141,6 +145,7 @@ def make_merv():
                 with t_1_cor: st.subheader('Panel')
                 with t_2_cor: st.subheader('Curva')
                 with t_3_cor: st.dataframe(S.df_bonos_cor[['last','change','volume','expiration']])
+        else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
         if S.df_iamc is not None:
             c1_3,c2_3=st.columns((0.7,0.3))
             with c1_3:
@@ -150,7 +155,7 @@ def make_merv():
                 st.subheader('Filtado de bono')
                 st.selectbox('Buscador de Bonos',options=S.df_iamc.index.to_list(),key='bonobuscado')
                 st.write(S.df_iamc.loc[S.df_iamc.index==S.bonobuscado].transpose())
-
+        else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
         st.divider()
         #TEST
         try:
@@ -167,6 +172,8 @@ def make_merv():
             else:
                 st.markdown("""<h2 style='text-align: center; color: #404040; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>Panel General</h2>""", unsafe_allow_html=True)
                 st.plotly_chart(fig_gen, use_container_width=True)
+        else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     with cedears:
         if S.df_cedears is not None:
             make_cedears(S.df_cedears)
+        else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
