@@ -40,11 +40,12 @@ def make_cedears(data_now : pd.DataFrame):
     fig.update_layout(margin=dict(l=1, r=1, t=10, b=1))
     st.markdown("""<h2 style='text-align: center; color: #404040; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>S&P 500 en Cedears</h2>""", unsafe_allow_html=True)
     st.plotly_chart(fig,use_container_width=True)
-    st.subheader('Listado de CEDEARS')
     data.set_index('symbol', inplace=True)
     data=data.drop(columns=['Name','Weigths'])
     c1,c2= st.columns((0.6,0.4))
-    with c1: st.dataframe(data)
+    with c1:
+        st.subheader('Listado de CEDEARS')
+        st.dataframe(data)
     with c2:
         st.subheader('Buscador de Cedears')
         st.selectbox('Buscador de cedears',label_visibility='collapsed',options=data.index.to_list(),key='cedebuscado')
