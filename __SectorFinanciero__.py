@@ -17,7 +17,6 @@ def make_cedears(data_now : pd.DataFrame):
             st.metric('Dolar Blue/MEP/CCL','-')
     data=pd.read_csv('data_bolsa/bolsa_cedears.csv',delimiter=';')
     data_now=data_now.drop_duplicates(subset='symbol', keep='first')
-    st.write(data_now)
     data=pd.merge(data_now,data,on='symbol').dropna()
     data['change']=data["change"]*100
     df_grouped = data.groupby(["Sector","symbol"])[["Weigths","change","Company","close"]].min().reset_index()
@@ -43,7 +42,7 @@ def make_cedears(data_now : pd.DataFrame):
     st.plotly_chart(fig,use_container_width=True)
     st.subheader('Listado de CEDEARS')
     data.set_index('symbol', inplace=True)
-    st.dataframe(data.drop(columns=['Name','Weigths']))
+    st.dataframe(data_now.drop_duplicates(subset='symbol', keep='first').drop(columns=['Name','Weigths']))
 
 @st.cache_data(show_spinner=False)
 def make_acciones(data_now_merv : pd.DataFrame , data_now_gen : pd.DataFrame):
