@@ -108,9 +108,9 @@ def make_acciones(data_now_merv : pd.DataFrame , data_now_gen : pd.DataFrame):
 def make_merv():
     st.header('Mercado de Capitales')
     st.button('🔄️Recargar Datos',key='Reload')
-    if (not 'df_indice' in S) or S.Reload:
-        S.df_indice,S.df_bonos_gob,S.df_letras,S.df_bonos_cor,S.df_merval,S.df_general,S.df_cedears, S.df_iamc=GetBYMA()
     try:
+        if (not 'df_indice' in S) or S.Reload:
+            S.df_indice,S.df_bonos_gob,S.df_letras,S.df_bonos_cor,S.df_merval,S.df_general,S.df_cedears, S.df_iamc=GetBYMA()
         st.metric('Merval',S.df_indice.loc[1,'last'],f'{round(S.df_indice.loc[1,"change"]*100,2)}%')
         bonos, acciones, cedears= st.tabs(["Bonos", "Acciones",'Cedears'])
         with bonos:
