@@ -158,6 +158,9 @@ def GetBYMA():
                 df_iamc= df_bonos_iamc.drop(["notas"],axis=1)
                 df_iamc.set_index('Especie', inplace=True)
                 df_iamc[~df_iamc.index.duplicated(keep='first')]
+                df=df.drop(columns=['Hora','Fecha de Cotización','ISIN'])
+                df=df.rename(columns={'Moneda de emisión':'Nombre Completo'})
+
                 
             except: df_iamc=None
 
