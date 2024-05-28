@@ -3,6 +3,7 @@ from librerias import *
 
 @st.cache_data(show_spinner=False)
 def make_cedears(data_now : pd.DataFrame):
+    st.write(data_now)
     with st.container(border=True):
         c1,c2,c3,c4,c5=st.columns(5)
         with c1:
