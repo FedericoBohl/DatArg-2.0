@@ -217,14 +217,12 @@ def make_merv():
     #________________-
     data = '{"excludeZeroPxAndQty":true,"T2":true,"T1":false,"T0":false,"Content-Type":"application/json"}' ## excluir especies sin precio y cantidad, determina plazo de listado
     response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/general-equity', headers=__headers, data=data)
-    panel_acciones_lideres = json.loads(response.text)
-    df= pd.DataFrame(panel_acciones_lideres['data'])
-    st.dataframe(df)
+    panel = json.loads(response.text)
+    df= pd.DataFrame(panel['data'])
     df = df[__filter_columns].copy()
-
+    st.write(df)
     df.columns = __securities_columns
-    try:
-        df['change']=df['close']/df['previous_close']-1
-    except: df['change']=None
+    df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
+    df = __convert_to_numeric_columns(df, __numeric_columns)
     df.set_index('symbol', inplace=True)
     st.dataframe(df)
