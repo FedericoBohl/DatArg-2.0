@@ -177,3 +177,4 @@ def make_merv():
         if S.df_cedears is not None:
             make_cedears(S.df_cedears)
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
+    st.write(S.df_cedears)
