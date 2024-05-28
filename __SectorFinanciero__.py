@@ -105,47 +105,47 @@ def make_merv():
     with bonos:
         c1_1,c2_1,c3_1=st.columns(3)
         #Los dataframes deberían tener de index el ticker del bono para hacer el filtrado más simple
-        if S.df_bonos_gob is not None:
-            with c1_1:
+        with c1_1:
+            if S.df_bonos_gob is not None:
                 st.subheader('Bonos Ley Nacional')
                 t_1_nac,t_2_nac,t_3_nac=st.tabs(['Panel','Curva','Buscador'])
                 with t_1_nac: st.subheader('Panel')
                 with t_2_nac: st.subheader('Curva')
                 with t_3_nac: st.dataframe(S.df_bonos_gob[['last','change','volume','expiration']])#Filtrar por rango
-        else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
-        if S.df_bonos_gob is not None:
-            with c2_1:
+            else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
+        with c2_1:
+            if S.df_bonos_gob is not None:
                 st.subheader('Bonos Ley Extrangera')
                 t_1_ex,t_2_ex,t_3_ex=st.tabs(['Panel','Curva','Buscador'])
                 with t_1_ex: st.subheader('Panel')
                 with t_2_ex: st.subheader('Curva')
                 with t_3_ex: st.dataframe(S.df_bonos_gob[['last','change','volume','expiration']])#Idem
-        else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
-        if S.df_bonos_gob is not None:
-            with c3_1:
+            else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
+        with c3_1:
+            if S.df_bonos_gob is not None:
                 st.subheader('Bonos ajustados por CER')
                 t_1_c,t_2_c,t_3_c=st.tabs(['Panel','Curva','Buscador'])
                 with t_1_c: st.subheader('Panel')
                 with t_2_c: st.subheader('Curva')
                 with t_3_c: st.dataframe(S.df_bonos_gob[['last','change','volume','expiration']])#Idem
-        else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
+            else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
         c1_2,c2_2=st.columns(2)
-        if S.df_letras is not None:
-            with c1_2:
+        with c1_2:
+            if S.df_letras is not None:
                 st.subheader('Letras')
                 t_1_l,t_2_l,t_3_l=st.tabs(['Panel','Curva','Buscador'])
                 with t_1_l: st.subheader('Panel')
                 with t_2_l: st.subheader('Curva')
                 with t_3_l: st.dataframe(S.df_letras[['last','change','volume','expiration']])
-        else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
-        if S.df_bonos_cor.all() is not None:
-            with c2_2:
+            else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
+        with c2_2:    
+            if S.df_bonos_cor.all() is not None:
                 st.subheader('Bonos Corporativos')
                 t_1_cor,t_2_cor,t_3_cor=st.tabs(['Panel','Curva','Buscador'])
                 with t_1_cor: st.subheader('Panel')
                 with t_2_cor: st.subheader('Curva')
                 with t_3_cor: st.dataframe(S.df_bonos_cor[['last','change','volume','expiration']])
-        else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
+            else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
         if S.df_iamc is not None:
             c1_3,c2_3=st.columns((0.7,0.3))
             with c1_3:
