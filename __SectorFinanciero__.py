@@ -41,7 +41,7 @@ def make_cedears(data_now : pd.DataFrame):
     st.plotly_chart(fig,use_container_width=True)
     st.subheader('Listado de CEDEARS')
     data.set_index('symbol', inplace=True)
-    st.dataframe(data.drop(columns=['Name','Weights']))
+    st.dataframe(data.drop(columns=['Name','Weigths']))
 
 @st.cache_data(show_spinner=False)
 def make_acciones(data_now_merv : pd.DataFrame , data_now_gen : pd.DataFrame):
