@@ -1,7 +1,7 @@
 from GetBYMA import GetBYMA
 from librerias import *
 
-@st.cache_data(show_spinner=False)
+@st.cache_data(show_spinner=False, experimental_allow_widgets=True)
 def make_cedears(data_now : pd.DataFrame):
     with st.container(border=True):
         c1,c2,c3,c4,c5=st.columns(5)
@@ -48,7 +48,7 @@ def make_cedears(data_now : pd.DataFrame):
     with c2:
         st.subheader('Buscador de Cedears')
         st.selectbox('Buscador de cedears',label_visibility='collapsed',options=data.index.to_list(),key='cedebuscado')
-        st.dataframe(data.loc[data.index==S.bonobuscado].transpose())
+        st.dataframe(data.loc[data.index==S.cedebuscado].transpose())
 
 
 
