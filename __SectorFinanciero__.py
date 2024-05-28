@@ -190,7 +190,7 @@ def make_merv():
         __filter_columns_fixedIncome=["symbol","settlementType","quantityBid","bidPrice","offerPrice","quantityOffer","settlementPrice","closingPrice","imbalance","openingPrice","tradingHighPrice","tradingLowPrice","previousClosingPrice","volumeAmount","volume","numberOfOrders","tradeHour","securityType","maturityDate"]
 
         __s = requests.session()
-        __s.get('https://open.bymadata.com.ar/#/dashboard', verify=certifi.where())
+        __s.get('https://open.bymadata.com.ar/#/dashboard', verify=False)
 
         __headers = {
             'Connection': 'keep-alive',
@@ -207,7 +207,7 @@ def make_merv():
             'Referer': 'https://open.bymadata.com.ar/',
             'Accept-Language': 'es-US,es-419;q=0.9,es;q=0.8,en;q=0.7',
         }
-        response = __s.get('https://open.bymadata.com.ar/assets/api/langs/es.json', headers=__headers, verify=certifi.where())
+        response = __s.get('https://open.bymadata.com.ar/assets/api/langs/es.json', headers=__headers, verify=False)
         __diction=json.loads(response.text)
         #________________-
         data = '{"excludeZeroPxAndQty":false,"T2":true,"T1":false,"T0":false,"Content-Type":"application/json"}' ## excluir especies sin precio y cantidad, determina plazo de listado
