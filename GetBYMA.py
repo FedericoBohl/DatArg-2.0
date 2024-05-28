@@ -91,7 +91,7 @@ def GetBYMA():
                     df['change']=df['close']/df['previous_close']-1
                 except: df['change']=None
                 #df.set_index('symbol', inplace=True)   #Para que pueda filtrar el threemap
-                df.drop_duplicates(subset='symbol', keep='first')
+                df=df.drop_duplicates(subset='symbol', keep='first')
                 df_cedears= df
             except: df_cedears=None
 
