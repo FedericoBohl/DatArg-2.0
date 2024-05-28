@@ -215,7 +215,6 @@ def make_merv():
     panel = json.loads(response.text)
     df= pd.DataFrame(panel)
     df = df[__filter_columns].copy()
-    st.write(df)
     df.columns=['symbol','close','previous_close']
     try:
         df['change']=df['close']/df['previous_close']-1
