@@ -232,5 +232,5 @@ def make_merv():
     df = df[__filter_columns].copy()
     df.columns=__securities_columns
     #df.set_index('symbol', inplace=True)   #Para que pueda filtrar el threemap
-    df=df.drop_duplicates(subset='symbol', keep='first')
+    df=df.drop_duplicates(subset='Nombre', keep='first')
     st.write(df)
