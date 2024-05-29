@@ -39,6 +39,10 @@ def make_internacional():
         st.header('EEUU')
     with c2:
         st.header('Europa')
+        t_eu,i_eu,u_eu=get_eu()
+        fig=go.Figure()
+        fig.add_trace(go.Scatter(x=t_eu.index,y=t_eu['MRO']))
+        st.plotly_chart(fig)
     c1,c2=st.columns(2)
     with c1:
         st.header('Inglaterra')
