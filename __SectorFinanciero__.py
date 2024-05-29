@@ -228,8 +228,9 @@ def make_merv():
     response = __s.post('https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/leading-equity', headers=__headers, data=data)
     panel_acciones_lideres = json.loads(response.text)
     df= pd.DataFrame(panel_acciones_lideres['data'])
-    df = df[__filter_columns].copy()
     st.write(df)
+
+    df = df[__filter_columns].copy()
     df.columns = __securities_columns
     try:
         df['change']=df['close']/df['previous_close']-1
