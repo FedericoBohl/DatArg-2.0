@@ -6,11 +6,11 @@ def make_cedears(data_now : pd.DataFrame):
     with st.container(border=True):
         c1,c2,c3,c4,c5=st.columns(5)
         with c1:
-            st.metric('SPY (ARS)',data_now.loc[data_now['Nombre']=='SPY','close'].values[0],f"{data_now.loc[data_now['Nombre']=='SPY','change'].values[0]*100:.2f}%")
+            st.metric('SPY (ARS)',data_now.loc[data_now['Nombre']=='SPY','Precio'].values[0],f"{data_now.loc[data_now['Nombre']=='SPY','Var%'].values[0]*100:.2f}%")
         with c2:
-            st.metric('NASDAQ (ARS)',data_now.loc[data_now['Nombre']=='QQQ','close'].values[0],f"{data_now.loc[data_now['Nombre']=='QQQ','change'].values[0]*100:.2f}%")
+            st.metric('NASDAQ (ARS)',data_now.loc[data_now['Nombre']=='QQQ','Precio'].values[0],f"{data_now.loc[data_now['Nombre']=='QQQ','Var%'].values[0]*100:.2f}%")
         with c3:
-            st.metric('Down Jones (ARS)',data_now.loc[data_now['Nombre']=='DIA','close'].values[0],f"{data_now.loc[data_now['Nombre']=='DIA','change'].values[0]*100:.2f}%")
+            st.metric('Down Jones (ARS)',data_now.loc[data_now['Nombre']=='DIA','Precio'].values[0],f"{data_now.loc[data_now['Nombre']=='DIA','Var%'].values[0]*100:.2f}%")
         with c4:
             st.metric('Dólar Oficial','-')
         with c5:
