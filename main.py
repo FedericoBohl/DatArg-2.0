@@ -2,6 +2,7 @@ from librerias import *
 from __BCRA__ import make_BCRA_web
 from GetBYMA import GetBYMA
 from __SectorFinanciero__ import make_merv
+from __SectorInternacional__ import make_internacional
 st.set_page_config(
     page_title="DatArg",
     page_icon="🧉",
@@ -42,6 +43,8 @@ if is_session_pc:
 
     with t_bcra:
         make_BCRA_web()
+    with t_Intl:
+        make_internacional()
     with t_Merv:
         make_merv()
 
