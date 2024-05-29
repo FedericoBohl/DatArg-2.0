@@ -6,26 +6,26 @@ def make_cedears(data_now : pd.DataFrame):
     with st.container(border=True):
         c1,c2,c3,c4,c5=st.columns(5)
         with c1:
-            st.metric('SPY (ARS)',data_now.loc[data_now['symbol']=='SPY','close'].values[0],f"{data_now.loc[data_now['symbol']=='SPY','change'].values[0]*100:.2f}%")
+            st.metric('SPY (ARS)',data_now.loc[data_now['Nombre']=='SPY','close'].values[0],f"{data_now.loc[data_now['Nombre']=='SPY','change'].values[0]*100:.2f}%")
         with c2:
-            st.metric('NASDAQ (ARS)',data_now.loc[data_now['symbol']=='QQQ','close'].values[0],f"{data_now.loc[data_now['symbol']=='QQQ','change'].values[0]*100:.2f}%")
+            st.metric('NASDAQ (ARS)',data_now.loc[data_now['Nombre']=='QQQ','close'].values[0],f"{data_now.loc[data_now['Nombre']=='QQQ','change'].values[0]*100:.2f}%")
         with c3:
-            st.metric('Down Jones (ARS)',data_now.loc[data_now['symbol']=='DIA','close'].values[0],f"{data_now.loc[data_now['symbol']=='DIA','change'].values[0]*100:.2f}%")
+            st.metric('Down Jones (ARS)',data_now.loc[data_now['Nombre']=='DIA','close'].values[0],f"{data_now.loc[data_now['Nombre']=='DIA','change'].values[0]*100:.2f}%")
         with c4:
             st.metric('Dólar Oficial','-')
         with c5:
             st.metric('Dolar Blue/MEP/CCL','-')
     data=pd.read_csv('data_bolsa/bolsa_cedears.csv',delimiter=';')
-    data_now=data_now.drop_duplicates(subset='symbol', keep='first')
-    data=pd.merge(data_now,data,on='symbol').dropna()
-    data['change']=data["change"]*100
-    df_grouped = data.groupby(["Sector","symbol"])[["Weigths","change","Company","close"]].min().reset_index()
+    data_now=data_now.drop_duplicates(subset='Nombre', keep='first')
+    data=pd.merge(data_now,data,on='Nombre').dropna()
+    data['Var%']=data["Var%"]*100
+    df_grouped = data.groupby(["Sector","Nombre"])[["Weigths","Var%","Nombre Completo","Precio"]].min().reset_index()
     fig = px.treemap(df_grouped, 
-                    path=[px.Constant("CEDEARS"), 'Sector',  'symbol'],
+                    path=[px.Constant("CEDEARS"), 'Sector',  'Nombre'],
                     values='Weigths',
-                    hover_name="change",
-                    custom_data=["Company",'close',"change"],
-                    color='change', 
+                    hover_name="Var%",
+                    custom_data=["Nombre Completo",'Precio',"Var%"],
+                    color='Var%', 
                     range_color =[-6,6],color_continuous_scale=colorscale,
                     labels={'Value': 'Number of Items'},
                     color_continuous_midpoint=0)
@@ -40,7 +40,7 @@ def make_cedears(data_now : pd.DataFrame):
     fig.update_layout(margin=dict(l=1, r=1, t=10, b=1))
     st.markdown("""<h2 style='text-align: center; color: #404040; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>S&P 500 en Cedears</h2>""", unsafe_allow_html=True)
     st.plotly_chart(fig,use_container_width=True)
-    data.set_index('symbol', inplace=True)
+    data.set_index('Nombre', inplace=True)
     data=data.drop(columns=['Name','Weigths'])
     c1,c2= st.columns((0.6,0.4))
     with c1:
