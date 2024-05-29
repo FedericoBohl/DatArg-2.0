@@ -36,11 +36,16 @@ def make_internacional():
 
     c1,c2=st.columns(2)
     with c1:
-        st.title('EEUU')
+        st.header('EEUU')
     with c2:
-        st.title('Europa')
+        st.header('Europa')
     c1,c2=st.columns(2)
     with c1:
-        st.title('EEUU')
+        st.header('Inglaterra')
     with c2:
-        st.title('Europa')
+        st.header('Japón')
+    c1,c2=st.columns(2)
+    with c1:
+        st.header('Brasil')
+    with c2:
+        st.header('México')
