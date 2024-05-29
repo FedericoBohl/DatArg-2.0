@@ -18,8 +18,8 @@ def GetBYMA():
             __filter_columns=["symbol","closingPrice","previousClosingPrice"]
             __numeric_columns = ['last', 'open', 'high', 'low', 'volume', 'turnover', 'operations', 'change', 'bid_size', 'bid', 'ask_size', 'ask', 'previous_close']
 
-            __fixedIncome_columns = ['symbol', 'settlement', 'bid_size', 'bid', 'ask', 'ask_size', 'last','close', 'change', 'open', 'high', 'low', 'previous_close', 'turnover', 'volume', 'operations', 'datetime', 'group',"expiration"]
-            __filter_columns_fixedIncome=["symbol","settlementType","quantityBid","bidPrice","offerPrice","quantityOffer","settlementPrice","closingPrice","imbalance","openingPrice","tradingHighPrice","tradingLowPrice","previousClosingPrice","volumeAmount","volume","numberOfOrders","tradeHour","securityType","maturityDate"]
+            __fixedIncome_columns = ['Nombre', 'Var%', 'Fecha de madurez', 'Moneda', 'Volumen', 'Días hasta la maturity', 'Precio','Cantidad Ofrecida']
+            __filter_columns_fixedIncome=["symbol","imbalance","maturityDate","denominationCcy","volume","daysToMaturity","closingPrice",'quantityOffer']
 
             __s = requests.session()
             __s.get('https://open.bymadata.com.ar/#/dashboard', verify=False)
@@ -134,10 +134,7 @@ def GetBYMA():
                 df= pd.DataFrame(panel_ons)
                 df = df[__filter_columns_fixedIncome].copy()
                 df.columns = __fixedIncome_columns
-                df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
-                df.expiration=pd.to_datetime(df.expiration)
-                df = __convert_to_numeric_columns(df, __numeric_columns)
-                df.set_index('symbol', inplace=True)
+                df.set_index('Nombre', inplace=True)
                 df[~df.index.duplicated(keep='first')]
                 df_bonos_cor= df
             except: df_bonos_cor=None
