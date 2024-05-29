@@ -232,5 +232,5 @@ def make_merv():
     df.columns = __fixedIncome_columns
     df.set_index('Nombre', inplace=True)
     df[~df.index.duplicated(keep='first')]
-    df_bonos_cor= df[['Precio','Var%','Moneda','Fecha de madurez', 'Moneda', 'Días hasta la maturity', 'Volumen','Cantidad Ofrecida']]
+    df_bonos_cor= df[['Precio','Var%','Moneda','Fecha de madurez', 'Días hasta la maturity', 'Volumen','Cantidad Ofrecida']]
     st.write(df_bonos_cor)
