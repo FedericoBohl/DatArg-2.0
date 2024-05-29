@@ -45,11 +45,11 @@ def make_cedears(data_now : pd.DataFrame):
     c1,c2= st.columns((0.6,0.4))
     with c1:
         st.subheader('Listado de CEDEARS')
-        st.dataframe(data)
+        st.dataframe(data,use_container_width=True)
     with c2:
         st.subheader('Buscador de Cedears')
         st.selectbox('Buscador de cedears',label_visibility='collapsed',options=data.index.to_list(),key='cedebuscado')
-        st.dataframe(data.loc[data.index==S.cedebuscado].transpose())
+        st.dataframe(data.loc[data.index==S.cedebuscado].transpose(),use_container_width=True)
 
 
 
@@ -154,9 +154,11 @@ def make_merv():
                 if S.df_bonos_cor.all() is not None:
                     st.subheader('Bonos Corporativos')
                     t_1_cor,t_2_cor,t_3_cor=st.tabs(['Panel','Curva','Buscador'])
-                    with t_1_cor: st.subheader('Panel')
+                    with t_1_cor: st.dataframe(S.df_bonos_cor,use_container_width=True)
                     with t_2_cor: st.subheader('Curva')
-                    with t_3_cor: st.dataframe(S.df_bonos_cor)
+                    with t_3_cor: 
+                        st.selectbox('Buscador de corpo',label_visibility='collapsed',options=S.df_bonos_cor.index.to_list(),key='corpobuscado')
+                        st.dataframe(S.df_bonos_cor.loc[S.df_bonos_cor.index==S.corpobuscado].transpose(),use_container_width=True)
                 else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
             if S.df_iamc is not None:
                 c1_3,c2_3=st.columns((0.7,0.3))
