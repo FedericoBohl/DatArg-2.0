@@ -136,6 +136,7 @@ def GetBYMA():
                 df.columns = __fixedIncome_columns
                 df.set_index('Nombre', inplace=True)
                 df[~df.index.duplicated(keep='first')]
+                df=df.reindex(['Precio','Var%','Moneda','Fecha de madurez', 'Moneda', 'Días hasta la maturity', 'Volumen','Cantidad Ofrecida'])
                 df_bonos_cor= df
             except: df_bonos_cor=None
 
