@@ -129,7 +129,7 @@ def GetBYMA():
                 df = df[__filter_columns_fixedIncome].copy()
                 df.columns = __fixedIncome_columns
                 df.set_index('Nombre', inplace=True)
-                df[~df.index.duplicated(keep='first')]
+                df=df[~df.index.duplicated(keep='first')]
                 df_bonos_cor= df[['Precio','Var%','Moneda','Fecha de madurez', 'Días hasta la maturity', 'Volumen','Cantidad Ofrecida']]
             except: df_bonos_cor=None
 
