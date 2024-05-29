@@ -83,12 +83,9 @@ def GetBYMA():
                 panel = json.loads(response.text)
                 df= pd.DataFrame(panel)
                 df = df[__filter_columns].copy()
-                df.columns=['symbol','close','previous_close']
-                try:
-                    df['change']=df['close']/df['previous_close']-1
-                except: df['change']=None
+                df.columns=__securities_columns
                 #df.set_index('symbol', inplace=True)   #Para que pueda filtrar el threemap
-                df=df.drop_duplicates(subset='symbol', keep='first')
+                df=df.drop_duplicates(subset='Nombre', keep='first')
                 df_cedears= df
             except: df_cedears=None
 
