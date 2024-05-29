@@ -28,4 +28,19 @@ def get_eu():
     return mro,inf,une
 
 def make_internacional():
-    pass
+    with st.container(border=True):
+        c1,c2,c3=st.columns(3)
+        with c1: st.metric('Precio WTI','-')
+        with c2: st.metric('Precio Trigo','-')
+        with c3: st.metric('Precio Soja','-')
+
+    c1,c2=st.columns(2)
+    with c1:
+        st.title('EEUU')
+    with c2:
+        st.title('Europa')
+    c1,c2=st.columns(2)
+    with c1:
+        st.title('EEUU')
+    with c2:
+        st.title('Europa')
