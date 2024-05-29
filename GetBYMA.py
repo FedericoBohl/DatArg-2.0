@@ -102,11 +102,11 @@ def GetBYMA():
                 df = pd.DataFrame(panel['data'])
                 df = df[__filter_columns_fixedIncome].copy()
                 df.columns = __fixedIncome_columns
-                df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
-                df.expiration=pd.to_datetime(df.expiration)
-                df = __convert_to_numeric_columns(df, __numeric_columns)
-                df.set_index('symbol', inplace=True)
-                df_bonos_gob= df
+                #df.settlement = df.settlement.apply(lambda x: __diction[x] if x in __diction else '')
+                #df.expiration=pd.to_datetime(df.expiration)
+                #df = __convert_to_numeric_columns(df, __numeric_columns)
+                df.set_index('Nombre', inplace=True)
+                df_bonos_gob= df[['Precio','Var%','Moneda','Fecha de madurez', 'Días hasta la maturity', 'Volumen','Cantidad Ofrecida']]
             except: df_bonos_gob=None
 
             try:

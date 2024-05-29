@@ -150,14 +150,13 @@ def make_merv():
                     with t_2_l: st.subheader('Curva')
                     with t_3_l: st.dataframe(S.df_letras[['last','change','volume','expiration']])
                 else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
-            st.write(S.df_bonos_cor)
             with c2_2:    
                 if S.df_bonos_cor.all() is not None:
                     st.subheader('Bonos Corporativos')
                     t_1_cor,t_2_cor,t_3_cor=st.tabs(['Panel','Curva','Buscador'])
                     with t_1_cor: st.subheader('Panel')
                     with t_2_cor: st.subheader('Curva')
-                    with t_3_cor: st.dataframe(S.df_bonos_cor[['Nombre', 'Var%', 'Fecha de madurez', 'Moneda', 'Volumen', 'Días hasta la maturity', 'Precio','Cantidad Ofrecida']])
+                    with t_3_cor: st.dataframe(S.df_bonos_cor)
                 else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
             if S.df_iamc is not None:
                 c1_3,c2_3=st.columns((0.7,0.3))
