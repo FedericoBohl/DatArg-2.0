@@ -40,6 +40,8 @@ def make_internacional():
     with c2:
         st.header('Europa')
         t_eu,i_eu,u_eu=get_eu()
+        st.write(t_eu)
+        st.write(i_eu)
         fig=go.Figure()
         fig.add_trace(go.Scatter(x=t_eu.index,y=t_eu['MRO']))
         fig.add_trace(go.Scatter(x=t_eu.index,y=i_eu['Inflacion']))
