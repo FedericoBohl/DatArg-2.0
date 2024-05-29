@@ -14,8 +14,8 @@ def GetBYMA():
             __columns_filter=["description","symbol","price","variation","highValue","minValue","closingPrice"]
             __index_columns=["description","symbol","last","change","high","low","previous_close"]
 
-            __securities_columns = ['symbol', 'settlement', 'bid_size', 'bid', 'ask', 'ask_size', 'last','close', 'change', 'open', 'high', 'low', 'previous_close', 'turnover', 'volume', 'operations', 'datetime', 'group']
-            __filter_columns=["symbol","closingPrice","previousClosingPrice"]
+            __securities_columns = ['Nombre', 'Precio', 'Var%', 'Volumen']
+            __filter_columns=["symbol","closingPrice","imbalance",'volume']
             __numeric_columns = ['last', 'open', 'high', 'low', 'volume', 'turnover', 'operations', 'change', 'bid_size', 'bid', 'ask_size', 'ask', 'previous_close']
 
             __fixedIncome_columns = ['Nombre', 'Var%', 'Fecha de madurez', 'Moneda', 'Volumen', 'Días hasta la maturity', 'Precio','Cantidad Ofrecida']
@@ -59,10 +59,7 @@ def GetBYMA():
                 df= pd.DataFrame(panel_acciones_lideres['data'])
                 df = df[__filter_columns].copy()
                 df.columns = __securities_columns
-                try:
-                    df['change']=df['close']/df['previous_close']-1
-                except: df['change']=None
-                df.set_index('symbol', inplace=True)
+                df.set_index('Nombre', inplace=True)
                 df[~df.index.duplicated(keep='first')]
                 df_merval=df
             except: df_merval=None
