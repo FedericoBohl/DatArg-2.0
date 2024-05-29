@@ -6,7 +6,7 @@ def get_eu():
     st.write(mro)
     mro=mro[['TIME_PERIOD','OBS_VALUE']]
     mro.TIME_PERIOD=pd.to_datetime(mro.TIME_PERIOD, format='%Y-%m-%d')
-    mro=mro.set_index('TIME_PERIOD',inplace=True)
+    mro.set_index('TIME_PERIOD',inplace=True)
     st.write(mro)
     mro.resample('M').last()
     mro=mro.rename(columns={'OBS_VALUE':'MRO'})
