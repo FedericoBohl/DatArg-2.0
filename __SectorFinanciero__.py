@@ -158,7 +158,7 @@ def make_merv():
                     with t_2_cor: st.subheader('Curva')
                     with t_3_cor: 
                         st.selectbox('Buscador de corpo',label_visibility='collapsed',options=S.df_bonos_cor.index.to_list(),key='corpobuscado')
-                        st.write(S.df_bonos_cor.loc[S.df_bonos_cor.index=='ARC1D'])
+                        st.write(S.df_bonos_cor.loc[S.df_bonos_cor.index=='ARC1D'].transpose())
                         st.write(S.df_bonos_cor.index)
                         st.dataframe(S.df_bonos_cor.loc[S.df_bonos_cor.index==S.corpobuscado].transpose(),use_container_width=True)
                 else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
