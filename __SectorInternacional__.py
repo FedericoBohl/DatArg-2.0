@@ -8,8 +8,7 @@ def get_eu():
     mro.set_index('TIME_PERIOD',inplace=True)
     mro=mro.resample('M').median()
     mro=mro.rename(columns={'OBS_VALUE':'MRO'})
-    #mro.index=mro.index.strftime('%b-%Y')
-
+    #mro.index=mro.index.strftime('%b-%Y') 
 
     inf=pd.read_csv('https://data-api.ecb.europa.eu/service/data/ICP/M.U2.N.000000.4.ANR?startPeriod=2000-01&detail=dataonly&format=csvdata')
     inf=inf[['TIME_PERIOD','OBS_VALUE']]
