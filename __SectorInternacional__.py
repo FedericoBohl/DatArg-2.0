@@ -10,7 +10,7 @@ def get_eu(_) -> None:
     mro.set_index('TIME_PERIOD',inplace=True)
     mro=mro.rename(columns={'OBS_VALUE':'MRO'})
     st.metric('MRO',f'{mro.iloc[-1]['MRO']}%',f'{round(mro.iloc[-1]['MRO']-mro.iloc[-2]['MRO'],2)}PP')
-    st.write(mro.index[-1])
+    st.write(mro.index[-1].strftime('%d-%b'))
     mro=mro.resample('M').median()
 
 
