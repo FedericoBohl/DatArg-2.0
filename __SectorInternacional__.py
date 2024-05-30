@@ -198,7 +198,7 @@ def get_usa(_):
     df_fed_funds = pd.DataFrame(fed_funds_data, columns=['Tasa'])
     fed_t=df_fed_funds.iloc[-1]['Tasa']
     fed_t1=df_fed_funds.iloc[-1]['Tasa']
-    with c2:st.metric(f'Fed Funds Rate ({df_fed_funds.index[-1].strftime('%d-%b')})',f'{fed_t}%',f'{round(fed_t-fed_t1,2)}PP',delta_color="inverse")
+    with c2:st.metric(f'Fed Funds Rate ({datetime.now.strftime('%d-%b')})',f'{fed_t}%',f'{round(fed_t-fed_t1,2)}PP',delta_color="inverse")
 
 
     graph_usa,table_usa=st.tabs(['Gráfico','Tabla'])
