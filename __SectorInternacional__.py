@@ -36,7 +36,7 @@ def get_eu(_) -> None:
     fig=make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=mro.index,y=mro['MRO'],name='MRO',line=dict(width=3,dash="dashdot"),marker_color="#FFDD00"),secondary_y=False)
     fig.add_trace(go.Bar(x=mro.index,y=inf['Inflación'],name="Inflación",marker_color="#001489"),secondary_y=False)
-    fig.add_trace(go.Scatter(x=mro.index,y=une['Desempleo'],name='Tasa de Desempleo',line=dict(width=2),marker_color='lime'),secondary_y=True)
+    fig.add_trace(go.Scatter(x=mro.index,y=une['Desempleo'],name='Desempleo',line=dict(width=2),marker_color='lime'),secondary_y=True)
 
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1), legend=dict( 
                             orientation="h",
@@ -47,8 +47,8 @@ def get_eu(_) -> None:
                             bordercolor=black,
                             borderwidth=2
                         ),
-                yaxis=dict(showgrid=False, zeroline=True, showline=True,title="% - Inflación"),
-                yaxis2=dict(showgrid=False, zeroline=True, showline=True,title="% - Tasa"),
+                yaxis=dict(showgrid=False, zeroline=True, showline=True,title="% - Inflación/MRO"),
+                yaxis2=dict(showgrid=False, zeroline=True, showline=True,title="% - Desempleo"),
                 xaxis=dict(
                             rangeselector=dict(
                                 buttons=list([
@@ -82,7 +82,7 @@ def get_eu(_) -> None:
     with table_eu:st.dataframe(data,use_container_width=True)
 
 @st.cache_resource(show_spinner=False)
-def get_uk(_):
+def get_uk(_) -> None:
     c1,c2,c3=st.columns((0.4,0.6/2,0.6/2))
     with c1:st.header('Inglaterra')
 
@@ -135,7 +135,7 @@ def get_uk(_):
     fig=make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=tas.index,y=tas['Tasa'],name='Bank Rate',line=dict(width=3,dash="dashdot"),marker_color="#C8102E"),secondary_y=False)
     fig.add_trace(go.Bar(x=tas.index,y=inf['Inflacion'],name="Inflación",marker_color="#012169"),secondary_y=False)
-    fig.add_trace(go.Scatter(x=tas.index,y=une['Desempleo'],name='Tasa de Desempleo',line=dict(width=2),marker_color=gray),secondary_y=True)
+    fig.add_trace(go.Scatter(x=tas.index,y=une['Desempleo'],name='Desempleo',line=dict(width=2),marker_color=gray),secondary_y=True)
 
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1), legend=dict( 
                             orientation="h",
@@ -146,8 +146,8 @@ def get_uk(_):
                             bordercolor=black,
                             borderwidth=2
                         ),
-                yaxis=dict(showgrid=False, zeroline=True, showline=True,title="% - Inflación"),
-                yaxis2=dict(showgrid=False, zeroline=True, showline=True,title="% - Tasa"),
+                yaxis=dict(showgrid=False, zeroline=True, showline=True,title="% - Inflación/Bank Rate"),
+                yaxis2=dict(showgrid=False, zeroline=True, showline=True,title="% - Desempleo"),
                 xaxis=dict(
                             rangeselector=dict(
                                 buttons=list([
@@ -195,11 +195,7 @@ def make_internacional():
 
     c1,c2=st.columns(2)
     with c1:
-        with st.container(border=True):
-            tas,inf,une=get_uk(datetime.now().strftime("%Y%m%d"))
-            st.dataframe(tas)
-            st.dataframe(inf)
-            st.dataframe(une)
+        with st.container(border=True):get_uk(datetime.now().strftime("%Y%m%d"))
     with c2:
         st.header('Japón')
     c1,c2=st.columns(2)
