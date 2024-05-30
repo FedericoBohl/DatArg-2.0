@@ -144,6 +144,9 @@ def make_internacional():
     with c1:
         with st.container(border=True):
             tas,inf,une=get_uk(datetime.now().strftime("%Y%m%d"))
+            st.dataframe(tas)
+            st.dataframe(inf)
+            st.dataframe(une)
     with c2:
         st.header('Japón')
     c1,c2=st.columns(2)
