@@ -20,7 +20,7 @@ def get_eu(_) -> None:
     inf.TIME_PERIOD=pd.to_datetime(inf.TIME_PERIOD, format='%Y-%m')
     inf.set_index('TIME_PERIOD',inplace=True)
     inf=inf.rename(columns={'OBS_VALUE':'Inflación'})
-    with c3:st.metric(f'Inflación ({inf.index[-1].strftime('%d-%b')})',f'{inf.iloc[-1]['Inflación']}%',f'{round(inf.iloc[-1]['Inflación']-inf.iloc[-2]['Inflación'],2)}PP')
+    with c3:st.metric(f'Inflación ({inf.index[-1].strftime('%b')})',f'{inf.iloc[-1]['Inflación']}%',f'{round(inf.iloc[-1]['Inflación']-inf.iloc[-2]['Inflación'],2)}PP')
     #inf.index=inf.index.strftime('%b-%Y')
 
 
@@ -95,7 +95,6 @@ def make_internacional():
     with c1:
         st.header('EEUU')
     with c2:
-        st.header('Europa')
         get_eu(datetime.now().strftime("%Y%m%d"))
 
     c1,c2=st.columns(2)
