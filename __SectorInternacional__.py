@@ -37,7 +37,7 @@ def get_eu(_) -> None:
     fig.add_trace(go.Bar(x=mro.index,y=inf['Inflación'],name="Infl. Interanual",marker_color="#001489"),secondary_y=False)
     fig.add_trace(go.Scatter(x=mro.index,y=une['Desempleo'],name='Tasa de Desempleo',line=dict(width=2),marker_color='lime'),secondary_y=True)
 
-    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),height=450, legend=dict( 
+    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1), legend=dict( 
                             orientation="h",
                             yanchor="bottom",
                             y=1.02,
