@@ -8,10 +8,11 @@ def get_eu(_) -> None:
     mro=mro[['TIME_PERIOD','OBS_VALUE']]
     mro.TIME_PERIOD=pd.to_datetime(mro.TIME_PERIOD, format='%Y-%m-%d')
     mro.set_index('TIME_PERIOD',inplace=True)
-    st.write(mro.iloc[-1].values)
-    mro=mro.resample('M').median()
     mro=mro.rename(columns={'OBS_VALUE':'MRO'})
     st.metric('MRO',f'{mro.iloc[-1]['MRO']}%',f'{round(mro.iloc[-1]['MRO']-mro.iloc[-2]['MRO'],2)}PP')
+    st.write(mro.index[-1])
+    mro=mro.resample('M').median()
+
 
     #mro.index=mro.index.strftime('%b-%Y') 
 
