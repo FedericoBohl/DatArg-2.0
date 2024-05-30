@@ -6,7 +6,7 @@ def get_eu(_) -> None:
     with c1:st.header('Europa')
     with c2:
         with st.container():
-            c21,c22=st.columns(2)
+            c21,c22=st.columns((0.5,0.5))
     mro=pd.read_csv('https://data-api.ecb.europa.eu/service/data/FM/D.U2.EUR.4F.KR.MRR_FR.LEV?startPeriod=2000-01&detail=dataonly&format=csvdata')
     mro=mro[['TIME_PERIOD','OBS_VALUE']]
     mro.TIME_PERIOD=pd.to_datetime(mro.TIME_PERIOD, format='%Y-%m-%d')
