@@ -39,8 +39,8 @@ def make_internacional():
         t_eu,i_eu,u_eu=get_eu()
         fig=make_subplots(specs=[[{"secondary_y": True}]])
         fig.add_trace(go.Scatter(x=t_eu.index,y=t_eu['OBS_VALUE'],name='MRO',line=dict(width=3,dash="dashdot"),marker_color="#FFDD00"),secondary_y=False)
-        fig.add_trace(go.Bar(x=t_eu.index,y=i_eu['OBS_VALUE'],name="Infl. Interanual",marker_color="#001489"),secondary_y=False)
-        fig.add_trace(go.Scatter(x=t_eu.index,y=u_eu['OBS_VALUE'],name='Tasa de Desempleo',line=dict(width=3,dash="dash"),marker_color=black),secondary_y=True)
+        #fig.add_trace(go.Bar(x=t_eu.index,y=i_eu['OBS_VALUE'],name="Infl. Interanual",marker_color="#001489"),secondary_y=False)
+        #fig.add_trace(go.Scatter(x=t_eu.index,y=u_eu['OBS_VALUE'],name='Tasa de Desempleo',line=dict(width=3,dash="dash"),marker_color=black),secondary_y=True)
 
         fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),height=450, legend=dict( 
                                 orientation="h",
@@ -56,7 +56,10 @@ def make_internacional():
                     xaxis=dict(
                                 rangeselector=dict(
                                     buttons=list([
-
+                                        dict(count=6,
+                                            label="6m",
+                                            step="month",
+                                            stepmode="backward"),
                                         dict(count=1,
                                             label="YTD",
                                             step="year",
