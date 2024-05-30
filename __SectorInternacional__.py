@@ -7,7 +7,6 @@ def get_eu():
     mro.TIME_PERIOD=pd.to_datetime(mro.TIME_PERIOD, format='%Y-%m-%d')
     mro.set_index('TIME_PERIOD',inplace=True)
     mro=mro.resample('M').median()
-    mro=mro.rename(columns={'OBS_VALUE':'MRO'})
     mro.index=mro.index.strftime('%b-%Y')
 
 
@@ -15,7 +14,6 @@ def get_eu():
     inf=inf[['TIME_PERIOD','OBS_VALUE']]
     inf.TIME_PERIOD=pd.to_datetime(inf.TIME_PERIOD, format='%Y-%m')
     inf.set_index('TIME_PERIOD',inplace=True)
-    inf=inf.rename(columns={'OBS_VALUE':'Inflacion'})
     inf.index=inf.index.strftime('%b-%Y')
 
 
@@ -23,7 +21,6 @@ def get_eu():
     une=une[['TIME_PERIOD','OBS_VALUE']]
     une.TIME_PERIOD=pd.to_datetime(une.TIME_PERIOD, format='%Y-%m')
     une.set_index('TIME_PERIOD',inplace=True)
-    une=une.rename(columns={'OBS_VALUE':'Desempleo'})
     une.index=une.index.strftime('%b-%Y')
     return mro,inf,une
 
@@ -40,11 +37,50 @@ def make_internacional():
     with c2:
         st.header('Europa')
         t_eu,i_eu,u_eu=get_eu()
-        fig=go.Figure()
-        fig.add_trace(go.Scatter(x=t_eu.index,y=t_eu['MRO']))
-        fig.add_trace(go.Scatter(x=t_eu.index,y=i_eu['Inflacion']))
-        fig.add_trace(go.Scatter(x=t_eu.index,y=u_eu['Desempleo']))
+        fig=make_subplots(specs=[[{"secondary_y": True}]])
+        fig.add_trace(go.Scatter(x=t_eu.index,y=t_eu['OBS_VALUE'],name='MRO',line=dict(width=3,dash="dashdot"),marker_color="#FFDD00"),secondary_y=False)
+        fig.add_trace(go.Bar(x=t_eu.index,y=i_eu['OBS_VALUE'],name="Infl. Interanual",marker_color="#001489"),secondary_y=False)
+        fig.add_trace(go.Scatter(x=t_eu.index,y=u_eu['OBS_VALUE'],name='Tasa de Desempleo',line=dict(width=3,dash="dash"),marker_color=black))
 
+        fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),height=450, legend=dict( 
+                                orientation="h",
+                                yanchor="bottom",
+                                y=1.02,
+                                xanchor="right",
+                                x=1,
+                                bordercolor=black,
+                                borderwidth=2
+                            ),
+                    yaxis=dict(showgrid=False, zeroline=True, showline=True,title="% - Inflación"),
+                    yaxis2=dict(showgrid=False, zeroline=True, showline=True,title="% - Tasa"),
+                    xaxis=dict(
+                                rangeselector=dict(
+                                    buttons=list([
+                                        dict(count=6,
+                                            label="6m",
+                                            step="month",
+                                            stepmode="backward"),
+                                        dict(count=1,
+                                            label="YTD",
+                                            step="year",
+                                            stepmode="todate"),
+                                        dict(count=1,
+                                            label="1y",
+                                            step="year",
+                                            stepmode="backward"),
+                                        dict(count=5,
+                                            label="5y",
+                                            step="year",
+                                            stepmode="backward"),
+                                        dict(step="all")
+                                    ])
+                                ),
+                                rangeslider=dict(
+                                    visible=True
+                                ),
+                                type="date"
+                            )
+                        )
         st.plotly_chart(fig)
     c1,c2=st.columns(2)
     with c1:
