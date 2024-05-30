@@ -90,6 +90,7 @@ def make_internacional():
             u_eu.index=u_eu.index.strftime('%b-%Y')
             _=pd.merge(t_eu,i_eu,left_index=True,right_index=True)
             _=pd.merge(_,u_eu,left_index=True,right_index=True)
+            _.index.name='Fecha'
             st.dataframe(_,use_container_width=True)
     c1,c2=st.columns(2)
     with c1:
