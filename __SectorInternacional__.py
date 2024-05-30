@@ -7,6 +7,7 @@ def get_eu():
     mro.TIME_PERIOD=pd.to_datetime(mro.TIME_PERIOD, format='%Y-%m-%d')
     mro.set_index('TIME_PERIOD',inplace=True)
     mro=mro.resample('M').median()
+    mro=mro.rename(columns={'OBS_VALUE':'MRO'})
     #mro.index=mro.index.strftime('%b-%Y')
 
 
@@ -14,6 +15,7 @@ def get_eu():
     inf=inf[['TIME_PERIOD','OBS_VALUE']]
     inf.TIME_PERIOD=pd.to_datetime(inf.TIME_PERIOD, format='%Y-%m')
     inf.set_index('TIME_PERIOD',inplace=True)
+    inf=mro.rename(columns={'OBS_VALUE':'Inflación'})
     #inf.index=inf.index.strftime('%b-%Y')
 
 
@@ -21,6 +23,7 @@ def get_eu():
     une=une[['TIME_PERIOD','OBS_VALUE']]
     une.TIME_PERIOD=pd.to_datetime(une.TIME_PERIOD, format='%Y-%m')
     une.set_index('TIME_PERIOD',inplace=True)
+    une=une.rename(columns={'OBS_VALUE':'Desempleo'})
     #une.index=une.index.strftime('%b-%Y')
     return mro,inf,une
 
@@ -37,10 +40,11 @@ def make_internacional():
     with c2:
         st.header('Europa')
         t_eu,i_eu,u_eu=get_eu()
+        graph_eu,table_eu=st.tabs('Gráfico','Tabla')
         fig=make_subplots(specs=[[{"secondary_y": True}]])
-        fig.add_trace(go.Scatter(x=t_eu.index,y=t_eu['OBS_VALUE'],name='MRO',line=dict(width=3,dash="dashdot"),marker_color="#FFDD00"),secondary_y=False)
-        fig.add_trace(go.Bar(x=t_eu.index,y=i_eu['OBS_VALUE'],name="Infl. Interanual",marker_color="#001489"),secondary_y=False)
-        fig.add_trace(go.Scatter(x=t_eu.index,y=u_eu['OBS_VALUE'],name='Tasa de Desempleo',line=dict(width=2),marker_color='lime'),secondary_y=True)
+        fig.add_trace(go.Scatter(x=t_eu.index,y=t_eu['MRO'],name='MRO',line=dict(width=3,dash="dashdot"),marker_color="#FFDD00"),secondary_y=False)
+        fig.add_trace(go.Bar(x=t_eu.index,y=i_eu['Inflación'],name="Infl. Interanual",marker_color="#001489"),secondary_y=False)
+        fig.add_trace(go.Scatter(x=t_eu.index,y=u_eu['Desempleo'],name='Tasa de Desempleo',line=dict(width=2),marker_color='lime'),secondary_y=True)
 
         fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),height=450, legend=dict( 
                                 orientation="h",
@@ -80,7 +84,14 @@ def make_internacional():
                                 )
                             )
                         )
-        st.plotly_chart(fig)
+        with graph_eu:st.plotly_chart(fig)
+        with table_eu:
+            t_eu.index=t_eu.index.strftime('%b-%Y')
+            i_eu.index=i_eu.index.strftime('%b-%Y')
+            u_eu.index=u_eu.index.strftime('%b-%Y')
+            _=pd.merge(t_eu,i_eu,left_index=True,right_index=True)
+            _=pd.merge(_,u_eu,left_index=True,right_index=True)
+            st.dataframe(_,use_container_width=True)
     c1,c2=st.columns(2)
     with c1:
         st.header('Inglaterra')
