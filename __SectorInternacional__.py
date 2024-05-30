@@ -9,7 +9,7 @@ def get_eu(_) -> None:
     mro.TIME_PERIOD=pd.to_datetime(mro.TIME_PERIOD, format='%Y-%m-%d')
     mro.set_index('TIME_PERIOD',inplace=True)
     mro=mro.rename(columns={'OBS_VALUE':'MRO'})
-    st.metric(f'MRO ({mro.index[-1].strftime('%d-%b')})',f'{mro.iloc[-1]['MRO']}%',f'{round(mro.iloc[-1]['MRO']-mro.iloc[-2]['MRO'],2)}PP')
+    with c2:st.metric(f'MRO ({mro.index[-1].strftime('%d-%b')})',f'{mro.iloc[-1]['MRO']}%',f'{round(mro.iloc[-1]['MRO']-mro.iloc[-2]['MRO'],2)}PP')
     mro=mro.resample('M').median()
 
 
@@ -20,6 +20,7 @@ def get_eu(_) -> None:
     inf.TIME_PERIOD=pd.to_datetime(inf.TIME_PERIOD, format='%Y-%m')
     inf.set_index('TIME_PERIOD',inplace=True)
     inf=inf.rename(columns={'OBS_VALUE':'Inflación'})
+    with c3:st.metric(f'Inflación ({inf.index[-1].strftime('%d-%b')})',f'{inf.iloc[-1]['Inflación']}%',f'{round(inf.iloc[-1]['Inflación']-inf.iloc[-2]['Inflación'],2)}PP')
     #inf.index=inf.index.strftime('%b-%Y')
 
 
