@@ -188,8 +188,8 @@ def get_usa(_):
     df_cpi = pd.DataFrame(cpi_data, columns=['Inflacion'])
     df_cpi['Inflacion']=(df_cpi['Inflacion']/df_cpi['Inflacion'].shift(12) -1)*100
     df_cpi=df_cpi.dropna()
-    inf_t=fed_funds_data.iloc[-1]['Tasa']
-    inf_t1=fed_funds_data.iloc[-1]['Tasa']
+    inf_t=df_cpi.iloc[-1]['Inflacion']
+    inf_t1=df_cpi.iloc[-1]['Inflacion']
     with c3:st.metric(f'Inflación ({df_cpi.index[-1].strftime('%b')})',f'{inf_t}%',f'{round(inf_t-inf_t1,2)}PP',delta_color="inverse")
 
     unemployment_data = fred.get_series('UNRATE').loc[f'{2000}':]
