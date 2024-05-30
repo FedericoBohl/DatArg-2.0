@@ -130,7 +130,55 @@ def get_uk(_):
     une['Fecha']=pd.to_datetime(une['Fecha'], format='%Y %b')
     une.set_index('Fecha',inplace=True)
 
-    return tas,inf,une
+
+    graph_eu,table_eu=st.tabs(['Gráfico','Tabla'])
+    fig=make_subplots(specs=[[{"secondary_y": True}]])
+    fig.add_trace(go.Scatter(x=tas.index,y=tas['Tasa'],name='Bank Rate',line=dict(width=3,dash="dashdot"),marker_color="#C8102E"),secondary_y=False)
+    fig.add_trace(go.Bar(x=tas.index,y=inf['Inflacion'],name="Inflación",marker_color="#012169"),secondary_y=False)
+    fig.add_trace(go.Scatter(x=tas.index,y=une['Desempleo'],name='Tasa de Desempleo',line=dict(width=2),marker_color=gray),secondary_y=True)
+
+    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1), legend=dict( 
+                            orientation="h",
+                            yanchor="bottom",
+                            y=1.02,
+                            xanchor="right",
+                            x=1,
+                            bordercolor=black,
+                            borderwidth=2
+                        ),
+                yaxis=dict(showgrid=False, zeroline=True, showline=True,title="% - Inflación"),
+                yaxis2=dict(showgrid=False, zeroline=True, showline=True,title="% - Tasa"),
+                xaxis=dict(
+                            rangeselector=dict(
+                                buttons=list([
+                                    dict(count=6,
+                                        label="6m",
+                                        step="month",
+                                        stepmode="backward"),
+                                    dict(count=1,
+                                        label="1y",
+                                        step="year",
+                                        stepmode="backward"),
+                                    dict(count=5,
+                                        label="5y",
+                                        step="year",
+                                        stepmode="backward"),
+                                    dict(step="all")
+                                ])
+                            ),
+                            rangeslider=dict(
+                                visible=True
+                            )
+                        )
+                    )    
+    with graph_eu:st.plotly_chart(fig)
+    tas.index=tas.index.strftime('%b-%Y')
+    inf.index=inf.index.strftime('%b-%Y')
+    une.index=une.index.strftime('%b-%Y')
+    data=pd.merge(tas,inf,left_index=True,right_index=True)
+    data=pd.merge(data,une,left_index=True,right_index=True)
+    with table_eu:st.dataframe(data,use_container_width=True)
+
 
 def make_internacional():
     with st.container(border=True):
