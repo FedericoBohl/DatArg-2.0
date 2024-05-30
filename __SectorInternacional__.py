@@ -1,4 +1,5 @@
 from librerias import *
+jp_id='7e63dd6ff7421e096fbdcf688af7b2c8ad69d814'
 
 @st.cache_resource(show_spinner=False)
 def get_eu(_) -> None:
@@ -9,8 +10,8 @@ def get_eu(_) -> None:
     mro.TIME_PERIOD=pd.to_datetime(mro.TIME_PERIOD, format='%Y-%m-%d')
     mro.set_index('TIME_PERIOD',inplace=True)
     mro=mro.rename(columns={'OBS_VALUE':'MRO'})
+    mro=mro.resample('M').last()
     with c2:st.metric(f'MRO ({mro.index[-1].strftime('%d-%b')})',f'{mro.iloc[-1]['MRO']}%',f'{round(mro.iloc[-1]['MRO']-mro.iloc[-2]['MRO'],2)}PP')
-    mro=mro.resample('M').median()
 
 
     #mro.index=mro.index.strftime('%b-%Y') 
@@ -80,6 +81,50 @@ def get_eu(_) -> None:
     data.index.name='Fecha'
     with table_eu:st.dataframe(data,use_container_width=True)
 
+@st.cache_resource(show_spinner=False)
+def get_uk(_) -> None:
+    c1,c2,c3=st.columns((0.3,0.7/2,0.7/2))
+    with c1:st.header('Inglaterra')
+
+    url = 'http://www.bankofengland.co.uk/boeapps/iadb/fromshowcolumns.asp?csv.x=yes'
+    payload = {
+        'Datefrom'   : '01/Jan/2000',
+        #'Dateto'     : '01/Oct/2018',
+        'SeriesCodes': 'IUDBEDR',
+        'CSVF'       : 'TN',
+        'UsingCodes' : 'Y',
+        'VPD'        : 'Y',
+        'VFD'        : 'N'
+    }
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) '
+                    'AppleWebKit/537.36 (KHTML, like Gecko) '
+                    'Chrome/54.0.2840.90 '
+                    'Safari/537.36'
+    }
+    response = requests.get(url, params=payload, headers=headers)
+    tas = pd.read_csv(io.BytesIO(response.content),names=['Fecha','Tasa'],skiprows=1)
+    tas['Fecha']=pd.to_datetime(tas['Fecha'], format='%d %b %Y').dt.strftime('%d-%m-%Y')
+    tas=tas.resample('M').last()
+    tas_t=tas['Tasa'].iloc[-1]
+    tas_t1=tas['Tasa'].iloc[-2]
+    with c2:st.metric(f'MRO ({tas.index[-1].strftime('%d-%b')})',f'{tas_t}%',f'{round(tas_t-tas_t1,2)}PP')
+
+    url='https://www.ons.gov.uk/generator?format=csv&uri=/economy/inflationandpriceindices/timeseries/l55o/mm23'
+    response=requests.get(url)
+    data = io.StringIO(response.text)
+    inf = pd.read_csv(data,skiprows=316,names=['Fecha','Inflacion'])
+    inf.columns=['Fecha','Inflacion']
+    inf['Fecha']=pd.to_datetime(inf['Fecha'], format='%Y %b').dt.strftime('%d-%m-%Y')
+    with c3:st.metric(f'Inflación ({inf.index[-1].strftime('%b')})',f'{inf.iloc[-1]['Inflación']}%',f'{round(inf.iloc[-1]['Inflación']-inf.iloc[-2]['Inflación'],2)}PP')
+
+    url='https://www.ons.gov.uk/generator?format=csv&uri=/employmentandlabourmarket/peoplenotinwork/unemployment/timeseries/mgsx/lms'
+    response=requests.get(url)
+    data = io.StringIO(response.text)
+    une = pd.read_csv(data,skiprows=621,names=['Fecha','Inflacion'])
+    une.columns=['Fecha','Desempleo']
+    une['Fecha']=pd.to_datetime(une['Fecha'], format='%Y %b').dt.strftime('%d-%m-%Y')
+
 def make_internacional():
     with st.container(border=True):
         c1,c2,c3=st.columns(3)
@@ -95,7 +140,7 @@ def make_internacional():
 
     c1,c2=st.columns(2)
     with c1:
-        st.header('Inglaterra')
+        with st.container(border=True):get_uk(datetime.now().strftime("%Y%m%d"))
     with c2:
         st.header('Japón')
     c1,c2=st.columns(2)
