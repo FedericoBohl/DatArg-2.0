@@ -40,7 +40,7 @@ def make_internacional():
     with c2:
         st.header('Europa')
         t_eu,i_eu,u_eu=get_eu()
-        graph_eu,table_eu=st.tabs('Gráfico','Tabla')
+        graph_eu,table_eu=st.tabs(['Gráfico','Tabla'])
         fig=make_subplots(specs=[[{"secondary_y": True}]])
         fig.add_trace(go.Scatter(x=t_eu.index,y=t_eu['MRO'],name='MRO',line=dict(width=3,dash="dashdot"),marker_color="#FFDD00"),secondary_y=False)
         fig.add_trace(go.Bar(x=t_eu.index,y=i_eu['Inflación'],name="Infl. Interanual",marker_color="#001489"),secondary_y=False)
