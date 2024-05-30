@@ -15,7 +15,7 @@ def get_eu():
     inf=inf[['TIME_PERIOD','OBS_VALUE']]
     inf.TIME_PERIOD=pd.to_datetime(inf.TIME_PERIOD, format='%Y-%m')
     inf.set_index('TIME_PERIOD',inplace=True)
-    inf=mro.rename(columns={'OBS_VALUE':'Inflación'})
+    inf=inf.rename(columns={'OBS_VALUE':'Inflación'})
     #inf.index=inf.index.strftime('%b-%Y')
 
 
