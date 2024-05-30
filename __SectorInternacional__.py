@@ -186,7 +186,7 @@ def get_usa(_):
     fred = Fred(api_key="6050b935d2f878f1100c6f217cbe6753")
     cpi_data = fred.get_series('CPIAUCNS').loc[f'{1999}':]
     df_cpi = pd.DataFrame(cpi_data, columns=['Inflacion'])
-    df_cpi['Inflacion']=round(df_cpi['Inflacion']/df_cpi['Inflacion'].shift(12) -1,2)*100
+    df_cpi['Inflacion']=round(df_cpi['Inflacion']/df_cpi['Inflacion'].shift(12) -1,4)*100
     df_cpi=df_cpi.dropna()
     inf_t=df_cpi.iloc[-1]['Inflacion']
     inf_t1=df_cpi.iloc[-1]['Inflacion']
