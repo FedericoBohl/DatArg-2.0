@@ -82,8 +82,8 @@ def get_eu(_) -> None:
     with table_eu:st.dataframe(data,use_container_width=True)
 
 @st.cache_resource(show_spinner=False)
-def get_uk(_) -> None:
-    c1,c2,c3=st.columns((0.3,0.7/2,0.7/2))
+def get_uk(_):
+    c1,c2,c3=st.columns((0.4,0.6/2,0.6/2))
     with c1:st.header('Inglaterra')
 
     url = 'http://www.bankofengland.co.uk/boeapps/iadb/fromshowcolumns.asp?csv.x=yes'
@@ -105,7 +105,7 @@ def get_uk(_) -> None:
     response = requests.get(url, params=payload, headers=headers)
     tas = pd.read_csv(io.BytesIO(response.content),names=['Fecha','Tasa'],skiprows=1)
     tas['Fecha']=pd.to_datetime(tas['Fecha'], format='%d %b %Y').dt.strftime('%d-%m-%Y')
-    tas=tas.resample('M').last()
+    #tas=tas.resample('M').last()
     tas_t=tas['Tasa'].iloc[-1]
     tas_t1=tas['Tasa'].iloc[-2]
     with c2:st.metric(f'MRO ({tas.index[-1].strftime('%d-%b')})',f'{tas_t}%',f'{round(tas_t-tas_t1,2)}PP')
@@ -125,6 +125,8 @@ def get_uk(_) -> None:
     une.columns=['Fecha','Desempleo']
     une['Fecha']=pd.to_datetime(une['Fecha'], format='%Y %b').dt.strftime('%d-%m-%Y')
 
+    return tas,inf,une
+
 def make_internacional():
     with st.container(border=True):
         c1,c2,c3=st.columns(3)
@@ -140,7 +142,8 @@ def make_internacional():
 
     c1,c2=st.columns(2)
     with c1:
-        with st.container(border=True):get_uk(datetime.now().strftime("%Y%m%d"))
+        with st.container(border=True):
+            tas,inf,une=get_uk(datetime.now().strftime("%Y%m%d"))
     with c2:
         st.header('Japón')
     c1,c2=st.columns(2)
