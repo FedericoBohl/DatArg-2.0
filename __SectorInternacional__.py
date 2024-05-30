@@ -179,8 +179,19 @@ def get_uk(_) -> None:
     data=pd.merge(data,une,left_index=True,right_index=True)
     with table_eu:st.dataframe(data,use_container_width=True)
 
+@st.cache_resource(show_spinner=False)
+def get_usa(_):
+    fred = Fred(api_key="6050b935d2f878f1100c6f217cbe6753")
+    cpi_data = fred.get_series('CPIAUCNS').loc[f'{1999}':]
+    df_cpi = pd.DataFrame(cpi_data, columns=['Inflacion'])
+    df_cpi['Inflacion']=(df_cpi['Inflacion']/df_cpi['Inflacion'].shift(12) -1)*100
+    df_cpi=df_cpi.dropna()
+    unemployment_data = fred.get_series('UNRATE').loc[f'{2000}':]
+    df_unemployment = pd.DataFrame(unemployment_data, columns=['Desempleo'])
+    fed_funds_data = fred.get_series('FEDFUNDS').loc[f'{2000}':]
+    df_fed_funds = pd.DataFrame(fed_funds_data, columns=['Tasa de la FED'])
+    st.write(df_cpi)
 
-def make_internacional():
     with st.container(border=True):
         c1,c2,c3=st.columns(3)
         with c1: st.metric('Precio WTI','-')
@@ -190,6 +201,7 @@ def make_internacional():
     c1,c2=st.columns(2)
     with c1:
         st.header('EEUU')
+        get_usa()
     with c2:
         with st.container(border=True):get_eu(datetime.now().strftime("%Y%m%d"))
 
@@ -202,4 +214,4 @@ def make_internacional():
     with c1:
         st.header('Brasil')
     with c2:
-        st.header('México')
+        st.header('Nueva Zelanda')
