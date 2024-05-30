@@ -4,14 +4,14 @@ from librerias import *
 def get_eu(_) -> None:
     c1,c2=st.columns((0.3,0.7))
     with c1:st.header('Europa')
-    #with c2:
-    #    with st.container():
-    #        c21,c22=st.columns((0.5,0.5))
+    with c2:
+        with st.container():
+            c21,c22=st.columns((0.5,0.5))
     mro=pd.read_csv('https://data-api.ecb.europa.eu/service/data/FM/D.U2.EUR.4F.KR.MRR_FR.LEV?startPeriod=2000-01&detail=dataonly&format=csvdata')
     mro=mro[['TIME_PERIOD','OBS_VALUE']]
     mro.TIME_PERIOD=pd.to_datetime(mro.TIME_PERIOD, format='%Y-%m-%d')
     mro.set_index('TIME_PERIOD',inplace=True)
-    st.write(mro.iloc[-1])
+    st.write(mro.iloc[-1].index)
     mro=mro.resample('M').median()
     mro=mro.rename(columns={'OBS_VALUE':'MRO'})
     #mro.index=mro.index.strftime('%b-%Y') 
