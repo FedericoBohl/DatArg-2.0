@@ -80,7 +80,8 @@ def make_internacional():
                                 ),
                                 rangeslider=dict(
                                     visible=True
-                                )
+                                ),
+                                type='date'
                             )
                         )
         with graph_eu:st.plotly_chart(fig)
