@@ -91,7 +91,7 @@ def make_internacional():
     with c1:
         st.header('EEUU')
     with c2:
-        get_eu(datetime.now().strftime("%Y%m%d"))
+        with st.container(border=True):get_eu(datetime.now().strftime("%Y%m%d"))
 
     c1,c2=st.columns(2)
     with c1:

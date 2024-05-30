@@ -50,7 +50,7 @@ def make_cedears(data_now : pd.DataFrame):
         st.subheader('Buscador de Cedears')
         st.selectbox('Buscador de cedears',label_visibility='collapsed',options=data.index.to_list(),key='cedebuscado')
         st.dataframe(data.loc[data.index==S.cedebuscado].transpose(),use_container_width=True)
-
+        #Anda mal, posiblemente porque estoy usando cache
 
 
 @st.cache_data(show_spinner=False)
