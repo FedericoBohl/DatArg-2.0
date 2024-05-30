@@ -1,6 +1,6 @@
 from librerias import *
 
-@st.cache_resource(show_spinner=False)
+@st.cache_resource(show_spinner=False,experimental_allow_widgets=True)
 def get_eu(_) -> None:
     c1,c2=st.columns((0.3,0.7))
     with c1:st.header('Europa')
