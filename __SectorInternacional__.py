@@ -106,7 +106,7 @@ def get_uk(_):
     tas = pd.read_csv(io.BytesIO(response.content),names=['Fecha','Tasa'],skiprows=1)
     tas['Fecha']=pd.to_datetime(tas['Fecha'], format='%d %b %Y').dt.strftime('%d-%m-%Y')
     tas.set_index('Fecha',inplace=True)
-    tas=tas.resample('M').median()
+    #tas=tas.resample('M').median()
     tas_t=tas['Tasa'].iloc[-1]
     tas_t1=tas['Tasa'].iloc[-2]
     with c2:st.metric(f'MRO ({tas.index[-1].strftime('%d-%b')})',f'{tas_t}%',f'{round(tas_t-tas_t1,2)}PP')
