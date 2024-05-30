@@ -186,7 +186,7 @@ def get_usa(_):
     fred = Fred(api_key="6050b935d2f878f1100c6f217cbe6753")
     cpi_data = fred.get_series('CPIAUCNS').loc[f'{1999}':]
     df_cpi = pd.DataFrame(cpi_data, columns=['Inflacion'])
-    df_cpi['Inflacion']=(df_cpi['Inflacion']/df_cpi['Inflacion'].shift(12) -1)*100
+    df_cpi['Inflacion']=round(df_cpi['Inflacion']/df_cpi['Inflacion'].shift(12) -1,2)*100
     df_cpi=df_cpi.dropna()
     inf_t=df_cpi.iloc[-1]['Inflacion']
     inf_t1=df_cpi.iloc[-1]['Inflacion']
@@ -196,9 +196,9 @@ def get_usa(_):
     df_unemployment = pd.DataFrame(unemployment_data, columns=['Desempleo'])
     fed_funds_data = fred.get_series('FEDFUNDS').loc[f'{2000}':]
     df_fed_funds = pd.DataFrame(fed_funds_data, columns=['Tasa'])
-    fed_t=fed_funds_data.iloc[-1]['Tasa']
-    fed_t1=fed_funds_data.iloc[-1]['Tasa']
-    with c2:st.metric(f'Fed Funds Rate ({fed_funds_data.index[-1].strftime('%d-%b')})',f'{fed_t}%',f'{round(fed_t-fed_t1,2)}PP',delta_color="inverse")
+    fed_t=df_fed_funds.iloc[-1]['Tasa']
+    fed_t1=df_fed_funds.iloc[-1]['Tasa']
+    with c2:st.metric(f'Fed Funds Rate ({df_fed_funds.index[-1].strftime('%d-%b')})',f'{fed_t}%',f'{round(fed_t-fed_t1,2)}PP',delta_color="inverse")
 
 
     graph_eu,table_eu=st.tabs(['Gráfico','Tabla'])
