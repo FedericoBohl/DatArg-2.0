@@ -34,7 +34,7 @@ def get_eu(_) -> None:
     graph_eu,table_eu=st.tabs(['Gráfico','Tabla'])
     fig=make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=mro.index,y=mro['MRO'],name='MRO',line=dict(width=3,dash="dashdot"),marker_color="#FFDD00"),secondary_y=False)
-    fig.add_trace(go.Bar(x=mro.index,y=inf['Inflación'],name="Infl. Interanual",marker_color="#001489"),secondary_y=False)
+    fig.add_trace(go.Bar(x=mro.index,y=inf['Inflación'],name="Inflación",marker_color="#001489"),secondary_y=False)
     fig.add_trace(go.Scatter(x=mro.index,y=une['Desempleo'],name='Tasa de Desempleo',line=dict(width=2),marker_color='lime'),secondary_y=True)
 
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1), legend=dict( 
@@ -55,10 +55,6 @@ def get_eu(_) -> None:
                                         label="6m",
                                         step="month",
                                         stepmode="backward"),
-                                    dict(count=1,
-                                        label="YTD",
-                                        step="year",
-                                        stepmode="todate"),
                                     dict(count=1,
                                         label="1y",
                                         step="year",
