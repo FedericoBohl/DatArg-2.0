@@ -1,11 +1,12 @@
 from librerias import *
 
-@st.cache_resource(show_spinner=False,experimental_allow_widgets=True)
+@st.cache_resource(show_spinner=False)
 def get_eu(_) -> None:
     c1,c2=st.columns((0.3,0.7))
     with c1:st.header('Europa')
     with c2:
-        c21,c22=st.columns(2)
+        with st.container():
+            c21,c22=st.columns(2)
     mro=pd.read_csv('https://data-api.ecb.europa.eu/service/data/FM/D.U2.EUR.4F.KR.MRR_FR.LEV?startPeriod=2000-01&detail=dataonly&format=csvdata')
     mro=mro[['TIME_PERIOD','OBS_VALUE']]
     mro.TIME_PERIOD=pd.to_datetime(mro.TIME_PERIOD, format='%Y-%m-%d')
