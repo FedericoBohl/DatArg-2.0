@@ -109,7 +109,8 @@ def get_uk(_):
     #tas=tas.resample('M').median()
     tas_t=tas['Tasa'].iloc[-1]
     tas_t1=tas['Tasa'].iloc[-2]
-    with c2:st.metric(f'MRO ({tas.index[-1].strftime('%d-%b')})',f'{tas_t}%',f'{round(tas_t-tas_t1,2)}PP')
+    with c2:st.metric(f'Bank Rate ()',f'{tas_t}%',f'{round(tas_t-tas_t1,2)}PP')
+    #{tas.index[-1].strftime('%d-%b')}
 
     url='https://www.ons.gov.uk/generator?format=csv&uri=/economy/inflationandpriceindices/timeseries/l55o/mm23'
     response=requests.get(url)
@@ -118,7 +119,7 @@ def get_uk(_):
     inf.columns=['Fecha','Inflacion']
     inf['Fecha']=pd.to_datetime(inf['Fecha'], format='%Y %b').dt.strftime('%d-%m-%Y')
     inf.set_index('Fecha',inplace=True)
-    with c3:st.metric(f'Inflación ({inf.index[-1].strftime('%b')})',f'{inf.iloc[-1]['Inflación']}%',f'{round(inf.iloc[-1]['Inflación']-inf.iloc[-2]['Inflación'],2)}PP')
+    #with c3:st.metric(f'Inflación ({inf.index[-1].strftime('%b')})',f'{inf.iloc[-1]['Inflación']}%',f'{round(inf.iloc[-1]['Inflación']-inf.iloc[-2]['Inflación'],2)}PP')
 
     url='https://www.ons.gov.uk/generator?format=csv&uri=/employmentandlabourmarket/peoplenotinwork/unemployment/timeseries/mgsx/lms'
     response=requests.get(url)
