@@ -192,6 +192,7 @@ def get_usa(_):
     df_fed_funds = pd.DataFrame(fed_funds_data, columns=['Tasa de la FED'])
     st.write(df_cpi)
 
+def make_internacional():
     with st.container(border=True):
         c1,c2,c3=st.columns(3)
         with c1: st.metric('Precio WTI','-')
