@@ -131,7 +131,7 @@ def get_uk(_) -> None:
     une.set_index('Fecha',inplace=True)
 
 
-    graph_eu,table_eu=st.tabs(['Gráfico','Tabla'])
+    graph_uk,table_uk=st.tabs(['Gráfico','Tabla'])
     fig=make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=tas.index,y=tas['Tasa'],name='Bank Rate',line=dict(width=3,dash="dashdot"),marker_color="#C8102E"),secondary_y=False)
     fig.add_trace(go.Bar(x=tas.index,y=inf['Inflacion'],name="Inflación",marker_color="#012169"),secondary_y=False)
@@ -171,13 +171,13 @@ def get_uk(_) -> None:
                             )
                         )
                     )    
-    with graph_eu:st.plotly_chart(fig)
+    with graph_uk:st.plotly_chart(fig)
     tas.index=tas.index.strftime('%b-%Y')
     inf.index=inf.index.strftime('%b-%Y')
     une.index=une.index.strftime('%b-%Y')
     data=pd.merge(tas,inf,left_index=True,right_index=True)
     data=pd.merge(data,une,left_index=True,right_index=True)
-    with table_eu:st.dataframe(data,use_container_width=True)
+    with table_uk:st.dataframe(data,use_container_width=True)
 
 @st.cache_resource(show_spinner=False)
 def get_usa(_):
@@ -201,10 +201,10 @@ def get_usa(_):
     with c2:st.metric(f'Fed Funds Rate ({df_fed_funds.index[-1].strftime('%d-%b')})',f'{fed_t}%',f'{round(fed_t-fed_t1,2)}PP',delta_color="inverse")
 
 
-    graph_eu,table_eu=st.tabs(['Gráfico','Tabla'])
+    graph_usa,table_usa=st.tabs(['Gráfico','Tabla'])
     fig=make_subplots(specs=[[{"secondary_y": True}]])
-    fig.add_trace(go.Scatter(x=df_fed_funds.index,y=df_fed_funds['Tasa'],name='FED',line=dict(width=3,dash="dashdot"),marker_color="#0A3161"),secondary_y=False)
-    fig.add_trace(go.Bar(x=df_fed_funds.index,y=df_cpi['Inflacion'],name="Inflación",marker_color="#B31942"),secondary_y=False)
+    fig.add_trace(go.Scatter(x=df_fed_funds.index,y=df_fed_funds['Tasa'],name='FED',line=dict(width=3,dash="dashdot"),marker_color="#B31942"),secondary_y=False)
+    fig.add_trace(go.Bar(x=df_fed_funds.index,y=df_cpi['Inflacion'],name="Inflación",marker_color="#0A3161"),secondary_y=False)
     fig.add_trace(go.Scatter(x=df_fed_funds.index,y=df_unemployment['Desempleo'],name='Desempleo',line=dict(width=2),marker_color=lavender),secondary_y=True)
 
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1), legend=dict( 
@@ -241,13 +241,13 @@ def get_usa(_):
                             )
                         )
                     )    
-    with graph_eu:st.plotly_chart(fig)
+    with graph_usa:st.plotly_chart(fig)
     df_fed_funds.index=df_fed_funds.index.strftime('%b-%Y')
     df_cpi.index=df_cpi.index.strftime('%b-%Y')
     df_unemployment.index=df_unemployment.index.strftime('%b-%Y')
     data=pd.merge(df_fed_funds,df_cpi,left_index=True,right_index=True)
     data=pd.merge(data,df_unemployment,left_index=True,right_index=True)
-    with table_eu:st.dataframe(data,use_container_width=True)
+    with table_usa:st.dataframe(data,use_container_width=True)
 
 
 def make_internacional():
