@@ -9,9 +9,10 @@ def get_eu(_) -> None:
     mro.TIME_PERIOD=pd.to_datetime(mro.TIME_PERIOD, format='%Y-%m-%d')
     mro.set_index('TIME_PERIOD',inplace=True)
     st.write(mro.iloc[-1].values)
-    st.metric('MRO',f'{mro.iloc[-1]['OBS_VALUE']}:.2f',f'{round(mro.iloc[-1]['OBS_VALUE']-mro.iloc[-2]['OBS_VALUE'],2)}PP')
     mro=mro.resample('M').median()
     mro=mro.rename(columns={'OBS_VALUE':'MRO'})
+    st.metric('MRO',f'{mro.iloc[-1]['MRO']}%',f'{round(mro.iloc[-1]['MRO']-mro.iloc[-2]['MRO'],2)}PP')
+
     #mro.index=mro.index.strftime('%b-%Y') 
 
     inf=pd.read_csv('https://data-api.ecb.europa.eu/service/data/ICP/M.U2.N.000000.4.ANR?startPeriod=2000-01&detail=dataonly&format=csvdata')
