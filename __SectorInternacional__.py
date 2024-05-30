@@ -85,9 +85,11 @@ def make_internacional():
                         )
         with graph_eu:st.plotly_chart(fig)
         with table_eu:
-            t_eu.index=t_eu.index.strftime('%b-%Y')
-            i_eu.index=i_eu.index.strftime('%b-%Y')
-            u_eu.index=u_eu.index.strftime('%b-%Y')
+            try:
+                t_eu.index=t_eu.index.strftime('%b-%Y')
+                i_eu.index=i_eu.index.strftime('%b-%Y')
+                u_eu.index=u_eu.index.strftime('%b-%Y')
+            except:pass
             _=pd.merge(t_eu,i_eu,left_index=True,right_index=True)
             _=pd.merge(_,u_eu,left_index=True,right_index=True)
             _.index.name='Fecha'
