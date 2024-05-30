@@ -181,16 +181,74 @@ def get_uk(_) -> None:
 
 @st.cache_resource(show_spinner=False)
 def get_usa(_):
+    c1,c2,c3=st.columns((0.3,0.7/2,0.7/2))
+    with c1:st.header('EE.UU.')
     fred = Fred(api_key="6050b935d2f878f1100c6f217cbe6753")
     cpi_data = fred.get_series('CPIAUCNS').loc[f'{1999}':]
     df_cpi = pd.DataFrame(cpi_data, columns=['Inflacion'])
     df_cpi['Inflacion']=(df_cpi['Inflacion']/df_cpi['Inflacion'].shift(12) -1)*100
     df_cpi=df_cpi.dropna()
+    inf_t=fed_funds_data.iloc[-1]['Tasa']
+    inf_t1=fed_funds_data.iloc[-1]['Tasa']
+    with c3:st.metric(f'Inflación ({df_cpi.index[-1].strftime('%b')})',f'{inf_t}%',f'{round(inf_t-inf_t1,2)}PP',delta_color="inverse")
+
     unemployment_data = fred.get_series('UNRATE').loc[f'{2000}':]
     df_unemployment = pd.DataFrame(unemployment_data, columns=['Desempleo'])
     fed_funds_data = fred.get_series('FEDFUNDS').loc[f'{2000}':]
-    df_fed_funds = pd.DataFrame(fed_funds_data, columns=['Tasa de la FED'])
-    st.write(df_cpi)
+    df_fed_funds = pd.DataFrame(fed_funds_data, columns=['Tasa'])
+    fed_t=fed_funds_data.iloc[-1]['Tasa']
+    fed_t1=fed_funds_data.iloc[-1]['Tasa']
+    with c2:st.metric(f'Fed Funds Rate ({fed_funds_data.index[-1].strftime('%d-%b')})',f'{fed_t}%',f'{round(fed_t-fed_t1,2)}PP',delta_color="inverse")
+
+
+    graph_eu,table_eu=st.tabs(['Gráfico','Tabla'])
+    fig=make_subplots(specs=[[{"secondary_y": True}]])
+    fig.add_trace(go.Scatter(x=df_fed_funds.index,y=df_fed_funds['Tasa'],name='FED',line=dict(width=3,dash="dashdot"),marker_color="#0A3161"),secondary_y=False)
+    fig.add_trace(go.Bar(x=df_fed_funds.index,y=df_cpi['Inflacion'],name="Inflación",marker_color="#B31942"),secondary_y=False)
+    fig.add_trace(go.Scatter(x=df_fed_funds.index,y=df_unemployment['Desempleo'],name='Desempleo',line=dict(width=2),marker_color=lavender),secondary_y=True)
+
+    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1), legend=dict( 
+                            orientation="h",
+                            yanchor="bottom",
+                            y=1.02,
+                            xanchor="right",
+                            x=1,
+                            bordercolor=black,
+                            borderwidth=2
+                        ),
+                yaxis=dict(showgrid=False, zeroline=True, showline=True,title="% - Inflación/Tasa de la FED"),
+                yaxis2=dict(showgrid=False, zeroline=True, showline=True,title="% - Desempleo"),
+                xaxis=dict(
+                            rangeselector=dict(
+                                buttons=list([
+                                    dict(count=6,
+                                        label="6m",
+                                        step="month",
+                                        stepmode="backward"),
+                                    dict(count=1,
+                                        label="1y",
+                                        step="year",
+                                        stepmode="backward"),
+                                    dict(count=5,
+                                        label="5y",
+                                        step="year",
+                                        stepmode="backward"),
+                                    dict(step="all")
+                                ])
+                            ),
+                            rangeslider=dict(
+                                visible=True
+                            )
+                        )
+                    )    
+    with graph_eu:st.plotly_chart(fig)
+    df_fed_funds.index=df_fed_funds.index.strftime('%b-%Y')
+    df_cpi.index=df_cpi.index.strftime('%b-%Y')
+    df_unemployment.index=df_unemployment.index.strftime('%b-%Y')
+    data=pd.merge(df_fed_funds,df_cpi,left_index=True,right_index=True)
+    data=pd.merge(data,df_unemployment,left_index=True,right_index=True)
+    with table_eu:st.dataframe(data,use_container_width=True)
+
 
 def make_internacional():
     with st.container(border=True):
@@ -201,8 +259,7 @@ def make_internacional():
 
     c1,c2=st.columns(2)
     with c1:
-        st.header('EEUU')
-        get_usa(datetime.now().strftime("%Y%m%d"))
+        with st.container(border=True):get_usa(datetime.now().strftime("%Y%m%d"))
     with c2:
         with st.container(border=True):get_eu(datetime.now().strftime("%Y%m%d"))
 
