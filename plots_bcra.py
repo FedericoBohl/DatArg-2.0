@@ -221,9 +221,9 @@ def plot_reservas(reservas): # Está andando medio mal, no reacciona bien con el
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     #if st.checkbox("Post Convertibilidad",value=True,key='reservas_post'):
     fig.add_trace(go.Scatter(x=reservas.loc["Jan-2002":].index, y=reservas.loc["Jan-2002":]["TCR"], name="TCR", marker_color="rgb(220, 20, 60)", line=dict(width=3.5,dash="dashdot")), secondary_y=False)
-    fig.add_trace(go.Scatter(x=reservas.loc["Jan-2002":].index, y=reservas["TCR"].ewm(span=12, adjust=False).mean().loc["Jan-2002":], name="EMA(12)-TCR", marker_color="darkgreen", line=dict(width=2.5,dash="dash")), secondary_y=False)
+    fig.add_trace(go.Scatter(x=reservas.loc["Jan-2002":].index, y=reservas["TCR"].rolling(12).mean().loc["Jan-2002":], name="EMA(12)-TCR", marker_color="darkgreen", line=dict(width=2.5,dash="dash")), secondary_y=False)
     fig.add_trace(go.Scatter(x=reservas.loc["Jan-2002":].index, y=reservas.loc["Jan-2002":]["Res Int"], name="Reservas Internacionales", marker_color="royalblue", line=dict(width=3),fill="tozeroy"), secondary_y=True)
-    #else:
+    #else:                                                      #y=reservas["TCR"].ewm(span=12, adjust=False).mean().loc["Jan-2002":]
     #    fig.add_trace(go.Scatter(x=reservas.index, y=reservas["Res Int"], name="Reservas Internacionales", marker_color="royalblue", line=dict(width=3),fill="tozeroy"), secondary_y=True)
     #    fig.add_trace(go.Scatter(x=reservas.index, y=reservas["TCR"], name="TCR", marker_color="rgb(220, 20, 60)", line=dict(width=3.5,dash="dashdot")), secondary_y=False)
     #    fig.add_trace(go.Scatter(x=reservas.index, y=reservas["TCR"].ewm(span=12, adjust=False).mean(), name="EMA(12)-TCR", marker_color="darkgreen", line=dict(width=2.5,dash="dash")), secondary_y=False)
