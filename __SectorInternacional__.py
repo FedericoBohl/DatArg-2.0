@@ -251,12 +251,6 @@ def get_usa(_):
 
 
 def make_internacional():
-    with st.container(border=True):
-        c1,c2,c3=st.columns(3)
-        with c1: st.metric('Precio WTI','-')
-        with c2: st.metric('Precio Trigo','-')
-        with c3: st.metric('Precio Soja','-')
-
     c1,c2=st.columns(2)
     with c1:
         with st.container(border=True):get_usa(datetime.now().strftime("%Y%m%d"))
