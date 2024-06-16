@@ -78,7 +78,7 @@ def load_data_map(end):
     return merged_df, geo, extras
 
 @st.cache_resource(show_spinner=False)
-def make_map(data,geo):
+def make_map(data,geo,extras):
     fig = px.choropleth_mapbox(
         data,
         geojson=geo,
