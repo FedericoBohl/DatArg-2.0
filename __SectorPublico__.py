@@ -152,6 +152,6 @@ def make_sect_pub():
             st.subheader('Deuda Pública')
     with c2:
         with st.container():
-            st.subheader('Mapa Fiscal Argentino')
+            st.subheader('Déficit Provincial')
             data,geo,extras=load_data_map(datetime.now().strftime("%Y%m%d"))
             make_map(data,geo,extras)
