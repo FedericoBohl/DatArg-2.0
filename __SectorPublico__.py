@@ -7,7 +7,6 @@ def load_sectpub():
 def load_data_map(end):
     #load new data
     try:
-        dsadsa
         # URL del endpoint de la API
         url = "https://www.presupuestoabierto.gob.ar/api/v1/credito?format=csv"
 
@@ -71,7 +70,7 @@ def load_data_map(end):
     df1['ubicacion_geografica_desc'] = df1['ubicacion_geografica_desc'].replace(provincias)
 
 
-    geo=json.load(open('provincias.json', encoding='utf-8'))
+    geo=json.load(open('ProvinciasArgentina.geojson', encoding='utf-8'))
     provincias_geo_df = pd.json_normalize(geo['features'])
     #provincias_geo_df['properties.nombre'] = 'Provincia de ' + provincias_geo_df['properties.nombre']
 
