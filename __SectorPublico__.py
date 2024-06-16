@@ -153,4 +153,5 @@ def make_sect_pub():
     with c2:
         with st.container():
             st.subheader('Mapa Fiscal Argentino')
-            make_map(load_data_map(datetime.now().strftime("%Y%m%d")))
+            data,geo,extras=load_data_map(datetime.now().strftime("%Y%m%d"))
+            make_map(data,geo,extras)
