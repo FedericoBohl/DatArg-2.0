@@ -92,8 +92,8 @@ def plot_pasivos_rem(escala,bcra: pd.DataFrame,tasas: pd.DataFrame): # El botón
         fig['layout']['yaxis3']['title']='Millones de ARS'
         fig['layout']['yaxis3']['type']='log'
     elif escala=="***Millones de USD-Oficial***":
-        fig['layout']['yaxis']['title']='Millones de USD-Oficial (TC Oficial)'
-        fig['layout']['yaxis3']['title']='Millones de USD-Oficial (TC Oficial)'
+        fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
+        fig['layout']['yaxis3']['title']='Millones de USD-TC Oficial'
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
         fig['layout']['yaxis3']['title']='PP del PBI'
