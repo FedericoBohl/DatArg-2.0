@@ -200,6 +200,7 @@ def plot_deuda(data,type_plot):
         else:
             t1,t2=st.tabs(['Gráfico','Datos'])
             t2.dataframe(data)
+            data=data.rolling(12).sum()
             fig=go.Figure()
             fig.add_trace(go.Scatter(x=data.index,y=data['Total Pagado'],name='Total Pagado',line=dict(width=3)))
             t1.plotly_chart(fig,use_container_width=True)
