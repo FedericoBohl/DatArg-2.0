@@ -26,7 +26,7 @@ def plot_agregados(escala,bcra: pd.DataFrame, tasas: pd.DataFrame):
         fig['layout']['yaxis']['title']='Millones de ARS'
         fig['layout']['yaxis']['type']='log'
     elif escala=="***Millones de USD-Oficial***":
-        fig['layout']['yaxis']['title']='Millones de USD-Oficial (TC Oficial)'
+        fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
     st.plotly_chart(fig,use_container_width=True)
@@ -53,7 +53,7 @@ def plot_BM(escala, bcra: pd.DataFrame):
         fig['layout']['yaxis']['title']='Millones de ARS'
         fig['layout']['yaxis']['type']='log'
     elif escala=="***Millones de USD-Oficial***":
-        fig['layout']['yaxis']['title']='Millones de USD-Oficial (TC Oficial)'
+        fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
     st.plotly_chart(fig,use_container_width=True)
@@ -154,7 +154,7 @@ def plot_fin_mon(escala,bcra: pd.DataFrame):
         fig['layout']['yaxis']['title']='Millones de ARS'
         fig['layout']['yaxis']['type']='log'
     elif escala=="***Millones de USD-Oficial***":
-        fig['layout']['yaxis']['title']='Millones de USD-Oficial (TC Oficial)'
+        fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
     st.plotly_chart(fig,use_container_width=True)
@@ -214,7 +214,7 @@ def plot_depositos(escala, bcra:pd.DataFrame, tasas: pd.DataFrame)->None:
         fig['layout']['yaxis']['title']='Millones de ARS'
         fig['layout']['yaxis']['type']='log'
     elif escala=="***Millones de USD-Oficial***":
-        fig['layout']['yaxis']['title']='Millones de USD-Oficial (TC Oficial)'
+        fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
     st.plotly_chart(fig,use_container_width=True)
