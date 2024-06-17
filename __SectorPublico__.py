@@ -195,8 +195,8 @@ def plot_deuda(data,type_plot):
     if not isinstance(data,pd.DataFrame):st.error('Error Extrayendo los Datos de la Deuda Bruta')
     else:
         if type_plot=='Composición de la Deuda Bruta':
-            t1,t2,t3=st.tabs(['Gráfico','Títulos Públicos','Datos'])
-            t3.dataframe(data)
+            t1,t2,t3,t4=st.tabs(['Gráfico','Títulos Públicos','Letras','Datos'])
+            t4.dataframe(data)
             fig=go.Figure()
             fig.add_trace(go.Scatter(x=data.index,y=data['Total Deuda Bruta'],name='Total',line=dict(width=5),marker_color=black))
             fig.add_trace(go.Bar(x=data.index,y=data['Titulos Publicos'],name='Títulos Públicos',marker_color='#1679AB'))
@@ -221,8 +221,33 @@ def plot_deuda(data,type_plot):
             fig.add_trace(go.Bar(x=data.index,y=data['Deuda ajustable por CER'],name='Ajustable por CER',marker_color='#6B8A7A',legendgroup='Moneda Nacional'))
             fig.add_trace(go.Bar(x=data.index,y=data['Deuda no ajustable por CER'],name='No Ajustable por CER',marker_color='#B7B597',legendgroup='Moneda Nacional'))
             fig.add_trace(go.Bar(x=data.index,y=data['Titulos Publicos-Moneda Extranjera'],name='Moneda Extranjera',marker_color='#FDFFE2'))
+            fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0.2,height=450,legend=dict(
+                                            orientation="h",
+                                            yanchor="bottom",
+                                            y=1.02,
+                                            xanchor="right",
+                                            x=1,
+                                            bordercolor=black,
+                                            borderwidth=2
+                                        ),yaxis=dict(showgrid=False, zeroline=True, showline=True))
+            fig['layout']['yaxis']['title']='Millones de USD (Fecha de Pago Efectivo)'
+            t2.plotly_chart(fig,use_container_width=True)
 
-
+            fig=go.Figure()
+            fig.add_trace(go.Scatter(x=data.index,y=data['Letras'],name='Total',line=dict(width=3.5),marker_color=black))
+            fig.add_trace(go.Bar(x=data.index,y=data['Letras-Moneda Nacional'],name='Moneda Nacional',marker_color='#40A578',legendgroup='Moneda Nacional'))
+            fig.add_trace(go.Bar(x=data.index,y=data['Letras-Moneda Extranjera'],name='Moneda Extranjera',marker_color='#006769'))
+            fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0.2,height=450,legend=dict(
+                                            orientation="h",
+                                            yanchor="bottom",
+                                            y=1.02,
+                                            xanchor="right",
+                                            x=1,
+                                            bordercolor=black,
+                                            borderwidth=2
+                                        ),yaxis=dict(showgrid=False, zeroline=True, showline=True))
+            fig['layout']['yaxis']['title']='Millones de USD (Fecha de Pago Efectivo)'
+            t3.plotly_chart(fig,use_container_width=True)
 
 
         else:
