@@ -78,6 +78,66 @@ def load_data_map(end):
     return merged_df, geo, extras
 
 @st.cache_resource(show_spinner=False)
+def load_datos_deuda(end) -> pd.DataFrame|None:
+    # URL del archivo de Excel
+    url = "https://www.argentina.gob.ar/sites/default/files/boletin_mensual_30_04_2024_0.xlsx"
+
+    # Descargar el archivo
+    response = requests.get(url)
+    if response.status_code == 200:
+        # Leer el archivo de Excel en un DataFrame sin guardarlo
+        excel_data = io.BytesIO(response.content)
+        xls = pd.ExcelFile(excel_data)
+        
+        # Cargar las hojas 'A.1' y 'A.5'
+        sheet_A1 = pd.read_excel(xls, sheet_name='A.1')
+        sheet_A5 = pd.read_excel(xls, sheet_name='A.5')
+
+        _=sheet_A1.iloc[15:45].transpose()
+        cols=['TÍTULOS PÚBLICOS',' - Moneda nacional','Deuda no ajustable por CER','Deuda ajustable por CER',' - Moneda extranjera ']
+        _.columns=_.iloc[1]
+        _=_.iloc[2:-1]
+        date_list = pd.date_range(start='2019-01-01 00:00:00', periods=len(_), freq='M').tolist()
+        tp=pd.DataFrame(index=date_list)
+        for i in cols:
+            tp[i]=_[i].tolist()
+
+        _=sheet_A1.iloc[80:87].transpose()
+        cols=['LETRAS DEL TESORO',' - Moneda nacional',' - Moneda extranjera ']
+        _.columns=_.iloc[1]
+        _=_.iloc[2:-1]
+        __=sheet_A1.iloc[134:148].transpose()
+        __.columns=__.iloc[1]
+        __=__.iloc[2:-1]
+        letras:pd.DataFrame=pd.DataFrame(index=date_list)
+        for i in cols:
+            letras[i]=[_[i][k]+__[i][k] for k in range(len(_))]
+
+        df=pd.merge(tp,letras,left_index=True,right_index=True)
+        df.columns=['Titulos Publicos', ' Titulos Publicos-Moneda Nacional',
+            'Deuda no ajustable por CER', 'Deuda ajustable por CER',
+            ' Titulos Publicos-Moneda Extranjera', 'Letras', ' Letras-Moneda Nacional',
+            'Letras-Moneda Extranjera']
+
+        _=sheet_A1.iloc[85:95].transpose()
+        _.columns=_.iloc[1]
+        _=_.iloc[2:-1]
+        df['Prestamos']=_['PRÉSTAMOS'].tolist()
+        _=sheet_A1.iloc[7:9].transpose()
+        _.columns=_.iloc[1]
+        _=_.iloc[2:-1]
+        df['Total Deuda Bruta']=_['A- DEUDA BRUTA ( I + II  + III)'].tolist()
+        df['Otros']=df['Total Deuda Bruta']-df['Titulos Publicos']-df['Letras']-df['Prestamos']
+
+        deuda_mon=sheet_A5.iloc[12:21].transpose().iloc[2:-1]
+        deuda_mon.index=date_list
+        deuda_mon=deuda_mon.rename(columns={12:'Total Pagado',14:'Total-Moneda Nacional',15:'Capital-Moneda Nacional',16:'Intereses-Moneda Nacional',18:'Total-Moneda Extranjera',19:'Capital-Moneda Extranjera',20:'Intereses-Moneda Extranjera'})
+        deuda_mon=deuda_mon.drop(columns=[13,17],axis=0)
+        del tp,letras,_,__,excel_data,xls,sheet_A1,sheet_A5
+        return df,deuda_mon
+
+
+@st.cache_data(show_spinner=False)
 def make_map(data,geo,extras):
     fig = px.choropleth_mapbox(
         data,
@@ -130,6 +190,20 @@ def make_map(data,geo,extras):
 
     st.plotly_chart(fig,use_container_width=True)
 
+@st.cache_data(show_spinner=False)
+def plot_deuda(data,type_plot):
+    if data==None:st.error('Error Extrayendo los Datos de la Deuda Bruta')
+    else:
+        if type_plot=='Composición de la Deuda Bruta':
+            t1,t2=st.tabs(['Gráfico','Datos'])
+            t2.dataframe(data)
+        else:
+            t1,t2=st.tabs(['Gráfico','Datos'])
+            t2.dataframe(data)
+            fig=go.Figure()
+            fig.add_trace(go.Scatter(x=data.index,y=data['Total Pagado'],name='Total Pagado',line=dict(width=3)))
+            t1.plotly_chart(fig,use_container_width=True)
+
 def make_sect_pub():
     load_sectpub()
     c1,c2=st.columns((0.8,0.2))
@@ -150,6 +224,9 @@ def make_sect_pub():
     with c1:
         with st.container():
             st.subheader('Deuda Pública')
+            deuda,deuda_mon=load_datos_deuda(datetime.now().strftime("%Y%m%d"))
+            st.radio('Deuda Pública',options=['Composición de la Deuda Bruta','Pagos de Deuda por Moneda'],horizontal=True,key='plot_deuda')
+            plot_deuda(deuda,S.plot_deuda) if S.plot_deuda=='Composición de la Deuda Bruta' else plot_deuda(deuda_mon,S.plot_deuda)
     with c2:
         with st.container():
             st.subheader('Déficit Provincial')
