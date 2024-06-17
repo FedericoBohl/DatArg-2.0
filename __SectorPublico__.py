@@ -199,10 +199,10 @@ def plot_deuda(data,type_plot):
             t3.dataframe(data)
             fig=go.Figure()
             fig.add_trace(go.Scatter(x=data.index,y=data['Total Deuda Bruta'],name='Total',line=dict(width=5),marker_color=black))
-            fig.add_trace(go.Bar(x=data.index,y=data['Titulos Publicos'],maker_color='#1679AB'))
-            fig.add_trace(go.Bar(x=data.index,y=data['Letras'],maker_color='#C80036'))
-            fig.add_trace(go.Bar(x=data.index,y=data['Prestamos'],maker_color='#FFF5E1'))
-            fig.add_trace(go.Bar(x=data.index,y=data['Otros'],maker_color=gray))
+            fig.add_trace(go.Bar(x=data.index,y=data['Titulos Publicos'],marker_color='#1679AB'))
+            fig.add_trace(go.Bar(x=data.index,y=data['Letras'],marker_color='#C80036'))
+            fig.add_trace(go.Bar(x=data.index,y=data['Prestamos'],marker_color='#FFF5E1'))
+            fig.add_trace(go.Bar(x=data.index,y=data['Otros'],marker_color=gray))
             fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0.2,height=450,legend=dict(
                                             orientation="h",
                                             yanchor="bottom",
