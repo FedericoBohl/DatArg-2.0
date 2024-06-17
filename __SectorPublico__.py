@@ -114,9 +114,9 @@ def load_datos_deuda(end) -> pd.DataFrame|None:
             letras[i]=[_[i][k]+__[i][k] for k in range(len(_))]
 
         df=pd.merge(tp,letras,left_index=True,right_index=True)
-        df.columns=['Titulos Publicos', ' Titulos Publicos-Moneda Nacional',
+        df.columns=['Titulos Publicos', 'Titulos Publicos-Moneda Nacional',
             'Deuda no ajustable por CER', 'Deuda ajustable por CER',
-            ' Titulos Publicos-Moneda Extranjera', 'Letras', ' Letras-Moneda Nacional',
+            'Titulos Publicos-Moneda Extranjera', 'Letras', 'Letras-Moneda Nacional',
             'Letras-Moneda Extranjera']
 
         _=sheet_A1.iloc[85:95].transpose()
@@ -199,10 +199,10 @@ def plot_deuda(data,type_plot):
             t3.dataframe(data)
             fig=go.Figure()
             fig.add_trace(go.Scatter(x=data.index,y=data['Total Deuda Bruta'],name='Total',line=dict(width=5),marker_color=black))
-            fig.add_trace(go.Bar(x=data.index,y=data['Titulos Publicos'],marker_color='#1679AB'))
-            fig.add_trace(go.Bar(x=data.index,y=data['Letras'],marker_color='#C80036'))
-            fig.add_trace(go.Bar(x=data.index,y=data['Prestamos'],marker_color='#FFF5E1'))
-            fig.add_trace(go.Bar(x=data.index,y=data['Otros'],marker_color=gray))
+            fig.add_trace(go.Bar(x=data.index,y=data['Titulos Publicos'],name='Títulos Públicos',marker_color='#1679AB'))
+            fig.add_trace(go.Bar(x=data.index,y=data['Letras'],name='Letras',marker_color='#C80036'))
+            fig.add_trace(go.Bar(x=data.index,y=data['Prestamos'],name='Préstamos',marker_color='#FFF5E1'))
+            fig.add_trace(go.Bar(x=data.index,y=data['Otros'],name='Otros',marker_color=gray))
             fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0.2,height=450,legend=dict(
                                             orientation="h",
                                             yanchor="bottom",
