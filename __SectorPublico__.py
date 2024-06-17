@@ -202,7 +202,23 @@ def plot_deuda(data,type_plot):
             t2.dataframe(data)
             data=data.rolling(12).sum().dropna()
             fig=go.Figure()
-            fig.add_trace(go.Scatter(x=data.index,y=data['Total Pagado'],name='Total Pagado',line=dict(width=3)))
+            fig.add_trace(go.Scatter(x=data.index,y=data['Total Pagado'],name='Total',line=dict(width=3),marker_color=black))
+            fig.add_trace(go.Scatter(x=data.index,y=data['Total-Moneda Nacional'],name='Moneda Nacional',line=dict(width=3),marker_color='red',legendgroup='Moneda Nacional'))
+            fig.add_trace(go.Scatter(x=data.index,y=data['Total-Moneda Extranjera'],name='Moneda Extranjera',line=dict(width=3),marker_color=navy,legendgroup='Moneda Extranjera'))
+            fig.add_trace(go.Bar(x=data.index,y=data['Capital-Moneda Nacional'],name='Capital-Moneda Nacional',marker_color=red,legendgroup='Moneda Nacional',showlegend=False))
+            fig.add_trace(go.Bar(x=data.index,y=data['Intereses-Moneda Nacional'],name='Capital-Moneda Nacional',marker_color=orange,legendgroup='Moneda Nacional',showlegend=False))
+            fig.add_trace(go.Bar(x=data.index,y=data['Capital-Moneda Extranjera'],name='Capital-Moneda Extranjera',marker_color=blue,legendgroup='Moneda Extranjera',showlegend=False))
+            fig.add_trace(go.Bar(x=data.index,y=data['Intereses-Moneda Extranjera'],name='Capital-Moneda Extranjera',marker_color='royalblue',legendgroup='Moneda Extranjera',showlegend=False))
+            fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0.2,height=450,legend=dict(
+                                            orientation="h",
+                                            yanchor="bottom",
+                                            y=1.02,
+                                            xanchor="right",
+                                            x=1,
+                                            bordercolor=black,
+                                            borderwidth=2
+                                        ),yaxis=dict(showgrid=False, zeroline=True, showline=True))
+            fig['layout']['yaxis']['title']='Millones de USD (Fecha de Pago Efectivo)'
             t1.plotly_chart(fig,use_container_width=True)
 
 def make_sect_pub():
