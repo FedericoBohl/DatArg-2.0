@@ -192,7 +192,7 @@ def make_map(data,geo,extras):
 
 @st.cache_data(show_spinner=False)
 def plot_deuda(data,type_plot):
-    if data==None:st.error('Error Extrayendo los Datos de la Deuda Bruta')
+    if isinstance(data,None):st.error('Error Extrayendo los Datos de la Deuda Bruta')
     else:
         if type_plot=='Composición de la Deuda Bruta':
             t1,t2=st.tabs(['Gráfico','Datos'])
