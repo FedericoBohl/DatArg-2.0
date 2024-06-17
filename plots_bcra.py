@@ -30,7 +30,6 @@ def plot_agregados(escala,bcra: pd.DataFrame, tasas: pd.DataFrame):
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
     st.plotly_chart(fig,use_container_width=True)
-            
 
 @st.cache_data(show_spinner=False)
 def plot_BM(escala, bcra: pd.DataFrame):
@@ -90,11 +89,16 @@ def plot_pasivos_rem(escala,bcra: pd.DataFrame,tasas: pd.DataFrame): # El botón
     if escala=="***Millones de ARS***":
         fig['layout']['yaxis']['title']='Millones de ARS'
         fig['layout']['yaxis']['type']='log'
+        fig['layout']['yaxis3']['title']='Millones de ARS'
+        fig['layout']['yaxis3']['type']='log'
     elif escala=="***Millones de USD-Oficial***":
         fig['layout']['yaxis']['title']='Millones de USD-Oficial (TC Oficial)'
+        fig['layout']['yaxis3']['title']='Millones de USD-Oficial (TC Oficial)'
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
+        fig['layout']['yaxis3']['title']='PP del PBI'
     fig['layout']['yaxis2']['title']='%-Tasa'
+    fig['layout']['yaxis4']['title']='%-Tasa'
     #else: 
     #    fig = make_subplots(rows=2, cols=1, specs=[[{"secondary_y": True}], [{"secondary_y": True}]])
     #    fig.add_trace(go.Bar(x=bcra.index, y=(bcra["LeLiq"]/bcra["BM"]), name='LELIQ', marker_color='navy'), row=1, col=1, secondary_y=False)
