@@ -246,12 +246,7 @@ def plot_deuda(data,type_plot):
                                             bordercolor=black,
                                             borderwidth=2
                                         ),yaxis=dict(showgrid=False, zeroline=True, showline=True),
-                                        title={
-                                            'text': "Letras",
-                                            'y':0.9,
-                                            'x':0.5,
-                                            'xanchor': 'center',
-                                            'yanchor': 'top'})
+                                        title='Letras')
             fig['layout']['yaxis']['title']='Millones de USD (Fecha de Pago Efectivo)'
             t3.plotly_chart(fig,use_container_width=True)
 
