@@ -220,7 +220,7 @@ def plot_deuda(data,type_plot):
             fig.add_trace(go.Scatter(x=data.index,y=data['Titulos Publicos-Moneda Nacional'],name='Moneda Nacional',line=dict(width=2),marker_color='#254336',legendgroup='Moneda Nacional'))
             fig.add_trace(go.Bar(x=data.index,y=data['Deuda ajustable por CER'],name='Ajustable por CER',marker_color='#6B8A7A',legendgroup='Moneda Nacional'))
             fig.add_trace(go.Bar(x=data.index,y=data['Deuda no ajustable por CER'],name='No Ajustable por CER',marker_color='#B7B597',legendgroup='Moneda Nacional'))
-            fig.add_trace(go.Bar(x=data.index,y=data['Titulos Publicos-Moneda Extranjera'],name='Moneda Extranjera',marker_color='#FDFFE2'))
+            fig.add_trace(go.Bar(x=data.index,y=data['Titulos Publicos-Moneda Extranjera'],name='Moneda Extranjera',marker_color='#D1D8C5'))
             fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0.2,height=450,legend=dict(
                                             orientation="h",
                                             yanchor="bottom",
@@ -245,7 +245,13 @@ def plot_deuda(data,type_plot):
                                             x=1,
                                             bordercolor=black,
                                             borderwidth=2
-                                        ),yaxis=dict(showgrid=False, zeroline=True, showline=True))
+                                        ),yaxis=dict(showgrid=False, zeroline=True, showline=True),
+                                        title={
+                                            'text': "Letras",
+                                            'y':0.9,
+                                            'x':0.5,
+                                            'xanchor': 'center',
+                                            'yanchor': 'top'})
             fig['layout']['yaxis']['title']='Millones de USD (Fecha de Pago Efectivo)'
             t3.plotly_chart(fig,use_container_width=True)
 
