@@ -195,8 +195,36 @@ def plot_deuda(data,type_plot):
     if not isinstance(data,pd.DataFrame):st.error('Error Extrayendo los Datos de la Deuda Bruta')
     else:
         if type_plot=='Composición de la Deuda Bruta':
-            t1,t2=st.tabs(['Gráfico','Datos'])
-            t2.dataframe(data)
+            t1,t2,t3=st.tabs(['Gráfico','Títulos Públicos','Datos'])
+            t3.dataframe(data)
+            fig=go.Figure()
+            fig.add_trace(go.Scatter(x=data.index,y=data['Total Deuda Bruta'],name='Total',line=dict(width=5),marker_color=black))
+            fig.add_trace(go.Bar(x=data.index,y=data['Titulos Publicos'],maker_color='#1679AB'))
+            fig.add_trace(go.Bar(x=data.index,y=data['Letras'],maker_color='#C80036'))
+            fig.add_trace(go.Bar(x=data.index,y=data['Prestamos'],maker_color='#FFF5E1'))
+            fig.add_trace(go.Bar(x=data.index,y=data['Otros'],maker_color=gray))
+            fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0.2,height=450,legend=dict(
+                                            orientation="h",
+                                            yanchor="bottom",
+                                            y=1.02,
+                                            xanchor="right",
+                                            x=1,
+                                            bordercolor=black,
+                                            borderwidth=2
+                                        ),yaxis=dict(showgrid=False, zeroline=True, showline=True))
+            fig['layout']['yaxis']['title']='Millones de USD (Fecha de Pago Efectivo)'
+            t1.plotly_chart(fig,use_container_width=True)
+            
+            fig=go.Figure()
+            fig.add_trace(go.Scatter(x=data.index,y=data['Titulos Publicos'],name='Total',line=dict(width=3.5),marker_color=black))
+            fig.add_trace(go.Scatter(x=data.index,y=data['Titulos Publicos-Moneda Nacional'],name='Moneda Nacional',line=dict(width=2),marker_color='#254336',legendgroup='Moneda Nacional'))
+            fig.add_trace(go.Bar(x=data.index,y=data['Deuda ajustable por CER'],name='Ajustable por CER',marker_color='#6B8A7A',legendgroup='Moneda Nacional'))
+            fig.add_trace(go.Bar(x=data.index,y=data['Deuda no ajustable por CER'],name='No Ajustable por CER',marker_color='#B7B597',legendgroup='Moneda Nacional'))
+            fig.add_trace(go.Bar(x=data.index,y=data['Titulos Publicos-Moneda Extranjera'],name='Moneda Extranjera',marker_color='#FDFFE2'))
+
+
+
+
         else:
             t1,t2=st.tabs(['Gráfico','Datos'])
             t2.dataframe(data)
