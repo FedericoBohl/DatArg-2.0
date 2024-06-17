@@ -295,7 +295,7 @@ def make_sect_pub():
         with st.container():
             st.subheader('Deuda Pública')
             deuda,deuda_mon=load_datos_deuda(datetime.now().strftime("%Y%m%d"))
-            st.radio('Deuda Pública',options=['Composición de la Deuda Bruta','Pagos de Deuda por Moneda'],horizontal=True,key='plot_deuda')
+            st.radio('Deuda Pública',options=['Composición de la Deuda Bruta','Pagos de Deuda por Moneda'],label_visibility='collapsed',horizontal=True,key='plot_deuda')
             plot_deuda(deuda,S.plot_deuda) if S.plot_deuda=='Composición de la Deuda Bruta' else plot_deuda(deuda_mon,S.plot_deuda)
     with c2:
         with st.container():
