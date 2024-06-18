@@ -1,5 +1,6 @@
 from librerias import *
 
+@st.cache_resource(show_spinner=False)
 def load_data_sectpub(date):
     deficit=pd.read_csv("His Data/his-deficit.csv",delimiter=";")
     deficit['Unnamed: 0'] = pd.to_datetime(deficit.iloc[:, 0].values, format='%d/%m/%Y')
@@ -14,19 +15,19 @@ def load_data_sectpub(date):
     data['Intereses de Deuda']=data['Superavit Primario']-data['Superavit Financiero']
     data.index = pd.to_datetime(data.index, format='%Y-%m-%d')
     data.columns=deficit.columns
-    st.dataframe(data)
-    st.dataframe(deficit)
     data.reindex(columns=deficit.columns)
-    st.dataframe(data)
     data=pd.concat([deficit,data],axis=0)
     datagdp=data.copy().iloc[48:]
-    st.dataframe(datagdp)
     #datagdp=pd.concat([datagdp,pbi],axis=1,ignore_index=True)
     datagdp["PBI"]=S.pbi_men
     for col in data.columns.to_list():
         datagdp[col]=datagdp.rolling(12).sum()[col]*100/(datagdp["PBI"]*4)
     
-    return data, datagdp.dropna()
+    datatco=data.copy().iloc[48:]
+    datatco['TC']=S.TC
+    for col in data.columns.to_list():
+        datatco[col]=datatco[col]/datatco["TC"]
+    return data, datagdp.dropna(), datatco.dropna()
 
 @st.cache_resource(show_spinner=False)
 def load_data_map(end):
@@ -161,7 +162,89 @@ def load_datos_deuda(end) -> pd.DataFrame|None:
         del tp,letras,_,__,excel_data,xls,sheet_A1,sheet_A5
         return df,deuda_mon
 
+@st.cache_data(show_spinner=False)
+def plot_deficit(escala,data):
+    t1,t2=st.tabs(['Superavit Financiero','Superavit Fiscal'])
+    fig=go.Figure()
+    fig.add_trace(go.Scatter(x=data.index,y=data["Superavit Financiero"],name="Resultado Financiero",line=dict(width=3),marker_color=black))
+    fig.add_trace(go.Bar(x=data.index,y=data["Superavit Primario"],name="Superavit Primario",marker_color=olive))
+    fig.add_trace(go.Bar(x=data.index,y=-data["Intereses de Deuda"],name="Intereses de deuda",marker_color=teal))
+    fig.add_hline(y=0,line_dash="dot",secondary_y=True)
+    fig.add_annotation(text="Déficit 0",
+                    xref="paper", yref="paper",
+                    x=0.9, y=0.98, showarrow=False,
+                        font=dict(size=12,color=black),
+                        align="center",
+                        bordercolor=black,
+                        borderwidth=1,
+                        borderpad=2,
+                        bgcolor=white,
+                        opacity=0.8
+                        )
+    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),
+        barmode="stack",height=450, 
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="right",
+            x=1,
+            bordercolor="Black",
+            borderwidth=2
+        ),
+        yaxis=dict(showgrid=False, zeroline=True, showline=True)
+    )
+    if escala=="***Millones de ARS***":
+        fig['layout']['yaxis']['title']='Millones de ARS'
+        fig['layout']['yaxis']['type']='log'
+    elif escala=="***Millones de USD-Oficial***":
+        fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
+    else:
+        fig['layout']['yaxis']['title']='PP del PBI'
+    t1.plotly_chart(fig,use_container_width=True)
 
+    fig = make_subplots(specs=[[{"secondary_y": True}]])
+    fig.add_trace(go.Scatter(x=data.index, y=data["Superavit Primario"], name="Resultado Primario", marker_color=black,line=dict(width=3)), secondary_y=True)
+    fig.add_trace(go.Bar(x=data.index, y=-data["Gastos"], name="Gastos", marker_color=red), secondary_y=False)
+    fig.add_trace(go.Bar(x=data.index, y=data["Ingresos"], name="Ingresos", marker_color=green), secondary_y=False)
+    fig.add_hline(y=0,line_dash="dot",secondary_y=True)
+    fig.add_annotation(text="Déficit 0",
+            xref="paper", yref="paper",
+            x=0.9, y=0.98, showarrow=False,
+            font=dict(size=12,color=black),
+            align="center",
+            bordercolor=black,
+            borderwidth=1,
+            borderpad=2,
+            bgcolor=white,
+            opacity=0.8
+            )
+    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0.2,height=450,legend=dict(
+                                    orientation="h",
+                                    yanchor="bottom",
+                                    y=1.02,
+                                    xanchor="right",
+                                    x=1,
+                                    bordercolor='black',
+                                    borderwidth=2),
+                                    yaxis=dict(showgrid=False, zeroline=True, showline=True),
+                                    yaxis2=dict(showgrid=False, zeroline=True, showline=True)
+                                )
+    if escala=="***Millones de ARS***":
+        fig['layout']['yaxis']['title']='Gasto/Ingresos-Millones de ARS'
+        fig['layout']['yaxis']['type']='log'
+        fig['layout']['yaxis2']['title']='Superávit/Déficit-Millones de ARS'
+        fig['layout']['yaxis2']['type']='log'
+
+    elif escala=="***Millones de USD-Oficial***":
+        fig['layout']['yaxis']['title']='Gasto/Ingresos-Millones de USD-TC Oficial'
+        fig['layout']['yaxis2']['title']='Superávit/Déficit-Millones de USD-TC Oficial'
+
+    else:
+        fig['layout']['yaxis']['title']='Gasto/Ingresos-PP del PBI'
+        fig['layout']['yaxis2']['title']='Superávit/Déficit-PP del PBI'
+
+    t2.plotly_chart(fig,use_container_width=True)
 @st.cache_data(show_spinner=False)
 def make_map(data,geo,extras):
     fig = px.choropleth_mapbox(
@@ -300,14 +383,30 @@ def plot_deuda(data,type_plot):
             t1.plotly_chart(fig,use_container_width=True)
 
 def make_sect_pub():
-    load_data_sectpub(datetime.now().strftime("%Y%m%d"))
+    deficit,datagdp,datatco=load_data_sectpub(datetime.now().strftime("%Y%m%d"))
     c1,c2=st.columns((0.8,0.2))
     with c1:
-        with st.container():
-            st.caption('Aca poner déficit fiscal y financiero y para que el usuario elija el ratio sobre PBI, dólares y pesos')
+        with st.container(border=True):
+            c11,c12=st.columns((0.3,0.7))
+            with c11: st.radio("Escala de los datos",options=["***Millones de ARS***","***Millones de USD-Oficial***","***Millones de USD-Blue***","***% del PBI***"],key="escala_sectpub")
+            with c12: st.number_input(value=2016,label='Datos desde',min_value=2000,max_value=2024,key="start_sectpub")
     with c2:
-        with st.container():
-            st.caption('Link web')
+        st.link_button(":blue[**Descargar datos:\nSector Público**]",url="https://1drv.ms/x/c/56f917c917f2e2f5/QfXi8hfJF_kggFaNFQAAAAAAHinUdp-mVHJoLA",use_container_width=True)
+    deficit=deficit.loc[f"{S.start_sectpub}":]
+    deficit.index=deficit.index.strftime('%b-%Y')
+    datagdp=datagdp.loc[f"{S.start_sectpub}":]
+    tasas=tasas.loc[f"{S.start_sectpub}":]
+    tasas.index=tasas.index.strftime('%b-%Y')
+    datagdp.index=datagdp.index.strftime('%b-%Y')
+    datatco=datatco.loc[f"{S.start_sectpub}":]
+    datatco.index=datatco.index.strftime('%b-%Y')
+    if S.escala_bcra=="***Millones de ARS***":
+        S.data_bcra=deficit
+    elif S.escala_bcra=="***Millones de USD-Oficial***":
+        S.data_bcra=datatco
+    else:
+        S.data_bcra=datagdp
+
     c1,c2=st.columns(2)
     with c1:
         with st.container():
