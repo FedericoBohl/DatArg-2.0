@@ -233,7 +233,7 @@ def plot_deficit(escala,data:pd.DataFrame):
     else:
         fig['layout']['yaxis']['title']='Gasto/Ingresos-PP del PBI'
         fig['layout']['yaxis2']['title']='Superávit/Déficit-PP del PBI'
-    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),bargap=0.2,height=450,legend=dict(
+    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0.2,height=450,legend=dict(
                                     orientation="h",
                                     yanchor="bottom",
                                     y=1.02,
