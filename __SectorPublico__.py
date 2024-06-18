@@ -1,7 +1,28 @@
 from librerias import *
 
-def load_sectpub():
-    pass
+def load_data_sectpub(date):
+    deficit=pd.read_csv("His Data/his-deficit.csv",delimiter=";")
+    deficit['Unnamed: 0'] = pd.to_datetime(deficit.iloc[:, 0].values, format='%Y-%m-%d')
+    deficit.set_index('Unnamed: 0', inplace=True)
+    ids=["379.9_GTOS_PRIMA017__39_96",
+        "379.9_ING_DESPUE017__28_10",
+        "379.9_SUPERAVIT_017__23_94",
+        "379.9_RESULTADO_017__18_38"
+        ]
+    cols=["Gastos","Ingresos","Superavit Primario","Superavit Financiero"]
+    data=get_data(ids,start_date="2024-01-01",col_list=cols)
+    data['Intereses de Deuda']=data['Superavit Primario']-data['Superavit Financiero']
+    data.index = pd.to_datetime(data.index, format='%Y-%m-%d')
+    data.reindex(columns=deficit.columns)
+    data=pd.concat([deficit,data],axis=0)
+    datagdp=data.copy().iloc[48:]
+    st.dataframe(datagdp)
+    #datagdp=pd.concat([datagdp,pbi],axis=1,ignore_index=True)
+    datagdp["PBI"]=S.pbi_men
+    for col in data.columns.to_list():
+        datagdp[col]=datagdp.rolling(12).sum()[col]*100/(datagdp["PBI"]*4)
+    
+    return data, datagdp.dropna()
 
 @st.cache_resource(show_spinner=False)
 def load_data_map(end):
@@ -275,7 +296,7 @@ def plot_deuda(data,type_plot):
             t1.plotly_chart(fig,use_container_width=True)
 
 def make_sect_pub():
-    load_sectpub()
+    load_data_sectpub()
     c1,c2=st.columns((0.8,0.2))
     with c1:
         with st.container():
@@ -295,7 +316,7 @@ def make_sect_pub():
         with st.container():
             st.subheader('Deuda Pública')
             deuda,deuda_mon=load_datos_deuda(datetime.now().strftime("%Y%m%d"))
-            st.radio('Deuda Pública',options=['Composición de la Deuda Bruta','Pagos de Deuda por Moneda'],label_visibility='collapsed',horizontal=True,key='plot_deuda')
+            st.radio('Deuda Pública',options=['Endeudamiento','Composición de la Deuda Bruta','Pagos de Deuda por Moneda'],label_visibility='collapsed',horizontal=False,key='plot_deuda')
             plot_deuda(deuda,S.plot_deuda) if S.plot_deuda=='Composición de la Deuda Bruta' else plot_deuda(deuda_mon,S.plot_deuda)
     with c2:
         with st.container():
