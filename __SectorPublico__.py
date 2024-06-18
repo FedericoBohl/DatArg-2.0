@@ -230,7 +230,17 @@ def plot_deficit(escala,data:pd.DataFrame):
     else:
         fig['layout']['yaxis']['title']='Gasto/Ingresos-PP del PBI'
         fig['layout']['yaxis2']['title']='Superávit/Déficit-PP del PBI'
-
+    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="overlay",bargap=0.2,height=450,legend=dict(
+                                    orientation="h",
+                                    yanchor="bottom",
+                                    y=1.02,
+                                    xanchor="right",
+                                    x=1,
+                                    bordercolor='black',
+                                    borderwidth=2),
+                                    yaxis=dict(showgrid=False, zeroline=True, showline=True),
+                                    yaxis2=dict(showgrid=False, zeroline=True, showline=True)
+                                )
     t2.plotly_chart(fig,use_container_width=True)
 
 @st.cache_data(show_spinner=False)
