@@ -1,6 +1,6 @@
 from librerias import *
 
-@st.cache_resource(show_spinner=False)
+#@st.cache_resource(show_spinner=False)
 def load_data_sectpub(date):
     deficit=pd.read_csv("His Data/his-deficit.csv",delimiter=";")
     deficit['Unnamed: 0'] = pd.to_datetime(deficit.iloc[:, 0].values, format='%d/%m/%Y')
