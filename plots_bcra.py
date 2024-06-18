@@ -195,7 +195,7 @@ def plot_varBM(escala,bcra:pd.DataFrame):
 def plot_depositos(escala, bcra:pd.DataFrame, tasas: pd.DataFrame)->None:
     st.subheader("Depósitos & Rendimiento de los Plazos Fijos")
     fig=make_subplots(specs=[[{"secondary_y": True}]])
-    fig.add_trace(go.Scatter(x=bcra.index,y=bcra["Depositos"]*100,name="Depósitos",marker_color=purple,line=dict(width=3),fill='tozeroy'),secondary_y=False)
+    fig.add_trace(go.Scatter(x=bcra.index,y=bcra["Depositos"],name="Depósitos",marker_color=purple,line=dict(width=3),fill='tozeroy'),secondary_y=False)
     fig.add_trace(go.Scatter(x=bcra.index,y=tasas["Badlar"],name="Tasa Badlar",marker_color="yellow",line=dict(width=4)),secondary_y=True)
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),height=450, legend=dict(
                                             orientation="h",
