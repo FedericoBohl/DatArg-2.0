@@ -398,9 +398,9 @@ def make_sect_pub():
     datagdp.index=datagdp.index.strftime('%b-%Y')
     datatco=datatco.loc[f"{S.start_sectpub}":]
     datatco.index=datatco.index.strftime('%b-%Y')
-    if S.escala_bcra=="***Millones de ARS***":
+    if S.escala_sectpub=="***Millones de ARS***":
         S.data_sectpub=deficit
-    elif S.escala_bcra=="***Millones de USD-Oficial***":
+    elif S.escala_sectpub=="***Millones de USD-Oficial***":
         S.data_sectpub=datatco
     else:
         S.data_sectpub=datagdp
