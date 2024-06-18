@@ -162,7 +162,7 @@ def load_datos_deuda(end) -> pd.DataFrame|None:
         del tp,letras,_,__,excel_data,xls,sheet_A1,sheet_A5
         return df,deuda_mon
 
-@st.cache_data(show_spinner=False)
+#@st.cache_data(show_spinner=False)
 def plot_deficit(escala,data:pd.DataFrame):
     t1,t2=st.tabs(['Superavit Financiero','Superavit Fiscal'])
     fig=go.Figure()
