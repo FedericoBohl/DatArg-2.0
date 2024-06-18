@@ -395,22 +395,21 @@ def make_sect_pub():
     deficit=deficit.loc[f"{S.start_sectpub}":]
     deficit.index=deficit.index.strftime('%b-%Y')
     datagdp=datagdp.loc[f"{S.start_sectpub}":]
-    tasas=tasas.loc[f"{S.start_sectpub}":]
-    tasas.index=tasas.index.strftime('%b-%Y')
     datagdp.index=datagdp.index.strftime('%b-%Y')
     datatco=datatco.loc[f"{S.start_sectpub}":]
     datatco.index=datatco.index.strftime('%b-%Y')
     if S.escala_bcra=="***Millones de ARS***":
-        S.data_bcra=deficit
+        S.data_sectpub=deficit
     elif S.escala_bcra=="***Millones de USD-Oficial***":
-        S.data_bcra=datatco
+        S.data_sectpub=datatco
     else:
-        S.data_bcra=datagdp
+        S.data_sectpub=datagdp
 
     c1,c2=st.columns(2)
     with c1:
         with st.container():
             st.subheader('Resultado Fiscal y Financiero')
+            plot_deficit(S.escala_sectpub,S.data_sectpub)
     with c2:
         with st.container():
             st.subheader('Endeudamiento')
