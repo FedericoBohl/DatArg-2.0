@@ -404,21 +404,21 @@ def make_sect_pub():
         S.data_sectpub=datagdp
     c1,c2=st.columns(2)
     with c1:
-        with st.container():
+        with st.container(border=True):
             st.subheader('Resultado Fiscal y Financiero')
             plot_deficit(S.escala_sectpub,S.data_sectpub)
     with c2:
-        with st.container():
+        with st.container(border=True):
             st.subheader('Endeudamiento')
     c1,c2=st.columns(2)
     with c1:
-        with st.container():
+        with st.container(border=True):
             st.subheader('Deuda Pública')
             deuda,deuda_mon=load_datos_deuda(2)
             st.radio('Deuda Pública',options=['Endeudamiento','Composición de la Deuda Bruta','Pagos de Deuda por Moneda'],label_visibility='collapsed',horizontal=False,key='plot_deuda')
             plot_deuda(deuda,S.plot_deuda) if S.plot_deuda=='Composición de la Deuda Bruta' else plot_deuda(deuda_mon,S.plot_deuda)
     with c2:
-        with st.container():
+        with st.container(border=True):
             st.subheader('Déficit Provincial')
             data,geo,extras=load_data_map(datetime.now().strftime("%Y%m%d"))
             make_map(data,geo,extras)
