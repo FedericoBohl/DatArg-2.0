@@ -245,6 +245,7 @@ def plot_deficit(escala,data):
         fig['layout']['yaxis2']['title']='Superávit/Déficit-PP del PBI'
 
     t2.plotly_chart(fig,use_container_width=True)
+
 @st.cache_data(show_spinner=False)
 def make_map(data,geo,extras):
     fig = px.choropleth_mapbox(
@@ -409,7 +410,7 @@ def make_sect_pub():
     with c1:
         with st.container():
             st.subheader('Resultado Fiscal y Financiero')
-            st.dataframe(S.data_sectpub)
+            st.dataframe(S.data_sectpub["Superavit Financiero"])
             plot_deficit(S.escala_sectpub,S.data_sectpub)
     with c2:
         with st.container():
