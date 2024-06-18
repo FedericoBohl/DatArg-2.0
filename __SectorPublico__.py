@@ -208,7 +208,7 @@ def plot_deficit(escala,data:pd.DataFrame):
     fig.add_trace(go.Bar(x=data.index, y=-data["Gastos"], name="Gastos", marker_color=red), secondary_y=False)
     fig.add_trace(go.Bar(x=data.index, y=data["Ingresos"], name="Ingresos", marker_color=green), secondary_y=False)
     fig.add_hline(y=0,line_dash="dot",secondary_y=True)
-    fig.add_annotation(text="Déficit 0",
+    fig.add_annotation(text="Déficit 0",barmode="stack",
             xref="paper", yref="paper",
             x=0.9, y=0.98, showarrow=False,
             font=dict(size=12,color=black),
