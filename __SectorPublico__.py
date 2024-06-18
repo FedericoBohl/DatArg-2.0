@@ -13,7 +13,9 @@ def load_data_sectpub(date):
     data=get_data(ids,start_date="2024-01-01",col_list=cols)
     data['Intereses de Deuda']=data['Superavit Primario']-data['Superavit Financiero']
     data.index = pd.to_datetime(data.index, format='%Y-%m-%d')
+    st.dataframe(data)
     data.reindex(columns=deficit.columns)
+    st.dataframe(data)
     data=pd.concat([deficit,data],axis=0)
     datagdp=data.copy().iloc[48:]
     st.dataframe(datagdp)
