@@ -286,10 +286,10 @@ def make_sect_pub():
     c1,c2=st.columns(2)
     with c1:
         with st.container():
-            st.subheader('Resultado Fiscal')
+            st.subheader('Resultado Fiscal y Financiero')
     with c2:
         with st.container():
-            st.subheader('Resultado Financiero')
+            st.subheader('Endeudamiento')
     c1,c2=st.columns(2)
     with c1:
         with st.container():

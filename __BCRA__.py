@@ -47,7 +47,7 @@ def load_bcra_his(date):
     data=pd.concat([bcra,data],axis=0)
     datagdp=data.copy()
     #datagdp=pd.concat([datagdp,pbi],axis=1,ignore_index=True)
-    datagdp["PBI"]=S.pbi_men
+    datagdp["PBI"]=S.pbi_men*4
     for col in data.columns.to_list():
         datagdp[col]=datagdp[col]*100/datagdp["PBI"]
 
