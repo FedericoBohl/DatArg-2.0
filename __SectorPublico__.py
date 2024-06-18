@@ -409,7 +409,7 @@ def make_sect_pub():
             plot_deficit(S.escala_sectpub,S.data_sectpub)
     with c2:
         with st.container(border=True):
-            st.subheader('Endeudamiento')
+            st.subheader('Gastos/Ingresos Corrientes')
     c1,c2=st.columns(2)
     with c1:
         with st.container(border=True):
