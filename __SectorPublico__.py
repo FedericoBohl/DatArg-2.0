@@ -1,6 +1,6 @@
 from librerias import *
 
-#@st.cache_resource(show_spinner=False)
+@st.cache_resource(show_spinner=False)
 def load_data_sectpub(date):
     deficit=pd.read_csv("His Data/his-deficit.csv",delimiter=";")
     deficit['Unnamed: 0'] = pd.to_datetime(deficit.iloc[:, 0].values, format='%d/%m/%Y')
@@ -162,7 +162,7 @@ def load_datos_deuda(end) -> pd.DataFrame|None:
         del tp,letras,_,__,excel_data,xls,sheet_A1,sheet_A5
         return df,deuda_mon
 
-#@st.cache_data(show_spinner=False)
+@st.cache_data(show_spinner=False)
 def plot_deficit(escala,data:pd.DataFrame):
     t1,t2=st.tabs(['Superavit Financiero','Superavit Fiscal'])
     fig=go.Figure()
@@ -405,7 +405,7 @@ def make_sect_pub():
         S.data_sectpub=datatco
     else:
         S.data_sectpub=datagdp
-    st.write(S.data_sectpub.columns.to_list())
+    st.write(S.data_sectpub)
     c1,c2=st.columns(2)
     with c1:
         with st.container():
