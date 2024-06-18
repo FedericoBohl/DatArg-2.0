@@ -296,7 +296,7 @@ def plot_deuda(data,type_plot):
             t1.plotly_chart(fig,use_container_width=True)
 
 def make_sect_pub():
-    load_data_sectpub()
+    load_data_sectpub(datetime.now().strftime("%Y%m%d"))
     c1,c2=st.columns((0.8,0.2))
     with c1:
         with st.container():
