@@ -182,7 +182,7 @@ def plot_deficit(escala,data:pd.DataFrame):
                         opacity=0.8
                         )
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),
-        barmode="stack",height=450, 
+        barmode="overlay",height=450, 
         legend=dict(
             orientation="h",
             yanchor="bottom",
@@ -406,7 +406,6 @@ def make_sect_pub():
     with c1:
         with st.container():
             st.subheader('Resultado Fiscal y Financiero')
-            st.dataframe(S.data_sectpub)
             plot_deficit(S.escala_sectpub,S.data_sectpub)
     with c2:
         with st.container():
