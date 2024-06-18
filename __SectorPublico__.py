@@ -219,18 +219,18 @@ def plot_deficit(escala,data:pd.DataFrame):
             bgcolor=white,
             opacity=0.8
             )
+    if escala=="***Millones de ARS***":
+        fig['layout']['yaxis']['title']='Gasto/Ingresos-Millones de ARS'
+        #fig['layout']['yaxis']['type']='log'
+        fig['layout']['yaxis2']['title']='Superávit/Déficit-Millones de ARS'
+        #fig['layout']['yaxis2']['type']='log'
+    elif escala=="***Millones de USD-Oficial***":
+        fig['layout']['yaxis']['title']='Gasto/Ingresos-Millones de USD-TC Oficial'
+        fig['layout']['yaxis2']['title']='Superávit/Déficit-Millones de USD-TC Oficial'
+    else:
+        fig['layout']['yaxis']['title']='Gasto/Ingresos-PP del PBI'
+        fig['layout']['yaxis2']['title']='Superávit/Déficit-PP del PBI'
 
-    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0.2,height=450,legend=dict(
-                                    orientation="h",
-                                    yanchor="bottom",
-                                    y=1.02,
-                                    xanchor="right",
-                                    x=1,
-                                    bordercolor='black',
-                                    borderwidth=2),
-                                    yaxis=dict(showgrid=False, zeroline=True, showline=True),
-                                    yaxis2=dict(showgrid=False, zeroline=True, showline=True)
-                                )
     t2.plotly_chart(fig,use_container_width=True)
 
 @st.cache_data(show_spinner=False)
