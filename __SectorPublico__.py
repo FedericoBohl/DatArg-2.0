@@ -196,7 +196,7 @@ def plot_deficit(escala,data:pd.DataFrame):
     )
     if escala=="***Millones de ARS***":
         fig['layout']['yaxis']['title']='Millones de ARS'
-        fig['layout']['yaxis']['type']='log'
+        #fig['layout']['yaxis']['type']='log'
     elif escala=="***Millones de USD-Oficial***":
         fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
@@ -232,9 +232,9 @@ def plot_deficit(escala,data:pd.DataFrame):
                                 )
     if escala=="***Millones de ARS***":
         fig['layout']['yaxis']['title']='Gasto/Ingresos-Millones de ARS'
-        fig['layout']['yaxis']['type']='log'
+        #fig['layout']['yaxis']['type']='log'
         fig['layout']['yaxis2']['title']='Superávit/Déficit-Millones de ARS'
-        fig['layout']['yaxis2']['type']='log'
+        #fig['layout']['yaxis2']['type']='log'
 
     elif escala=="***Millones de USD-Oficial***":
         fig['layout']['yaxis']['title']='Gasto/Ingresos-Millones de USD-TC Oficial'
