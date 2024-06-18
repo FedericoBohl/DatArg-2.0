@@ -206,7 +206,7 @@ def plot_deficit(escala,data:pd.DataFrame):
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=data.index, y=data["Superavit Primario"], name="Resultado Primario", marker_color=black,line=dict(width=3)), secondary_y=True)
     fig.add_trace(go.Bar(x=data.index, y=data["Ingresos"], name="Ingresos", marker_color=green), secondary_y=False)
-    fig.add_trace(go.Bar(x=data.index, y=data["Gastos"], name="Gastos", marker_color=red), secondary_y=False)
+    fig.add_trace(go.Bar(x=data.index, y=data["Gastos"].to_list()*(-1), name="Gastos", marker_color=red), secondary_y=False)
 
     fig.add_hline(y=0,line_dash="dot",secondary_y=True)
     fig.add_annotation(text="Déficit 0",
