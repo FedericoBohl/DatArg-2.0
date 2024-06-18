@@ -405,7 +405,7 @@ def make_sect_pub():
         S.data_sectpub=datatco
     else:
         S.data_sectpub=datagdp
-
+    st.write(S.data_sectpub.columns.to_list())
     c1,c2=st.columns(2)
     with c1:
         with st.container():
