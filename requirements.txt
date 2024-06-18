@@ -5,7 +5,7 @@ requests==2.31.0
 numpy==1.26.2
 urllib3==2.1.0
 pytz==2023.3.post1
-plotly
+plotly==5.22.0
 fredapi
 numpy
 bs4
