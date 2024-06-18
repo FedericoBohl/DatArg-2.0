@@ -168,7 +168,7 @@ def plot_deficit(escala,data:pd.DataFrame):
     fig=go.Figure()
     fig.add_trace(go.Scatter(x=data.index,y=data["Superavit Financiero"],name="Resultado Financiero",line=dict(width=3),marker_color=black))
     fig.add_trace(go.Bar(x=data.index,y=data["Superavit Primario"],name="Superavit Primario",marker_color=olive))
-    fig.add_trace(go.Bar(x=data.index,y=-data["Intereses de Deuda"],name="Intereses de deuda",marker_color=teal))
+    fig.add_trace(go.Bar(x=data.index,y=data["Intereses de Deuda"],name="Intereses de deuda",marker_color=teal))
     fig.add_hline(y=0,line_dash="dot",secondary_y=True)
     fig.add_annotation(text="Déficit 0",
                     xref="paper", yref="paper",
@@ -206,7 +206,7 @@ def plot_deficit(escala,data:pd.DataFrame):
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=data.index, y=data["Superavit Primario"], name="Resultado Primario", marker_color=black,line=dict(width=3)), secondary_y=True)
     fig.add_trace(go.Bar(x=data.index, y=data["Ingresos"], name="Ingresos", marker_color=green,legendgroup='1'), secondary_y=False)
-    fig.add_trace(go.Bar(x=data.index, y=-1*data["Gastos"], name="Gastos", marker_color=red,legendgroup='2'), secondary_y=False)
+    fig.add_trace(go.Bar(x=data.index, y=-data["Gastos"], name="Gastos", marker_color=red,legendgroup='2'), secondary_y=False)
 
     fig.add_hline(y=0,line_dash="dot",secondary_y=True)
     fig.add_annotation(text="Déficit 0",
