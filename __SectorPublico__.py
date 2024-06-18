@@ -166,9 +166,9 @@ def load_datos_deuda(end) -> pd.DataFrame|None:
 def plot_deficit(escala,data):
     t1,t2=st.tabs(['Superavit Financiero','Superavit Fiscal'])
     fig=go.Figure()
-    fig.add_trace(go.Scatter(x=data.index,y=data["Superavit Financiero"],name="Resultado Financiero",line=dict(width=3),marker_color=black))
-    fig.add_trace(go.Bar(x=data.index,y=data["Superavit Primario"],name="Superavit Primario",marker_color=olive))
-    fig.add_trace(go.Bar(x=data.index,y=-data["Intereses de Deuda"],name="Intereses de deuda",marker_color=teal))
+    fig.add_trace(go.Scatter(x=data.index,y=data[" Superavit Financiero"],name="Resultado Financiero",line=dict(width=3),marker_color=black))
+    fig.add_trace(go.Bar(x=data.index,y=data[" Superavit Primario"],name="Superavit Primario",marker_color=olive))
+    fig.add_trace(go.Bar(x=data.index,y=-data[" Intereses de Deuda"],name="Intereses de deuda",marker_color=teal))
     fig.add_hline(y=0,line_dash="dot",secondary_y=True)
     fig.add_annotation(text="Déficit 0",
                     xref="paper", yref="paper",
@@ -204,9 +204,9 @@ def plot_deficit(escala,data):
     t1.plotly_chart(fig,use_container_width=True)
 
     fig = make_subplots(specs=[[{"secondary_y": True}]])
-    fig.add_trace(go.Scatter(x=data.index, y=data["Superavit Primario"], name="Resultado Primario", marker_color=black,line=dict(width=3)), secondary_y=True)
-    fig.add_trace(go.Bar(x=data.index, y=-data["Gastos"], name="Gastos", marker_color=red), secondary_y=False)
-    fig.add_trace(go.Bar(x=data.index, y=data["Ingresos"], name="Ingresos", marker_color=green), secondary_y=False)
+    fig.add_trace(go.Scatter(x=data.index, y=data[" Superavit Primario"], name="Resultado Primario", marker_color=black,line=dict(width=3)), secondary_y=True)
+    fig.add_trace(go.Bar(x=data.index, y=-data[" Gastos"], name="Gastos", marker_color=red), secondary_y=False)
+    fig.add_trace(go.Bar(x=data.index, y=data[" Ingresos"], name="Ingresos", marker_color=green), secondary_y=False)
     fig.add_hline(y=0,line_dash="dot",secondary_y=True)
     fig.add_annotation(text="Déficit 0",
             xref="paper", yref="paper",
@@ -410,7 +410,7 @@ def make_sect_pub():
     with c1:
         with st.container():
             st.subheader('Resultado Fiscal y Financiero')
-            st.dataframe(S.data_sectpub[' Superavit Financiero'])
+            st.dataframe(S.data_sectpub['Superavit Financiero'])
             plot_deficit(S.escala_sectpub,S.data_sectpub)
     with c2:
         with st.container():
