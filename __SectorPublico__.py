@@ -168,7 +168,7 @@ def plot_deficit(escala,data:pd.DataFrame):
     fig=go.Figure()
     fig.add_trace(go.Scatter(x=data.index,y=data["Superavit Financiero"],name="Resultado Financiero",line=dict(width=3),marker_color=black))
     fig.add_trace(go.Bar(x=data.index,y=data["Superavit Primario"],name="Superavit Primario",marker_color=olive))
-    #fig.add_trace(go.Bar(x=data.index,y=-data["Intereses de Deuda"],name="Intereses de deuda",marker_color=teal))
+    fig.add_trace(go.Bar(x=data.index,y=-data["Intereses de Deuda"],name="Intereses de deuda",marker_color=teal))
     fig.add_hline(y=0,line_dash="dot",secondary_y=True)
     fig.add_annotation(text="Déficit 0",
                     xref="paper", yref="paper",
@@ -219,17 +219,6 @@ def plot_deficit(escala,data:pd.DataFrame):
             bgcolor=white,
             opacity=0.8
             )
-    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0.2,height=450,legend=dict(
-                                    orientation="h",
-                                    yanchor="bottom",
-                                    y=1.02,
-                                    xanchor="right",
-                                    x=1,
-                                    bordercolor='black',
-                                    borderwidth=2),
-                                    yaxis=dict(showgrid=False, zeroline=True, showline=True),
-                                    yaxis2=dict(showgrid=False, zeroline=True, showline=True)
-                                )
     if escala=="***Millones de ARS***":
         fig['layout']['yaxis']['title']='Gasto/Ingresos-Millones de ARS'
         #fig['layout']['yaxis']['type']='log'
@@ -243,7 +232,17 @@ def plot_deficit(escala,data:pd.DataFrame):
     else:
         fig['layout']['yaxis']['title']='Gasto/Ingresos-PP del PBI'
         fig['layout']['yaxis2']['title']='Superávit/Déficit-PP del PBI'
-
+    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0.2,height=450,legend=dict(
+                                    orientation="h",
+                                    yanchor="bottom",
+                                    y=1.02,
+                                    xanchor="right",
+                                    x=1,
+                                    bordercolor='black',
+                                    borderwidth=2),
+                                    yaxis=dict(showgrid=False, zeroline=True, showline=True),
+                                    yaxis2=dict(showgrid=False, zeroline=True, showline=True)
+                                )
     t2.plotly_chart(fig,use_container_width=True)
 
 @st.cache_data(show_spinner=False)
