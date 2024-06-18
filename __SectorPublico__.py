@@ -410,7 +410,7 @@ def make_sect_pub():
     with c1:
         with st.container():
             st.subheader('Resultado Fiscal y Financiero')
-            st.dataframe(S.data_sectpub["Superavit Financiero"])
+            st.dataframe(S.data_sectpub.columns)
             plot_deficit(S.escala_sectpub,S.data_sectpub)
     with c2:
         with st.container():
