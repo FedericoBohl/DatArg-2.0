@@ -168,7 +168,7 @@ def plot_deficit(escala,data:pd.DataFrame):
     fig=go.Figure()
     fig.add_trace(go.Scatter(x=data.index,y=data["Superavit Financiero"],name="Resultado Financiero",line=dict(width=3),marker_color=black))
     fig.add_trace(go.Bar(x=data.index,y=data["Superavit Primario"],name="Superavit Primario",marker_color=olive))
-    fig.add_trace(go.Bar(x=data.index,y=-data["Intereses de Deuda"],name="Intereses de deuda",marker_color=teal))
+    fig.add_trace(go.Bar(x=data.index,y=data["Intereses de Deuda"],name="Intereses de deuda",marker_color=teal))
     fig.add_hline(y=0,line_dash="dot",secondary_y=True)
     fig.add_annotation(text="Déficit 0",
                     xref="paper", yref="paper",
@@ -182,7 +182,7 @@ def plot_deficit(escala,data:pd.DataFrame):
                         opacity=0.8
                         )
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),
-        barmode="overlay",height=450, 
+        barmode="stack",height=450, 
         legend=dict(
             orientation="h",
             yanchor="bottom",
