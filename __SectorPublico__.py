@@ -182,7 +182,7 @@ def plot_deficit(escala,data:pd.DataFrame):
                         opacity=0.8
                         )
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),
-        barmode="stack",height=450, 
+        barmode="overlay",height=450, 
         legend=dict(
             orientation="h",
             yanchor="bottom",
