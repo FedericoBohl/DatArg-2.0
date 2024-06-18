@@ -168,7 +168,7 @@ def plot_deficit(escala,data:pd.DataFrame):
     fig=go.Figure()
     fig.add_trace(go.Scatter(x=data.index,y=data["Superavit Financiero"],name="Resultado Financiero",line=dict(width=3),marker_color=black))
     fig.add_trace(go.Bar(x=data.index,y=data["Superavit Primario"],name="Superavit Primario",marker_color=olive))
-    fig.add_trace(go.Bar(x=data.index,y=data["Intereses de Deuda"],name="Intereses de deuda",marker_color=teal))
+    fig.add_trace(go.Bar(x=data.index,y=-data["Intereses de Deuda"],name="Intereses de deuda",marker_color=teal))
     fig.add_hline(y=0,line_dash="dot",secondary_y=True)
     fig.add_annotation(text="Déficit 0",
                     xref="paper", yref="paper",
@@ -205,9 +205,8 @@ def plot_deficit(escala,data:pd.DataFrame):
 
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=data.index, y=data["Superavit Primario"], name="Resultado Primario", marker_color=black,line=dict(width=3)), secondary_y=True)
-    fig.add_trace(go.Bar(x=data.index, y=data["Ingresos"], name="Ingresos", marker_color=green,legendgroup='1'), secondary_y=False)
-    fig.add_trace(go.Bar(x=data.index, y=-data["Gastos"], name="Gastos", marker_color=red,legendgroup='2'), secondary_y=False)
-
+    fig.add_trace(go.Bar(x=data.index, y=data["Ingresos"], name="Ingresos", marker_color=green), secondary_y=False)
+    fig.add_trace(go.Bar(x=data.index, y=-data["Gastos"], name="Gastos", marker_color=red), secondary_y=False)
     fig.add_hline(y=0,line_dash="dot",secondary_y=True)
     fig.add_annotation(text="Déficit 0",
             xref="paper", yref="paper",
@@ -220,19 +219,7 @@ def plot_deficit(escala,data:pd.DataFrame):
             bgcolor=white,
             opacity=0.8
             )
-    if escala=="***Millones de ARS***":
-        fig['layout']['yaxis']['title']='Gasto/Ingresos-Millones de ARS'
-        #fig['layout']['yaxis']['type']='log'
-        fig['layout']['yaxis2']['title']='Superávit/Déficit-Millones de ARS'
-        #fig['layout']['yaxis2']['type']='log'
 
-    elif escala=="***Millones de USD-Oficial***":
-        fig['layout']['yaxis']['title']='Gasto/Ingresos-Millones de USD-TC Oficial'
-        fig['layout']['yaxis2']['title']='Superávit/Déficit-Millones de USD-TC Oficial'
-
-    else:
-        fig['layout']['yaxis']['title']='Gasto/Ingresos-PP del PBI'
-        fig['layout']['yaxis2']['title']='Superávit/Déficit-PP del PBI'
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0.2,height=450,legend=dict(
                                     orientation="h",
                                     yanchor="bottom",
