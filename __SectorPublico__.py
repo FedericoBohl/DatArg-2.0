@@ -507,7 +507,7 @@ def plot_ingresos_gastos(data,escala):
 
 
 def make_sect_pub():
-    deficit,datagdp,datatco,endeudamiento,endeudamientogdp,endeudamientotco=load_data_sectpub(datetime.now().strftime("%Y%m%d"))
+    deficit,datagdp,datatco,endeudamiento,endeudamientogdp,endeudamientotco,corr,corrgdp,corrtco=load_data_sectpub(datetime.now().strftime("%Y%m%d"))
     c1,c2=st.columns((0.8,0.2))
     with c1:
         with st.container(border=True):
@@ -528,16 +528,25 @@ def make_sect_pub():
     endeudamientogdp.index=endeudamientogdp.index.strftime('%b-%Y')
     endeudamientotco=endeudamientotco.loc[f"{S.start_sectpub}":]
     endeudamientotco.index=endeudamientotco.index.strftime('%b-%Y')
+    corr=corr.loc[f"{S.start_sectpub}":]
+    corr.index=corr.index.strftime('%b-%Y')
+    corrgdp=corrgdp.loc[f"{S.start_sectpub}":]
+    corrgdp.index=corrgdp.index.strftime('%b-%Y')
+    corrtco=corrtco.loc[f"{S.start_sectpub}":]
+    corrtco.index=corrtco.index.strftime('%b-%Y')
 
     if S.escala_sectpub=="***Millones de ARS***":
         S.data_sectpub=deficit
         S.endeudamiento=endeudamiento
+        S.corr=corr
     elif S.escala_sectpub=="***Millones de USD-Oficial***":
         S.data_sectpub=datatco
         S.endeudamiento=endeudamientotco
+        S.corr=corrtco
     else:
         S.data_sectpub=datagdp
         S.endeudamiento=endeudamientogdp
+        S.corr=corrgdp
     c1,c2=st.columns(2)
     with c1:
         with st.container(border=True):
@@ -546,6 +555,7 @@ def make_sect_pub():
     with c2:
         with st.container(border=True):
             st.subheader('Gastos/Ingresos Corrientes')
+            plot_ingresos_gastos(S.corr,S.escala_sectpub)
     c1,c2=st.columns(2)
     with c1:
         with st.container(border=True):
