@@ -18,7 +18,7 @@ def load_data_sectpub(date):
     data.reindex(columns=deficit.columns)
     data=pd.concat([deficit,data],axis=0)
     datagdp=data.copy().iloc[48:]
-    #datagdp=pd.concat([datagdp,pbi],axis=1,ignore_index=True)
+
     datagdp["PBI"]=S.pbi_men
     for col in data.columns.to_list():
         datagdp[col]=datagdp.rolling(12).sum()[col]*100/(datagdp["PBI"]*4)
@@ -27,7 +27,36 @@ def load_data_sectpub(date):
     datatco['TC']=S.TC
     for col in data.columns.to_list():
         datatco[col]=datatco[col]/datatco["TC"]
-    return data, datagdp.dropna(), datatco.dropna()
+    ################## ENDEUDAMIENTO ##############################
+    endeudamiento_his=pd.read_csv("His Data/his-endeudamiento.csv",delimiter=";")
+    endeudamiento_his['Unnamed: 0'] = pd.to_datetime(endeudamiento_his.iloc[:, 0].values, format='%Y-%m-%d')
+    endeudamiento_his.set_index('Unnamed: 0', inplace=True)
+    ids=["379.9_FTES_FIN_E017__47_62",
+        "379.9_FTES_FIN_E017__49_20",
+        "379.9_AP_FIN_AMO017__50_49",
+        "379.9_AP_FIN_AMO017__52_70"
+        ]
+    cols=["Endeudamiento ARS","Endeudamiento USD","Amort ARS","Amort USD"]
+    endeudamiento_cur=get_data(ids,start_date="2024-01-01",col_list=cols)
+    endeudamiento_cur.index = pd.to_datetime(endeudamiento_cur.index, format='%Y-%m-%d')
+    endeudamiento_cur.columns=endeudamiento_his.columns
+    endeudamiento_cur.reindex(columns=endeudamiento_his.columns)
+    endeudamiento_cur=pd.concat([endeudamiento_his,endeudamiento_cur],axis=0)
+    endeudamiento_cur['ARS']=endeudamiento_cur['Endeudamiento ARS']-endeudamiento_cur['Amort ARS']
+    endeudamiento_cur['USD']=endeudamiento_cur['Endeudamiento USD']-endeudamiento_cur['Amort USD']
+    endeudamiento_cur['Total']=endeudamiento_cur['ARS']+endeudamiento_cur['USD']
+    endeudamiento_curgdp=endeudamiento_cur.copy().iloc[48:]
+
+    endeudamiento_curgdp["PBI"]=S.pbi_men
+    for col in endeudamiento_cur.columns.to_list():
+        endeudamiento_curgdp[col]=endeudamiento_curgdp.rolling(12).sum()[col]*100/(datagdp["PBI"]*4)
+    
+    endeudamientotco=endeudamiento_cur.copy().iloc[48:]
+    endeudamientotco['TC']=S.TC
+    for col in endeudamiento_cur.columns.to_list():
+        endeudamientotco[col]=endeudamientotco[col]/endeudamientotco["TC"]
+
+    return data, datagdp.dropna(), datatco.dropna(),endeudamiento_cur, endeudamiento_curgdp.dropna(), endeudamientotco.dropna()
 
 @st.cache_resource(show_spinner=False)
 def load_data_map(end):
@@ -196,7 +225,7 @@ def plot_deficit(escala,data:pd.DataFrame):
     )
     if escala=="***Millones de ARS***":
         fig['layout']['yaxis']['title']='Millones de ARS'
-        #fig['layout']['yaxis']['type']='log'
+        fig['layout']['yaxis']['type']='log'
     elif escala=="***Millones de USD-Oficial***":
         fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
@@ -221,9 +250,9 @@ def plot_deficit(escala,data:pd.DataFrame):
             )
     if escala=="***Millones de ARS***":
         fig['layout']['yaxis']['title']='Gasto/Ingresos-Millones de ARS'
-        #fig['layout']['yaxis']['type']='log'
+        fig['layout']['yaxis']['type']='log'
         fig['layout']['yaxis2']['title']='Superávit/Déficit-Millones de ARS'
-        #fig['layout']['yaxis2']['type']='log'
+        fig['layout']['yaxis2']['type']='log'
     elif escala=="***Millones de USD-Oficial***":
         fig['layout']['yaxis']['title']='Gasto/Ingresos-Millones de USD-TC Oficial'
         fig['layout']['yaxis2']['title']='Superávit/Déficit-Millones de USD-TC Oficial'
@@ -380,8 +409,35 @@ def plot_deuda(data,type_plot):
             fig['layout']['yaxis']['title']='Millones de USD (Fecha de Pago Efectivo)'
             t1.plotly_chart(fig,use_container_width=True)
 
+@st.cache_data(show_spinner=False)
+def plot_endeudamiento(data,escala):
+    fig=go.Figure()
+    fig.add_trace(go.Scatter(x=data.index,y=data['Total'],name='Endeudamiento Total',marker_color=black))
+    fig.add_trace(go.Bar(x=data.index,y=data['ARS'],name='Endeudamiento en Moneda Local',marker_color='#C80036'))
+    fig.add_trace(go.Bar(x=data.index,y=data['USD'],name='Endeudamiento en Moneda Extranjera',marker_color='#AF47D2'))
+    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0.2,height=450,legend=dict(
+                                    orientation="h",
+                                    yanchor="bottom",
+                                    y=1.02,
+                                    xanchor="right",
+                                    x=1,
+                                    bordercolor=black,
+                                    borderwidth=2
+                                ),yaxis=dict(showgrid=False, zeroline=True, showline=True))
+    if escala=="***Millones de ARS***":
+        fig['layout']['yaxis']['title']='Millones de ARS'
+        fig['layout']['yaxis']['type']='log'
+    elif escala=="***Millones de USD-Oficial***":
+        fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
+    else:
+        fig['layout']['yaxis']['title']='PP del PBI'
+    st.plotly_chart(fig,use_container_width=True)
+
+
+    st.caption('Los datos corresponden al endeudamiento en cada moneda neto de lo amortizado en el mes en cuestión. Se ignora el incremento de otros pasivos.')
+
 def make_sect_pub():
-    deficit,datagdp,datatco=load_data_sectpub(datetime.now().strftime("%Y%m%d"))
+    deficit,datagdp,datatco,endeudamiento,endeudamientogdp,endeudamientotco=load_data_sectpub(datetime.now().strftime("%Y%m%d"))
     c1,c2=st.columns((0.8,0.2))
     with c1:
         with st.container(border=True):
@@ -396,12 +452,22 @@ def make_sect_pub():
     datagdp.index=datagdp.index.strftime('%b-%Y')
     datatco=datatco.loc[f"{S.start_sectpub}":]
     datatco.index=datatco.index.strftime('%b-%Y')
+    endeudamiento=endeudamiento.loc[f"{S.start_sectpub}":]
+    endeudamiento.index=endeudamiento.index.strftime('%b-%Y')
+    endeudamientogdp=endeudamientogdp.loc[f"{S.start_sectpub}":]
+    endeudamientogdp.index=endeudamientogdp.index.strftime('%b-%Y')
+    endeudamientotco=endeudamientotco.loc[f"{S.start_sectpub}":]
+    endeudamientotco.index=endeudamientotco.index.strftime('%b-%Y')
+
     if S.escala_sectpub=="***Millones de ARS***":
         S.data_sectpub=deficit
+        S.endeudamiento=endeudamiento
     elif S.escala_sectpub=="***Millones de USD-Oficial***":
         S.data_sectpub=datatco
+        S.endeudamiento=endeudamientotco
     else:
         S.data_sectpub=datagdp
+        S.endeudamiento=endeudamientogdp
     c1,c2=st.columns(2)
     with c1:
         with st.container(border=True):
@@ -416,7 +482,7 @@ def make_sect_pub():
             st.subheader('Deuda Pública')
             deuda,deuda_mon=load_datos_deuda(2)
             st.radio('Deuda Pública',options=['Endeudamiento','Composición de la Deuda Bruta','Pagos de Deuda por Moneda'],label_visibility='collapsed',horizontal=False,key='plot_deuda')
-            plot_deuda(deuda,S.plot_deuda) if S.plot_deuda=='Composición de la Deuda Bruta' else plot_deuda(deuda_mon,S.plot_deuda)
+            plot_deuda(deuda,S.plot_deuda) if S.plot_deuda=='Composición de la Deuda Bruta' else (plot_deuda(deuda_mon,S.plot_deuda) if S.plot_deuda=='Pagos de Deuda por Moneda' else plot_endeudamiento(S.endeudamiento,S.escala_sectpub))
     with c2:
         with st.container(border=True):
             st.subheader('Déficit Provincial')
