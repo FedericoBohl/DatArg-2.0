@@ -51,7 +51,7 @@ def load_data_sectpub(date):
     for col in endeudamiento_cur.columns.to_list():
         endeudamiento_curgdp[col]=endeudamiento_curgdp.rolling(12).sum()[col]*100/(datagdp["PBI"]*4)
     
-    endeudamientotco=endeudamiento_cur.copy().iloc[48:]
+    endeudamientotco=endeudamiento_cur.copy().iloc[47:]
     endeudamientotco['TC']=S.TC
     for col in endeudamiento_cur.columns.to_list():
         endeudamientotco[col]=endeudamientotco[col]/endeudamientotco["TC"]
