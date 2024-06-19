@@ -49,14 +49,58 @@ def load_data_sectpub(date):
 
     endeudamiento_curgdp["PBI"]=S.pbi_men[:len(endeudamiento_curgdp)]
     for col in endeudamiento_cur.columns.to_list():
-        endeudamiento_curgdp[col]=endeudamiento_curgdp.rolling(12).sum()[col]*100/(datagdp["PBI"]*4)
+        endeudamiento_curgdp[col]=endeudamiento_curgdp.rolling(12).sum()[col]*100/(endeudamiento_curgdp["PBI"]*4)
     
     endeudamientotco=endeudamiento_cur.copy().iloc[47:]
     endeudamientotco['TC']=S.TC
     for col in endeudamiento_cur.columns.to_list():
         endeudamientotco[col]=endeudamientotco[col]/endeudamientotco["TC"]
 
-    return data.rolling(12).sum().dropna(), datagdp.dropna(), datatco.rolling(12).sum().dropna(),endeudamiento_cur.rolling(12).sum().dropna(), endeudamiento_curgdp.dropna(), endeudamientotco.rolling(12).sum().dropna()
+    ############################ GASTOS/INGRESOS ###############################################
+    corr_his=pd.read_csv("His Data/his-ingresos-gastos.csv",delimiter=";")
+    corr_his['Unnamed: 0'] = pd.to_datetime(corr_his.iloc[:, 0].values, format='%Y-%m-%d')
+    corr_his.set_index('Unnamed: 0', inplace=True)
+    ids=["379.9_GTOS_CORR_017__14_1",
+        "379.9_GTOS_CORR_017__49_26",
+        "379.9_GTOS_CORR_017__51_65",
+        "379.9_GTOS_CORR_017__43_4",
+        "379.9_GTOS_CORR_017__35_92",
+        "379.9_GTOS_CORR_017_3_0_M_50_79",
+        "379.9_GTOS_CORR_017_5_0_M_51_42",
+        "379.9_GTOS_CORR_017_7_0_M_38_20",
+        "379.9_GTOS_CORR_017_8_0_M_37_3",
+        "379.9_GTOS_CORR_017__34_72",
+        "379.9_ING_CORR_2017__13_2",
+        "379.9_ING_CORR_I017__29_10",
+        "379.9_ING_CORR_A017__37_57",
+        "379.9_ING_CORR_I017__32_24",
+        "379.9_ING_CORR_T017__25_70"
+        ]
+    cols['Gastos Corrientes','Remuneraciones','Bienes y Servicios','Otros Gastos de Consumo',"Gasto Seguridad Social",
+         "Trans Sect Priv","Trans Provincias y CABA","Trans Universidades","Trans Otras","Trans Sect Ext",
+         'Ingresos Corrientes','Ingresos Tributarios','Ingresos Seguridad Social','Ingresos No Tributarios',
+         'Ingresos Transferencias Corrientes']
+    corr=get_data(ids,start_date="2024-01-01",col_list=cols)
+    corr.index = pd.to_datetime(corr.index, format='%Y-%m-%d')
+    corr['Gastos en consumo y operación']=corr['Remuneraciones']+corr['Bienes y Servicios']+corr['Otros Gastos de Consumo']
+    corr['Gastos Transferencias Corrientes']=corr['Trans Sect Priv']+corr['Trans Provincias y CABA']+corr['Trans Universidades']+corr['Trans Otras']+corr['Trans Sect Ext']
+    corr=corr.drop(columns=['Remuneraciones','Bienes y Servicios','Otros Gastos de Consumo',"Trans Sect Priv","Trans Provincias y CABA","Trans Universidades","Trans Otras","Trans Sect Ext"])
+    corr['Otros Gastos']=corr['Gastos Corrientes']-corr['Gastos en consumo y operación']-corr['Gastos Transferencias Corrientes']-corr['Gasto Seguridad Social']
+    corr['Otros Ingresos']=corr['Ingresos Corrientes']-corr['Ingresos Tributarios']-corr['Ingresos Seguridad Social']-corr['Ingresos No Tributarios']-corr['Ingresos Transferencias Corrientes']
+    corr.reindex(columns=corr_his.columns)
+    corr=pd.concat([corr_his,corr],axis=0)
+
+    corrgdp=corr.copy().iloc[48:]
+    corrgdp["PBI"]=S.pbi_men[:len(corrgdp)]
+    for col in corr.columns.to_list():
+        corrgdp[col]=corrgdp.rolling(12).sum()[col]*100/(corrgdp["PBI"]*4)
+    
+    corrtco=corr.copy().iloc[47:]
+    corrtco['TC']=S.TC
+    for col in corr.columns.to_list():
+        corrtco[col]=corrtco[col]/corrtco["TC"]
+    
+    return data.rolling(12).sum().dropna(), datagdp.dropna(), datatco.rolling(12).sum().dropna(),endeudamiento_cur.rolling(12).sum().dropna(), endeudamiento_curgdp.dropna(), endeudamientotco.rolling(12).sum().dropna(),corr.rolling(12).sum().dropna(),corrgdp.dropna(),corrtco.rolling(12).sum().dropna()
 
 @st.cache_resource(show_spinner=False)
 def load_data_map(end):
@@ -431,6 +475,36 @@ def plot_endeudamiento(data,escala):
 
 
     st.caption('Los datos corresponden al endeudamiento en cada moneda neto de lo amortizado en el mes en cuestión. Se ignora el incremento de otros pasivos.')
+
+@st.cache_data(show_spinner=False)
+def plot_ingresos_gastos(data,escala):
+    t1,t2=st.tabs(['Ingresos','Gastos'])
+    st.caption('Los datos son el resultado anual acumulado de cada mes.')
+
+    fig=go.Figure()
+    fig.add_trace(go.Scatter(x=data.index,y=data['Ingresos Corrientes'],name='Total',line=dict(width=4)))
+    fig.add_trace(go.Bar(x=data.index,y=data['Ingresos Tributarios'],name='Ingresos Tributarios'))
+    fig.add_trace(go.Bar(x=data.index,y=data['Ingresos Seguridad Social'],name='Aport. a la Seg. Social'))
+    fig.add_trace(go.Bar(x=data.index,y=data['Ingresos No Tributarios'],name='Ingresos No Tributarios'))
+    fig.add_trace(go.Bar(x=data.index,y=data['Ingresos Transferencias Corrientes'],name='Trans. Corrientes'))
+    fig.add_trace(go.Bar(x=data.index,y=data['Otros Ingresos'],name='Otros'))
+    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0.2,height=450,legend=dict(
+                                    orientation="h",
+                                    yanchor="bottom",
+                                    y=1.02,
+                                    xanchor="right",
+                                    x=1,
+                                    bordercolor=black,
+                                    borderwidth=2
+                                ),yaxis=dict(showgrid=False, zeroline=True, showline=True))
+    if escala=="***Millones de ARS***":
+        fig['layout']['yaxis']['title']='Millones de ARS'
+    elif escala=="***Millones de USD-Oficial***":
+        fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
+    else:
+        fig['layout']['yaxis']['title']='PP del PBI'
+    t1.plotly_chart(fig,use_container_width=True)
+
 
 def make_sect_pub():
     deficit,datagdp,datatco,endeudamiento,endeudamientogdp,endeudamientotco=load_data_sectpub(datetime.now().strftime("%Y%m%d"))
