@@ -87,11 +87,8 @@ def load_data_sectpub(date):
     corr=corr.drop(columns=['Remuneraciones','Bienes y Servicios','Otros Gastos de Consumo',"Trans Sect Priv","Trans Provincias y CABA","Trans Universidades","Trans Otras","Trans Sect Ext"])
     corr['Otros Gastos']=corr['Gastos Corrientes']-corr['Gastos en consumo y operación']-corr['Gastos Transferencias Corrientes']-corr['Gasto Seguridad Social']
     corr['Otros Ingresos']=corr['Ingresos Corrientes']-corr['Ingresos Tributarios']-corr['Ingresos Seguridad Social']-corr['Ingresos No Tributarios']-corr['Ingresos Transferencias Corrientes']
-    st.dataframe(corr)
     corr.reindex(columns=corr_his.columns)
-    st.dataframe(corr)
     corr=pd.concat([corr_his,corr],axis=0)
-    st.dataframe(corr)
     corrgdp=corr.copy().iloc[48:]
     corrgdp["PBI"]=S.pbi_men[:len(corrgdp)]
     for col in corr.columns.to_list():
@@ -484,12 +481,12 @@ def plot_ingresos_gastos(data,escala):
     st.caption('Los datos son el resultado anual acumulado de cada mes.')
 
     fig=go.Figure()
-    fig.add_trace(go.Scatter(x=data.index,y=data['Ingresos Corrientes'],name='Total',line=dict(width=4)))
-    fig.add_trace(go.Bar(x=data.index,y=data['Ingresos Tributarios'],name='Ingresos Tributarios'))
-    fig.add_trace(go.Bar(x=data.index,y=data['Ingresos Seguridad Social'],name='Aport. a la Seg. Social'))
-    fig.add_trace(go.Bar(x=data.index,y=data['Ingresos No Tributarios'],name='Ingresos No Tributarios'))
-    fig.add_trace(go.Bar(x=data.index,y=data['Ingresos Transferencias Corrientes'],name='Trans. Corrientes'))
-    fig.add_trace(go.Bar(x=data.index,y=data['Otros Ingresos'],name='Otros'))
+    fig.add_trace(go.Scatter(x=data.index,y=data['Ingresos Corrientes'],name='Total',line=dict(width=4,dash='dashdot'),marker_color='#06D001'))
+    fig.add_trace(go.Bar(x=data.index,y=data['Ingresos Tributarios'],name='Ing. Tributarios',marker_color='#F3FF90'))
+    fig.add_trace(go.Bar(x=data.index,y=data['Ingresos Seguridad Social'],name='Aport. a la Seg. Social',marker_color='#9BEC00'))
+    fig.add_trace(go.Bar(x=data.index,y=data['Ingresos No Tributarios'],name='Ing. No Tributarios',marker_color='#006769'))
+    fig.add_trace(go.Bar(x=data.index,y=data['Ingresos Transferencias Corrientes'],name='Trans. Corrientes',marker_color='#059212'))
+    fig.add_trace(go.Bar(x=data.index,y=data['Otros Ingresos'],name='Otros',marker_color='#059212'))
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0.2,height=450,legend=dict(
                                     orientation="h",
                                     yanchor="bottom",
@@ -501,13 +498,36 @@ def plot_ingresos_gastos(data,escala):
                                 ),yaxis=dict(showgrid=False, zeroline=True, showline=True))
     if escala=="***Millones de ARS***":
         fig['layout']['yaxis']['title']='Millones de ARS'
+        fig['layout']['yaxis']['type']='log'
     elif escala=="***Millones de USD-Oficial***":
         fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
     t1.plotly_chart(fig,use_container_width=True)
 
-
+    fig=go.Figure()
+    fig.add_trace(go.Scatter(x=data.index,y=data['Gastos Corrientes'],name='Total',line=dict(width=4,dash='dashdot'),marker_color='#8B322C'))
+    fig.add_trace(go.Bar(x=data.index,y=data['Gastos en consumo y operación'],name='Gtos. Consumo/Operación',marker_color='#FFC100'))
+    fig.add_trace(go.Bar(x=data.index,y=data['Gasto Seguridad Social'],name='Prestaciones Seg. Social',marker_color='#FF6500'))
+    fig.add_trace(go.Bar(x=data.index,y=data['Gastos Transferencias Corrientes'],name='Trans. Corrientes',marker_color='#C40C0C'))
+    fig.add_trace(go.Bar(x=data.index,y=data['Otros Gastos'],name='Otros',marker_color='#FFF5E1'))
+    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0.2,height=450,legend=dict(
+                                    orientation="h",
+                                    yanchor="bottom",
+                                    y=1.02,
+                                    xanchor="right",
+                                    x=1,
+                                    bordercolor=black,
+                                    borderwidth=2
+                                ),yaxis=dict(showgrid=False, zeroline=True, showline=True))
+    if escala=="***Millones de ARS***":
+        fig['layout']['yaxis']['title']='Millones de ARS'
+        fig['layout']['yaxis']['type']='log'
+    elif escala=="***Millones de USD-Oficial***":
+        fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
+    else:
+        fig['layout']['yaxis']['title']='PP del PBI'
+    t2.plotly_chart(fig,use_container_width=True)
 def make_sect_pub():
     deficit,datagdp,datatco,endeudamiento,endeudamientogdp,endeudamientotco,corr,corrgdp,corrtco=load_data_sectpub(datetime.now().strftime("%Y%m%d"))
     c1,c2=st.columns((0.8,0.2))
