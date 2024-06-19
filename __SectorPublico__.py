@@ -19,7 +19,7 @@ def load_data_sectpub(date):
     data=pd.concat([deficit,data],axis=0)
     datagdp=data.copy().iloc[48:]
 
-    datagdp["PBI"]=S.pbi_men
+    datagdp["PBI"]=S.pbi_men[:len(datagdp)]
     for col in data.columns.to_list():
         datagdp[col]=datagdp.rolling(12).sum()[col]*100/(datagdp["PBI"]*4)
     
@@ -226,7 +226,6 @@ def plot_deficit(escala,data:pd.DataFrame):
     )
     if escala=="***Millones de ARS***":
         fig['layout']['yaxis']['title']='Millones de ARS'
-        fig['layout']['yaxis']['type']='log'
     elif escala=="***Millones de USD-Oficial***":
         fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
@@ -251,9 +250,7 @@ def plot_deficit(escala,data:pd.DataFrame):
             )
     if escala=="***Millones de ARS***":
         fig['layout']['yaxis']['title']='Gasto/Ingresos-Millones de ARS'
-        fig['layout']['yaxis']['type']='log'
         fig['layout']['yaxis2']['title']='Superávit/Déficit-Millones de ARS'
-        fig['layout']['yaxis2']['type']='log'
     elif escala=="***Millones de USD-Oficial***":
         fig['layout']['yaxis']['title']='Gasto/Ingresos-Millones de USD-TC Oficial'
         fig['layout']['yaxis2']['title']='Superávit/Déficit-Millones de USD-TC Oficial'
@@ -427,7 +424,6 @@ def plot_endeudamiento(data,escala):
                                 ),yaxis=dict(showgrid=False, zeroline=True, showline=True))
     if escala=="***Millones de ARS***":
         fig['layout']['yaxis']['title']='Millones de ARS'
-        fig['layout']['yaxis']['type']='log'
     elif escala=="***Millones de USD-Oficial***":
         fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
