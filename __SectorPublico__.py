@@ -481,11 +481,11 @@ def plot_ingresos_gastos(data,escala):
     st.caption('Los datos son el resultado anual acumulado de cada mes.')
 
     fig=go.Figure()
-    fig.add_trace(go.Scatter(x=data.index,y=data['Ingresos Corrientes'],name='Total',line=dict(width=4,dash='dashdot'),marker_color='#06D001'))
-    fig.add_trace(go.Bar(x=data.index,y=data['Ingresos Tributarios'],name='Ing. Tributarios',marker_color='#F3FF90'))
+    fig.add_trace(go.Scatter(x=data.index,y=data['Ingresos Corrientes'],name='Total',line=dict(width=5),marker_color=black))
+    fig.add_trace(go.Bar(x=data.index,y=data['Ingresos Tributarios'],name='Ing. Tributarios',marker_color='#059212'))
     fig.add_trace(go.Bar(x=data.index,y=data['Ingresos Seguridad Social'],name='Aport. a la Seg. Social',marker_color='#9BEC00'))
     fig.add_trace(go.Bar(x=data.index,y=data['Ingresos No Tributarios'],name='Ing. No Tributarios',marker_color='#006769'))
-    fig.add_trace(go.Bar(x=data.index,y=data['Ingresos Transferencias Corrientes'],name='Trans. Corrientes',marker_color='#059212'))
+    fig.add_trace(go.Bar(x=data.index,y=data['Ingresos Transferencias Corrientes'],name='Trans. Corrientes',marker_color='#F3FF90'))
     fig.add_trace(go.Bar(x=data.index,y=data['Otros Ingresos'],name='Otros',marker_color='#059212'))
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0.2,height=450,legend=dict(
                                     orientation="h",
@@ -506,7 +506,7 @@ def plot_ingresos_gastos(data,escala):
     t1.plotly_chart(fig,use_container_width=True)
 
     fig=go.Figure()
-    fig.add_trace(go.Scatter(x=data.index,y=data['Gastos Corrientes'],name='Total',line=dict(width=4,dash='dashdot'),marker_color='#8B322C'))
+    fig.add_trace(go.Scatter(x=data.index,y=data['Gastos Corrientes'],name='Total',line=dict(width=5),marker_color=black))
     fig.add_trace(go.Bar(x=data.index,y=data['Gastos en consumo y operación'],name='Gtos. Consumo/Operación',marker_color='#FFC100'))
     fig.add_trace(go.Bar(x=data.index,y=data['Gasto Seguridad Social'],name='Prestaciones Seg. Social',marker_color='#FF6500'))
     fig.add_trace(go.Bar(x=data.index,y=data['Gastos Transferencias Corrientes'],name='Trans. Corrientes',marker_color='#C40C0C'))
