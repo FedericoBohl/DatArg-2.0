@@ -12,7 +12,7 @@ def make_sect_ext_web():
     c1,c2=st.columns(2)
     with c1.container(border=True):
         st.subheader('Balance de Pagos')
-        st.text('Suma Interanual')
+        st.caption('Suma Interanual')
     with c2.container(border=True):
         st.subheader('Balance Comercial - ToT + TCR')
         st.caption('El Tipo de Cambio es re-escalado por conveniencia visual con base Enero 2004 = 100.')
