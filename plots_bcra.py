@@ -163,7 +163,7 @@ def plot_fin_mon(escala,bcra: pd.DataFrame):
 def plot_varBM(escala,bcra:pd.DataFrame):
     st.markdown("<h3 style='text-align: center;'>Factores de variación de la Base Monetaria</h3>", unsafe_allow_html=True)
     roll=st.number_input("¿Suma Móvil de cuantos meses?",min_value=1,max_value=24,value=12,key="roll_bcra_bm")
-    bcra=bcra.rolling(roll).sum()[12:]#.dropna()
+    bcra=bcra.rolling(roll).sum()#[12:]#.dropna()
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=bcra.index,y=bcra["Var. BM"],name="Var. BM Total",line=dict(width=3.5),marker_color="#0B1623"))
     fig.add_trace(go.Bar(x=bcra.index,y=bcra["Neto compra divisas"],name="Neto-Compra de divisas",marker_color=cyan))
