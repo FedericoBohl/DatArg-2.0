@@ -19,7 +19,7 @@ def make_sect_ext_web():
     c1,c2=st.columns(2)
     with c1.container(border=True):
         st.subheader('Destino de las Expo/Importaciones')
-        c11.c12=st.columns(2)
+        c11,c12=st.columns(2)
         c11.number_input('Año',2004,2023,step=1)
         c12.radio('Destino expo/impo',label_visibility='collapsed',options=['Valor (USD)','Porcentaje del Total'])
         ex,im=st.tabs(['Exportaciones','Importaciones'])
