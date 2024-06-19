@@ -153,7 +153,7 @@ def load_data_map(end):
     'Provincia de Santa Cruz':'Santa Cruz',
     'Provincia de Santa Fe':'Santa Fe',
     'Provincia de Santiago del Estero':'Santiago del Estero',
-    'Provincia de Tierra del Fuego, Antártida e Islas del Atlántico Sur':'Tierra del Fuego',
+    'Provincia de Tierra del Fuego, Antártida e Islas del Atlántico Sur':'Tierra del Fuego, Antártida e Islas del Atlántico Sur',
     'Provincia de Tucumán':'Tucumán',
     'Provincia del Chaco':'Chaco',
     'Provincia del Chubut':'Chubut',
@@ -168,7 +168,7 @@ def load_data_map(end):
     df1['ubicacion_geografica_desc'] = df1['ubicacion_geografica_desc'].replace(provincias)
 
 
-    geo=json.load(open('ProvinciasArgentina.geojson', encoding='utf-8'))
+    geo=json.load(open('provincias.geojson', encoding='utf-8'))
     provincias_geo_df = pd.json_normalize(geo['features'])
     #provincias_geo_df['properties.nombre'] = 'Provincia de ' + provincias_geo_df['properties.nombre']
 
