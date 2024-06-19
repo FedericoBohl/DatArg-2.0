@@ -409,7 +409,7 @@ def plot_deuda(data,type_plot):
 @st.cache_data(show_spinner=False)
 def plot_endeudamiento(data,escala):
     fig=go.Figure()
-    fig.add_trace(go.Scatter(x=data.index,y=data['Total'],name='Endeudamiento Total',marker_color=black))
+    fig.add_trace(go.Scatter(x=data.index,y=data['Total'],name='Endeudamiento Total',marker_color=black,line=dict(width=4)))
     fig.add_trace(go.Bar(x=data.index,y=data['ARS'],name='Moneda Local',marker_color='#C80036'))
     fig.add_trace(go.Bar(x=data.index,y=data['USD'],name='Moneda Extranjera',marker_color='#AF47D2'))
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0.2,height=450,legend=dict(
