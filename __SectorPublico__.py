@@ -477,8 +477,8 @@ def make_sect_pub():
         with st.container(border=True):
             st.subheader('Deuda Pública')
             deuda,deuda_mon=load_datos_deuda(2)
-            st.radio('Deuda Pública',options=['Endeudamiento','Composición de la Deuda Bruta','Pagos de Deuda por Moneda'],label_visibility='collapsed',horizontal=False,key='plot_deuda')
-            plot_deuda(deuda,S.plot_deuda) if S.plot_deuda=='Composición de la Deuda Bruta' else (plot_deuda(deuda_mon,S.plot_deuda) if S.plot_deuda=='Pagos de Deuda por Moneda' else plot_endeudamiento(S.endeudamiento,S.escala_sectpub))
+            st.radio('Deuda Pública',options=['Endeudamiento Anual Acumulado','Composición de la Deuda Bruta','Pagos de Deuda por Moneda'],label_visibility='collapsed',horizontal=False,key='plot_deuda')
+            plot_deuda(deuda,S.plot_deuda) if S.plot_deuda=='Composición de la Deuda Bruta' else (plot_deuda(deuda_mon,S.plot_deuda) if S.plot_deuda=='Pagos de Deuda por Moneda' else plot_endeudamiento(S.endeudamiento.rolling(12).sum().dropna(),S.escala_sectpub))
     with c2:
         with st.container(border=True):
             st.subheader('Déficit Provincial')
