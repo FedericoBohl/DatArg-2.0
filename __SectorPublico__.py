@@ -457,10 +457,10 @@ def make_sect_pub():
 
     if S.escala_sectpub=="***Millones de ARS***":
         S.data_sectpub=deficit
-        S.endeudamiento=endeudamiento
+        S.endeudamiento=endeudamiento.rolling(12).sum().dropna()
     elif S.escala_sectpub=="***Millones de USD-Oficial***":
         S.data_sectpub=datatco
-        S.endeudamiento=endeudamientotco
+        S.endeudamiento=endeudamientotco.rolling(12).sum().dropna()
     else:
         S.data_sectpub=datagdp
         S.endeudamiento=endeudamientogdp
@@ -478,7 +478,7 @@ def make_sect_pub():
             st.subheader('Deuda Pública')
             deuda,deuda_mon=load_datos_deuda(2)
             st.radio('Deuda Pública',options=['Endeudamiento Anual Acumulado','Composición de la Deuda Bruta','Pagos de Deuda por Moneda'],label_visibility='collapsed',horizontal=False,key='plot_deuda')
-            plot_deuda(deuda,S.plot_deuda) if S.plot_deuda=='Composición de la Deuda Bruta' else (plot_deuda(deuda_mon,S.plot_deuda) if S.plot_deuda=='Pagos de Deuda por Moneda' else plot_endeudamiento(S.endeudamiento.rolling(12).sum().dropna(),S.escala_sectpub))
+            plot_deuda(deuda,S.plot_deuda) if S.plot_deuda=='Composición de la Deuda Bruta' else (plot_deuda(deuda_mon,S.plot_deuda) if S.plot_deuda=='Pagos de Deuda por Moneda' else plot_endeudamiento(S.endeudamiento,S.escala_sectpub))
     with c2:
         with st.container(border=True):
             st.subheader('Déficit Provincial')
