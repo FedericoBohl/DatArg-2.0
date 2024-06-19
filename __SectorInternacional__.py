@@ -268,7 +268,7 @@ def make_internacional_web():
         c1,c2=st.columns((0.6,0.4))
         with c1:
             fig=go.Figure()
-            fig.add_trace(x=pd.date_range('Jan-2020','Jun-2020'),y=[0,1,2,3,4,5])
+            fig.add_trace(go.Scatter(x=pd.date_range('Jan-2020','Jun-2020'),y=[0,1,2,3,4,5]))
             st.plotly_chart(fig)
         with c2:
             st.caption('Variaciónes Intermensuales !!')
