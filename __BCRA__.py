@@ -129,4 +129,6 @@ def make_BCRA_web():
         with st.container(border=True):
             plot_depositos(S.escala_bcra,S.data_bcra,tasas)
     with st.container(border=True):
-        plot_varBM(S.escala_bcra,S.data_bcra)
+        st.markdown("<h3 style='text-align: center;'>Factores de variación de la Base Monetaria</h3>", unsafe_allow_html=True)
+        st.number_input("¿Suma Móvil de cuantos meses?",min_value=1,max_value=24,value=12,key="roll_bcra_bm")
+        plot_varBM(S.escala_bcra,S.data_bcra,S.roll_bcra_bm)
