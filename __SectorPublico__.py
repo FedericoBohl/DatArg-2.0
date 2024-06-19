@@ -47,7 +47,6 @@ def load_data_sectpub(date):
     endeudamiento_cur['Total']=endeudamiento_cur['ARS']+endeudamiento_cur['USD']
     endeudamiento_curgdp=endeudamiento_cur.copy().iloc[48:]
 
-    st.dataframe(endeudamiento_curgdp)
     endeudamiento_curgdp["PBI"]=S.pbi_men[:len(endeudamiento_curgdp)]
     for col in endeudamiento_cur.columns.to_list():
         endeudamiento_curgdp[col]=endeudamiento_curgdp.rolling(12).sum()[col]*100/(datagdp["PBI"]*4)
@@ -411,8 +410,8 @@ def plot_deuda(data,type_plot):
 def plot_endeudamiento(data,escala):
     fig=go.Figure()
     fig.add_trace(go.Scatter(x=data.index,y=data['Total'],name='Endeudamiento Total',marker_color=black))
-    fig.add_trace(go.Bar(x=data.index,y=data['ARS'],name='Endeudamiento en Moneda Local',marker_color='#C80036'))
-    fig.add_trace(go.Bar(x=data.index,y=data['USD'],name='Endeudamiento en Moneda Extranjera',marker_color='#AF47D2'))
+    fig.add_trace(go.Bar(x=data.index,y=data['ARS'],name='Moneda Local',marker_color='#C80036'))
+    fig.add_trace(go.Bar(x=data.index,y=data['USD'],name='Moneda Extranjera',marker_color='#AF47D2'))
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0.2,height=450,legend=dict(
                                     orientation="h",
                                     yanchor="bottom",
