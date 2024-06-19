@@ -48,7 +48,7 @@ def load_data_sectpub(date):
     endeudamiento_curgdp=endeudamiento_cur.copy().iloc[48:]
 
     st.dataframe(endeudamiento_curgdp)
-    endeudamiento_curgdp["PBI"]=S.pbi_men
+    endeudamiento_curgdp["PBI"]=S.pbi_men[:len(endeudamiento_curgdp)]
     for col in endeudamiento_cur.columns.to_list():
         endeudamiento_curgdp[col]=endeudamiento_curgdp.rolling(12).sum()[col]*100/(datagdp["PBI"]*4)
     
