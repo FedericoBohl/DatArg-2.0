@@ -250,7 +250,7 @@ def get_usa(_):
     with table_usa:st.dataframe(data,use_container_width=True)
 
 
-def make_internacional():
+def make_internacional_web():
     c1,c2=st.columns(2)
     with c1:
         with st.container(border=True):get_usa(datetime.now().strftime("%Y%m%d"))
@@ -261,9 +261,20 @@ def make_internacional():
     with c1:
         with st.container(border=True):get_uk(datetime.now().strftime("%Y%m%d"))
     with c2:
-        st.header('Japón')
-    c1,c2=st.columns(2)
-    with c1:
         st.header('Brasil')
-    with c2:
-        st.header('Nueva Zelanda')
+    with st.container(border=True):
+        st.markdown("<h3 style='text-align: center;'>Canasta de Monedas de Latam</h3>", unsafe_allow_html=True)
+        st.caption('La idea es crear una canasta de monedas comparadas con el USD y poderadas por la participación en el comercio mundial\nA priori los países por un tema de complejidad serían Argentina, Colombia, Brasil, Chile y Mexico y que la serie sea mensual.')
+        c1,c2=st.columns((0.6,0.4))
+        with c1:
+            fig=go.Figure()
+            fig.add_trace(x=pd.date_range('Jan-2020','Jun-2020'),y=[0,1,2,3,4,5])
+            st.plotly_chart(fig)
+        with c2:
+            st.caption('Variaciónes Intermensuales !!')
+            c21,c22=st.columns(2)
+            c21.metric('Argentina',None)
+            c22.metric('Brasil',None)
+            c21.metric('Colombia',None)
+            c22.metric('Chile',None)
+            c21.metric('México',None)

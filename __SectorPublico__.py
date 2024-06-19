@@ -528,7 +528,8 @@ def plot_ingresos_gastos(data,escala):
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
     t2.plotly_chart(fig,use_container_width=True)
-def make_sect_pub():
+
+def make_sect_pub_web():
     deficit,datagdp,datatco,endeudamiento,endeudamientogdp,endeudamientotco,corr,corrgdp,corrtco=load_data_sectpub(datetime.now().strftime("%Y%m%d"))
     c1,c2=st.columns((0.8,0.2))
     with c1:

@@ -105,7 +105,7 @@ def make_acciones(data_now_merv : pd.DataFrame , data_now_gen : pd.DataFrame):
     return fig_merv,None#,fig_gen
 
 
-def make_merv():
+def make_merv_web():
     st.header('Mercado de Capitales')
     st.button('🔄️Recargar Datos',key='Reload')
     try:

@@ -1,9 +1,10 @@
 from librerias import *
 from __BCRA__ import make_BCRA_web
-from GetBYMA import GetBYMA
-from __SectorFinanciero__ import make_merv
-from __SectorInternacional__ import make_internacional
-from __SectorPublico__ import make_sect_pub
+from __SectorExterno__ import make_sect_ext_web
+from __SectorPublico__ import make_sect_pub_web
+from __SectorInternacional__ import make_internacional_web
+from __SectorFinanciero__ import make_merv_web
+
 st.set_page_config(
     page_title="DatArg",
     page_icon="🧉",
@@ -44,12 +45,14 @@ if is_session_pc:
 
     with t_bcra:
         make_BCRA_web()
+    with t_SecExt:
+        make_sect_ext_web()
     with t_SecPub:
-        make_sect_pub()
+        make_sect_pub_web()
     with t_Intl:
-        make_internacional()
+        make_internacional_web()
     with t_Merv:
-        make_merv()
+        make_merv_web()
 
 
 
