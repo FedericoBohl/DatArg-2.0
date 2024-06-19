@@ -56,7 +56,7 @@ def load_data_sectpub(date):
     for col in endeudamiento_cur.columns.to_list():
         endeudamientotco[col]=endeudamientotco[col]/endeudamientotco["TC"]
 
-    return data, datagdp.dropna(), datatco.dropna(),endeudamiento_cur, endeudamiento_curgdp.dropna(), endeudamientotco.dropna()
+    return data.rolling(12).sum().dropna(), datagdp.dropna(), datatco.rolling(12).sum().dropna(),endeudamiento_cur.rolling(12).sum().dropna(), endeudamiento_curgdp.dropna(), endeudamientotco.rolling(12).sum().dropna()
 
 @st.cache_resource(show_spinner=False)
 def load_data_map(end):
@@ -457,10 +457,10 @@ def make_sect_pub():
 
     if S.escala_sectpub=="***Millones de ARS***":
         S.data_sectpub=deficit
-        S.endeudamiento=endeudamiento.rolling(12).sum().dropna()
+        S.endeudamiento=endeudamiento
     elif S.escala_sectpub=="***Millones de USD-Oficial***":
         S.data_sectpub=datatco
-        S.endeudamiento=endeudamientotco.rolling(12).sum().dropna()
+        S.endeudamiento=endeudamientotco
     else:
         S.data_sectpub=datagdp
         S.endeudamiento=endeudamientogdp
