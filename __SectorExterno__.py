@@ -6,7 +6,7 @@ def make_sect_ext_web():
         with st.container(border=True):
             c11,c12=st.columns((0.3,0.7))
             with c11: st.radio("Escala de los datos",options=["***Millones de USD***","***% del PBI***"],key="escala_sectext")
-            with c12: st.number_input(value=2016,label='Datos desde',min_value=2000,max_value=2024,key="start_sectpub")
+            with c12: st.number_input(value=2016,label='Datos desde',min_value=2000,max_value=2024,key="start_sectext")
     with c2:
         st.link_button(":blue[**Descargar datos:\nSector Externo**]",url="https://1drv.ms/x/c/56f917c917f2e2f5/QfXi8hfJF_kggFaNFQAAAAAAHinUdp-mVHJoLA",use_container_width=True)
     c1,c2=st.columns(2)
