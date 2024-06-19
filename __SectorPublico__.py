@@ -76,7 +76,7 @@ def load_data_sectpub(date):
         "379.9_ING_CORR_I017__32_24",
         "379.9_ING_CORR_T017__25_70"
         ]
-    cols['Gastos Corrientes','Remuneraciones','Bienes y Servicios','Otros Gastos de Consumo',"Gasto Seguridad Social",
+    cols=['Gastos Corrientes','Remuneraciones','Bienes y Servicios','Otros Gastos de Consumo',"Gasto Seguridad Social",
          "Trans Sect Priv","Trans Provincias y CABA","Trans Universidades","Trans Otras","Trans Sect Ext",
          'Ingresos Corrientes','Ingresos Tributarios','Ingresos Seguridad Social','Ingresos No Tributarios',
          'Ingresos Transferencias Corrientes']
@@ -87,9 +87,11 @@ def load_data_sectpub(date):
     corr=corr.drop(columns=['Remuneraciones','Bienes y Servicios','Otros Gastos de Consumo',"Trans Sect Priv","Trans Provincias y CABA","Trans Universidades","Trans Otras","Trans Sect Ext"])
     corr['Otros Gastos']=corr['Gastos Corrientes']-corr['Gastos en consumo y operación']-corr['Gastos Transferencias Corrientes']-corr['Gasto Seguridad Social']
     corr['Otros Ingresos']=corr['Ingresos Corrientes']-corr['Ingresos Tributarios']-corr['Ingresos Seguridad Social']-corr['Ingresos No Tributarios']-corr['Ingresos Transferencias Corrientes']
+    st.dataframe(corr)
     corr.reindex(columns=corr_his.columns)
+    st.dataframe(corr)
     corr=pd.concat([corr_his,corr],axis=0)
-
+    st.dataframe(corr)
     corrgdp=corr.copy().iloc[48:]
     corrgdp["PBI"]=S.pbi_men[:len(corrgdp)]
     for col in corr.columns.to_list():
