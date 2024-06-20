@@ -48,6 +48,8 @@ def load_sect_ext(end):
     ica=pd.concat([ica_his,ica],axis=0)
     
     icagdp=ica.copy().iloc[156:].resample('T')
+    st.dataframe(icagdp)
+    st.dataframe(data)
     icagdp=icagdp.iloc[:len(data)]
     icagdp.index=data.index[:len(icagdp)]
     icagdp["PBIUSD"]=data['PBIUSD'].iloc[:len(icagdp)]
