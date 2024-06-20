@@ -80,13 +80,14 @@ pio.templates["Oficial"] = go.layout.Template(
 )
 pio.templates.default = "Oficial"
 
-@st.cache_data()
 def page_info():
-    page_width = streamlit_js_eval(js_expressions='window.innerWidth', key='WIDTH',  want_output = True)
-    ua_string = st_javascript("""window.navigator.userAgent;""")
-    user_agent = parse(ua_string)
-    is_session_pc = not user_agent.is_mobile
-    return page_width,is_session_pc
+    if not 'page_width' in S:
+        page_width = streamlit_js_eval(js_expressions='window.innerWidth', key='WIDTH',  want_output = True)
+        ua_string = st_javascript("""window.navigator.userAgent;""")
+        user_agent = parse(ua_string)
+        is_session_pc = not user_agent.is_mobile
+        S.page_width=page_width
+        S.is_session_pc=is_session_pc
 
 def get_data(id:str|list[str],start_date:str,col_list:list[str]|str|None=None):
     now=datetime.now().strftime("%Y-%m-%d")
