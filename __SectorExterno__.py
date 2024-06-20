@@ -1,4 +1,5 @@
 from librerias import *
+@st.cache_resource(show_spinner=False)
 def load_sect_ext(end):
     bop=pd.read_csv("His Data/his-BOP.csv",delimiter=";")
     bop['Unnamed: 0'] = pd.to_datetime(bop.iloc[:, 0].values, format='%Y-%m-%d')
@@ -57,7 +58,8 @@ def load_sect_ext(end):
         icagdp[col]=icagdp.rolling(4).sum()[col]*100/(icagdp["PBIUSD"]*4)
     return data.rolling(4).sum(),datagdp.dropna(),ica.rolling(12).sum(),icagdp.dropna()
 def make_sect_ext_web():
-    #bop,bopgdp,ica,icagdp=load_sect_ext(datetime.now().strftime("%Y%m%d"))
+    bop,bopgdp,ica,icagdp=load_sect_ext(datetime.now().strftime("%Y%m%d"))
+    st.dataframe(bopgdp)
     c1,c2=st.columns((0.8,0.2))
     with c1:
         with st.container(border=True):
