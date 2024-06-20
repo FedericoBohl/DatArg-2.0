@@ -58,7 +58,7 @@ def plot_BM(escala, bcra: pd.DataFrame):
         fig['layout']['yaxis']['title']='PP del PBI'
     st.plotly_chart(fig,use_container_width=True)
 
-@st.cache_data(show_spinner=False,experimental_allow_widgets=True)
+#@st.cache_data(show_spinner=False,experimental_allow_widgets=True)
 def plot_pasivos_rem(escala,bcra: pd.DataFrame,tasas: pd.DataFrame): # El botón de BM está andando mal
     st.subheader("Pases Netos   &   LELIQ/LEBAC")
     #if not st.checkbox("%BM",value=False,key="BM_bcra"):

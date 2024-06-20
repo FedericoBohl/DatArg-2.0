@@ -11,7 +11,7 @@ def get_eu(_) -> None:
     mro.set_index('TIME_PERIOD',inplace=True)
     mro=mro.rename(columns={'OBS_VALUE':'MRO'})
     mro=mro.resample('M').last()
-    with c2:st.metric(f'MRO ({mro.index[-1].strftime('%d-%b')})',f'{mro.iloc[-1]['MRO']}%',f'{round(mro.iloc[-1]['MRO']-mro.iloc[-2]['MRO'],2)}PP',delta_color="inverse")
+    with c2:st.metric(f"MRO ({mro.index[-1].strftime('%d-%b')})",f"{mro.iloc[-1]['MRO']}%",f"{round(mro.iloc[-1]['MRO']-mro.iloc[-2]['MRO'],2)}PP",delta_color="inverse")
 
 
     #mro.index=mro.index.strftime('%b-%Y') 
@@ -21,7 +21,7 @@ def get_eu(_) -> None:
     inf.TIME_PERIOD=pd.to_datetime(inf.TIME_PERIOD, format='%Y-%m')
     inf.set_index('TIME_PERIOD',inplace=True)
     inf=inf.rename(columns={'OBS_VALUE':'Inflación'})
-    with c3:st.metric(f'Inflación ({inf.index[-1].strftime('%b')})',f'{inf.iloc[-1]['Inflación']}%',f'{round(inf.iloc[-1]['Inflación']-inf.iloc[-2]['Inflación'],2)}PP',delta_color="inverse")
+    with c3:st.metric(f"Inflación ({inf.index[-1].strftime('%b')})",f"{inf.iloc[-1]['Inflación']}%",f"{round(inf.iloc[-1]['Inflación']-inf.iloc[-2]['Inflación'],2)}PP",delta_color="inverse")
     #inf.index=inf.index.strftime('%b-%Y')
 
 
@@ -109,7 +109,7 @@ def get_uk(_) -> None:
     tas=tas.resample('M').median()
     tas_t=tas['Tasa'].iloc[-1]
     tas_t1=tas['Tasa'].iloc[-2]
-    with c2:st.metric(f'Bank Rate ({tas.index[-1].strftime('%d-%b')})',f'{tas_t}%',f'{round(tas_t-tas_t1,2)}PP',delta_color="inverse")
+    with c2:st.metric(f"Bank Rate ({tas.index[-1].strftime('%d-%b')})",f"{tas_t}%",f"{round(tas_t-tas_t1,2)}PP",delta_color="inverse")
 
     url='https://www.ons.gov.uk/generator?format=csv&uri=/economy/inflationandpriceindices/timeseries/l55o/mm23'
     response=requests.get(url)
@@ -120,7 +120,7 @@ def get_uk(_) -> None:
     inf.set_index('Fecha',inplace=True)
     inf_t=inf.iloc[-1]['Inflacion']
     inf_t1=inf.iloc[-2]['Inflacion']
-    with c3:st.metric(f'Inflación ({inf.index[-1].strftime('%b')})',f'{inf_t}%',f'{round(inf_t-inf_t1,2)}PP',delta_color="inverse")
+    with c3:st.metric(f"Inflación ({inf.index[-1].strftime('%b')})",f"{inf_t}%",f"{round(inf_t-inf_t1,2)}PP",delta_color="inverse")
 
     url='https://www.ons.gov.uk/generator?format=csv&uri=/employmentandlabourmarket/peoplenotinwork/unemployment/timeseries/mgsx/lms'
     response=requests.get(url)
@@ -190,7 +190,7 @@ def get_usa(_):
     df_cpi=df_cpi.dropna()
     inf_t=df_cpi.iloc[-1]['Inflacion']
     inf_t1=df_cpi.iloc[-1]['Inflacion']
-    with c3:st.metric(f'Inflación ({df_cpi.index[-1].strftime('%b')})',f'{inf_t}%',f'{round(inf_t-inf_t1,2)}PP',delta_color="inverse")
+    with c3:st.metric(f"Inflación ({df_cpi.index[-1].strftime('%b')})",f"{inf_t}%",f"{round(inf_t-inf_t1,2)}PP",delta_color="inverse")
 
     unemployment_data = fred.get_series('UNRATE').loc[f'{2000}':]
     df_unemployment = pd.DataFrame(unemployment_data, columns=['Desempleo'])
@@ -198,7 +198,7 @@ def get_usa(_):
     df_fed_funds = pd.DataFrame(fed_funds_data, columns=['Tasa'])
     fed_t=df_fed_funds.iloc[-1]['Tasa']
     fed_t1=df_fed_funds.iloc[-1]['Tasa']
-    with c2:st.metric(f'Fed Funds Rate ({datetime.now().strftime('%d-%b')})',f'{fed_t}%',f'{round(fed_t-fed_t1,2)}PP',delta_color="inverse")
+    with c2:st.metric(f"Fed Funds Rate ({datetime.now().strftime('%d-%b')})",f"{fed_t}%",f"{round(fed_t-fed_t1,2)}PP",delta_color="inverse")
 
 
     graph_usa,table_usa=st.tabs(['Gráfico','Tabla'])

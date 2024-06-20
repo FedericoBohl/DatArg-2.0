@@ -1,7 +1,7 @@
 from GetBYMA import GetBYMA
 from librerias import *
 
-@st.cache_data(show_spinner=False, experimental_allow_widgets=True)
+#@st.cache_data(show_spinner=False, experimental_allow_widgets=True)
 def make_cedears(data_now : pd.DataFrame):
     with st.container(border=True):
         c1,c2,c3,c4,c5=st.columns(5)
