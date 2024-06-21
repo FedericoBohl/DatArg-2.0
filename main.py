@@ -12,14 +12,15 @@ st.set_page_config(
     initial_sidebar_state="expanded")
 while True:
     try:
-        page_width,S.is_session_pc=page_info()
+        S.page_width,S.is_session_pc=page_info()
         break
     except:
-        pass
-if ('is_session_pc' in S) or True:  #Fix momentaneo
+        S.page_width=2000
+        S.is_session_pc=True
+if S.is_session_pc:  #Fix momentaneo
     try:
         components.html(w_barra_stocks,height=80)
-    except:page_width=2000
+    except:pass
 
 
     col1,col2=st.columns((0.1,0.9))
@@ -37,7 +38,7 @@ if ('is_session_pc' in S) or True:  #Fix momentaneo
             #with c1:
             #    components.html(w_calendar_investing, height=350,width=int(page_width*0.9*0.45))
             #with c2:
-            create_widget(w_calendar_tv,height=350,width=int(page_width*0.85))
+            create_widget(w_calendar_tv,height=350,width=int(S.page_width*0.85))
 
     t_info, t_actividad, t_PI, t_ML, t_precios, t_bcra, t_SecExt, t_SecPub, t_Intl, t_Merv= st.tabs(["Info","Actividad","Pobreza/Indigencia", "Mercado Laboral", "Precios", "BCRA", "Sector Externo","Sector Público","Internacional","Bolsa Argentina"])
 
