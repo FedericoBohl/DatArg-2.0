@@ -119,7 +119,7 @@ def make_sect_ext_web():
         st.caption('Suma Interanual')
     with c2.container(border=True):
         st.subheader('Balance Comercial - ToT + TCR')
-        _=S.TCR.resample('Q').mean()
+        _=S.TCR#.resample('Q').mean()
         st.write(_)
         
         st.caption('El Tipo de Cambio es re-escalado por conveniencia visual con base Enero 2004 = 100.')
