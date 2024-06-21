@@ -48,7 +48,7 @@ def load_sect_ext(end):
     ica.reindex(columns=ica_his.columns)
     ica=pd.concat([ica_his,ica],axis=0)
     
-    icagdp=ica.copy().iloc[156:].resample('T')
+    icagdp=ica.copy().iloc[156:].resample('T').sum()
     st.dataframe(icagdp)
     st.dataframe(data)
     icagdp=icagdp.iloc[:len(data)]
@@ -58,7 +58,7 @@ def load_sect_ext(end):
         icagdp[col]=icagdp.rolling(4).sum()[col]*100/(icagdp["PBIUSD"]*4)
     return data.rolling(4).sum(),datagdp.dropna(),ica.rolling(12).sum(),icagdp.dropna()
 def make_sect_ext_web():
-    #bop,bopgdp,ica,icagdp=load_sect_ext(datetime.now().strftime("%Y%m%d"))
+    bop,bopgdp,ica,icagdp=load_sect_ext(datetime.now().strftime("%Y%m%d"))
     #st.dataframe(bopgdp)
     c1,c2=st.columns((0.8,0.2))
     with c1:
