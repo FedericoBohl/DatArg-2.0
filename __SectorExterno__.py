@@ -53,7 +53,7 @@ def load_sect_ext(end):
     #for col in ica.columns.to_list():
     #    icagdp[col]=icagdp.rolling(4).sum()[col]*100/(icagdp["PBIUSD"]*4)
     
-    return data.rolling(4).sum(),datagdp.dropna(),ica.rolling(12).sum()#,icagdp.dropna() 
+    return data.rolling(4).sum(),datagdp.dropna(),ica.rolling(4).sum()#,icagdp.dropna() 
 def make_sect_ext_web():
     bop,bopgdp,ica=load_sect_ext(datetime.now().strftime("%Y%m%d"))
     c1,c2=st.columns((0.8,0.2))
@@ -72,6 +72,7 @@ def make_sect_ext_web():
     ica.index=ica.index.strftime('%b-%Y')
     #icagdp=icagdp.loc[f"{S.start_sectext}":]
     #icagdp.index=icagdp.index.strftime('%b-%Y')
+    st.dataframe(bopgdp)
     st.dataframe(ica)
     c1,c2=st.columns(2)
     with c1.container(border=True):
