@@ -113,8 +113,8 @@ def make_sect_ext_web():
     with c1.container(border=True):
         c11,c12=st.columns((0.7,0.3))
         c11.subheader('Balance de Pagos')
-        c11.latex(r'''\left
-                  CC+CF+CK=\Delta R''')
+        c11.latex(r'''\left{CC+CF+CK=\Delta R}
+                  ''')
         c12.checkbox('Agregar Errores y Omisiones',value=True,key='erroresyomisiones')
         plot_bop(S.bop,S.escala_sectext,S.erroresyomisiones)
         st.caption('Suma Interanual')
