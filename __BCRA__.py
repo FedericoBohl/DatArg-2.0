@@ -66,6 +66,7 @@ def load_bcra_his(date):
     reservas=pd.concat([his_data,cur_data],axis=0)
 
     datatco=data.copy()
+    S.TCR=reservas.loc["2004":f"{data.index.values[len(data)-1]}","TCR"]
     S.TC=reservas.loc["2004":f"{data.index.values[len(data)-1]}","TC"]
     datatco['TC']=S.TC
     for col in data.columns.to_list():
