@@ -49,9 +49,9 @@ def load_sect_ext(end):
     ica.reindex(columns=ica_his.columns)
     ica=pd.concat([ica_his,ica],axis=0)
     
-    datagdp=data.copy()
-    for col in data.columns.to_list():
-        datagdp[col]=datagdp.rolling(4).sum()[col]*100/(datagdp["PBIUSD"]*4)
+    icagdp=ica.copy()
+    for col in ica.columns.to_list():
+        icagdp[col]=icagdp.rolling(4).sum()[col]*100/(icagdp["PBIUSD"]*4)
     
     return data.rolling(4).sum(),datagdp.dropna(),ica.rolling(12).sum(),icagdp.dropna()
 def make_sect_ext_web():
