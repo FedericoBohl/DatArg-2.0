@@ -59,7 +59,7 @@ def load_sect_ext(end):
 
     return data.rolling(4).sum(),datagdp.dropna(),ica.rolling(4).sum(),icagdp.dropna() 
 def make_sect_ext_web():
-    bop,bopgdp,ica=load_sect_ext(datetime.now().strftime("%Y%m%d"))
+    bop,bopgdp,ica,icagdp=load_sect_ext(datetime.now().strftime("%Y%m%d"))
     c1,c2=st.columns((0.8,0.2))
     with c1:
         with st.container(border=True):
@@ -74,8 +74,8 @@ def make_sect_ext_web():
     bopgdp.index=bopgdp.index.strftime('%b-%Y')
     ica=ica.loc[f"{S.start_sectext}":]
     ica.index=ica.index.strftime('%b-%Y')
-    #icagdp=icagdp.loc[f"{S.start_sectext}":]
-    #icagdp.index=icagdp.index.strftime('%b-%Y')
+    icagdp=icagdp.loc[f"{S.start_sectext}":]
+    icagdp.index=icagdp.index.strftime('%b-%Y')
     st.dataframe(bop)
     st.dataframe(bopgdp)
     st.dataframe(ica)
