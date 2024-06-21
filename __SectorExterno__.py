@@ -69,8 +69,8 @@ def make_sect_ext_web():
     bop.index=bop.index.strftime('%b-%Y')
     bopgdp=bopgdp.loc[f"{S.start_sectext}":]
     bopgdp.index=bopgdp.index.strftime('%b-%Y')
-    ica=ica.loc[f"{S.start_sectext}":]
-    ica.index=ica.index.strftime('%b-%Y')
+    #ica=ica.loc[f"{S.start_sectext}":]
+    #ica.index=ica.index.strftime('%b-%Y')
     icagdp=icagdp.loc[f"{S.start_sectext}":]
     icagdp.index=icagdp.index.strftime('%b-%Y')
     _=ica.copy()
