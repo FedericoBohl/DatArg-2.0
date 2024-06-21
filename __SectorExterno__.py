@@ -72,7 +72,7 @@ def make_sect_ext_web():
     ica.index=ica.index.strftime('%b-%Y')
     #icagdp=icagdp.loc[f"{S.start_sectext}":]
     #icagdp.index=icagdp.index.strftime('%b-%Y')
-    st.dataframe(ica)
+    st.dataframe(bopgdp)
     c1,c2=st.columns(2)
     with c1.container(border=True):
         st.subheader('Balance de Pagos')
