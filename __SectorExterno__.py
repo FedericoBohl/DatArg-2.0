@@ -19,7 +19,7 @@ def load_sect_ext(end):
     data.reindex(columns=bop.columns)
     data=pd.concat([bop,data],axis=0)
     data['CF(MBP5)']=-(data['CF']-data['VarR'])
-    S.tot=data['ToT']
+    tot=data['ToT']
     
     datagdp=data.rolling(4).sum()
     datagdp['PBIUSD']=data['PBIUSD']
@@ -58,7 +58,7 @@ def load_sect_ext(end):
         if col=='PBIUSD':pass
         else: icagdp[col]=100*icagdp[col]/(icagdp['PBIUSD']*4)
 
-    return data.rolling(4).sum(),datagdp.dropna(),ica.rolling(4).sum(),icagdp.dropna() 
+    return data.rolling(4).sum(),datagdp.dropna(),ica.rolling(4).sum(),icagdp.dropna(),tot
 
 @st.cache_resource(show_spinner=False)
 def plot_bop(data,escala,errores):
@@ -120,7 +120,7 @@ def plot_balcom(data,escala):
     del _,fig
 
 def make_sect_ext_web():
-    bop,bopgdp,ica,icagdp=load_sect_ext(datetime.now().strftime("%Y%m%d"))
+    bop,bopgdp,ica,icagdp,S.tot=load_sect_ext(datetime.now().strftime("%Y%m%d"))
     c1,c2=st.columns((0.8,0.2))
     with c1:
         with st.container(border=True):

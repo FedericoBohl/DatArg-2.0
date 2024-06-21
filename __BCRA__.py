@@ -66,8 +66,8 @@ def load_bcra_his(date):
     reservas=pd.concat([his_data,cur_data],axis=0)
 
     datatco=data.copy()
-    S.TCR=reservas.loc["2004":f"{data.index.values[len(data)-1]}","TCR"]
-    S.TC=reservas.loc["2004":f"{data.index.values[len(data)-1]}","TC"]
+    TCR=reservas.loc["2004":f"{data.index.values[len(data)-1]}","TCR"]
+    TC=reservas.loc["2004":f"{data.index.values[len(data)-1]}","TC"]
     datatco['TC']=S.TC
     for col in data.columns.to_list():
         datatco[col]=datatco[col]/datatco["TC"]
@@ -82,12 +82,12 @@ def load_bcra_his(date):
     cur_data=cur_data.reindex(columns=his_data.columns)
     tasas=pd.concat([his_data,cur_data],axis=0)
 
-    return reservas, data, datagdp, datatco, tasas
+    return reservas, data, datagdp, datatco, tasas,TCR,TC
 
 
 #@st.cache_data(show_spinner=False,experimental_allow_widgets=True)
 def make_BCRA_web():
-    reservas,bcra,bcragdp,datatco,tasas=load_bcra_his(datetime.now().strftime("%Y%m%d"))
+    reservas,bcra,bcragdp,datatco,tasas,S.TCR,S.TC=load_bcra_his(datetime.now().strftime("%Y%m%d"))
     c1,c2=st.columns((0.7,0.3))
     with c1:
         with st.container(border=True):
