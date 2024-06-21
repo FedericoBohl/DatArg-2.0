@@ -20,9 +20,11 @@ def load_sect_ext(end):
     data=pd.concat([bop,data],axis=0)
     data['CF(MBP5)']=-(data['CF']-data['VarR'])
     
-    datagdp=data.copy()
+    datagdp=data.rolling(4).sum()
+    datagdp['PBIUSD']=data['PBIUSD']
     for col in data.columns.to_list():
-        datagdp[col]=datagdp.rolling(4).sum()[col]*100/(datagdp["PBIUSD"]*4)
+        if col=='PBIUSD':pass
+        else: datagdp[col]=datagdp[col]/datagdp['PBIUSD']
 
 
     ica_his=pd.read_csv("His Data/his-ica.csv",delimiter=";")
@@ -49,11 +51,13 @@ def load_sect_ext(end):
     ica.reindex(columns=ica_his.columns)
     ica=pd.concat([ica_his,ica],axis=0)
     
-    #icagdp=ica.copy()
-    #for col in ica.columns.to_list():
-    #    icagdp[col]=icagdp.rolling(4).sum()[col]*100/(icagdp["PBIUSD"]*4)
-    
-    return data.rolling(4).sum(),datagdp.dropna(),ica.rolling(4).sum()#,icagdp.dropna() 
+    icagdp=ica.rolling(4).sum()
+    icagdp['PBIUSD']=ica['PBIUSD']
+    for col in ica.columns.to_list():
+        if col=='PBIUSD':pass
+        else: icagdp[col]=icagdp[col]/icagdp['PBIUSD']
+
+    return data.rolling(4).sum(),datagdp.dropna(),ica.rolling(4).sum(),icagdp.dropna() 
 def make_sect_ext_web():
     bop,bopgdp,ica=load_sect_ext(datetime.now().strftime("%Y%m%d"))
     c1,c2=st.columns((0.8,0.2))
