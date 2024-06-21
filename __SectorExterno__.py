@@ -84,7 +84,7 @@ def plot_bop(data,escala,errores):
         fig['layout']['yaxis']['type']='log'
     else:
         fig['layout']['yaxis']['title']='PP del PBI en USD'
-    st.plotly_chart(fig)
+    st.plotly_chart(fig,use_container_width=True)
 def make_sect_ext_web():
     bop,bopgdp,ica,icagdp=load_sect_ext(datetime.now().strftime("%Y%m%d"))
     c1,c2=st.columns((0.8,0.2))
