@@ -10,13 +10,11 @@ st.set_page_config(
     page_icon="🧉",
     layout="wide",
     initial_sidebar_state="expanded")
-while True:
-    try:
-        S.page_width,S.is_session_pc=page_info()
-        break
-    except:
-        S.page_width=2000
-        S.is_session_pc=True
+try:
+    S.page_width,S.is_session_pc=page_info()
+except:
+    S.page_width=2000
+    S.is_session_pc=True
 if S.is_session_pc:  #Fix momentaneo
     try:
         components.html(w_barra_stocks,height=80)

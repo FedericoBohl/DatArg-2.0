@@ -83,6 +83,7 @@ pio.templates.default = "Oficial"
 #@st.cache_data()
 def page_info():
     page_width = streamlit_js_eval(js_expressions='window.innerWidth', key='WIDTH',  want_output = True)
+    if page_width==None:page_width=2000
     ua_string = st_javascript("""window.navigator.userAgent;""")
     user_agent = parse(ua_string)
     is_session_pc = not user_agent.is_mobile
