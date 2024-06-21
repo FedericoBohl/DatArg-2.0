@@ -58,6 +58,33 @@ def load_sect_ext(end):
         else: icagdp[col]=icagdp[col]/icagdp['PBIUSD']
 
     return data.rolling(4).sum(),datagdp.dropna(),ica.rolling(4).sum(),icagdp.dropna() 
+
+@st.cache_resource(show_spinner=False)
+def plot_bop(data,escala,errores):
+    fig=go.Figure()
+    fig.add_trace(go.Scatter(x=data.index,y=data['CC'],name='CC',marker_color=maroon,line=dict(width=5)))
+    fig.add_trace(go.Scatter(x=data.index,y=data['CK']+data['CF(MBP5)'],name='CF+CK',marker_color=navy,line=dict(width=5)))
+    fig.add_trace(go.Bar(x=data.index,y=data['VarR'],name='Var. R',marker_color=data["VarR"].apply(lambda x: green if x >= 0 else red),
+                                    showlegend=True, opacity=1, marker_line_color=black,
+                                    marker_line_width=1))
+    if errores==True:fig.add_trace(go.Bar(x=data.index,y=data['Errores'],name='Errores y Omisiones'))
+    fig.update_xaxes(type='category',tickmode='array',showticklabels=True)
+    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0.2,height=450,legend=dict(
+                                    orientation="h",
+                                    yanchor="bottom",
+                                    y=1.02,
+                                    xanchor="right",
+                                    x=1,
+                                    bordercolor='black',
+                                    borderwidth=2),
+                                    yaxis=dict(showgrid=False, zeroline=True, showline=True)
+                                )
+    if escala=="***Millones de USD***":
+        fig['layout']['yaxis']['title']='Millones de USD'
+        fig['layout']['yaxis']['type']='log'
+    else:
+        fig['layout']['yaxis']['title']='PP del PBI en USD'
+
 def make_sect_ext_web():
     bop,bopgdp,ica,icagdp=load_sect_ext(datetime.now().strftime("%Y%m%d"))
     c1,c2=st.columns((0.8,0.2))
@@ -76,12 +103,18 @@ def make_sect_ext_web():
     ica.index=ica.index.strftime('%b-%Y')
     icagdp=icagdp.loc[f"{S.start_sectext}":]
     icagdp.index=icagdp.index.strftime('%b-%Y')
-    st.dataframe(bop)
-    st.dataframe(bopgdp)
-    st.dataframe(ica)
+    if S.escala_sectext=='Millones de USD':
+        S.bop=bop
+        S.ica=ica
+    else:
+        S.bop=bopgdp
+        S.ica=icagdp
     c1,c2=st.columns(2)
     with c1.container(border=True):
-        st.subheader('Balance de Pagos')
+        c11,c12=st.columns((0.7,0.3))
+        c11.subheader('Balance de Pagos')
+        c12.checkbox('Agregar Errores y Omisiones',value=True,key='erroresyomisiones')
+        plot_bop(S.bop,S.escala_sectext,S.erroresyomisiones)
         st.caption('Suma Interanual')
     with c2.container(border=True):
         st.subheader('Balance Comercial - ToT + TCR')
