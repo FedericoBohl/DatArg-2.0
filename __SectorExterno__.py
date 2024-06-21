@@ -93,11 +93,11 @@ def plot_balcom(data,escala):
     fig.add_trace(go.Scatter(x=data.index[4:],y=data["XN"][4:],fill="tozeroy",marker_color="#3A4D39",fillcolor="#739072",name="Balance Comercial"))
     _=S.tot.copy()
     _.index=_.index.strftime('%b-%Y')
-    fig.add_trace(go.Scatter(x=data.index,y=_.values.tolist()[4:],name="ToT",line=dict(width=3),marker_color='#FF7F3E'),secondary_y=True)
+    fig.add_trace(go.Scatter(x=data.index[4:],y=_.values.tolist(),name="ToT",line=dict(width=3),marker_color='#FF7F3E'),secondary_y=True)
     _=S.TCR.resample('Q').mean()
     _=_.iloc[8:]*100/69.82120981
     _.index=_.index.strftime('%b-%Y')
-    fig.add_trace(go.Scatter(x=data.index,y=_.values.tolist()[4:],name="TCR",line=dict(width=4,dash="dot"),marker_color="#F19ED2"),secondary_y=True)
+    fig.add_trace(go.Scatter(x=data.index[4:],y=_.values.tolist(),name="TCR",line=dict(width=4,dash="dot"),marker_color="#F19ED2"),secondary_y=True)
     fig.add_hline(y=0)
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0,height=450,legend=dict(
                                         orientation="h",
