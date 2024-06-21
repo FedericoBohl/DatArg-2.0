@@ -67,7 +67,7 @@ def plot_bop(data,escala,errores):
     fig.add_trace(go.Bar(x=data.index,y=data['VarR'],name='Var. R',marker_color=data["VarR"].apply(lambda x: green if x >= 0 else red),
                                     showlegend=True, opacity=1, marker_line_color=black,
                                     marker_line_width=1))
-    if errores==True:fig.add_trace(go.Bar(x=data.index,y=data['Errores'],name='Errores y Omisiones'))
+    if errores==True:fig.add_trace(go.Bar(x=data.index,y=data['Errores'],name='Errores y Omisiones',marker_color=gray))
     fig.update_xaxes(type='category',tickmode='array',showticklabels=True)
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0.2,height=450,legend=dict(
                                     orientation="h",
@@ -92,7 +92,7 @@ def make_sect_ext_web():
         with st.container(border=True):
             c11,c12=st.columns((0.3,0.7))
             with c11: st.radio("Escala de los datos",options=["***Millones de USD***","***% del PBI***"],key="escala_sectext")
-            with c12: st.number_input(value=2016,label='Datos desde',min_value=2000,max_value=2024,key="start_sectext")
+            with c12: st.number_input(value=2016,label='Datos desde',min_value=2006,max_value=2024,key="start_sectext")
     with c2:
         st.link_button(":blue[**Descargar datos:\nSector Externo**]",url="https://1drv.ms/x/c/56f917c917f2e2f5/QfXi8hfJF_kggFaKFQAAAAAA7qhKZI81Oq7vDg",use_container_width=True)
     bop=bop.loc[f"{S.start_sectext}":]
@@ -113,6 +113,7 @@ def make_sect_ext_web():
     with c1.container(border=True):
         c11,c12=st.columns((0.7,0.3))
         c11.subheader('Balance de Pagos')
+        c11.latex(r'''CC+CF+CK=\Delta R''')
         c12.checkbox('Agregar Errores y Omisiones',value=True,key='erroresyomisiones')
         plot_bop(S.bop,S.escala_sectext,S.erroresyomisiones)
         st.caption('Suma Interanual')
