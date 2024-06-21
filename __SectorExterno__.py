@@ -90,7 +90,7 @@ def plot_bop(data,escala,errores):
 @st.cache_resource(show_spinner=False)
 def plot_balcom(data,escala):
     fig = make_subplots(specs=[[{"secondary_y": True}]])    
-    fig.add_trace(go.Scatter(x=data.index,y=data["XN"],fill="tozeroy",marker_color="#3A4D39",fillcolor="#739072",name="Balance Comercial"))
+    fig.add_trace(go.Scatter(x=data.index[4:],y=data["XN"][4:],fill="tozeroy",marker_color="#3A4D39",fillcolor="#739072",name="Balance Comercial"))
     _=S.tot.copy()
     _.index=_.index.strftime('%b-%Y')
     fig.add_trace(go.Scatter(x=data.index,y=_.values.tolist()[4:],name="ToT",line=dict(width=3),marker_color='#FF7F3E'),secondary_y=True)
