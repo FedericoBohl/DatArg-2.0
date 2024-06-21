@@ -19,6 +19,7 @@ def load_sect_ext(end):
     data.reindex(columns=bop.columns)
     data=pd.concat([bop,data],axis=0)
     data['CF(MBP5)']=-(data['CF']-data['VarR'])
+    S.tot=data['ToT']
     
     datagdp=data.rolling(4).sum()
     datagdp['PBIUSD']=data['PBIUSD']
@@ -85,6 +86,31 @@ def plot_bop(data,escala,errores):
     else:
         fig['layout']['yaxis']['title']='PP del PBI en USD'
     st.plotly_chart(fig,use_container_width=True)
+
+@st.cache_resource(show_spinner=False)
+def plot_balcom(data,escala):
+    fig = make_subplots(specs=[[{"secondary_y": True}]])    
+    fig.add_trace(go.Scatter(x=data.index,y=data["XN"],fill="tozeroy",marker_color="#3A4D39",fillcolor="#739072",name="Balance Comercial"))
+    fig.add_trace(go.Scatter(x=data.index,y=S.tot['ToT'],name="ToT",line=dict(width=3),marker_color=black),secondary_y=True)
+    _=S.TCR.resample('Q').mean()
+    _=_.iloc[8:]*100/69.82120981
+    fig.add_trace(go.Scatter(x=_.index,y=_["TCR"],name="TCR",line=dict(width=4,dash="dot"),marker_color="#FF8080"),secondary_y=True)
+    fig.add_hline(y=0)
+    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0,height=450,legend=dict(
+                                        orientation="h",
+                                        yanchor="bottom",
+                                        y=1.05,
+                                        xanchor="right",
+                                        x=1,
+                                    bordercolor=black,
+                                    borderwidth=2
+                                ),
+                                yaxis=dict(title="PP del PBI en Dólares",showgrid=True, zeroline=True, showline=True),
+                                yaxis2=dict(title="ToT - TCR (Ene-2004=100)",showgrid=True, zeroline=True, showline=True)
+                                )
+
+    st.plotly_chart(fig,use_container_width=True)
+
 def make_sect_ext_web():
     bop,bopgdp,ica,icagdp=load_sect_ext(datetime.now().strftime("%Y%m%d"))
     c1,c2=st.columns((0.8,0.2))
@@ -119,9 +145,7 @@ def make_sect_ext_web():
         st.caption('Suma Interanual')
     with c2.container(border=True):
         st.subheader('Balance Comercial - ToT + TCR')
-        _=S.TCR.resample('Q').mean()
-        st.write(_.iloc[8:]*100/69.82120981)
-        
+        S.tot
         st.caption('El Tipo de Cambio es re-escalado por conveniencia visual con base Enero 2004 = 100.')
     c1,c2=st.columns(2)
     with c1.container(border=True):
