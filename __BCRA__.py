@@ -68,7 +68,7 @@ def load_bcra_his(date):
     datatco=data.copy()
     TCR=reservas.loc["2004":f"{data.index.values[len(data)-1]}","TCR"]
     TC=reservas.loc["2004":f"{data.index.values[len(data)-1]}","TC"]
-    datatco['TC']=S.TC
+    datatco['TC']=TC
     for col in data.columns.to_list():
         datatco[col]=datatco[col]/datatco["TC"]
 
