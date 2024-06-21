@@ -81,7 +81,7 @@ def plot_bop(data,escala,errores):
                                 )
     if escala=="***Millones de USD***":
         fig['layout']['yaxis']['title']='Millones de USD'
-        fig['layout']['yaxis']['type']='log'
+        #fig['layout']['yaxis']['type']='log'   #Dado a que hay valores negativos no sirve
     else:
         fig['layout']['yaxis']['title']='PP del PBI en USD'
     st.plotly_chart(fig,use_container_width=True)
