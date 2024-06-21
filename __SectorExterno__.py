@@ -91,10 +91,13 @@ def plot_bop(data,escala,errores):
 def plot_balcom(data,escala):
     fig = make_subplots(specs=[[{"secondary_y": True}]])    
     fig.add_trace(go.Scatter(x=data.index,y=data["XN"],fill="tozeroy",marker_color="#3A4D39",fillcolor="#739072",name="Balance Comercial"))
-    fig.add_trace(go.Scatter(x=S.tot.index,y=S.tot.values.tolist(),name="ToT",line=dict(width=3),marker_color=black),secondary_y=True)
+    _=S.tot
+    _.index=_.index.strftime('%b-%Y')
+    fig.add_trace(go.Scatter(x=_.index,y=_.values.tolist(),name="ToT",line=dict(width=3),marker_color='#FF7F3E'),secondary_y=True)
     _=S.TCR.resample('Q').mean()
     _=_.iloc[8:]*100/69.82120981
-    fig.add_trace(go.Scatter(x=_.index,y=_.values.tolist(),name="TCR",line=dict(width=4,dash="dot"),marker_color="#FF8080"),secondary_y=True)
+    _.index=_.index.strftime('%b-%Y')
+    fig.add_trace(go.Scatter(x=_.index,y=_.values.tolist(),name="TCR",line=dict(width=4,dash="dot"),marker_color="#F19ED2"),secondary_y=True)
     fig.add_hline(y=0)
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0,height=450,legend=dict(
                                         orientation="h",
@@ -114,6 +117,7 @@ def plot_balcom(data,escala):
     else:
         fig['layout']['yaxis']['title']='PP del PBI en USD'
     st.plotly_chart(fig,use_container_width=True)
+    del _,fig
 
 def make_sect_ext_web():
     bop,bopgdp,ica,icagdp=load_sect_ext(datetime.now().strftime("%Y%m%d"))
