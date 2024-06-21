@@ -72,6 +72,7 @@ def make_sect_ext_web():
     ica.index=ica.index.strftime('%b-%Y')
     #icagdp=icagdp.loc[f"{S.start_sectext}":]
     #icagdp.index=icagdp.index.strftime('%b-%Y')
+    st.dataframe(bop)
     st.dataframe(bopgdp)
     st.dataframe(ica)
     c1,c2=st.columns(2)
