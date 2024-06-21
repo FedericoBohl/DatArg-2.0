@@ -28,32 +28,31 @@ def load_sect_ext(end):
     ica_his=pd.read_csv("His Data/his-ica.csv",delimiter=";")
     ica_his['Unnamed: 0'] = pd.to_datetime(ica_his.iloc[:, 0].values, format='%Y-%m-%d')
     ica_his.set_index('Unnamed: 0', inplace=True)
-    ids=["74.3_IET_0_M_16",
-        "74.3_IEPP_0_M_35",
-        "74.3_IEMOA_0_M_48",
-        "74.3_IEMOI_0_M_46",
-        "74.3_IECE_0_M_35",
-        "74.3_IIT_0_M_25",
-        "74.3_IIBCA_0_M_32",
-        "74.3_IIBI_0_M_36",
-        "74.3_IICL_0_M_42",
-        "74.3_IIPABC_0_M_50",
-        "74.3_IIBCO_0_M_32",
-        "74.3_IIVAP_0_M_49",
-        "74.3_IIR_0_M_23"
+    ids=["74.3_IET_0_T_16",
+        "74.3_IEPP_0_T_35",
+        "74.3_IEMOA_0_T_48",
+        "74.3_IEMOI_0_T_46",
+        "74.3_IECE_0_T_35",
+        "74.3_IIT_0_T_25",
+        "74.3_IIBCA_0_T_32",
+        "74.3_IIBI_0_T_36",
+        "74.3_IICL_0_T_42",
+        "74.3_IIPABC_0_T_50",
+        "74.3_IIBCO_0_T_32",
+        "74.3_IIVAP_0_T_49",
+        "74.3_IIR_0_T_23",
+        "9.2_PDPC_2004_T_30"
         ]
-    cols=["Expo Totales","PP","MOA","MOI","Combustibles y Energía","Impo Totales","Bienes de capital","Bienes intermedios","Combustibles y Lubricantes","Piezas y acces","Bienes de consumo","Vehículos","Resto"]
+    cols=["Expo Totales","PP","MOA","MOI","Combustibles y Energía","Impo Totales","Bienes de capital","Bienes intermedios","Combustibles y Lubricantes","Piezas y acces","Bienes de consumo","Vehículos","Resto","PBIUSD"]
     ica=get_data(ids,start_date="2023-10-01",col_list=cols)
     ica.index = pd.to_datetime(ica.index, format='%Y-%m-%d')
     ica.reindex(columns=ica_his.columns)
     ica=pd.concat([ica_his,ica],axis=0)
     
-    icagdp=ica.copy().iloc[156:].resample('T').sum()
-    icagdp=icagdp.iloc[:len(data)]
-    icagdp.index=data.index[:len(icagdp)]
-    icagdp["PBIUSD"]=data['PBIUSD'].iloc[:len(icagdp)]
-    for col in ica.columns.to_list():
-        icagdp[col]=icagdp.rolling(4).sum()[col]*100/(icagdp["PBIUSD"]*4)
+    datagdp=data.copy()
+    for col in data.columns.to_list():
+        datagdp[col]=datagdp.rolling(4).sum()[col]*100/(datagdp["PBIUSD"]*4)
+    
     return data.rolling(4).sum(),datagdp.dropna(),ica.rolling(12).sum(),icagdp.dropna()
 def make_sect_ext_web():
     bop,bopgdp,ica,icagdp=load_sect_ext(datetime.now().strftime("%Y%m%d"))
