@@ -68,10 +68,10 @@ def make_sect_ext_web():
     bop.index=bop.index.strftime('%b-%Y')
     bopgdp=bopgdp.loc[f"{S.start_sectext}":]
     bopgdp.index=bopgdp.index.strftime('%b-%Y')
-    #ica=ica.loc[f"{S.start_sectext}":]
-    #ica.index=ica.index.strftime('%b-%Y')
-    icagdp=icagdp.loc[f"{S.start_sectext}":]
-    icagdp.index=icagdp.index.strftime('%b-%Y')
+    ica=ica.loc[f"{S.start_sectext}":]
+    ica.index=ica.index.strftime('%b-%Y')
+    #icagdp=icagdp.loc[f"{S.start_sectext}":]
+    #icagdp.index=icagdp.index.strftime('%b-%Y')
     st.dataframe(ica)
     c1,c2=st.columns(2)
     with c1.container(border=True):
