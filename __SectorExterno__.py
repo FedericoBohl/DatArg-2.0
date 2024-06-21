@@ -154,7 +154,8 @@ def make_sect_ext_web():
     with c2.container(border=True):
         st.subheader('Balance Comercial - ToT + TCR')
         plot_balcom(S.bop,S.escala_sectext)
-        st.caption('El Tipo de Cambio es re-escalado por conveniencia visual con base Enero 2004 = 100.\nEl Balance Comercial viene dado como suma interanual, por lo que el tipo de cambio y los terminos de intercambio son los promedios anuales móviles.')
+        st.caption('El Tipo de Cambio es re-escalado por conveniencia visual con base Enero 2004 = 100.')
+        st.caption('El Balance Comercial viene dado como suma interanual, por lo que el tipo de cambio y los terminos de intercambio son los promedios anuales móviles.')
     c1,c2=st.columns(2)
     with c1.container(border=True):
         st.subheader('Destino de las Expo/Importaciones')
