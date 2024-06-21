@@ -49,8 +49,6 @@ def load_sect_ext(end):
     ica=pd.concat([ica_his,ica],axis=0)
     
     icagdp=ica.copy().iloc[156:].resample('T').sum()
-    st.dataframe(icagdp)
-    st.dataframe(data)
     icagdp=icagdp.iloc[:len(data)]
     icagdp.index=data.index[:len(icagdp)]
     icagdp["PBIUSD"]=data['PBIUSD'].iloc[:len(icagdp)]
@@ -67,9 +65,15 @@ def make_sect_ext_web():
             with c12: st.number_input(value=2016,label='Datos desde',min_value=2000,max_value=2024,key="start_sectext")
     with c2:
         st.link_button(":blue[**Descargar datos:\nSector Externo**]",url="https://1drv.ms/x/c/56f917c917f2e2f5/QfXi8hfJF_kggFaKFQAAAAAA7qhKZI81Oq7vDg",use_container_width=True)
-    deficit=deficit.loc[f"{S.start_sectpub}":]
-    deficit.index=deficit.index.strftime('%b-%Y')
-
+    bop=bop.loc[f"{S.start_sectext}":]
+    bop.index=bop.index.strftime('%b-%Y')
+    bopgdp=bopgdp.loc[f"{S.start_sectext}":]
+    bopgdp.index=bopgdp.index.strftime('%b-%Y')
+    ica=ica.loc[f"{S.start_sectext}":]
+    ica.index=ica.index.strftime('%b-%Y')
+    icagdp=icagdp.loc[f"{S.start_sectext}":]
+    icagdp.index=icagdp.index.strftime('%b-%Y')
+    st.dataframe(icagdp)
     c1,c2=st.columns(2)
     with c1.container(border=True):
         st.subheader('Balance de Pagos')
