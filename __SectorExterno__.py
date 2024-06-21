@@ -28,19 +28,19 @@ def load_sect_ext(end):
     ica_his=pd.read_csv("His Data/his-ica.csv",delimiter=";")
     ica_his['Unnamed: 0'] = pd.to_datetime(ica_his.iloc[:, 0].values, format='%Y-%m-%d')
     ica_his.set_index('Unnamed: 0', inplace=True)
-    ids=["74.3_IET_0_T_16",
-        "74.3_IEPP_0_T_35",
-        "74.3_IEMOA_0_T_48",
-        "74.3_IEMOI_0_T_46",
-        "74.3_IECE_0_T_35",
-        "74.3_IIT_0_T_25",
-        "74.3_IIBCA_0_T_32",
-        "74.3_IIBI_0_T_36",
-        "74.3_IICL_0_T_42",
-        "74.3_IIPABC_0_T_50",
-        "74.3_IIBCO_0_T_32",
-        "74.3_IIVAP_0_T_49",
-        "74.3_IIR_0_T_23",
+    ids=["74.2_IET_0_T_16",
+        "74.2_IEPP_0_T_35",
+        "74.2_IEMOA_0_T_48",
+        "74.2_IEMOI_0_T_46",
+        "74.2_IECE_0_T_35",
+        "74.2_IIT_0_T_25",
+        "74.2_IIBCA_0_T_32",
+        "74.2_IIBI_0_T_36",
+        "74.2_IICL_0_T_42",
+        "74.2_IIPABC_0_T_50",
+        "74.2_IIBCO_0_T_32",
+        "74.2_IIVAP_0_T_49",
+        "74.2_IIR_0_T_23",
         "9.2_PDPC_2004_T_30"
         ]
     cols=["Expo Totales","PP","MOA","MOI","Combustibles y Energía","Impo Totales","Bienes de capital","Bienes intermedios","Combustibles y Lubricantes","Piezas y acces","Bienes de consumo","Vehículos","Resto","PBIUSD"]
