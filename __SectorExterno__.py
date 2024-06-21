@@ -24,7 +24,7 @@ def load_sect_ext(end):
     datagdp['PBIUSD']=data['PBIUSD']
     for col in data.columns.to_list():
         if col=='PBIUSD':pass
-        else: datagdp[col]=datagdp[col]/(datagdp['PBIUSD']*4)
+        else: datagdp[col]=100*datagdp[col]/(datagdp['PBIUSD']*4)
 
 
     ica_his=pd.read_csv("His Data/his-ica.csv",delimiter=";")
@@ -55,7 +55,7 @@ def load_sect_ext(end):
     icagdp['PBIUSD']=ica['PBIUSD']
     for col in ica.columns.to_list():
         if col=='PBIUSD':pass
-        else: icagdp[col]=icagdp[col]/(icagdp['PBIUSD']*4)
+        else: icagdp[col]=100*icagdp[col]/(icagdp['PBIUSD']*4)
 
     return data.rolling(4).sum(),datagdp.dropna(),ica.rolling(4).sum(),icagdp.dropna() 
 
