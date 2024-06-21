@@ -103,7 +103,7 @@ def make_sect_ext_web():
     ica.index=ica.index.strftime('%b-%Y')
     icagdp=icagdp.loc[f"{S.start_sectext}":]
     icagdp.index=icagdp.index.strftime('%b-%Y')
-    if S.escala_sectext=='Millones de USD':
+    if S.escala_sectext=='***Millones de USD***':
         S.bop=bop
         S.ica=ica
     else:
