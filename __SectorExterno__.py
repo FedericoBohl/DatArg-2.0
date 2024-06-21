@@ -49,13 +49,13 @@ def load_sect_ext(end):
     ica.reindex(columns=ica_his.columns)
     ica=pd.concat([ica_his,ica],axis=0)
     
-    icagdp=ica.copy()
-    for col in ica.columns.to_list():
-        icagdp[col]=icagdp.rolling(4).sum()[col]*100/(icagdp["PBIUSD"]*4)
+    #icagdp=ica.copy()
+    #for col in ica.columns.to_list():
+    #    icagdp[col]=icagdp.rolling(4).sum()[col]*100/(icagdp["PBIUSD"]*4)
     
-    return data.rolling(4).sum(),datagdp.dropna(),ica.rolling(12).sum(),icagdp.dropna() 
+    return data.rolling(4).sum(),datagdp.dropna(),ica.rolling(12).sum()#,icagdp.dropna() 
 def make_sect_ext_web():
-    bop,bopgdp,ica,icagdp=load_sect_ext(datetime.now().strftime("%Y%m%d"))
+    bop,bopgdp,ica=load_sect_ext(datetime.now().strftime("%Y%m%d"))
     c1,c2=st.columns((0.8,0.2))
     with c1:
         with st.container(border=True):
@@ -72,9 +72,7 @@ def make_sect_ext_web():
     #ica.index=ica.index.strftime('%b-%Y')
     icagdp=icagdp.loc[f"{S.start_sectext}":]
     icagdp.index=icagdp.index.strftime('%b-%Y')
-    _=ica.copy()
-    st.dataframe(_.resample('T').sum()) 
-    st.data(bopgdp)
+    st.dataframe(ica)
     c1,c2=st.columns(2)
     with c1.container(border=True):
         st.subheader('Balance de Pagos')
