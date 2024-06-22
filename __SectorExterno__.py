@@ -58,7 +58,7 @@ def load_sect_ext(end):
         if col=='PBIUSD':pass
         else: icagdp[col]=100*icagdp[col]/(icagdp['PBIUSD']*4)
 
-    return data.rolling(4).sum(),datagdp.dropna(),ica.rolling(4).sum(),icagdp.dropna(),tot
+    return data.rolling(4).sum().dropna(),datagdp.dropna(),ica.rolling(4).sum()[4:],icagdp.dropna(),tot
 
 @st.cache_resource(show_spinner=False)
 def plot_bop(data,escala,errores):
