@@ -190,6 +190,61 @@ def plot_destXM(escala,año):
 
     return figX,figM
 
+@st.cache_resource(show_spinner=False)
+def plot_ica(data,escala):
+    figX=go.Figure()
+    figX.add_trace(go.Bar(x=data.index,y=data["PP"],name="Productos Primarios",marker_color=red))
+    figX.add_trace(go.Bar(x=data.index,y=data["MOA"],name="Manufacturas de Origen Agropecuario",marker_color=green))
+    figX.add_trace(go.Bar(x=data.index,y=data["MOI"],name="Manufacturas de Origen Industrial",marker_color=blue))
+    figX.add_trace(go.Bar(x=data.index,y=data["Combustibles y Energia"],name="Combustibles y Energias",marker_color=yellow))
+    figX.add_trace(go.Scatter(x=data.index,y=data["Expo Totales"],name="Exportaciones Totales",line=dict(width=4),marker_color=black))
+    figX.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),
+        barmode="stack",height=450, 
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=-0.75,
+            xanchor="right",
+            x=0.75,
+            bordercolor="Black",
+            borderwidth=2
+        ),
+        yaxis=dict(showgrid=False, zeroline=True, showline=True)
+    )
+
+    figM=go.Figure()
+    figM.add_trace(go.Bar(x=data.index,y=data["Bienes de capital"],name="Bienes de Capital",marker_color=red))
+    figM.add_trace(go.Bar(x=data.index,y=data["Piezas y acces"],name="Piezas y Acc. para bienes de capital",marker_color=teal))
+    figM.add_trace(go.Bar(x=data.index,y=data["Bienes intermedios"],name="Bienes Intermedios",marker_color=green))
+    figM.add_trace(go.Bar(x=data.index,y=data["Bienes de consumo"],name="Bienes de Consumo",marker_color=blue))
+    figM.add_trace(go.Bar(x=data.index,y=data["Vehículos"],name="Vehículos",marker_color=yellow))
+    figM.add_trace(go.Bar(x=data.index,y=data["Combustibles y Lubricantes"],name="Combustibles y Lubricantes",marker_color=purple))            
+    figM.add_trace(go.Bar(x=data.index,y=data["Resto"],name="Otros",marker_color=gray))
+    figM.add_trace(go.Scatter(x=data.index,y=data["Impo Totales"],name="Importaciones Totales",line=dict(width=4),marker_color=black))
+    figM.update_layout(margin=dict(l=1, r=1, t=75, b=1),
+        barmode="stack",height=450, 
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=-0.75,
+            xanchor="right",
+            x=0.85,
+            bordercolor="Black",
+            borderwidth=2
+        ),
+        yaxis=dict(showgrid=False, zeroline=True, showline=True, title="Millones de Dólares")
+    )
+    if escala=="***Millones de USD***":
+        figX['layout']['yaxis']['title']='Millones de USD'
+        figX['layout']['yaxis']['type']='log'
+        figM['layout']['yaxis']['title']='Millones de USD'
+        figM['layout']['yaxis']['type']='log'
+
+    else:
+        figX['layout']['yaxis']['title']='PP del PBI en USD'
+        figM['layout']['yaxis']['title']='PP del PBI en USD'
+    return figX,figM
+
 def make_sect_ext_web():
     bop,bopgdp,ica,icagdp,S.tot=load_sect_ext(datetime.now().strftime("%Y%m%d"))
     c1,c2=st.columns((0.8,0.2))
@@ -239,4 +294,7 @@ def make_sect_ext_web():
         im.plotly_chart(im_plot,use_container_width=True)
     with c2.container(border=True):
         st.subheader('Intercambio Comercial Argentino')
+        ex_plot,im_plot=plot_ica(S.ica,S.escala_sectext)
         ex,im=st.tabs(['Exportaciones','Importaciones'])
+        ex.plotly_chart(ex_plot,use_container_width=True)
+        im.plotly_chart(im_plot,use_container_width=True)
