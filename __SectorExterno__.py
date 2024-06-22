@@ -206,7 +206,7 @@ def plot_ica(data,escala):
             y=-0.75,
             xanchor="right",
             x=0.75,
-            bordercolor="Black",
+            bordercolor=black,
             borderwidth=2
         ),
         yaxis=dict(showgrid=False, zeroline=True, showline=True)
@@ -228,8 +228,8 @@ def plot_ica(data,escala):
             yanchor="bottom",
             y=-0.75,
             xanchor="right",
-            x=0.85,
-            bordercolor="Black",
+            x=0.75,
+            bordercolor=black,
             borderwidth=2
         ),
         yaxis=dict(showgrid=False, zeroline=True, showline=True, title="Millones de Dólares")
