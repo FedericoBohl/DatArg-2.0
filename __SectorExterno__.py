@@ -133,17 +133,17 @@ def plot_destXM(escala,año):
     color_map = {
         'América Latina y el Caribe': 'rgb(255, 179, 186)',  # Rosa pastel
         'Canadá': 'rgb(255, 223, 186)',                      # Naranja pastel
-        'Estados Unidos': 'rgb(255, 255, 186)',              # Amarillo pastel
+        'Estados Unidos': 'rgb(186, 255, 239)',              # Verde agua pastel 
         'Unión Europea': 'rgb(186, 255, 201)',               # Verde pastel
         'Reino Unido': 'rgb(186, 255, 255)',                 # Azul pastel
         'Suiza': 'rgb(186, 225, 255)',                       # Azul claro pastel
-        'India': 'rgb(186, 186, 255)',                       # Morado pastel
+        'India': 'rgb(255, 205, 186)',                       # Durazno pastel
         'Rusia': 'rgb(255, 186, 255)',                       # Rosa claro pastel
-        'Asia Pacífico': 'rgb(255, 205, 186)',               # Durazno pastel
+        'Asia Pacífico': 'rgb(186, 186, 255)',               # Morado pastel
         'Israel': 'rgb(210, 255, 173)',                      # Verde claro pastel
         'Australia': 'rgb(255, 248, 201)',                   # Beige pastel
         'Nueva Zelanda': 'rgb(220, 220, 220)',               # Gris claro pastel
-        'Africa': 'rgb(186, 255, 239)',                      # Verde agua pastel
+        'Africa':'rgb(255, 255, 186)',                       # Amarillo pastel
         'Otros': 'rgb(255, 214, 214)'                        # Rosa medio pastel
     }
 
