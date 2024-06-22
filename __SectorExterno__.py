@@ -130,7 +130,27 @@ def plot_destXM(escala,año):
     destM["Share"]=round(destM[año]*100/sum(destM[año]),2)
     destM["rounded"]=round(destM[año],2)
 
-    figX = px.sunburst(destX, path=['Continente', 'Alianza-Pais', 'Pais'], values=destX['rounded' if escala=='Valor (USD)' else  'Share'])
+    color_map = {
+        'América Latina y el Caribe': 'rgb(255, 179, 186)',  # Rosa pastel
+        'Canadá': 'rgb(255, 223, 186)',                      # Naranja pastel
+        'Estados Unidos': 'rgb(255, 255, 186)',              # Amarillo pastel
+        'Unión Europea': 'rgb(186, 255, 201)',               # Verde pastel
+        'Reino Unido': 'rgb(186, 255, 255)',                 # Azul pastel
+        'Suiza': 'rgb(186, 225, 255)',                       # Azul claro pastel
+        'India': 'rgb(186, 186, 255)',                       # Morado pastel
+        'Rusia': 'rgb(255, 186, 255)',                       # Rosa claro pastel
+        'Asia Pacífico': 'rgb(255, 205, 186)',               # Durazno pastel
+        'Israel': 'rgb(210, 255, 173)',                      # Verde claro pastel
+        'Australia': 'rgb(255, 248, 201)',                   # Beige pastel
+        'Nueva Zelanda': 'rgb(220, 220, 220)',               # Gris claro pastel
+        'Africa': 'rgb(186, 255, 239)',                      # Verde agua pastel
+        'Otros': 'rgb(255, 214, 214)'                        # Rosa medio pastel
+    }
+
+
+    figX = px.sunburst(destX, path=['Continente', 'Alianza-Pais', 'Pais'],
+                       values=destX['rounded' if escala=='Valor (USD)' else  'Share'],
+                       color='Continente',color_discrete_map=color_map)
     if escala=="Porcentaje del Total":    
         figX.update_traces(
             hovertemplate="<br>".join([
@@ -138,7 +158,7 @@ def plot_destXM(escala,año):
             "<b>Proporción del Total<b>: %{value}%"
             ])
             )
-        
+
     else:
         figX.update_traces(
             hovertemplate="<br>".join([
@@ -148,7 +168,9 @@ def plot_destXM(escala,año):
             )   
     figX.update_layout(margin=dict(l=1, r=1, t=75, b=1),height=600)
 
-    figM = px.sunburst(destM, path=['Continente', 'Alianza-Pais', 'Pais'], values=destM['rounded' if escala=='Valor (USD)' else  'Share'])
+    figM = px.sunburst(destM, path=['Continente', 'Alianza-Pais', 'Pais'],
+                       values=destM['rounded' if escala=='Valor (USD)' else  'Share'],
+                       color='Continente',color_discrete_map=color_map)
     if escala=="Porcentaje del Total":    
         figM.update_traces(
             hovertemplate="<br>".join([
