@@ -196,8 +196,8 @@ def plot_ica(data,escala):
     figX.add_trace(go.Bar(x=data.index,y=data["PP"],name="Productos Primarios",marker_color=red))
     figX.add_trace(go.Bar(x=data.index,y=data["MOA"],name="Manufacturas de Origen Agropecuario",marker_color=green))
     figX.add_trace(go.Bar(x=data.index,y=data["MOI"],name="Manufacturas de Origen Industrial",marker_color=blue))
-    figX.add_trace(go.Bar(x=data.index,y=data["Combustibles y Energia"],name="Combustibles y Energias",marker_color=yellow))
-    figX.add_trace(go.Scatter(x=data.index,y=data["Expo Totales"],name="Exportaciones Totales",line=dict(width=4),marker_color=black))
+    figX.add_trace(go.Bar(x=data.index,y=data["Combustibles y Energía"],name="Combustibles y Energía",marker_color=yellow))
+    figX.add_trace(go.Scatter(x=data.index,y=data["Expo Totales"],name="Total",line=dict(width=4),marker_color=black))
     figX.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),
         barmode="stack",height=450, 
         legend=dict(
@@ -220,7 +220,7 @@ def plot_ica(data,escala):
     figM.add_trace(go.Bar(x=data.index,y=data["Vehículos"],name="Vehículos",marker_color=yellow))
     figM.add_trace(go.Bar(x=data.index,y=data["Combustibles y Lubricantes"],name="Combustibles y Lubricantes",marker_color=purple))            
     figM.add_trace(go.Bar(x=data.index,y=data["Resto"],name="Otros",marker_color=gray))
-    figM.add_trace(go.Scatter(x=data.index,y=data["Impo Totales"],name="Importaciones Totales",line=dict(width=4),marker_color=black))
+    figM.add_trace(go.Scatter(x=data.index,y=data["Impo Totales"],name="Total",line=dict(width=4),marker_color=black))
     figM.update_layout(margin=dict(l=1, r=1, t=75, b=1),
         barmode="stack",height=450, 
         legend=dict(
