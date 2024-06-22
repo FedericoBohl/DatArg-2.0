@@ -227,7 +227,7 @@ def plot_ica(data,escala):
             orientation="h",
             yanchor="bottom",
             y=-0.75,
-            xanchor="right",
+            xanchor="center",
             x=0.85,
             bordercolor=black,
             borderwidth=2
