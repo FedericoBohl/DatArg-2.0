@@ -121,6 +121,53 @@ def plot_balcom(data,escala):
     st.plotly_chart(fig,use_container_width=True)
     del _,fig
 
+@st.cache_resource(show_spinner=False)
+def plot_destXM(escala,año):
+    destX=pd.read_excel('His Data/Data SectExt.xlsx',sheet_name=f"Dest X")
+    destX["Share"]=round(destX[año]*100/sum(destX[año]),2)
+    destX["rounded"]=round(destX[año],2)
+    destM=pd.read_excel('His Data/Data SectExt.xlsx',sheet_name=f"Dest M")
+    destM["Share"]=round(destM[año]*100/sum(destM[año]),2)
+    destM["rounded"]=round(destM[año],2)
+
+    figX = px.sunburst(destX, path=['Continente', 'Alianza-Pais', 'Pais'], values=destX['rounded' if escala=='Valor (USD)' else  'Share'])
+    if escala=="Porcentaje del Total":    
+        figX.update_traces(
+            hovertemplate="<br>".join([
+            "<b><b>%{label}",
+            "<b>Proporción del Total<b>: %{value}%"
+            ])
+            )
+        
+    else:
+        figX.update_traces(
+            hovertemplate="<br>".join([
+            "<b><b>%{label}",
+            "<b>Valor<b>: %{value} MM USD"
+            ])
+            )   
+    figX.update_layout(margin=dict(l=1, r=1, t=75, b=1),height=600)
+
+    figM = px.sunburst(destM, path=['Continente', 'Alianza-Pais', 'Pais'], values=destM['rounded' if escala=='Valor (USD)' else  'Share'])
+    if escala=="Porcentaje del Total":    
+        figM.update_traces(
+            hovertemplate="<br>".join([
+            "<b><b>%{label}",
+            "<b>Proporción del Total<b>: %{value}%"
+            ])
+            )
+        
+    else:
+        figM.update_traces(
+            hovertemplate="<br>".join([
+            "<b><b>%{label}",
+            "<b>Valor<b>: %{value} MM USD"
+            ])
+            )   
+    figM.update_layout(margin=dict(l=1, r=1, t=75, b=1),height=600)
+
+    return figX,figM
+
 def make_sect_ext_web():
     bop,bopgdp,ica,icagdp,S.tot=load_sect_ext(datetime.now().strftime("%Y%m%d"))
     c1,c2=st.columns((0.8,0.2))
@@ -162,9 +209,12 @@ def make_sect_ext_web():
     with c1.container(border=True):
         st.subheader('Destino de las Expo/Importaciones')
         c11,c12=st.columns(2)
-        c11.number_input('Año',2004,2023,step=1)
-        c12.radio('Destino expo/impo',label_visibility='collapsed',options=['Valor (USD)','Porcentaje del Total'])
+        c11.number_input('Año',2004,2023,value=2023,step=1,key='year_destXM')
+        c12.radio('Destino expo/impo',label_visibility='collapsed',options=['Valor (USD)','Porcentaje del Total'],key='escalaXM')
+        ex_plot,im_plot=plot_destXM(S.escalaXM,S.year_destXM)
         ex,im=st.tabs(['Exportaciones','Importaciones'])
+        ex.plotly_chart(ex_plot,use_container_width=True)
+        im.plotly_chart(im_plot,use_container_width=True)
     with c2.container(border=True):
         st.subheader('Intercambio Comercial Argentino')
         ex,im=st.tabs(['Exportaciones','Importaciones'])
