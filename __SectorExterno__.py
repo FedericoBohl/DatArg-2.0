@@ -85,7 +85,7 @@ def plot_bop(data,escala,errores):
         #fig['layout']['yaxis']['type']='log'   #Dado a que hay valores negativos no sirve
     else:
         fig['layout']['yaxis']['title']='PP del PBI en USD'
-    st.plotly_chart(fig,use_container_width=True)
+    st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 @st.cache_resource(show_spinner=False)
 def plot_balcom(data,escala):
@@ -290,11 +290,11 @@ def make_sect_ext_web():
         c12.radio('Destino expo/impo',label_visibility='collapsed',options=['Valor (USD)','Porcentaje del Total'],key='escalaXM')
         ex_plot,im_plot=plot_destXM(S.escalaXM,S.year_destXM)
         ex,im=st.tabs(['Exportaciones','Importaciones'])
-        ex.plotly_chart(ex_plot,use_container_width=True)
-        im.plotly_chart(im_plot,use_container_width=True)
+        ex.plotly_chart(ex_plot,config={'displayModeBar': False},use_container_width=True)
+        im.plotly_chart(im_plot,config={'displayModeBar': False},use_container_width=True)
     with c2.container(border=True):
         st.subheader('Intercambio Comercial Argentino')
         ex_plot,im_plot=plot_ica(S.ica,S.escala_sectext)
         ex,im=st.tabs(['Exportaciones','Importaciones'])
-        ex.plotly_chart(ex_plot,use_container_width=True)
-        im.plotly_chart(im_plot,use_container_width=True)
+        ex.plotly_chart(ex_plot,config={'displayModeBar': False},use_container_width=True)
+        im.plotly_chart(im_plot,config={'displayModeBar': False},use_container_width=True)
