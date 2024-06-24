@@ -221,18 +221,18 @@ def plot_ica(data,escala):
     figM.add_trace(go.Bar(x=data.index,y=data["Combustibles y Lubricantes"],name="Combustibles y Lubricantes",marker_color=purple))            
     figM.add_trace(go.Bar(x=data.index,y=data["Resto"],name="Otros",marker_color=gray))
     figM.add_trace(go.Scatter(x=data.index,y=data["Impo Totales"],name="Total",line=dict(width=4),marker_color=black))
-    figM.update_layout(margin=dict(l=1, r=1, t=75, b=1),
+    figM.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),
         barmode="stack",height=450, 
         legend=dict(
             orientation="h",
             yanchor="bottom",
             y=-0.75,
             xanchor="right",
-            x=0.75,
+            x=0.95,
             bordercolor=black,
             borderwidth=2
         ),
-        yaxis=dict(showgrid=False, zeroline=True, showline=True, title="Millones de Dólares")
+        yaxis=dict(showgrid=False, zeroline=True, showline=True)
     )
     if escala=="***Millones de USD***":
         figX['layout']['yaxis']['title']='Millones de USD'
