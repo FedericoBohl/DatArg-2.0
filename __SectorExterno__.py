@@ -118,7 +118,7 @@ def plot_balcom(data,escala):
         #fig['layout']['yaxis']['type']='log'   #Dado a que hay valores negativos no sirve
     else:
         fig['layout']['yaxis']['title']='PP del PBI en USD'
-    st.plotly_chart(fig,use_container_width=True)
+    st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
     del _,fig
 
 @st.cache_resource(show_spinner=False)
