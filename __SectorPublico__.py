@@ -272,7 +272,7 @@ def plot_deficit(escala,data:pd.DataFrame):
         fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
-    t1.plotly_chart(fig,use_container_width=True)
+    t1.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=data.index, y=data["Superavit Primario"], name="Resultado Primario", marker_color=black,line=dict(width=3)), secondary_y=True)
@@ -310,7 +310,7 @@ def plot_deficit(escala,data:pd.DataFrame):
                                     yaxis=dict(showgrid=False, zeroline=True, showline=True),
                                     yaxis2=dict(showgrid=False, zeroline=True, showline=True)
                                 )
-    t2.plotly_chart(fig,use_container_width=True)
+    t2.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 @st.cache_data(show_spinner=False)
 def make_map(data,geo,extras):
@@ -363,7 +363,7 @@ def make_map(data,geo,extras):
         )
     )
 
-    st.plotly_chart(fig,use_container_width=True)
+    st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 @st.cache_data(show_spinner=False)
 def plot_deuda(data,type_plot):
@@ -388,7 +388,7 @@ def plot_deuda(data,type_plot):
                                             borderwidth=2
                                         ),yaxis=dict(showgrid=False, zeroline=True, showline=True))
             fig['layout']['yaxis']['title']='Millones de USD (Fecha de Pago Efectivo)'
-            t1.plotly_chart(fig,use_container_width=True)
+            t1.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
             
             fig=go.Figure()
             fig.add_trace(go.Scatter(x=data.index,y=data['Titulos Publicos'],name='Total',line=dict(width=3.5),marker_color=black))
@@ -406,7 +406,7 @@ def plot_deuda(data,type_plot):
                                             borderwidth=2
                                         ),yaxis=dict(showgrid=False, zeroline=True, showline=True))
             fig['layout']['yaxis']['title']='Millones de USD (Fecha de Pago Efectivo)'
-            t2.plotly_chart(fig,use_container_width=True)
+            t2.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
             fig=go.Figure()
             fig.add_trace(go.Scatter(x=data.index,y=data['Letras'],name='Total',line=dict(width=3.5),marker_color=black))
@@ -422,7 +422,7 @@ def plot_deuda(data,type_plot):
                                             borderwidth=2
                                         ),yaxis=dict(showgrid=False, zeroline=True, showline=True))
             fig['layout']['yaxis']['title']='Millones de USD (Fecha de Pago Efectivo)'
-            t3.plotly_chart(fig,use_container_width=True)
+            t3.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 
         else:
@@ -447,7 +447,7 @@ def plot_deuda(data,type_plot):
                                             borderwidth=2
                                         ),yaxis=dict(showgrid=False, zeroline=True, showline=True))
             fig['layout']['yaxis']['title']='Millones de USD (Fecha de Pago Efectivo)'
-            t1.plotly_chart(fig,use_container_width=True)
+            t1.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 @st.cache_data(show_spinner=False)
 def plot_endeudamiento(data,escala):
@@ -470,7 +470,7 @@ def plot_endeudamiento(data,escala):
         fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
-    st.plotly_chart(fig,use_container_width=True)
+    st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 
     st.caption('Los datos corresponden al endeudamiento en cada moneda neto de lo amortizado en el mes en cuestión. Se ignora el incremento de otros pasivos.')
@@ -503,7 +503,7 @@ def plot_ingresos_gastos(data,escala):
         fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
-    t1.plotly_chart(fig,use_container_width=True)
+    t1.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
     fig=go.Figure()
     fig.add_trace(go.Scatter(x=data.index,y=data['Gastos Corrientes'],name='Total',line=dict(width=5),marker_color=black))
@@ -527,7 +527,7 @@ def plot_ingresos_gastos(data,escala):
         fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
-    t2.plotly_chart(fig,use_container_width=True)
+    t2.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 def make_sect_pub_web():
     deficit,datagdp,datatco,endeudamiento,endeudamientogdp,endeudamientotco,corr,corrgdp,corrtco=load_data_sectpub(datetime.now().strftime("%Y%m%d"))

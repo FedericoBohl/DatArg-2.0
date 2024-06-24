@@ -29,7 +29,7 @@ def plot_agregados(escala,bcra: pd.DataFrame, tasas: pd.DataFrame):
         fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
-    st.plotly_chart(fig,use_container_width=True)
+    st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 @st.cache_data(show_spinner=False)
 def plot_BM(escala, bcra: pd.DataFrame):
@@ -56,7 +56,7 @@ def plot_BM(escala, bcra: pd.DataFrame):
         fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
-    st.plotly_chart(fig,use_container_width=True)
+    st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 @st.cache_data(show_spinner=False)
 def plot_pasivos_rem(escala,bcra: pd.DataFrame,tasas: pd.DataFrame): # El botón de BM está andando mal
@@ -130,7 +130,7 @@ def plot_pasivos_rem(escala,bcra: pd.DataFrame,tasas: pd.DataFrame): # El botón
     #    fig['layout']['yaxis2']['title']='%-Tasa'
     #    fig['layout']['yaxis3']['title']='Puntos de la BM'
     #    fig['layout']['yaxis4']['title']='%-Tasa'
-    st.plotly_chart(fig,use_container_width=True)
+    st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
         
 @st.cache_data(show_spinner=False)
 def plot_fin_mon(escala,bcra: pd.DataFrame):
@@ -157,7 +157,7 @@ def plot_fin_mon(escala,bcra: pd.DataFrame):
         fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
-    st.plotly_chart(fig,use_container_width=True)
+    st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 @st.cache_data(show_spinner=False)
 def plot_varBM(escala,bcra:pd.DataFrame,roll:int):
@@ -186,7 +186,7 @@ def plot_varBM(escala,bcra:pd.DataFrame,roll:int):
         pass
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
-    st.plotly_chart(fig,use_container_width=True)
+    st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 
 @st.cache_data(show_spinner=False)
@@ -215,7 +215,7 @@ def plot_depositos(escala, bcra:pd.DataFrame, tasas: pd.DataFrame)->None:
         fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
-    st.plotly_chart(fig,use_container_width=True)
+    st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 @st.cache_data(show_spinner=False)
 def plot_reservas(reservas): # Está andando medio mal, no reacciona bien con el botón
@@ -266,7 +266,7 @@ def plot_reservas(reservas): # Está andando medio mal, no reacciona bien con el
                     )
                 )
     )
-    st.plotly_chart(fig,use_container_width=True)
+    st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
     st.caption("El TCR es una elaboración propia en base el IPC de EEUU, el IPC ajustado de la sección Precios y el Tipo de cambio nominal oficial")
 
 

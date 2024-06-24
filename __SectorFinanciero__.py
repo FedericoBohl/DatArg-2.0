@@ -39,7 +39,7 @@ def make_cedears(data_now : pd.DataFrame):
     fig.update_traces(marker=dict(cornerradius=10))
     fig.update_layout(margin=dict(l=1, r=1, t=10, b=1))
     st.markdown("""<h2 style='text-align: center; color: #404040; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>S&P 500 en Cedears</h2>""", unsafe_allow_html=True)
-    st.plotly_chart(fig,use_container_width=True)
+    st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
     data.set_index('Nombre', inplace=True)
     data=data.drop(columns=['Name','Weigths'])
     c1,c2= st.columns((0.6,0.4))
@@ -185,7 +185,7 @@ def make_merv_web():
                 container=st.container(border=True)
                 if container.radio('¿Que panel desea ver?' , options=['Merval','Panel General'] , horizontal=True, index=0 , key='which_merv') == 'Merval':
                     st.markdown("""<h2 style='text-align: center; color: #404040; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>Merval</h2>""", unsafe_allow_html=True)
-                    st.plotly_chart(fig_merv, use_container_width=True)
+                    st.plotly_chart(fig_merv,config={'displayModeBar': False},use_container_width=True)
                 else:
                     st.markdown("""<h2 style='text-align: center; color: #404040; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>Panel General</h2>""", unsafe_allow_html=True)
                     #st.plotly_chart(fig_gen, use_container_width=True)
