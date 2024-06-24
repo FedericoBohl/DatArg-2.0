@@ -297,4 +297,4 @@ def make_sect_ext_web():
         ex_plot,im_plot=plot_ica(S.ica,S.escala_sectext)
         ex,im=st.tabs(['Exportaciones','Importaciones'])
         ex.plotly_chart(ex_plot,config={'displayModeBar': False},use_container_width=True)
-        im.plotly_chart(im_plot,config={'modeBarButtonsToRemove': ['zoom', 'pan','zoomIn','zoomOut','autoScale','resetScale','select','lasso2d']},use_container_width=True)
+        im.plotly_chart(im_plot,config={'displaylogo': False,'modeBarButtonsToRemove': ['zoom', 'pan','zoomIn','zoomOut','autoScale','resetScale','select','lasso2d']},use_container_width=True)
