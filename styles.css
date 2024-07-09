@@ -52,3 +52,7 @@ div[data-testid="stFullScreenFrame"]{
 .dashboardTable tbody tr:nth-of-type(even) {
    background-color: #f3f3f3;
 }
+
+#MainMenu{
+   visibility: hidden;
+}
