@@ -21,6 +21,10 @@ div[data-testid="stMetricValue"]{
    color: #82858d;
 }
 
+div[data-testid="StyledFullScreenButton"]{
+   visibility: hidden;
+}
+
 
 /*Estilos para tablas*/
 
