@@ -15,6 +15,10 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded")
 
+@st.cache_resource(show_spinner=False)
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 
 try:
@@ -26,6 +30,7 @@ if S.is_session_pc:  #Fix momentaneo
     try:
         components.html(w_barra_stocks,height=80)
     except:pass
+    local_css('static\css\styles.css')
     col1,col2=st.columns((0.1,0.9))
     with col1:st.image("Icono.jpeg",caption="🐐")
     with col2:

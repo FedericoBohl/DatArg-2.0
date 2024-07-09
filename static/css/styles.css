@@ -1,24 +1,52 @@
-/* Estilos para el widget st.radio */
-.streamlit-widget.stRadio {
-    /* Estilos generales */
+/*Estilo general para contenedores*/
+div[data-testid="stAppViewBlockContainer"] div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stVerticalBlockBorderWrapper"],
+div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stHorizontalBlock"] div[data-testid="column"] div[data-testid="stVerticalBlockBorderWrapper"]  {
+   background-color:white;
+   padding:5px;
+   border-radius:15px;        
+   /* border: silver solid 2px; */
+   box-shadow: 0px 0px 10px rgba(178, 182, 192,0.3)
 }
 
-.streamlit-widget.stRadio input[type="radio"] {
-    /* Estilos para los radios */
+/* Color etiquetas y títulos*/
+h3,
+label[data-testid="stMetricLabel"] p{  
+   font-weight:bold;
+   color:#1ea47e
 }
 
-.streamlit-widget.stRadio label {
-    /* Estilos para las etiquetas (textos) */
-    font-weight: normal; /* Por defecto */
+/* Estilo de valor de métricas*/
+div[data-testid="stMetricValue"]{
+   font-size:2.5em;
+   font-weight:bold;
+   color: #82858d;
 }
 
-.streamlit-widget.stRadio label.checked {
-    /* Estilos para la etiqueta seleccionada */
-    color: blue;
-    font-weight: bold;
+/*Estilos para tablas*/
+
+.dashboardTable {
+   border-collapse: collapse;
+   margin: 25px 0;
+   font-size: 0.9em;
+   font-family: sans-serif;    
+   width:100%
+}
+.dashboardTable thead tr {
+   background-color: #f4f4f9;
+   color: #12bb94;
+   text-align: left;
+}
+.dashboardTable th,
+.dashboardTable td {
+   /* padding: 5px 5px; */
+   border:none;
 }
 
-/* Animaciones */
-.streamlit-widget.stRadio label {
-    transition: color 0.3s ease-in-out;
+.dashboardTable tbody tr {
+   border-bottom: 1px solid #ecedff;
+   background-color:white;
+}
+
+.dashboardTable tbody tr:nth-of-type(even) {
+   background-color: #f3f3f3;
 }
