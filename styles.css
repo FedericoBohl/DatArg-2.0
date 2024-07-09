@@ -3,7 +3,7 @@ div[data-testid="stAppViewBlockContainer"] div[data-testid="stHorizontalBlock"] 
    background-color:white;
    padding:5px;
    border-radius:15px;        
-   border: rgb(252, 4, 4) solid 2px;
+   border: silver solid 2px;
    box-shadow: 0px 0px 10px rgba(178, 182, 192, 0.5)  
 }
 
