@@ -9,7 +9,8 @@ def make_precios_web():
                             {
                             background-color:#404040;
                             padding:5px;
-                            border-radius:15px;        
+                            border-radius:15px;       
+                            border: silver solid 2px;];
                             box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5)  
                             }    
                             """):
