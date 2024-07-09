@@ -486,4 +486,18 @@ w_barra_stocks="""<!-- TradingView Widget BEGIN -->
                 </div>
                 <!-- TradingView Widget END -->"""
 
+st.cache_resource(show_spinner=False)
+def get_pbiii():
+    ...
 
+def add_gdp(df:pd.DataFrame)->pd.DataFrame:
+    values=get_pbi()
+    if len(df) == len(values):
+        df['PBI'] = values
+    else:
+        if len(df) > len(values):
+            values = list(values) + [None] * (len(df) - len(values))
+        else:
+            values = values[:len(df)]
+        df['PBI'] = values
+    return df
