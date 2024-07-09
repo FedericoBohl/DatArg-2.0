@@ -20,6 +20,12 @@ div[data-testid="stMetricValue"]{
    color: #82858d;
 }
 
+/* Estilo de valor de tabs*/
+div[data-testid="stTabs"]{
+   background-color:#B2B6C04D;
+   padding:5px;
+   border-radius:15px    
+}
 /*Estilos para tablas*/
 
 .dashboardTable {
