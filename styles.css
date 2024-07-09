@@ -1,7 +1,7 @@
 /*Estilo general para contenedores*/
 div[data-testid="stAppViewBlockContainer"]{
    background-color:white;
-   padding:1px;
+   padding:3px;
    border-radius:0px;        
 
 }
