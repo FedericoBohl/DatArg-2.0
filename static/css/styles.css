@@ -1,0 +1,24 @@
+/* Estilos para el widget st.radio */
+.streamlit-widget.stRadio {
+    /* Estilos generales */
+}
+
+.streamlit-widget.stRadio input[type="radio"] {
+    /* Estilos para los radios */
+}
+
+.streamlit-widget.stRadio label {
+    /* Estilos para las etiquetas (textos) */
+    font-weight: normal; /* Por defecto */
+}
+
+.streamlit-widget.stRadio label.checked {
+    /* Estilos para la etiqueta seleccionada */
+    color: blue;
+    font-weight: bold;
+}
+
+/* Animaciones */
+.streamlit-widget.stRadio label {
+    transition: color 0.3s ease-in-out;
+}
