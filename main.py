@@ -1,9 +1,11 @@
 from librerias import *
-from __BCRA__ import make_BCRA_web
-from __SectorExterno__ import make_sect_ext_web
-from __SectorPublico__ import make_sect_pub_web
-from __SectorInternacional__ import make_internacional_web
-from __SectorFinanciero__ import make_merv_web
+from Paginas.__BCRA__ import make_BCRA_web
+from Paginas.__SectorExterno__ import make_sect_ext_web
+from Paginas.__SectorPublico__ import make_sect_pub_web
+from Paginas.__SectorInternacional__ import make_internacional_web
+from Paginas.__SectorFinanciero__ import make_merv_web
+from Paginas.__Actividad__ import make_actividad_web
+from Paginas.__Pobreza__ import make_pobreza_web
 
 
 
@@ -41,9 +43,16 @@ if S.is_session_pc:  #Fix momentaneo
             #with c2:
             create_widget(w_calendar_tv,height=350,width=int(S.page_width*0.85))
 
-    t_info, t_actividad, t_PI, t_ML, t_precios, t_bcra, t_SecExt, t_SecPub, t_Intl, t_Merv= st.tabs(["Info","Actividad","Pobreza/Indigencia", "Mercado Laboral", "Precios", "BCRA", "Sector Externo","Sector Público","Internacional","Bolsa Argentina"])
+    t_info, t_actividad, t_PI, t_precios, t_bcra, t_SecExt, t_SecPub, t_Intl, t_Merv= st.tabs(["Info","Actividad","Pobreza y Empleo", "Precios", "BCRA", "Sector Externo","Sector Público","Internacional","Bolsa Argentina"])
 
     S.pbi_men=get_pbi()
+
+    with t_actividad:
+        make_actividad_web()
+    with t_PI:
+        make_pobreza_web()
+    with t_precios:
+        make_actividad_web()
     with t_bcra:
         make_BCRA_web()
     with t_SecExt:
