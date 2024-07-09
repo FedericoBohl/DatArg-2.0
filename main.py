@@ -20,7 +20,7 @@ st.set_page_config(
 def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-
+local_css('styles.css')
 
 try:
     S.page_width,S.is_session_pc=page_info()
@@ -31,7 +31,7 @@ if S.is_session_pc:  #Fix momentaneo
     try:
         components.html(w_barra_stocks,height=80)
     except:pass
-    local_css('styles.css')
+    
     col1,col2=st.columns((0.1,0.9))
     with col1:st.image("Icono.jpeg",caption="🐐")
     with col2:
