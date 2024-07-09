@@ -1,6 +1,6 @@
 /*Estilo general para contenedores*/
 div[data-testid="stAppViewBlockContainer"] div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stVerticalBlockBorderWrapper"],
-div[data-testid="stHorizontalBlock"] div[data-testid="column"]  {
+div[data-testid="stHorizontalBlock"] div[data-testid="column"]{
    background-color:white;
    padding:5px;
    border-radius:15px    
@@ -26,7 +26,11 @@ div[data-testid="stTabs"]{
    padding:5px;
    border-radius:15px    
 }
-
+div[data-testid="stVerticalBlockBorderWrapper"]{
+   background-color:#B2B6C04D;
+   padding:5px;
+   border-radius:15px    
+}
 
 /*Estilos para tablas*/
 
