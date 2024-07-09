@@ -6,6 +6,7 @@ from Paginas.__SectorInternacional__ import make_internacional_web
 from Paginas.__SectorFinanciero__ import make_merv_web
 from Paginas.__Actividad__ import make_actividad_web
 from Paginas.__Pobreza__ import make_pobreza_web
+from Paginas.__Precios__ import make_precios_web
 
 
 
@@ -57,7 +58,7 @@ if S.is_session_pc:  #Fix momentaneo
     with t_PI:
         make_pobreza_web()
     with t_precios:
-        make_actividad_web()
+        make_precios_web()
     with t_bcra:
         make_BCRA_web()
     with t_SecExt:
