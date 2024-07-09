@@ -5,7 +5,7 @@ div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stHorizontalBlo
    padding:5px;
    border-radius:15px;        
    /* border: silver solid 2px; */
-   box-shadow: 0px 0px 10px rgba(178, 182, 192,0.3)
+   box-shadow: 0px 0px 10px #0048ff
 }
 
 /* Color etiquetas y títulos*/
@@ -32,7 +32,7 @@ div[data-testid="stMetricValue"]{
    width:100%
 }
 .dashboardTable thead tr {
-   background-color: #f4f4f9;
+   background-color: #ff00cc;
    color: #12bb94;
    text-align: left;
 }
