@@ -15,7 +15,7 @@ st.set_page_config(
     page_icon="🧉",
     layout="wide",
     initial_sidebar_state="expanded")
-
+st.logo(icon_image='Icono.jpeg')
 #@st.cache_resource(show_spinner=False)
 def local_css(file_name):
     with open(file_name) as f:
