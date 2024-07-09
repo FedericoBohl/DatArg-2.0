@@ -46,13 +46,6 @@ def load_bcra_his(date):
     data.reindex(columns=bcra.columns)
     data=pd.concat([bcra,data],axis=0)
     datagdp=data.copy()
-    #datagdp=pd.concat([datagdp,pbi],axis=1,ignore_index=True)
-
-    st.dataframe(data)
-    st.write(S.pbi_men)
-
-    #datagdp["PBI"]=S.pbi_men[:data.shape[0]]
-    #st.dataframe(datagdp)
     datagdp=add_gdp(datagdp)
     for col in data.columns.to_list():
         datagdp[col]=datagdp[col]*100/(datagdp["PBI"]*4)
