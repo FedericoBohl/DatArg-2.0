@@ -1,6 +1,6 @@
 /*Estilo general para contenedores*/
-div[data-testid="stAppViewBlockContainer"],
-div[data-testid="stHorizontalBlock"] div[data-testid="column"]{
+div[data-testid="stAppViewBlockContainer"] div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stVerticalBlockBorderWrapper"],
+div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stHorizontalBlock"] div[data-testid="column"] div[data-testid="stVerticalBlockBorderWrapper"]  {
    background-color:white;
    padding:5px;
    border-radius:15px    
@@ -18,18 +18,6 @@ div[data-testid="stMetricValue"]{
    font-size:2.5em;
    font-weight:bold;
    color: #82858d;
-}
-
-/* Estilo de valor de tabs*/
-div[data-testid="stTabs"]{
-   background-color:#B2B6C04D;
-   padding:5px;
-   border-radius:15px    
-}
-div[data-testid="stVerticalBlockBorderWrapper"]{
-   background-color:#B2B6C04D;
-   padding:5px;
-   border-radius:15px    
 }
 
 /*Estilos para tablas*/
