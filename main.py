@@ -41,8 +41,6 @@ if S.is_session_pc:  #Fix momentaneo
     t_info, t_actividad, t_PI, t_ML, t_precios, t_bcra, t_SecExt, t_SecPub, t_Intl, t_Merv= st.tabs(["Info","Actividad","Pobreza/Indigencia", "Mercado Laboral", "Precios", "BCRA", "Sector Externo","Sector Público","Internacional","Bolsa Argentina"])
 
     S.pbi_men=get_pbi()
-    st.write(type(S.pbi_men))
-    st.write(S.pbi_men)
     with t_bcra:
         make_BCRA_web()
     with t_SecExt:

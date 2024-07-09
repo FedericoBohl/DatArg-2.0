@@ -127,8 +127,10 @@ def get_data(id:str|list[str],start_date:str,col_list:list[str]|str|None=None):
             df.rename(columns={1:result["meta"][1]["field"]["description"]},inplace=True)
     return df[~df.index.duplicated(keep='first')]
 
+
+########    Debería modificarse para que tome como ancla el ULTIMO valor del PBI real
 @st.cache_data(show_spinner=False)
-def get_pbi():
+def get_pbi()->list:
     data=[450307.061,
     451549.5601,
     450180.8253,
@@ -486,9 +488,6 @@ w_barra_stocks="""<!-- TradingView Widget BEGIN -->
                 </div>
                 <!-- TradingView Widget END -->"""
 
-st.cache_resource(show_spinner=False)
-def get_pbiii():
-    ...
 
 def add_gdp(df:pd.DataFrame)->pd.DataFrame:
     values=get_pbi()

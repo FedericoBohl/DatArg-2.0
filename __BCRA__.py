@@ -51,8 +51,9 @@ def load_bcra_his(date):
     st.dataframe(data)
     st.write(S.pbi_men)
 
-    datagdp["PBI"]=S.pbi_men[:data.shape[0]]
-    st.dataframe(datagdp)
+    #datagdp["PBI"]=S.pbi_men[:data.shape[0]]
+    #st.dataframe(datagdp)
+    datagdp=add_gdp(datagdp)
     for col in data.columns.to_list():
         datagdp[col]=datagdp[col]*100/(datagdp["PBI"]*4)
 
