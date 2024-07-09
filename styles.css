@@ -4,7 +4,7 @@ div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stHorizontalBlo
    background-color:white;
    padding:5px;
    border-radius:15px;        
-   /* border: silver solid 2px; */
+   border: silver solid 2px;
 }
 
 /* Color etiquetas y títulos*/
