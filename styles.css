@@ -2,7 +2,9 @@
 div[data-testid="stAppViewBlockContainer"]{
    background-color:white;
    padding:5px;
-   border-radius:15px    
+   border-radius:15px;        
+   /* border: silver solid 2px; */
+   box-shadow: 0px 0px 10px rgba(178, 182, 192,0.3)  
 }
 
 /* Color etiquetas y títulos*/
