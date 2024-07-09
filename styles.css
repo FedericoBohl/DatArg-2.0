@@ -56,3 +56,7 @@ div[data-testid="stFullScreenFrame"]{
 #MainMenu{
    visibility: hidden;
 }
+
+div[data-testid="stToolbar"]{
+   visibility: hidden;
+}
