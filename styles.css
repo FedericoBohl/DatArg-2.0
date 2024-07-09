@@ -1,5 +1,5 @@
 /*Estilo general para contenedores*/
-div[data-testid="stAppViewBlockContainer"]{
+div[data-testid="stAppViewBlockContainer"] div[data-testid="stVerticalBlockBorderWrapper"]{
    background-color:white;
    padding:5px;
    border-radius:15px;        
