@@ -89,15 +89,7 @@ def make_BCRA_web():
     reservas,bcra,bcragdp,datatco,tasas,S.TCR,S.TC=load_bcra_his(datetime.now().strftime("%Y%m%d"))
     c1,c2=st.columns((0.7,0.3))
     with c1:
-        with cont(key='panel bcra',css_styles="""
-                            {
-                            background-color:white;
-                            padding:5px;
-                            border-radius:15px;       
-                            border: silver solid 2px;];
-                            box-shadow: 0px 0px 13px 10px rgba(255, 255, 255, 0.5)  
-                            }    
-                            """):
+        with st.container(border=True):
             c11,c12=st.columns((0.3,0.7))
             with c11: st.radio("Escala de los datos",options=["***Millones de ARS***","***Millones de USD-Oficial***","***Millones de USD-Blue***","***% del PBI***"],key="escala_bcra")
             with c12: st.number_input(value=2016,label='Datos desde',min_value=2004,max_value=2024,key="start_bcra")
@@ -122,77 +114,21 @@ def make_BCRA_web():
     with c1:
         #with st.container(border=True,height=143):
         #    st.subheader("Datos Spot a Agregar")
-        with cont(key='agregados',css_styles="""
-                            {
-                            background-color:white;
-                            padding:5px;
-                            border-radius:15px;       
-                            border: silver solid 2px;];
-                            box-shadow: 0px 0px 13px 10px rgba(255, 255, 255, 0.5)  
-                            }    
-                            """):
+        with st.container(border=True):
             plot_agregados(S.escala_bcra,S.data_bcra,tasas)
-        with cont(key='bm',css_styles="""
-                            {
-                            background-color:white;
-                            padding:5px;
-                            border-radius:15px;       
-                            border: silver solid 2px;];
-                            box-shadow: 0px 0px 13px 10px rgba(255, 255, 255, 0.5)  
-                            }    
-                            """):
+        with st.container(border=True):
             plot_BM(S.escala_bcra,S.data_bcra)
         st.text(" ")
-        with cont(key='reservas',css_styles="""
-                            {
-                            background-color:white;
-                            padding:5px;
-                            border-radius:15px;       
-                            border: silver solid 2px;];
-                            box-shadow: 0px 0px 13px 10px rgba(255, 255, 255, 0.5)  
-                            }    
-                            """):
+        with st.container(border=True):
             plot_reservas(reservas)
     with c2:
-        with cont(key='pas rem',css_styles="""
-                            {
-                            background-color:white;
-                            padding:5px;
-                            border-radius:15px;       
-                            border: silver solid 2px;];
-                            box-shadow: 0px 0px 13px 10px rgba(255, 255, 255, 0.5)  
-                            }    
-                            """):
+        with st.container(border=True):
             plot_pasivos_rem(S.escala_bcra,S.data_bcra,tasas)
-        with cont(key='fin mon',css_styles="""
-                            {
-                            background-color:white;
-                            padding:5px;
-                            border-radius:15px;       
-                            border: silver solid 2px;];
-                            box-shadow: 0px 0px 13px 10px rgba(255, 255, 255, 0.5)  
-                            }    
-                            """):
+        with st.container(border=True):
             plot_fin_mon(S.escala_bcra,S.data_bcra)
-        with cont(key='depositos',css_styles="""
-                            {
-                            background-color:white;
-                            padding:5px;
-                            border-radius:15px;       
-                            border: silver solid 2px;];
-                            box-shadow: 0px 0px 13px 10px rgba(255, 255, 255, 0.5)  
-                            }    
-                            """):
+        with st.container(border=True):
             plot_depositos(S.escala_bcra,S.data_bcra,tasas)
-    with cont(key='var bm',css_styles="""
-                            {
-                            background-color:white;
-                            padding:5px;
-                            border-radius:15px;       
-                            border: silver solid 2px;];
-                            box-shadow: 0px 0px 13px 10px rgba(255, 255, 255, 0.5)  
-                            }    
-                            """):
+    with st.container(border=True):
         st.markdown("<h3 style='text-align: center;'>Factores de variación de la Base Monetaria</h3>", unsafe_allow_html=True)
         st.number_input("¿Suma Móvil de cuantos meses?",min_value=1,max_value=24,value=12,key="roll_bcra_bm")
         plot_varBM(S.escala_bcra,S.data_bcra,S.roll_bcra_bm)
