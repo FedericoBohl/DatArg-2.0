@@ -11,7 +11,7 @@ def make_precios_web():
                             padding:5px;
                             border-radius:15px;       
                             border: silver solid 2px;];
-                            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5)  
+                            box-shadow: 0px 0px 13px 10px rgba(255, 255, 255, 0.5)  
                             }    
                             """):
             st.header('Inflación')
