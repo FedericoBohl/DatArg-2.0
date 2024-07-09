@@ -1,6 +1,6 @@
 /*Estilo general para contenedores*/
 div[data-testid="stAppViewBlockContainer"] div[data-testid="stHorizontalBlock"] div[data-testid="column"]{
-   background-color:rgb(201, 8, 8);
+   background-color:white;
    padding:5px;
    border-radius:15px;        
    /*border: silver solid 2px;]*/
@@ -22,7 +22,7 @@ div[data-testid="stMetricValue"]{
 }
 
 div[data-testid="StyledFullScreenButton"]{
-   visibility: hidden;
+   visibility:collapse;
 }
 
 
