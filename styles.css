@@ -3,8 +3,7 @@ div[data-testid="stAppViewBlockContainer"] div[data-testid="stVerticalBlockBorde
 div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stHorizontalBlock"] div[data-testid="column"] div[data-testid="stVerticalBlockBorderWrapper"]  {
    background-color:white;
    padding:5px;
-   border-radius:15px;        
-   border: silver solid 2px;
+   border-radius:15px    
 }
 
 /* Color etiquetas y títulos*/
