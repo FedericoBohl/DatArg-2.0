@@ -7,7 +7,7 @@ def make_precios_web():
     with c1:
         with cont(key='Inflacion_cont',css_styles="""
                             {
-                            background-color:#404040;
+                            background-color:white;
                             padding:5px;
                             border-radius:15px;       
                             border: silver solid 2px;];
