@@ -8,6 +8,12 @@ div[data-testid="stAppViewBlockContainer"] div[data-testid="stVerticalBlockBorde
 }
 
 /* Color etiquetas y títulos*/
+h1,
+label[data-testid="stHeader"] p{  
+   font-weight:bold;
+   color:#404040
+}
+
 h3,
 label[data-testid="stMetricLabel"] p{  
    font-weight:bold;
