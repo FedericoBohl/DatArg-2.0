@@ -5,7 +5,7 @@ from streamlit_extras.stylable_container import stylable_container as cont
 def make_precios_web():
     c1,c2=st.columns(2)
     with c1:
-        with cont(css_styles="""
+        with cont(key='Inflacion',css_styles="""
                             {
                             background-color:white;
                             padding:5px;
