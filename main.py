@@ -40,15 +40,6 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded")
 
-option = st.radio("Elige una opción", ["Opción 1", "Opción 2", "Opción 3"])
-
-# Aplicar estilos dinámicos para la opción seleccionada
-if option == "Opción 1":
-    st.markdown('<style>.streamlit-widget.stRadio label:nth-of-type(1) {color: blue !important; font-weight: bold !important;}</style>', unsafe_allow_html=True)
-elif option == "Opción 2":
-    st.markdown('<style>.streamlit-widget.stRadio label:nth-of-type(2) {color: blue !important; font-weight: bold !important;}</style>', unsafe_allow_html=True)
-elif option == "Opción 3":
-    st.markdown('<style>.streamlit-widget.stRadio label:nth-of-type(3) {color: blue !important; font-weight: bold !important;}</style>', unsafe_allow_html=True)
 
 
 try:
@@ -60,6 +51,15 @@ if S.is_session_pc:  #Fix momentaneo
     try:
         components.html(w_barra_stocks,height=80)
     except:pass
+    option = st.radio("Elige una opción", ["Opción 1", "Opción 2", "Opción 3"])
+
+    # Aplicar estilos dinámicos para la opción seleccionada
+    if option == "Opción 1":
+        st.markdown('<style>.streamlit-widget.stRadio label:nth-of-type(1) {color: blue !important; font-weight: bold !important;}</style>', unsafe_allow_html=True)
+    elif option == "Opción 2":
+        st.markdown('<style>.streamlit-widget.stRadio label:nth-of-type(2) {color: blue !important; font-weight: bold !important;}</style>', unsafe_allow_html=True)
+    elif option == "Opción 3":
+        st.markdown('<style>.streamlit-widget.stRadio label:nth-of-type(3) {color: blue !important; font-weight: bold !important;}</style>', unsafe_allow_html=True)
 
 
     col1,col2=st.columns((0.1,0.9))
