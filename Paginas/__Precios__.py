@@ -1,6 +1,4 @@
 from librerias import *
-from streamlit_extras.stylable_container import stylable_container as cont
-
 
 def make_precios_web():
     c1,c2=st.columns(2)
