@@ -1,6 +1,9 @@
 /*Estilo general para contenedores*/
 div[data-testid="stAppViewBlockContainer"]{
-   background-color:white; 
+   background-color:white;
+   padding:0px;
+   border-radius:0px;        
+
 }
 
 div[data-testid="stHorizontalBlock"] div[data-testid="column"]{
