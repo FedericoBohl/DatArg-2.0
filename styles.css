@@ -1,12 +1,6 @@
 /*Estilo general para contenedores*/
 div[data-testid="stAppViewBlockContainer"] div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stVerticalBlockBorderWrapper"],
-div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stHorizontalBlock"] div[data-testid="column"] div[data-testid="stVerticalBlockBorderWrapper"]  {
-   background-color:white;
-   padding:5px;
-   border-radius:15px;        
-   /* border: silver solid 2px; */
-   box-shadow: 0px 0px 10px #0048ff
-}
+
 
 /* Color etiquetas y títulos*/
 h3,
@@ -32,7 +26,7 @@ div[data-testid="stMetricValue"]{
    width:100%
 }
 .dashboardTable thead tr {
-   background-color: #ff00cc;
+   background-color: #f4f4f9;
    color: #12bb94;
    text-align: left;
 }
