@@ -1,4 +1,5 @@
 /*Estilo general para contenedores*/
+div[data-testid="stAppViewBlockContainer"] div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stVerticalBlockBorderWrapper"],
 div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stHorizontalBlock"] div[data-testid="column"] div[data-testid="stVerticalBlockBorderWrapper"]  {
    background-color:white;
    padding:5px;
@@ -11,7 +12,7 @@ div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stHorizontalBlo
 h3,
 label[data-testid="stMetricLabel"] p{  
    font-weight:bold;
-   color:#1ea47e
+   color:#404040
 }
 
 /* Estilo de valor de métricas*/
