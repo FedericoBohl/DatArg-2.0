@@ -20,6 +20,11 @@ div[data-testid="stMetricValue"]{
    color: #82858d;
 }
 
+/* Estilo de valor de plots*/
+div[data-testid="stFullScreenFrame"]{
+   color: #e70895;
+}
+
 /*Estilos para tablas*/
 
 .dashboardTable {
