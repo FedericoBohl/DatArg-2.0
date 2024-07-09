@@ -5,34 +5,7 @@ from __SectorPublico__ import make_sect_pub_web
 from __SectorInternacional__ import make_internacional_web
 from __SectorFinanciero__ import make_merv_web
 
-st.markdown("""
-    <style>
-        /* Estilos para el widget st.radio */
-        .streamlit-widget.stRadio {
-            /* Estilos generales */
-        }
 
-        .streamlit-widget.stRadio input[type="radio"] {
-            /* Estilos para los radios */
-        }
-
-        .streamlit-widget.stRadio label {
-            /* Estilos para las etiquetas (textos) */
-            font-weight: normal; /* Por defecto */
-        }
-
-        .streamlit-widget.stRadio label.checked {
-            /* Estilos para la etiqueta seleccionada */
-            color: blue;
-            font-weight: bold;
-        }
-
-        /* Animaciones */
-        .streamlit-widget.stRadio label {
-            transition: color 0.3s ease-in-out;
-        }
-    </style>
-""", unsafe_allow_html=True)
 
 st.set_page_config(
     page_title="DatArg",
@@ -51,6 +24,34 @@ if S.is_session_pc:  #Fix momentaneo
     try:
         components.html(w_barra_stocks,height=80)
     except:pass
+    st.markdown("""
+        <style>
+            /* Estilos para el widget st.radio */
+            .streamlit-widget.stRadio {
+                /* Estilos generales */
+            }
+
+            .streamlit-widget.stRadio input[type="radio"] {
+                /* Estilos para los radios */
+            }
+
+            .streamlit-widget.stRadio label {
+                /* Estilos para las etiquetas (textos) */
+                font-weight: normal; /* Por defecto */
+            }
+
+            .streamlit-widget.stRadio label.checked {
+                /* Estilos para la etiqueta seleccionada */
+                color: blue;
+                font-weight: bold;
+            }
+
+            /* Animaciones */
+            .streamlit-widget.stRadio label {
+                transition: color 0.3s ease-in-out;
+            }
+        </style>
+    """, unsafe_allow_html=True)
     option = st.radio("Elige una opción", ["Opción 1", "Opción 2", "Opción 3"])
 
     # Aplicar estilos dinámicos para la opción seleccionada
