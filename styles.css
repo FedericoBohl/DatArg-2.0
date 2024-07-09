@@ -1,4 +1,12 @@
-
+/*Estilo general para contenedores*/
+div[data-testid="stAppViewBlockContainer"] div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stVerticalBlockBorderWrapper"],
+div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stHorizontalBlock"] div[data-testid="column"] div[data-testid="stVerticalBlockBorderWrapper"]  {
+   background-color:white;
+   padding:5px;
+   border-radius:15px;        
+   /* border: silver solid 2px; */
+   box-shadow: 0px 0px 10px rgba(178, 182, 192,0.3)
+}
 
 /* Color etiquetas y títulos*/
 h3,
