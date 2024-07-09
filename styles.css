@@ -26,7 +26,7 @@ div[data-testid="stTabs"]{
    padding:5px;
    border-radius:15px    
 }
-div[data-testid="stVerticalBlockBorderWrapper"]{
+div[data-testid="stVerticalBlock"]{
    background-color:#B2B6C04D;
    padding:5px;
    border-radius:15px    
