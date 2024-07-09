@@ -1,5 +1,5 @@
 /*Estilo general para contenedores*/
-div[data-testid="stAppViewBlockContainer"] div[data-testid="stVerticalBlockBorderWrapper"]{
+div[data-testid="stAppViewBlockContainer"] div[data-testid="stHorizontalBlock"] {
    background-color:white;
    padding:5px;
    border-radius:15px;        
@@ -8,12 +8,6 @@ div[data-testid="stAppViewBlockContainer"] div[data-testid="stVerticalBlockBorde
 }
 
 /* Color etiquetas y títulos*/
-h1,
-label[data-testid="stHeader"] p{  
-   font-weight:bold;
-   color:#404040
-}
-
 h3,
 label[data-testid="stMetricLabel"] p{  
    font-weight:bold;
