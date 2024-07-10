@@ -71,13 +71,13 @@ div[data-testid="stToolbar"]{
 
 /*Editar Tabs*/
 div[data-testid="stTabs"]{
-   display: grid;
+   display: flex;
+   justify-content: center;
 }
 
 div[data-baseweb="tab-list"] {
    font-size: 14px;
-   align-content: center;
-   align-self: center;
+   flex-grow:1;
    text-align: center;
  }
 
