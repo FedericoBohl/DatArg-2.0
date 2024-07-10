@@ -72,17 +72,17 @@ div[role="radiogroup"] {
    flex-direction:row;
 }
 input[type="radio"] + div {
-   background: #E6FF4D !important;
+   background: #6CACE4 !important;
    color: #17455C;
    border-radius: 38px !important;
    padding: 8px 18px !important;
 }
 input[type="radio"][tabindex="0"] + div {
-   background: #6CACE4 !important;
+   background: #E6FF4D !important;
    color: #17455C !important;
 }
 input[type="radio"][tabindex="0"] + div p {
-   color: #000000 !important;
+   color: #17455C !important;
 }
 div[role="radiogroup"] label > div:first-child {
    display: none !important;
