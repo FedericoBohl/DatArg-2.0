@@ -71,7 +71,7 @@ div[data-testid="stToolbar"]{
 
 /*Editar Tabs*/
 div[data-testid="stTabs"]{
-   display: flex;
+   display:contents;
    justify-content: center;
 }
 
