@@ -70,7 +70,7 @@ div[data-testid="stToolbar"]{
 }
 
 /*Editar Tabs*/
-button[data-baseweb="tab-list"] > div[data-testid="stMarkdownContainer"] > p {
+div[data-baseweb="tab-list"] {
    font-size: 14px;
    align-content: center;
    align-self: center;
