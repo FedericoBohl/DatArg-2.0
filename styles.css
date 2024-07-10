@@ -66,7 +66,10 @@ div[data-testid="stToolbar"]{
 
 
 
-
+div.row-widget.stRadio > div {
+   flex-direction: row;
+   align-items: stretch;
+}
 
 div[role="radiogroup"] {
    flex-direction:row;
