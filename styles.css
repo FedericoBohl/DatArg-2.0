@@ -82,7 +82,7 @@ input[type="radio"][tabindex="0"] + div {
    color: #17455C !important;
 }
 input[type="radio"][tabindex="0"] + div p {
-   color: #6CACE4 !important;
+   color: #000000 !important;
 }
 div[role="radiogroup"] label > div:first-child {
    display: none !important;
