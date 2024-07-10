@@ -79,13 +79,16 @@ input[type="radio"] + div {
    color: #17455C;
    border-radius: 38px !important;
    padding: 8px 18px !important;
+   align-items: stretch;
 }
 input[type="radio"][tabindex="0"] + div {
    background: #E6FF4D !important;
    color: #17455C !important;
+   align-items: stretch;
 }
 input[type="radio"][tabindex="0"] + div p {
    color: #17455C !important;
+   align-items: stretch !important;
 }
 div[role="radiogroup"] label > div:first-child {
    display: none !important;
