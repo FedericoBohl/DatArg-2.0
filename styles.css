@@ -69,9 +69,12 @@ div[data-testid="stToolbar"]{
    visibility: hidden;
 }
 
+/*Editar Tabs*/
+button[data-baseweb="tab"] > div[data-testid="stMarkdownContainer"] > p {
+   align-items: center;
+ }
 
-
-
+ /*Editar Radio*/
 div.row-widget.stRadio > div {
    flex-direction: row;
    align-items: stretch;
