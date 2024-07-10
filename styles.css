@@ -6,7 +6,13 @@ div[data-testid="stAppViewBlockContainer"] div[data-testid="stHorizontalBlock"] 
    /*border: silver solid 2px;]*/
    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5)
 }
-
+div[data-testid="stAppViewBlockContainer"]{
+   background-color:rgb(0, 0, 0);
+   padding:2.5px;
+   border-radius:0px;
+   /*border: silver solid 2px;]*/
+   box-shadow: 0px 0px 0px rgba(255, 255, 255, 0.5)
+}
 /* Color etiquetas y títulos*/
 h3,
 label[data-testid="stMetricLabel"] p{  
