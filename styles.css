@@ -73,7 +73,7 @@ div.row-widget.stRadio > div {
 
 /* Ocultar el div interno */
 div.row-widget.stRadio > div[role="radiogroup"] > label[data-baseweb="radio"] > div:first-child {
-   content: '○';
+   content: '';
    display: inline-block;
    color: black;
    margin-right: 8px;
