@@ -70,8 +70,12 @@ div[data-testid="stToolbar"]{
 }
 
 /*Editar Tabs*/
-button[data-baseweb="tab"] > div[data-testid="stMarkdownContainer"] > p {
+button[data-baseweb="tab-list"] > div[data-testid="stMarkdownContainer"] > p {
    font-size: 14px;
+   align-content: center;
+   align-self: center;
+   align-tracks: center;
+   text-align: center;
  }
 
  /*Editar Radio*/
