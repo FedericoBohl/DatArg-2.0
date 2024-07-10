@@ -74,6 +74,7 @@ div.row-widget.stRadio > div {
 /* Ocultar el div interno */
 div.row-widget.stRadio > div[role="radiogroup"] > label[data-baseweb="radio"] > div:first-child {
    content: '';
+   background: transparent;
    display: inline-block;
    color: black;
    margin-right: 8px;
@@ -93,15 +94,7 @@ div.row-widget.stRadio > div[role="radiogroup"] > label[data-baseweb="radio"] {
    transition: background-color 0.3s; /* Para la animación */
 }
 
-/* Añadir círculo negro a la izquierda */
-div.row-widget.stRadio > div[role="radiogroup"] > label[data-baseweb="radio"]::before {
-   content: '→';
-   display: inline-block;
-   color: black;
-   margin-right: 8px;
-   font-weight: bold;
-   font-size: 1.2em; /* Ajustar tamaño según necesidad */
-}
+
 
 /* Cambiar el ícono del valor seleccionado a una flecha */
 input[type="radio"]:checked + label[data-baseweb="radio"]::before {
