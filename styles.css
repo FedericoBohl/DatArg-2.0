@@ -95,10 +95,11 @@ div.row-widget.stRadio > div[role="radiogroup"] > label[data-baseweb="radio"] {
 
 /* Añadir círculo negro a la izquierda */
 div.row-widget.stRadio > div[role="radiogroup"] > label[data-baseweb="radio"]::before {
-   content: '○';
+   content: '→';
    display: inline-block;
    color: black;
    margin-right: 8px;
+   font-weight: bold;
    font-size: 1.2em; /* Ajustar tamaño según necesidad */
 }
 
