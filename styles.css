@@ -71,10 +71,14 @@ div.row-widget.stRadio > div {
    align-items: stretch;
 }
 
-/* Ocultar el div interno 
+/* Ocultar el div interno */
 div.row-widget.stRadio > div[role="radiogroup"] > label[data-baseweb="radio"] > div:first-child {
-   display: none;
-}*/
+   content: '○';
+   display: inline-block;
+   color: black;
+   margin-right: 8px;
+   font-size: 1.2em; /* Ajustar tamaño según necesidad */
+}
 
 /* Estilizar las opciones sin bordes */
 div.row-widget.stRadio > div[role="radiogroup"] > label[data-baseweb="radio"] {
