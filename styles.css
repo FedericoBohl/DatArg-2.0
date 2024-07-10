@@ -70,8 +70,11 @@ div[data-testid="stToolbar"]{
 }
 
 /*Editar Tabs*/
+div[data-testid="stTabs"]{
+   display: grid;
+}
+
 div[data-baseweb="tab-list"] {
-   flex-wrap: wrap;
    font-size: 14px;
    align-content: center;
    align-self: center;
