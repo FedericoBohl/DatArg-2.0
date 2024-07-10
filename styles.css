@@ -70,16 +70,18 @@ div[data-testid="stToolbar"]{
 }
 
 /*Editar Tabs*/
+/*
 div[data-testid="stTabs"]{
    display:contents;
    justify-content: center;
 }
-
+*//*
 div[data-baseweb="tab-list"] {
    font-size: 14px;
    flex-grow:1;
    text-align: center;
  }
+   */
 
  /*Editar Radio*/
 div.row-widget.stRadio > div {
