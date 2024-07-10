@@ -71,10 +71,7 @@ div[data-testid="stToolbar"]{
 
 /*Editar Tabs*/
 button[data-baseweb="tab"] > div[data-testid="stMarkdownContainer"] > p {
-   align-items: center;
-   align-self: center;
-   align-content: center;
-   text-align: center;
+   font-size: 14px;
  }
 
  /*Editar Radio*/
