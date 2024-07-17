@@ -76,22 +76,25 @@ div[data-testid="stTabs"]{
    justify-content: center;
 }
 */
-.stTabs [data-baseweb="tab-list"] {
-   gap: 2px;
- }
+div[data-baseweb="tab-list"] {
+   display: flex;
+   justify-content: center;
+}
 
-.stTabs [data-baseweb="tab"] {
-   height: 50px;
-     white-space: pre-wrap;
-   background-color: #F0F2F6;
-   border-radius: 4px 4px 0px 0px;
-   gap: 1px;
-   padding-top: 10px;
-   padding-bottom: 10px;
- }
+/* Estilo del borde inferior de las tabs */
+div[data-baseweb="tab"] {
+   border-bottom: 2px solid transparent;
+}
 
-.stTabs [aria-selected="true"] {
-     background-color: #FFFFFF;
+div[data-baseweb="tab"][aria-selected="true"] {
+   border-bottom: 2px solid #FF4B4B; /* Puedes cambiar el color según tus necesidades */
+}
+
+div[data-baseweb="tab"]::after {
+   content: "";
+   flex-grow: 1;
+   border-bottom: 2px solid transparent;
+   margin-top: -2px; /* Ajusta para que coincida con el borde de la pestaña seleccionada */
 }
 
 
