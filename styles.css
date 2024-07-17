@@ -75,13 +75,20 @@ div[data-testid="stTabs"]{
    display:contents;
    justify-content: center;
 }
-*//*
-div[data-baseweb="tab-list"] {
-   font-size: 14px;
-   flex-grow:1;
-   text-align: center;
- }
-   */
+*/
+/* Custom style for the active tab */
+.stTabs > .tablist > .react-tabs__tab--selected {
+background-color: #0e1117;
+color: #ff0000;
+font-family: 'Courier New', Courier, monospace;
+}
+/* Custom style for all tabs */
+.stTabs > .tablist > .react-tabs__tab {
+   background-color: #00ff33;
+   color: #1500ff;
+   font-family: 'Courier New', Courier, monospace;
+}
+
 
  /*Editar Radio*/
 div.row-widget.stRadio > div {
