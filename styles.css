@@ -91,7 +91,13 @@ div[data-baseweb="tab"][aria-selected="true"] {
    border-bottom: 2px solid #FF4B4B; /* Puedes cambiar el color según tus necesidades */
 }
 
-
+/* Remuevo el borde del contenedor de las tabs */
+div[data-baseweb="tab-list"]::before {
+   content: '';
+   display: block;
+   width: 100%;
+   border-bottom: 0; /* Quita el borde inferior del contenedor */
+}
 
 
  /*Editar Radio*/
