@@ -31,15 +31,12 @@ div[data-testid="StyledFullScreenButton"]{
    visibility:collapse;
 }
 
-/* Header centrado
-div[data-testid="stHeading"]{
+/* Header centrado*/
+div[data-testid="stHeadingWithActionElements"]{
    display: flex;
    justify-content: center;
-}*/
-.st-emotion-cache-asc41u h2 {
-   color: blue !important;
-   text-align: center !important;
- }
+}
+
 
 /*Estilos para tablas*/
 
