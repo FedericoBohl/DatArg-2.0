@@ -75,6 +75,12 @@ div[data-testid="stTabs"]{
    justify-content: center;
 }
 
+/* Centro la lista de tabs */
+div[data-baseweb="tab-list"] {
+   display: flex;
+   justify-content: center;
+}
+
 
 
 
