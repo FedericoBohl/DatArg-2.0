@@ -93,10 +93,18 @@ div[data-baseweb="tab"][aria-selected="true"] {
 
 /* Remuevo el borde del contenedor de las tabs */
 div[data-baseweb="tab-list"]::before {
-   content: '';
-   display: block;
    width: 100%;
    border-bottom: 0; /* Quita el borde inferior del contenedor */
+}
+
+/* Bordes inferiores personalizados para cada tab */
+div[data-baseweb="tab"]:not([aria-selected="true"]) {
+   border-bottom: 2px solid transparent;
+}
+
+/* Estilo del contenedor de las tabs para evitar el borde inferior */
+div[data-baseweb="tabs"] {
+   border-bottom: none;
 }
 
 
