@@ -1,7 +1,7 @@
 div[class="element-container"]{
    visibility:collapse;
 }
-
+ 
 
 /*Estilo general para contenedores*/
 div[data-testid="stAppViewBlockContainer"] div[data-testid="stHorizontalBlock"] div[data-testid="column"]{
