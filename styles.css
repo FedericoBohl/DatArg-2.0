@@ -1,14 +1,23 @@
-.block-container {
-   padding-top: 0rem;
-   padding-bottom: 0rem;
+div[class="element-container"]{
+   visibility:collapse;
 }
-.st-emotion-cache-z5fcl4 {
-   position: relative;
-   top: -62px;
-   }
 
 
-
+/*Estilo general para contenedores*/
+div[data-testid="stAppViewBlockContainer"] div[data-testid="stHorizontalBlock"] div[data-testid="column"]{
+   background-color:white;
+   padding:5px;
+   border-radius:15px;
+   /*border: silver solid 2px;]*/
+   box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5)
+}
+div[data-testid="stAppViewBlockContainer"]{
+   background-color:rgb(255, 255, 255);
+   padding:2.5px;
+   border-radius:0px;
+   /*border: silver solid 2px;]*/
+   box-shadow: 0px 0px 0px rgba(255, 255, 255, 0.5)
+}
 /* Color etiquetas y títulos*/
 h3,
 label[data-testid="stMetricLabel"] p{  
