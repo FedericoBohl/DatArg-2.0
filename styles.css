@@ -1,9 +1,4 @@
-div[data-testid="element-container"]{
-   height: 0;
-   overflow: hidden;
-   padding: 0;
-   margin: 0;
-}
+
 
 /*Estilo general para contenedores*/
 div[data-testid="stAppViewBlockContainer"] div[data-testid="stHorizontalBlock"] div[data-testid="column"]{
