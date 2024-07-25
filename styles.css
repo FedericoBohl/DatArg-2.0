@@ -87,6 +87,10 @@ div[data-baseweb="tab"] {
    padding: 0 10px; /* Añadir algo de padding para que no estén tan pegadas entre sí */
 }
 
+div[data-baseweb="tab"][aria-selected="true"] {
+   border-bottom: 2px solid #FF4B4B; /* Puedes cambiar el color según tus necesidades */
+}
+
 
 
 
