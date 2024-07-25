@@ -81,6 +81,12 @@ div[data-baseweb="tab-list"] {
    justify-content: center;
 }
 
+/* Estilo del borde inferior de las tabs */
+div[data-baseweb="tab"] {
+   border-bottom: 2px solid transparent;
+   padding: 0 10px; /* Añadir algo de padding para que no estén tan pegadas entre sí */
+}
+
 
 
 
