@@ -1,4 +1,11 @@
-
+.block-container {
+   padding-top: 0rem;
+   padding-bottom: 0rem;
+}
+.st-emotion-cache-z5fcl4 {
+   position: relative;
+   top: -62px;
+   }
 
 
 /*Estilo general para contenedores*/
@@ -146,11 +153,4 @@ div[role="radiogroup"] label {
 }
 div[role="radiogroup"] {
    gap: 12px;
-}
-
-
-
-.block-container {
-   padding-top: 0rem;
-   padding-bottom: 0rem;
 }
