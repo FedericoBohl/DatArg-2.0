@@ -95,7 +95,7 @@ div[data-baseweb="tab"][aria-selected="true"] {
 /* Remuevo el borde del contenedor de las tabs */
 div[data-baseweb="tab-list"]::before {
    content: '';
-   display: block;
+   /*display: block;*/
    width: 100%;
    border-bottom: 0; /* Quita el borde inferior del contenedor */
 }
