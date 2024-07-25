@@ -41,10 +41,10 @@ if S.is_session_pc:  #Fix momentaneo
         #x=f"""<div data-stale="false" width="{page_width}"""+"""class="element-container st-emotion-cache-u4g42f e1f1d6gn4" data-testid="element-container"><div class="stHeadingContainer" data-testid="stHeading"><div class="stMarkdown" style="width: 524.8px;"><div data-testid="stMarkdownContainer" class="st-emotion-cache-w3enc8 e1nzilvr5" style="width: 524.8px;"><div class="st-emotion-cache-1629p8f e1nzilvr2"><h2 id="61901152"><div data-testid="StyledLinkIconContainer" class="st-emotion-cache-zt5igj e1nzilvr4"><a href="#61901152" class="st-emotion-cache-p2doo6 e1nzilvr3"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a><span class="st-emotion-cache-10trblm e1nzilvr1"><span style='text-align: center; color: #6CACE4; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>Datos Argentina 🧉</span></span></div></h2></div></div></div><hr data-testid="stHeadingDivider" color="#FFB81C" class="st-emotion-cache-h8phe6 e1nzilvr0"></div></div>"""
         #st.markdown(x,unsafe_allow_html=True)
         st.markdown("""<h2 style='text-align: center; color: #6CACE4; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>Datos Argentina 🧉</h2>""", unsafe_allow_html=True)
-        st.markdown("""<hr data-testid="stHeadingDivider" color="#3d9df3" class="st-emotion-cache-h8phe6 e1nzilvr0">""",unsafe_allow_html=True)
+        #st.markdown("""<hr data-testid="stHeadingDivider" color="#3d9df3" class="st-emotion-cache-h8phe6 e1nzilvr0">""",unsafe_allow_html=True)
         
         #st.markdown("""<hr data-testid="stHeadingDivider" color="#6cace4" class="st-emotion-cache-h8phe6 e1nzilvr0">""", unsafe_allow_html=True)
-        #st.header('Test 🧉',divider='blue')
+        st.header('Test 🧉',divider='blue')
         st.caption(" ")
         with st.popover("Calendario Económico",use_container_width=True,help="Los datos muy recientes pueden tardar unos pocos dias en ser agregados a las series oficiales. Aquí puede ver los últimos datos anunciados y las fechas de proximos anuncios."):
             #c1,c2=st.columns(2)
