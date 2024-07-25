@@ -42,7 +42,7 @@ if S.is_session_pc:  #Fix momentaneo
         #st.markdown(x,unsafe_allow_html=True)
         st.markdown("""<h2 style='text-align: center; color: #6CACE4; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>Datos Argentina 🧉</h2>""", unsafe_allow_html=True)
         #st.markdown("""<hr data-testid="stHeadingDivider" color="#6cace4" class="st-emotion-cache-h8phe6 e1nzilvr0">""", unsafe_allow_html=True)
-        st.header('',divider='blue')
+        st.header('Test 🧉',divider='blue')
         st.caption(" ")
         with st.popover("Calendario Económico",use_container_width=True,help="Los datos muy recientes pueden tardar unos pocos dias en ser agregados a las series oficiales. Aquí puede ver los últimos datos anunciados y las fechas de proximos anuncios."):
             #c1,c2=st.columns(2)
