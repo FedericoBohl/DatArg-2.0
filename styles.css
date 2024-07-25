@@ -33,7 +33,7 @@ div[data-testid="StyledFullScreenButton"]{
 
 /* Header centrado*/
 div[data-testid="stHeadingWithActionElements"]{
-   display: flex;
+   display: grid;
    justify-content: center;
 }
 
