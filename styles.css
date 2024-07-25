@@ -69,6 +69,12 @@ div[data-testid="stToolbar"]{
    visibility: hidden;
 }
 
+/*Editar Tabs*/
+div[data-testid="stTabs"]{
+   display:contents;
+   justify-content: center;
+}
+
 
 
 
