@@ -13,8 +13,8 @@ from bs4 import BeautifulSoup
 import re
 from datetime import datetime,timedelta
 fred = Fred(api_key="6050b935d2f878f1100c6f217cbe6753")
-from streamlit_js_eval import streamlit_js_eval
-from streamlit_javascript import st_javascript
+#from streamlit_js_eval import streamlit_js_eval
+#from streamlit_javascript import st_javascript
 from user_agents import parse
 import streamlit.components.v1 as components
 from streamlit_extras.stylable_container import stylable_container as cont
@@ -83,13 +83,13 @@ pio.templates["Oficial"] = go.layout.Template(
 pio.templates.default = "Oficial"
 
 #@st.cache_data()
-def page_info():
-    page_width = streamlit_js_eval(js_expressions='window.innerWidth', key='WIDTH',  want_output = True)
-    if page_width==None:page_width=2000
-    ua_string = st_javascript("""window.navigator.userAgent;""")
-    user_agent = parse(ua_string)
-    is_session_pc = not user_agent.is_mobile
-    return page_width,is_session_pc
+#def page_info():
+#    page_width = streamlit_js_eval(js_expressions='window.innerWidth', key='WIDTH',  want_output = True)
+#    if page_width==None:page_width=2000
+#    ua_string = st_javascript("""window.navigator.userAgent;""")
+#    user_agent = parse(ua_string)
+#    is_session_pc = not user_agent.is_mobile
+#    return page_width,is_session_pc
 
 def get_data(id:str|list[str],start_date:str,col_list:list[str]|str|None=None):
     now=datetime.now().strftime("%Y-%m-%d")
