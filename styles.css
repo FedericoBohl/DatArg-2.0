@@ -183,4 +183,5 @@ div[role="radiogroup"] {
 /*Ocultar logo streamlit*/
 a[href="https://streamlit.io/cloud"]{
    visibility: collapse;
+   display: none;
 }
