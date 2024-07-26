@@ -125,7 +125,7 @@ div[data-baseweb="tabs"] {
 }
 
 .stTabs [aria-selected="true"] {
-   background-color: blue !important;
+   background-color:#6CACE4 !important;
    color: white !important;
    border-radius: 10px !important; /* Ajusta el valor según el nivel de redondeado que desees */
    padding: 10px !important; /* Ajusta el relleno según sea necesario */
@@ -133,7 +133,9 @@ div[data-baseweb="tabs"] {
 .stTabs [data-baseweb="tab-highlight"] {
    visibility: collapse;
 }
-
+.stTabs [data-baseweb="tab-border"]{
+   visibility: collapse;
+}
 
 
  /*Editar Radio*/
