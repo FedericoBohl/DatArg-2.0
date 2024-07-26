@@ -1,4 +1,12 @@
+/* Ajustar el padding del contenedor principal para reducir el espacio superior */
+.main {
+   padding-top: 0;
+}
 
+/* Asegurarse de que no haya margen superior en el primer elemento */
+.element-container:first-of-type {
+   margin-top: 0;
+}
 
 /*Estilo general para contenedores*/
 div[data-testid="stAppViewBlockContainer"] div[data-testid="stHorizontalBlock"] div[data-testid="column"]{
