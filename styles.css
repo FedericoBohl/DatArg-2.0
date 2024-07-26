@@ -94,9 +94,6 @@ div[data-testid="stTabs"]{
 div[data-baseweb="tab-list"] {
    display: flex;
    justify-content: center;
-   border-radius: 10px !important; /* Ajusta el valor según el nivel de redondeado que desees */
-   padding: 10px !important; /* Ajusta el relleno según sea necesario */
-
 }
 
 /* Estilo del borde inferior de las tabs */
