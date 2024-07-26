@@ -28,8 +28,8 @@ label[data-testid="stMetricLabel"] p{
 span[class="st-emotion-cache-gi0tri e1nzilvr1"]{
    visibility: collapse;
 }
-
-h2[id="c7da57d5"]{
+/* Aplica al caso del header de Datos Argentina*/
+h2[id="61901152"]{
    display: flex;
    justify-content: center;
    color: #6CACE4;
@@ -123,6 +123,17 @@ div[data-baseweb="tab"]:not([aria-selected="true"]) {
 div[data-baseweb="tabs"] {
    border-bottom: none;
 }
+
+.stTabs [aria-selected="true"] {
+   background-color: blue !important;
+   color: white !important;
+   border-radius: 10px !important; /* Ajusta el valor según el nivel de redondeado que desees */
+   padding: 10px !important; /* Ajusta el relleno según sea necesario */
+ }
+.stTabs [data-baseweb="tab-highlight"] {
+   visibility: collapse;
+}
+
 
 
  /*Editar Radio*/
