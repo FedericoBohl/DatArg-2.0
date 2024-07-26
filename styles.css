@@ -179,3 +179,8 @@ div[role="radiogroup"] {
    display: flex;
    justify-content: center;
 }
+
+/*Ocultar logo streamlit*/
+.st-emotion-cache-1dtefog{
+   visibility: collapse;
+}
