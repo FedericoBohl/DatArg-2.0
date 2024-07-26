@@ -89,7 +89,7 @@ def make_BCRA_web():
     reservas,bcra,bcragdp,datatco,tasas,S.TCR,S.TC=load_bcra_his(datetime.now().strftime("%Y%m%d"))
     c1,c2=st.columns((0.7,0.3))
     with c1:
-        with st.expander(label='Ajustes',icon=":material/thumb_up:"):
+        with st.expander(label='Ajustar Gráficas',icon=":material/settings:"):
             c11,c12=st.columns((0.3,0.7))
             with c11: st.radio("Escala de los datos",options=["***Millones de ARS***","***Millones de USD-Oficial***","***Millones de USD-Blue***","***% del PBI***"],key="escala_bcra")
             with c12: st.number_input(value=2016,label='Datos desde',min_value=2004,max_value=2024,key="start_bcra")
