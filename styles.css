@@ -1,4 +1,4 @@
-
+div[class^='block-container'] { padding-top: 2rem; }
 /*Estilo general para contenedores*/
 div[data-testid="stAppViewBlockContainer"] div[data-testid="stHorizontalBlock"] div[data-testid="column"]{
    background-color:white;
