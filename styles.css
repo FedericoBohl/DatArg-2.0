@@ -33,9 +33,6 @@ div[data-testid="stMetricValue"]{
    color: #82858d;
 }
 
-div[data-testid="StyledFullScreenButton"]{
-   visibility:collapse;
-}
 
 
 /*Estilos para tablas*/
@@ -67,13 +64,7 @@ div[data-testid="StyledFullScreenButton"]{
    background-color: #f3f3f3;
 }
 
-#MainMenu{
-   visibility: hidden;
-}
 
-div[data-testid="stToolbar"]{
-   visibility: hidden;
-}
 
 /*Editar Tabs*/
 div[data-testid="stTabs"]{
