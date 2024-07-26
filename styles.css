@@ -181,6 +181,6 @@ div[role="radiogroup"] {
 }
 
 /*Ocultar logo streamlit*/
-.st-emotion-cache-1dtefog{
+a[href="https://streamlit.io/cloud"]{
    visibility: collapse;
 }
