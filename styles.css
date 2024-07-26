@@ -1,11 +1,5 @@
-/* Ajustar el padding del contenedor principal para reducir el espacio superior */
-.main {
-   padding-top: 0;
-}
-
-/* Asegurarse de que no haya margen superior en el primer elemento */
-.element-container:first-of-type {
-   margin-top: 0;
+header[class="st-emotion-cache-ttupiz ezrtsby2"]{
+   visibility: unset;
 }
 
 /*Estilo general para contenedores*/
