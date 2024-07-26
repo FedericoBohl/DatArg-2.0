@@ -181,6 +181,6 @@ div[role="radiogroup"] {
 }
 
 /*Ocultar logo streamlit*/
-a[href="https://streamlit.io/cloud"]{
+.viewerBadge_container__r5tak{
    visibility: collapse;
 }
