@@ -1,7 +1,7 @@
+/*Sacar el Margen superior de la página*/
 .st-emotion-cache-ttupiz{
    height:0cm;
 }
-
 
 /*Estilo general para contenedores*/
 div[data-testid="stAppViewBlockContainer"] div[data-testid="stHorizontalBlock"] div[data-testid="column"]{
@@ -23,6 +23,14 @@ h3,
 label[data-testid="stMetricLabel"] p{  
    font-weight:bold;
    color:#404040
+}
+
+span[class="st-emotion-cache-gi0tri e1nzilvr1"]{
+   visibility: collapse;
+}
+
+div[data-testid="stHeading"]{
+   justify-content: center;
 }
 
 /* Estilo de valor de métricas*/
