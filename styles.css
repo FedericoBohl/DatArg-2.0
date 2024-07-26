@@ -172,3 +172,10 @@ div[role="radiogroup"] label {
 div[role="radiogroup"] {
    gap: 12px;
 }
+
+
+/* Ajustan st.Expander  */
+.stExpander[class="st-emotion-cache-16t3tpa e1nzilvr4"]{
+   display: flex;
+   justify-content: center;
+}
