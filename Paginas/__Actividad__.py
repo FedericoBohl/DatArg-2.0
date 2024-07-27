@@ -31,7 +31,7 @@ def plot_PBI(data:pd.DataFrame):
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=data.index,y=data['PBI Real'],name='PBI Real',line=dict(width=3.5),marker_color=navy),secondary_y=False)
     fig.add_trace(go.Bar(x=data.index,y=data['PBI Real'].pct_change(),name='Var %',marker_color='royalblue'),secondary_y=True)
-    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0,height=450,legend=dict(
+    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),height=450,legend=dict(
                                         orientation="h",
                                         yanchor="bottom",
                                         y=1.05,
@@ -44,7 +44,7 @@ def plot_PBI(data:pd.DataFrame):
                                 yaxis2=dict(title="%",showgrid=True, zeroline=True, showline=True)
                                 )
     fig['layout']['yaxis']['type']='log'
-    st.plotly_chart(fig,use_container_width=True)
+    st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 @st.cache_resource(show_spinner=False)
 def plot_percap(data:pd.DataFrame):
@@ -64,7 +64,7 @@ def plot_percap(data:pd.DataFrame):
                                 yaxis2=dict(title="%",showgrid=True, zeroline=True, showline=True)
                                 )
     fig['layout']['yaxis']['type']='log'
-    st.plotly_chart(fig,use_container_width=True)
+    st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 
 def make_actividad_web():
