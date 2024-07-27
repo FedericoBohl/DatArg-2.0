@@ -77,7 +77,7 @@ def make_actividad_web():
     pbi=pbi.loc[f"{S.start_actividad}":]
     pbi.index=pbi.index.strftime('%b-%Y')
 
-    c1,c2,c3=st.columns(2)
+    c1,c2,c3=st.columns(3)
     with c1.container(border=False):
         st.header('EMAE')
     with c2.container(border=False):
