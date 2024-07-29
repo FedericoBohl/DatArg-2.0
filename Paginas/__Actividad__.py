@@ -200,8 +200,9 @@ def make_actividad_web():
     c1,c2=st.columns((0.7,0.3))
     c1.number_input(value=2016,label='Datos desde',min_value=2004,max_value=2024,key="start_actividad")
     c2.link_button(":blue[**Descargar datos:\nActividad**]",url="https://1drv.ms/x/c/56f917c917f2e2f5/QfXi8hfJF_kggFaKFQAAAAAA7qhKZI81Oq7vDg",use_container_width=True)
-    actividad=actividad.loc[f"{S.start_actividad}":]
-    actividad.index=actividad.index.strftime('%b-%Y')
+    if S.start_actividad>2016:
+        actividad=actividad.loc[f"{S.start_actividad}":]
+        actividad.index=actividad.index.strftime('%b-%Y')
     pbi=pbi.loc[f"{S.start_actividad}":]
     pbi.index=pbi.index.strftime('%b-%Y')
 
@@ -213,9 +214,11 @@ def make_actividad_web():
         st.plotly_chart(emae_plots[S.emae_elegido],config={'displayModeBar': False},use_container_width=True)
     with c2.container(border=True):
         st.subheader('Industria')
+        st.empty()
         plot_ipi(actividad)
     with c3.container(border=True):
         st.subheader('Construcción')
+        st.empty()
         plot_isac(actividad)
     c1,c2=st.columns(2)
     with c1.container(border=True):
