@@ -51,7 +51,7 @@ def plot_percap(data:pd.DataFrame,var:pd.DataFrame):
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=data.index,y=data['PBI Per Cap'],name='PBI Per Cápita',line=dict(width=4.5),marker_color=olive),secondary_y=True)
     fig.add_trace(go.Bar(x=data.index,y=var['PBI Per Cap'],name='Var %',marker_color='lime'),secondary_y=False)
-    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0,height=450,legend=dict(
+    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),height=450,legend=dict(
                                         orientation="h",
                                         yanchor="bottom",
                                         y=1.05,
