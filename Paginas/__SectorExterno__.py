@@ -246,7 +246,7 @@ def plot_ica(data,escala):
 
 def make_sect_ext_web():
     bop,bopgdp,ica,icagdp,S.tot=load_sect_ext(datetime.now().strftime("%Y%m%d"))
-    c1,c2=st.columns((0.7,0.3))
+    c1,c2=st.columns((0.7,0.3),vertical_alignment='center')
     with c1:
         with st.expander(label='Ajustar Gráficas',icon=":material/settings:"):
             c11,c12=st.columns((0.3,0.7))
