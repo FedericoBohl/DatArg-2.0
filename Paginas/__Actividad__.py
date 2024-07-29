@@ -41,7 +41,7 @@ def plot_PBI(data:pd.DataFrame,var:pd.DataFrame):
                                     borderwidth=2
                                 ),
                                 yaxis=dict(title='Millones de ARS del 2004',showgrid=True, zeroline=True, showline=True),
-                                yaxis2=dict(title="%",showgrid=True, zeroline=True, showline=True)
+                                yaxis2=dict(title="%",showgrid=False, zeroline=False, showline=False)
                                 )
     fig['layout']['yaxis']['type']='log'
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
@@ -61,7 +61,7 @@ def plot_percap(data:pd.DataFrame,var:pd.DataFrame):
                                     borderwidth=2
                                 ),
                                 yaxis=dict(title='Millones de USD',showgrid=True, zeroline=True, showline=True),
-                                yaxis2=dict(title="%",showgrid=True, zeroline=True, showline=True)
+                                yaxis2=dict(title="%",showgrid=False, zeroline=False, showline=False)
                                 )
     fig['layout']['yaxis']['type']='log'
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
@@ -99,7 +99,7 @@ def plot_emae(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
                                     borderwidth=2
                                 ),
                                 yaxis=dict(title='EMAE',showgrid=True, zeroline=True, showline=True),
-                                yaxis2=dict(title="%",showgrid=True, zeroline=True, showline=True)
+                                yaxis2=dict(title="%",showgrid=False, zeroline=False, showline=False)
                                 )
 
     fig_minas = make_subplots(specs=[[{"secondary_y": True}]])
@@ -116,7 +116,7 @@ def plot_emae(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
                                     borderwidth=2
                                 ),
                                 yaxis=dict(title='EMAE',showgrid=True, zeroline=True, showline=True),
-                                yaxis2=dict(title="%",showgrid=True, zeroline=True, showline=True)
+                                yaxis2=dict(title="%",showgrid=False, zeroline=False, showline=False)
                                 )
 
     fig_comercio = make_subplots(specs=[[{"secondary_y": True}]])
@@ -133,7 +133,7 @@ def plot_emae(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
                                     borderwidth=2
                                 ),
                                 yaxis=dict(title='EMAE',showgrid=True, zeroline=True, showline=True),
-                                yaxis2=dict(title="%",showgrid=True, zeroline=True, showline=True)
+                                yaxis2=dict(title="%",showgrid=False, zeroline=False, showline=False)
                                 )
     
     fig_inmob = make_subplots(specs=[[{"secondary_y": True}]])
@@ -150,7 +150,7 @@ def plot_emae(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
                                     borderwidth=2
                                 ),
                                 yaxis=dict(title='EMAE',showgrid=True, zeroline=True, showline=True),
-                                yaxis2=dict(title="%",showgrid=True, zeroline=True, showline=True)
+                                yaxis2=dict(title="%",showgrid=False, zeroline=False, showline=False)
                                 )
 
     return {'EMAE-Nivel General':fig_emae,'Agricultura, ganadería, caza y silvicultura':fig_campo,'Explotación de minas y canteras':fig_minas,'Comercio mayorista, minorista y reparaciones':fig_comercio,'Actividades inmobiliarias, empresariales y de alquiler':fig_inmob}
@@ -171,7 +171,7 @@ def plot_ipi(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
                                     borderwidth=2
                                 ),
                                 yaxis=dict(title='IPI',showgrid=True, zeroline=True, showline=True),
-                                yaxis2=dict(title="%",showgrid=True, zeroline=True, showline=True)
+                                yaxis2=dict(title="%",showgrid=False, zeroline=False, showline=False)
                                 )
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
@@ -191,7 +191,7 @@ def plot_isac(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
                                     borderwidth=2
                                 ),
                                 yaxis=dict(title='ISAC',showgrid=True, zeroline=True, showline=True),
-                                yaxis2=dict(title="%",showgrid=True, zeroline=True, showline=True)
+                                yaxis2=dict(title="%",showgrid=False, zeroline=False, showline=False)
                                 )
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
