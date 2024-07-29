@@ -66,6 +66,134 @@ def plot_percap(data:pd.DataFrame):
     fig['layout']['yaxis']['type']='log'
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
+@st.cache_resource(show_spinner=False)
+def plot_emae(data:pd.DataFrame):
+    fig_emae = make_subplots(specs=[[{"secondary_y": True}]])
+    fig_emae.add_trace(go.Scatter(x=data.index,y=data['EMAE'],name='EMAE',marker_color=blue),secondary_y=False)
+    fig_emae.add_trace(go.Bar(x=data.index,y=data.pct_change()['EMAE'],name='Var. Mensual',marker_color=green),secondary_y=True)
+    fig_emae.add_trace(go.Scatter(x=data.index,y=data.pct_change(periods=12)['EMAE'],name='Var. Interanual',line=dict(dash='dashdot',width=1.5),marker_color=lavender),secondary_y=True)
+    fig_emae.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0,height=450,legend=dict(
+                                        orientation="h",
+                                        yanchor="bottom",
+                                        y=1.05,
+                                        xanchor="right",
+                                        x=1,
+                                    bordercolor=black,
+                                    borderwidth=2
+                                ),
+                                yaxis=dict(title='EMAE',showgrid=True, zeroline=True, showline=True),
+                                yaxis2=dict(title="%",showgrid=True, zeroline=True, showline=True)
+                                )
+    
+    fig_campo = make_subplots(specs=[[{"secondary_y": True}]])
+    fig_campo.add_trace(go.Scatter(x=data.index,y=data['Campo'],name='EMAE-Sector Agrícola',marker_color=blue),secondary_y=False)
+    fig_campo.add_trace(go.Bar(x=data.index,y=data.pct_change()['Campo'],name='Var. Mensual',marker_color=green),secondary_y=True)
+    fig_campo.add_trace(go.Scatter(x=data.index,y=data.pct_change(periods=12)['Campo'],name='Var. Interanual',line=dict(dash='dashdot',width=1.5),marker_color=lavender),secondary_y=True)
+    fig_campo.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0,height=450,legend=dict(
+                                        orientation="h",
+                                        yanchor="bottom",
+                                        y=1.05,
+                                        xanchor="right",
+                                        x=1,
+                                    bordercolor=black,
+                                    borderwidth=2
+                                ),
+                                yaxis=dict(title='EMAE',showgrid=True, zeroline=True, showline=True),
+                                yaxis2=dict(title="%",showgrid=True, zeroline=True, showline=True)
+                                )
+
+    fig_minas = make_subplots(specs=[[{"secondary_y": True}]])
+    fig_minas.add_trace(go.Scatter(x=data.index,y=data['Minas'],name='EMAE-Minas y Canteras',marker_color=blue),secondary_y=False)
+    fig_minas.add_trace(go.Bar(x=data.index,y=data.pct_change()['Minas'],name='Var. Mensual',marker_color=green),secondary_y=True)
+    fig_minas.add_trace(go.Scatter(x=data.index,y=data.pct_change(periods=12)['Minas'],name='Var. Interanual',line=dict(dash='dashdot',width=1.5),marker_color=lavender),secondary_y=True)
+    fig_minas.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0,height=450,legend=dict(
+                                        orientation="h",
+                                        yanchor="bottom",
+                                        y=1.05,
+                                        xanchor="right",
+                                        x=1,
+                                    bordercolor=black,
+                                    borderwidth=2
+                                ),
+                                yaxis=dict(title='EMAE',showgrid=True, zeroline=True, showline=True),
+                                yaxis2=dict(title="%",showgrid=True, zeroline=True, showline=True)
+                                )
+
+    fig_comercio = make_subplots(specs=[[{"secondary_y": True}]])
+    fig_comercio.add_trace(go.Scatter(x=data.index,y=data['Comercio'],name='EMAE-Comercio',marker_color=blue),secondary_y=False)
+    fig_comercio.add_trace(go.Bar(x=data.index,y=data.pct_change()['Comercio'],name='Var. Mensual',marker_color=green),secondary_y=True)
+    fig_comercio.add_trace(go.Scatter(x=data.index,y=data.pct_change(periods=12)['Comercio'],name='Var. Interanual',line=dict(dash='dashdot',width=1.5),marker_color=lavender),secondary_y=True)
+    fig_comercio.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0,height=450,legend=dict(
+                                        orientation="h",
+                                        yanchor="bottom",
+                                        y=1.05,
+                                        xanchor="right",
+                                        x=1,
+                                    bordercolor=black,
+                                    borderwidth=2
+                                ),
+                                yaxis=dict(title='EMAE',showgrid=True, zeroline=True, showline=True),
+                                yaxis2=dict(title="%",showgrid=True, zeroline=True, showline=True)
+                                )
+    
+    fig_inmob = make_subplots(specs=[[{"secondary_y": True}]])
+    fig_inmob.add_trace(go.Scatter(x=data.index,y=data['Inmobiliaria'],name='EMAE-Inmobiliaria',marker_color=blue),secondary_y=False)
+    fig_inmob.add_trace(go.Bar(x=data.index,y=data.pct_change()['Inmobiliaria'],name='Var. Mensual',marker_color=green),secondary_y=True)
+    fig_inmob.add_trace(go.Scatter(x=data.index,y=data.pct_change(periods=12)['Inmobiliaria'],name='Var. Interanual',line=dict(dash='dashdot',width=1.5),marker_color=lavender),secondary_y=True)
+    fig_inmob.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0,height=450,legend=dict(
+                                        orientation="h",
+                                        yanchor="bottom",
+                                        y=1.05,
+                                        xanchor="right",
+                                        x=1,
+                                    bordercolor=black,
+                                    borderwidth=2
+                                ),
+                                yaxis=dict(title='EMAE',showgrid=True, zeroline=True, showline=True),
+                                yaxis2=dict(title="%",showgrid=True, zeroline=True, showline=True)
+                                )
+
+    return {'EMAE-Nivel General':fig_emae,'Agricultura, ganadería, caza y silvicultura':fig_campo,'Explotación de minas y canteras':fig_minas,'Comercio mayorista, minorista y reparaciones':fig_comercio,'Actividades inmobiliarias, empresariales y de alquiler':fig_inmob}
+
+@st.cache_resource(show_spinner=False)
+def plot_ipi(data:pd.DataFrame):
+    fig = make_subplots(specs=[[{"secondary_y": True}]])
+    fig.add_trace(go.Scatter(x=data.index,y=data['IPI'],name='IPI',marker_color=blue),secondary_y=False)
+    fig.add_trace(go.Bar(x=data.index,y=data.pct_change()['IPI'],name='Var. Mensual',marker_color=green),secondary_y=True)
+    fig.add_trace(go.Scatter(x=data.index,y=data.pct_change(periods=12)['IPI'],name='Var. Interanual',line=dict(dash='dashdot',width=1.5),marker_color=lavender),secondary_y=True)
+    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0,height=450,legend=dict(
+                                        orientation="h",
+                                        yanchor="bottom",
+                                        y=1.05,
+                                        xanchor="right",
+                                        x=1,
+                                    bordercolor=black,
+                                    borderwidth=2
+                                ),
+                                yaxis=dict(title='IPI',showgrid=True, zeroline=True, showline=True),
+                                yaxis2=dict(title="%",showgrid=True, zeroline=True, showline=True)
+                                )
+    st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
+
+@st.cache_resource(show_spinner=False)
+def plot_isac(data:pd.DataFrame):
+    fig = make_subplots(specs=[[{"secondary_y": True}]])
+    fig.add_trace(go.Scatter(x=data.index,y=data['ISAC'],name='ISAC',marker_color=blue),secondary_y=False)
+    fig.add_trace(go.Bar(x=data.index,y=data.pct_change()['ISAC'],name='Var. Mensual',marker_color=green),secondary_y=True)
+    fig.add_trace(go.Scatter(x=data.index,y=data.pct_change(periods=12)['ISAC'],name='Var. Interanual',line=dict(dash='dashdot',width=1.5),marker_color=lavender),secondary_y=True)
+    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0,height=450,legend=dict(
+                                        orientation="h",
+                                        yanchor="bottom",
+                                        y=1.05,
+                                        xanchor="right",
+                                        x=1,
+                                    bordercolor=black,
+                                    borderwidth=2
+                                ),
+                                yaxis=dict(title='ISAC',showgrid=True, zeroline=True, showline=True),
+                                yaxis2=dict(title="%",showgrid=True, zeroline=True, showline=True)
+                                )
+    st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 def make_actividad_web():
     actividad,pbi=load_actividad(datetime.now().strftime("%Y%m%d"))
@@ -79,11 +207,16 @@ def make_actividad_web():
 
     c1,c2,c3=st.columns(3)
     with c1.container(border=False):
-        st.header('EMAE')
+        st.subheader('EMAE')
+        st.radio('EMAE-elegido',label_visibility='collapsed',options=['EMAE-Nivel General','Agricultura, ganadería, caza y silvicultura','Explotación de minas y canteras','Comercio mayorista, minorista y reparaciones','Actividades inmobiliarias, empresariales y de alquiler'],key='emae_elegido')
+        emae_plots=plot_emae(actividad)
+        st.plotly_chart(emae_plots[S.emae_elegido],config={'displayModeBar': False},use_container_width=True)
     with c2.container(border=False):
-        st.header('Industria')
+        st.subheader('Industria')
+        plot_ipi(actividad)
     with c3.container(border=True):
-        st.header('Construcción')
+        st.subheader('Construcción')
+        plot_isac(actividad)
     c1,c2=st.columns(2)
     with c1.container(border=False):
         st.subheader('PBI Real')
