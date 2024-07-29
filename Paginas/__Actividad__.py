@@ -197,7 +197,7 @@ def plot_isac(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
 
 def make_actividad_web():
     actividad,pbi=load_actividad(datetime.now().strftime("%Y%m%d"))
-    c1,c2=st.columns((0.7,0.3))
+    c1,c2=st.columns((0.7,0.3),vertical_alignment='center')
     c1.number_input(value=2016,label='Datos desde',min_value=2004,max_value=2024,key="start_actividad")
     c2.link_button(":blue[**Descargar datos:\nActividad**]",url="https://1drv.ms/x/c/56f917c917f2e2f5/QfXi8hfJF_kggFaKFQAAAAAA7qhKZI81Oq7vDg",use_container_width=True)
     var_men_act=actividad.pct_change()
