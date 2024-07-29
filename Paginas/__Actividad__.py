@@ -205,15 +205,15 @@ def make_actividad_web():
     var_pbi=pbi.pct_change()
     if S.start_actividad>2016:
         actividad=actividad.loc[f"{S.start_actividad}":]
-        actividad.index=actividad.index.strftime('%b-%Y')
         var_men_act=var_men_act.loc[f"{S.start_actividad}":]
-        var_men_act.index=var_men_act.index.strftime('%b-%Y')
         var_an_act=var_an_act.loc[f"{S.start_actividad}":]
-        var_an_act.index=var_an_act.index.strftime('%b-%Y')
     pbi=pbi.loc[f"{S.start_actividad}":]
     pbi.index=pbi.index.strftime('%b-%Y')
     var_pbi=var_pbi.loc[f"{S.start_actividad}":]
     var_pbi.index=var_pbi.index.strftime('%b-%Y')
+    actividad.index=actividad.index.strftime('%b-%Y')
+    var_men_act.index=var_men_act.index.strftime('%b-%Y')
+    var_an_act.index=var_an_act.index.strftime('%b-%Y')
 
     c1,c2,c3=st.columns(3)
     with c1.container(border=True):
@@ -227,7 +227,7 @@ def make_actividad_web():
         plot_ipi(actividad,var_men_act,var_an_act)
     with c3.container(border=True):
         st.subheader('Construcción')
-        plot_isac(actividad,var_men_act,var_an_act)
+        plot_isac(actividad.loc[f"{S.start_actividad}":],var_men_act,var_an_act)
     c1,c2=st.columns(2)
     with c1.container(border=True):
         st.subheader('PBI Real')
@@ -237,4 +237,3 @@ def make_actividad_web():
         plot_percap(pbi,var_pbi)
     st.divider()
     st.caption('Datos Desestacionalizados excepto para el PBI Per Cápita')
-    st.write(actividad.index[((2016-2004)*12):])
