@@ -60,7 +60,7 @@ def plot_percap(data:pd.DataFrame,var:pd.DataFrame):
                                     bordercolor=black,
                                     borderwidth=2
                                 ),
-                                yaxis=dict(title='Millones de USD',showgrid=True, zeroline=True, showline=True),
+                                yaxis=dict(title='Millones de USD',showgrid=True, zeroline=True, showline=True,overlaying='y'),
                                 yaxis2=dict(title="%",showgrid=False, zeroline=False, showline=False)
                                 )
     fig['layout']['yaxis']['type']='log'
