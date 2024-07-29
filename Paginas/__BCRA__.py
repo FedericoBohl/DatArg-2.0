@@ -87,7 +87,7 @@ def load_bcra_his(date):
 #@st.cache_data(show_spinner=False,experimental_allow_widgets=True)
 def make_BCRA_web():
     reservas,bcra,bcragdp,datatco,tasas,S.TCR,S.TC=load_bcra_his(datetime.now().strftime("%Y%m%d"))
-    c1,c2=st.columns((0.7,0.3))
+    c1,c2=st.columns((0.7,0.3),vertical_alignment='bottom')
     with c1:
         with st.expander(label='Ajustar Gráficas',icon=":material/settings:"):
             c11,c12=st.columns((0.3,0.7))
