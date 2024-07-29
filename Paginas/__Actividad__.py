@@ -214,7 +214,7 @@ def make_actividad_web():
         st.plotly_chart(emae_plots[S.emae_elegido],config={'displayModeBar': False},use_container_width=True)
     with c2.container(border=True):
         st.subheader('Industria')
-        st.text('')
+        st.text(' \n \n ')
         plot_ipi(actividad)
     with c3.container(border=True):
         st.subheader('Construcción')
