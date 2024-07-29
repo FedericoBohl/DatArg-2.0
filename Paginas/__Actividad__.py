@@ -29,8 +29,8 @@ def load_actividad(end):
 @st.cache_resource(show_spinner=False)
 def plot_PBI(data:pd.DataFrame,var:pd.DataFrame):
     fig = make_subplots(specs=[[{"secondary_y": True}]])
-    fig.add_trace(go.Scatter(x=data.index,y=data['PBI Real'],name='PBI Real',line=dict(width=4.5),marker_color=navy),secondary_y=False)
-    fig.add_trace(go.Bar(x=data.index,y=var['PBI Real'],name='Var %',marker_color='royalblue'),secondary_y=True)
+    fig.add_trace(go.Scatter(x=data.index,y=data['PBI Real'],name='PBI Real',line=dict(width=4.5),marker_color=navy),secondary_y=True)
+    fig.add_trace(go.Bar(x=data.index,y=var['PBI Real'],name='Var %',marker_color='royalblue'),secondary_y=False)
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),height=450,legend=dict(
                                         orientation="h",
                                         yanchor="bottom",
@@ -40,10 +40,10 @@ def plot_PBI(data:pd.DataFrame,var:pd.DataFrame):
                                     bordercolor=black,
                                     borderwidth=2
                                 ),
-                                yaxis=dict(title='Millones de ARS del 2004',showgrid=True, zeroline=True, showline=True),
-                                yaxis2=dict(title="%",showgrid=False, zeroline=False, showline=False)
+                                yaxis=dict(title='%',showgrid=True, zeroline=True, showline=True),
+                                yaxis2=dict(title="Millones de ARS del 2004",showgrid=False, zeroline=False, showline=False)
                                 )
-    fig['layout']['yaxis']['type']='log'
+    fig['layout']['yaxis2']['type']='log'
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 @st.cache_resource(show_spinner=False)
@@ -60,10 +60,10 @@ def plot_percap(data:pd.DataFrame,var:pd.DataFrame):
                                     bordercolor=black,
                                     borderwidth=2
                                 ),
-                                yaxis=dict(title='Millones de USD',showgrid=True, zeroline=True, showline=True),
-                                yaxis2=dict(title="%",showgrid=False, zeroline=False, showline=False)
+                                yaxis=dict(title='%',showgrid=True, zeroline=True, showline=True),
+                                yaxis2=dict(title="Millones de USD",showgrid=False, zeroline=False, showline=False)
                                 )
-    fig['layout']['yaxis']['type']='log'
+    fig['layout']['yaxis2']['type']='log'
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 @st.cache_resource(show_spinner=False)
