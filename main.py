@@ -33,7 +33,6 @@ if S.is_session_pc:  #Fix momentaneo
     try:
         components.html(w_barra_stocks,height=80)
     except:pass
-    st.context.cookies
     col1,col2=st.columns((0.1,0.9))
     with col1:st.image("Icono.jpeg",caption="🐐")
     with col2:
@@ -51,6 +50,8 @@ if S.is_session_pc:  #Fix momentaneo
             #    components.html(w_calendar_investing, height=350,width=int(page_width*0.9*0.45))
             #with c2:
             create_widget(w_calendar_tv,height=350,width=int(S.page_width*0.85))
+    
+    st.write(st.context.cookies)
     
     t_info, t_actividad, t_PI, t_precios, t_bcra, t_SecExt, t_SecPub, t_Intl, t_Merv= st.tabs(["Info","Actividad","Pobreza y Empleo", "Precios", "BCRA", "Sector Externo","Sector Público","Internacional","Bolsa Argentina"])
 
