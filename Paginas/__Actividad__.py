@@ -208,17 +208,16 @@ def make_actividad_web():
 
     c1,c2,c3=st.columns(3)
     with c1.container(border=True):
-        st.subheader('EMAE')
-        st.selectbox('EMAE-elegido',label_visibility='collapsed',options=['EMAE-Nivel General','Agricultura, ganadería, caza y silvicultura','Explotación de minas y canteras','Comercio mayorista, minorista y reparaciones','Actividades inmobiliarias, empresariales y de alquiler'],key='emae_elegido')
+        c11,c12=st.columns((0.3,0.7))
+        c11.subheader('EMAE')
+        c12.selectbox('EMAE-elegido',label_visibility='collapsed',options=['EMAE-Nivel General','Agricultura, ganadería, caza y silvicultura','Explotación de minas y canteras','Comercio mayorista, minorista y reparaciones','Actividades inmobiliarias, empresariales y de alquiler'],key='emae_elegido')
         emae_plots=plot_emae(actividad)
         st.plotly_chart(emae_plots[S.emae_elegido],config={'displayModeBar': False},use_container_width=True)
     with c2.container(border=True):
         st.subheader('Industria')
-        st.divider()
         plot_ipi(actividad)
     with c3.container(border=True):
         st.subheader('Construcción')
-        st.divider()
         plot_isac(actividad)
     c1,c2=st.columns(2)
     with c1.container(border=True):
