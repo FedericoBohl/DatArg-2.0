@@ -51,7 +51,6 @@ if S.is_session_pc:  #Fix momentaneo
             #with c2:
             create_widget(w_calendar_tv,height=350,width=int(S.page_width*0.85))
     
-    st.write(st.context)
     
     t_info, t_actividad, t_PI, t_precios, t_bcra, t_SecExt, t_SecPub, t_Intl, t_Merv= st.tabs(["Info","Actividad","Pobreza y Empleo", "Precios", "BCRA", "Sector Externo","Sector Público","Internacional","Bolsa Argentina"])
 
@@ -76,3 +75,4 @@ if S.is_session_pc:  #Fix momentaneo
 
 
 
+st.write(st.context)
