@@ -213,20 +213,21 @@ def make_actividad_web():
     actividad.index=actividad.index.strftime('%b-%Y')
     var_men_act.index=var_men_act.index.strftime('%b-%Y')
     var_an_act.index=var_an_act.index.strftime('%b-%Y')
-
-    c1,c2,c3=st.columns(3)
-    with c1.container(border=True):
-        c11,c12=st.columns((0.3,0.7))
-        c11.subheader('EMAE')
-        c12.selectbox('EMAE-elegido',label_visibility='collapsed',options=['EMAE-Nivel General','Agricultura, ganadería, caza y silvicultura','Explotación de minas y canteras','Comercio mayorista, minorista y reparaciones','Actividades inmobiliarias, empresariales y de alquiler'],key='emae_elegido')
-        emae_plots=plot_emae(actividad,var_men_act,var_an_act)
-        st.plotly_chart(emae_plots[S.emae_elegido],config={'displayModeBar': False},use_container_width=True)
-    with c2.container(border=True):
-        st.subheader('Industria')
-        plot_ipi(actividad['IPI'].dropna(),var_men_act['IPI'].dropna(),var_an_act['IPI'].dropna())
-    with c3.container(border=True):
-        st.subheader('Construcción')
-        plot_isac(actividad['ISAC'].dropna(),var_men_act['ISAC'].dropna(),var_an_act['ISAC'].dropna())
+    with st.container(border=True):
+        c1,c2=st.columns([0.3,0.7],vertical_alignment='center')
+        c1.radio('¿Qué indicador de actividad desea ver?',options=['EMAE','IPI','ISAC'],horizontal=False,key='indicador_actividad')
+        with c2:
+            if S.indicador_actividad=='EMAE':
+                st.subheader('EMAE')
+                st.selectbox('EMAE-elegido',label_visibility='collapsed',options=['EMAE-Nivel General','Agricultura, ganadería, caza y silvicultura','Explotación de minas y canteras','Comercio mayorista, minorista y reparaciones','Actividades inmobiliarias, empresariales y de alquiler'],key='emae_elegido')
+                emae_plots=plot_emae(actividad,var_men_act,var_an_act)
+                st.plotly_chart(emae_plots[S.emae_elegido],config={'displayModeBar': False},use_container_width=True)
+            elif S.indicador_actividad=='IPI':
+                st.subheader('Industria')
+                plot_ipi(actividad['IPI'].dropna(),var_men_act['IPI'].dropna(),var_an_act['IPI'].dropna())
+            else:
+                st.subheader('Construcción')
+                plot_isac(actividad['ISAC'].dropna(),var_men_act['ISAC'].dropna(),var_an_act['ISAC'].dropna())
     c1,c2=st.columns(2)
     with c1.container(border=True):
         st.subheader('PBI Real')
