@@ -66,8 +66,7 @@ def plot_bop(data,escala,errores):
     fig.add_trace(go.Scatter(x=data.index,y=data['CC'],name='CC',marker_color=maroon,line=dict(width=5)))
     fig.add_trace(go.Scatter(x=data.index,y=data['CK']+data['CF(MBP5)'],name='CF+CK',marker_color=navy,line=dict(width=5)))
     fig.add_trace(go.Bar(x=data.index,y=data['VarR'],name='Var. R',marker_color=data["VarR"].apply(lambda x: green if x >= 0 else red),
-                                    showlegend=True, opacity=1, marker_line_color=black,
-                                    marker_line_width=1))
+                                    showlegend=True, opacity=1, marker_line_color=black,marker_line_width=1))
     if errores==True:fig.add_trace(go.Bar(x=data.index,y=data['Errores'],name='Errores y Omisiones',marker_color=gray))
     fig.update_xaxes(type='category',tickmode='array',showticklabels=True)
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0.2,height=450,legend=dict(
