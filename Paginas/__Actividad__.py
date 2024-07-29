@@ -158,9 +158,9 @@ def plot_emae(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
 @st.cache_resource(show_spinner=False)
 def plot_ipi(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
     fig = make_subplots(specs=[[{"secondary_y": True}]])
-    fig.add_trace(go.Scatter(x=data.index,y=data['IPI'],name='IPI',marker_color=blue),secondary_y=False)
-    fig.add_trace(go.Bar(x=data.index,y=var_m['IPI'],name='Var. Mensual',marker_color=green),secondary_y=True)
-    fig.add_trace(go.Scatter(x=data.index,y=var_a['IPI'],name='Var. Interanual',line=dict(dash='dashdot',width=1.5),marker_color=lavender),secondary_y=True)
+    fig.add_trace(go.Scatter(x=data.index,y=data,name='IPI',marker_color=blue),secondary_y=False)
+    fig.add_trace(go.Bar(x=data.index,y=var_m,name='Var. Mensual',marker_color=green),secondary_y=True)
+    fig.add_trace(go.Scatter(x=data.index,y=var_a,name='Var. Interanual',line=dict(dash='dashdot',width=1.5),marker_color=lavender),secondary_y=True)
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0,height=450,legend=dict(
                                         orientation="h",
                                         yanchor="bottom",
@@ -178,9 +178,9 @@ def plot_ipi(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
 @st.cache_resource(show_spinner=False)
 def plot_isac(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
     fig = make_subplots(specs=[[{"secondary_y": True}]])
-    fig.add_trace(go.Scatter(x=data.index,y=data['ISAC'],name='ISAC',marker_color=blue),secondary_y=False)
-    fig.add_trace(go.Bar(x=data.index,y=var_m['ISAC'],name='Var. Mensual',marker_color=green),secondary_y=True)
-    fig.add_trace(go.Scatter(x=data.index,y=var_a['ISAC'],name='Var. Interanual',line=dict(dash='dashdot',width=1.5),marker_color=lavender),secondary_y=True)
+    fig.add_trace(go.Scatter(x=data.index,y=data,name='ISAC',marker_color=blue),secondary_y=False)
+    fig.add_trace(go.Bar(x=data.index,y=var_m,name='Var. Mensual',marker_color=green),secondary_y=True)
+    fig.add_trace(go.Scatter(x=data.index,y=var_a,name='Var. Interanual',line=dict(dash='dashdot',width=1.5),marker_color=lavender),secondary_y=True)
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0,height=450,legend=dict(
                                         orientation="h",
                                         yanchor="bottom",
@@ -203,10 +203,9 @@ def make_actividad_web():
     var_men_act=actividad.pct_change()
     var_an_act=actividad.pct_change(periods=12)
     var_pbi=pbi.pct_change()
-    if S.start_actividad>2016:
-        actividad=actividad.loc[f"{S.start_actividad}":]
-        var_men_act=var_men_act.loc[f"{S.start_actividad}":]
-        var_an_act=var_an_act.loc[f"{S.start_actividad}":]
+    actividad=actividad.loc[f"{S.start_actividad}":]
+    var_men_act=var_men_act.loc[f"{S.start_actividad}":]
+    var_an_act=var_an_act.loc[f"{S.start_actividad}":]
     pbi=pbi.loc[f"{S.start_actividad}":]
     pbi.index=pbi.index.strftime('%b-%Y')
     var_pbi=var_pbi.loc[f"{S.start_actividad}":]
@@ -224,10 +223,10 @@ def make_actividad_web():
         st.plotly_chart(emae_plots[S.emae_elegido],config={'displayModeBar': False},use_container_width=True)
     with c2.container(border=True):
         st.subheader('Industria')
-        plot_ipi(actividad,var_men_act,var_an_act)
+        plot_ipi(actividad['IPI'].dropna(),var_men_act['IPI'].dropna(),var_an_act['IPI'].dropna())
     with c3.container(border=True):
         st.subheader('Construcción')
-        plot_isac(actividad.loc[f"{S.start_actividad}":],var_men_act,var_an_act)
+        plot_isac(actividad['ISAC'].dropna(),var_men_act['ISAC'].dropna(),var_an_act['ISAC'].dropna())
     c1,c2=st.columns(2)
     with c1.container(border=True):
         st.subheader('PBI Real')
