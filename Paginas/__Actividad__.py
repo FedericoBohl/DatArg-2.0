@@ -70,7 +70,7 @@ def plot_percap(data:pd.DataFrame,var:pd.DataFrame):
 def plot_emae(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
     fig_emae = make_subplots(specs=[[{"secondary_y": True}]])
     fig_emae.add_trace(go.Scatter(x=data.index,y=data['EMAE'],name='EMAE',marker_color=blue),secondary_y=False)
-    fig_emae.add_trace(go.Bar(x=data.index,y=var_m['EMAE'],name='Var. Mensual',marker_color=green),secondary_y=True)
+    fig_emae.add_trace(go.Bar(x=data.index,y=var_m['EMAE'],name='Var. Mensual',marker_color=var_m.apply(lambda x: 'green' if x >= 0 else 'red'),opacity=0.5),secondary_y=True)
     fig_emae.add_trace(go.Scatter(x=data.index,y=var_a['EMAE'],name='Var. Interanual',line=dict(dash='dashdot',width=1.5),marker_color=lavender),secondary_y=True)
     fig_emae.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0,height=450,legend=dict(
                                         orientation="h",
@@ -87,7 +87,7 @@ def plot_emae(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
     
     fig_campo = make_subplots(specs=[[{"secondary_y": True}]])
     fig_campo.add_trace(go.Scatter(x=data.index,y=data['Campo'],name='EMAE-Sector Agrícola',marker_color=blue),secondary_y=False)
-    fig_campo.add_trace(go.Bar(x=data.index,y=var_m['Campo'],name='Var. Mensual',marker_color=green),secondary_y=True)
+    fig_campo.add_trace(go.Bar(x=data.index,y=var_m['Campo'],name='Var. Mensual',marker_color=var_m.apply(lambda x: 'green' if x >= 0 else 'red'),opacity=0.5),secondary_y=True)
     fig_campo.add_trace(go.Scatter(x=data.index,y=var_a['Campo'],name='Var. Interanual',line=dict(dash='dashdot',width=1.5),marker_color=lavender),secondary_y=True)
     fig_campo.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0,height=450,legend=dict(
                                         orientation="h",
@@ -104,7 +104,7 @@ def plot_emae(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
 
     fig_minas = make_subplots(specs=[[{"secondary_y": True}]])
     fig_minas.add_trace(go.Scatter(x=data.index,y=data['Minas'],name='EMAE-Minas y Canteras',marker_color=blue),secondary_y=False)
-    fig_minas.add_trace(go.Bar(x=data.index,y=var_m['Minas'],name='Var. Mensual',marker_color=green),secondary_y=True)
+    fig_minas.add_trace(go.Bar(x=data.index,y=var_m['Minas'],name='Var. Mensual',marker_color=var_m.apply(lambda x: 'green' if x >= 0 else 'red'),opacity=0.5),secondary_y=True)
     fig_minas.add_trace(go.Scatter(x=data.index,y=var_a['Minas'],name='Var. Interanual',line=dict(dash='dashdot',width=1.5),marker_color=lavender),secondary_y=True)
     fig_minas.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0,height=450,legend=dict(
                                         orientation="h",
@@ -121,7 +121,7 @@ def plot_emae(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
 
     fig_comercio = make_subplots(specs=[[{"secondary_y": True}]])
     fig_comercio.add_trace(go.Scatter(x=data.index,y=data['Comercio'],name='EMAE-Comercio',marker_color=blue),secondary_y=False)
-    fig_comercio.add_trace(go.Bar(x=data.index,y=var_m['Comercio'],name='Var. Mensual',marker_color=green),secondary_y=True)
+    fig_comercio.add_trace(go.Bar(x=data.index,y=var_m['Comercio'],name='Var. Mensual',marker_color=var_m.apply(lambda x: 'green' if x >= 0 else 'red'),opacity=0.5),secondary_y=True)
     fig_comercio.add_trace(go.Scatter(x=data.index,y=var_a['Comercio'],name='Var. Interanual',line=dict(dash='dashdot',width=1.5),marker_color=lavender),secondary_y=True)
     fig_comercio.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0,height=450,legend=dict(
                                         orientation="h",
@@ -138,7 +138,7 @@ def plot_emae(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
     
     fig_inmob = make_subplots(specs=[[{"secondary_y": True}]])
     fig_inmob.add_trace(go.Scatter(x=data.index,y=data['Inmobiliaria'],name='EMAE-Inmobiliaria',marker_color=blue),secondary_y=False)
-    fig_inmob.add_trace(go.Bar(x=data.index,y=var_m['Inmobiliaria'],name='Var. Mensual',marker_color=green),secondary_y=True)
+    fig_inmob.add_trace(go.Bar(x=data.index,y=var_m['Inmobiliaria'],name='Var. Mensual',marker_color=var_m.apply(lambda x: 'green' if x >= 0 else 'red'),opacity=0.5),secondary_y=True)
     fig_inmob.add_trace(go.Scatter(x=data.index,y=var_a['Inmobiliaria'],name='Var. Interanual',line=dict(dash='dashdot',width=1.5),marker_color=lavender),secondary_y=True)
     fig_inmob.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0,height=450,legend=dict(
                                         orientation="h",
@@ -159,7 +159,7 @@ def plot_emae(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
 def plot_ipi(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=data.index,y=data,name='IPI',marker_color=blue),secondary_y=False)
-    fig.add_trace(go.Bar(x=data.index,y=var_m,name='Var. Mensual',marker_color=green),secondary_y=True)
+    fig.add_trace(go.Bar(x=data.index,y=var_m,name='Var. Mensual',marker_color=var_m.apply(lambda x: 'green' if x >= 0 else 'red'),opacity=0.5),secondary_y=True)
     fig.add_trace(go.Scatter(x=data.index,y=var_a,name='Var. Interanual',line=dict(dash='dashdot',width=1.5),marker_color=lavender),secondary_y=True)
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0,height=450,legend=dict(
                                         orientation="h",
@@ -179,7 +179,7 @@ def plot_ipi(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
 def plot_isac(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=data.index,y=data,name='ISAC',marker_color=blue),secondary_y=False)
-    fig.add_trace(go.Bar(x=data.index,y=var_m,name='Var. Mensual',marker_color=green),secondary_y=True)
+    fig.add_trace(go.Bar(x=data.index,y=var_m,name='Var. Mensual',marker_color=var_m.apply(lambda x: 'green' if x >= 0 else 'red'),opacity=0.5),secondary_y=True)
     fig.add_trace(go.Scatter(x=data.index,y=var_a,name='Var. Interanual',line=dict(dash='dashdot',width=1.5),marker_color=lavender),secondary_y=True)
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0,height=450,legend=dict(
                                         orientation="h",
