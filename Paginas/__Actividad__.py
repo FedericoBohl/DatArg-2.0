@@ -237,3 +237,4 @@ def make_actividad_web():
         plot_percap(pbi,var_pbi)
     st.divider()
     st.caption('Datos Desestacionalizados excepto para el PBI Per Cápita')
+    st.write(actividad.index[((2016-2004)*12):])
