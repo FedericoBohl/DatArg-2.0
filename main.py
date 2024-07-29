@@ -33,7 +33,7 @@ if S.is_session_pc:  #Fix momentaneo
     try:
         components.html(w_barra_stocks,height=80)
     except:pass
-    
+    st.context()
     col1,col2=st.columns((0.1,0.9))
     with col1:st.image("Icono.jpeg",caption="🐐")
     with col2:
