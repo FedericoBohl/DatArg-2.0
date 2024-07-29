@@ -75,4 +75,4 @@ if S.is_session_pc:  #Fix momentaneo
 
 
 
-st.write(st.context)
+st.write(st.context.cookies)
