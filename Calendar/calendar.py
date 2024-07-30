@@ -3,7 +3,7 @@ import pandas as pd
 from streamlit_calendar import calendar
 
 
-@st.cache_resource(show_spinner=False)
+@st.cache_data(show_spinner=False)
 def create_calendar(df):
     # Convertir columna de fechas a tipo datetime
     df['date'] = pd.to_datetime(df['date'])
