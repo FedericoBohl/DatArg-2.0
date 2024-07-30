@@ -235,7 +235,7 @@ def make_actividad_web():
              'Comercio mayorista, minorista y reparaciones':'Comercio',
              'Actividades inmobiliarias, empresariales y de alquiler':'Inmobiliaria'}
             _=actividad.iloc[-1][_['emae_elegido']]
-            st.metric(label=f"Último Dato ({actividad.index[-1]})",value=actividad.iloc[-1][_['emae_elegido']],delta=var_men_act.iloc[-1][_['emae_elegido']])
+            st.metric(label=f"Último Dato ({actividad.index[-1]})",value=actividad.iloc[-1][_[S.emae_elegido]],delta=var_men_act.iloc[-1][_[S.emae_elegido]])
         else:
             _=actividad.iloc[-1]
             st.write(_)
