@@ -48,7 +48,7 @@ if S.is_session_pc:  #Fix momentaneo
         with st.expander(label='Calendario económico',icon=":material/settings:"):
             #create_widget(w_calendar_tv,height=350,width=int(S.page_width*0.85))
             df = pd.read_csv('Calendar/calendar_events.csv')
-            create_calendar(df)
+            calendario=create_calendar(df)
         with c2.popover('Bot de Telegram/Mail',use_container_width=True):
             st.caption('Poner algo corto para explicar de que trata el bot y el link a este o un formulario de inscripción (chequear esto de abajo)')
             st.write(st.form_submit_button)
