@@ -236,7 +236,7 @@ def make_actividad_web():
              'Actividades inmobiliarias, empresariales y de alquiler':'Inmobiliaria'}
             with c1.container(border=True):st.metric(label=f"Último Dato ({actividad.index[-1]})",value=round(actividad.iloc[-1][_[S.emae_elegido]],2),delta=f"{round(var_men_act.iloc[-1][_[S.emae_elegido]],2)}%")
         else:
-            with c1.container(border=True):st.metric(label=f"Último Dato ({actividad.index[-1]})",value=round(actividad.iloc[-1][_[S.indicador_actividad]],2),delta=f"{round(var_men_act.iloc[-1][_[S.indicador_actividad]],2)}%")
+            with c1.container(border=True):st.metric(label=f"Último Dato ({actividad.index[-1]})",value=round(actividad.iloc[-1][S.indicador_actividad],2),delta=f"{round(var_men_act.iloc[-1][S.indicador_actividad],2)}%")
     c1,c2=st.columns(2)
     with c1.container(border=True):
         st.subheader('PBI Real')
