@@ -43,16 +43,14 @@ if S.is_session_pc:  #Fix momentaneo
         #st.markdown("""<hr data-testid="stHeadingDivider" color="#3d9df3" class="st-emotion-cache-h8phe6 e1nzilvr0">""",unsafe_allow_html=True)
         #st.markdown("""<hr data-testid="stHeadingDivider" color="#6cace4" class="st-emotion-cache-h8phe6 e1nzilvr0">""", unsafe_allow_html=True)
         st.header('Datos Argentina 🧉',divider='blue')
-        #st.caption(" ")
-        with st.popover("Calendario Económico",use_container_width=True,help="Los datos muy recientes pueden tardar unos pocos dias en ser agregados a las series oficiales. Aquí puede ver los últimos datos anunciados y las fechas de proximos anuncios."):
-            #c1,c2=st.columns(2)
-            #with c1:
-            #    components.html(w_calendar_investing, height=350,width=int(page_width*0.9*0.45))
-            #with c2:
+        c1,c2=st.columns((0.8,0.2))
+        with c1.popover("Calendario Económico",use_container_width=True,help="Los datos muy recientes pueden tardar unos pocos dias en ser agregados a las series oficiales. Aquí puede ver los últimos datos anunciados y las fechas de proximos anuncios."):
             #create_widget(w_calendar_tv,height=350,width=int(S.page_width*0.85))
             df = pd.read_csv('Calendar/calendar_events.csv')
             create_calendar(df)
-    
+        with c2.popover('Bot de Telegram/Mail',use_container_width=True):
+            st.text('Poner algo corto para explicar de que trata el bot y el link a este o un formulario de inscripción (chequear esto de abajo)')
+            st.write(st.form_submit_button)
     t_info, t_actividad, t_PI, t_precios, t_bcra, t_SecExt, t_SecPub, t_Intl, t_Merv= st.tabs(["Info","Actividad","Pobreza y Empleo", "Precios", "BCRA", "Sector Externo","Sector Público","Internacional","Bolsa Argentina"])
 
     S.pbi_men=get_pbi()
