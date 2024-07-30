@@ -39,7 +39,4 @@ def create_calendar(df):
     }
     # Mostrar el calendario usando streamlit-calendar
     return calendar(events=events, options=calendar_options)
-st.title("Calendario en Formato de Lista")
 
-df = pd.read_csv('Calendar/calendar_events.csv')
-create_calendar(df)
