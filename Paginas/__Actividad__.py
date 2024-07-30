@@ -159,8 +159,8 @@ def plot_emae(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
 def plot_ipi(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=data.index,y=data,name='IPI',marker_color=blue),secondary_y=False)
-    fig.add_trace(go.Bar(x=data.index,y=var_m,name='Var. Mensual',marker_color=var_m.apply(lambda x: 'green' if x >= 0 else 'red'),opacity=0.5,marker_line_color=black,marker_line_width=1),secondary_y=True)
-    fig.add_trace(go.Scatter(x=data.index,y=var_a,name='Var. Interanual',line=dict(dash='dashdot',width=1.5),marker_color=lavender),secondary_y=True)
+    fig.add_trace(go.Bar(x=var_m.index,y=var_m,name='Var. Mensual',marker_color=var_m.apply(lambda x: 'green' if x >= 0 else 'red'),opacity=0.5,marker_line_color=black,marker_line_width=1),secondary_y=True)
+    fig.add_trace(go.Scatter(x=var_a.index,y=var_a,name='Var. Interanual',line=dict(dash='dashdot',width=1.5),marker_color=lavender),secondary_y=True)
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0,height=450,legend=dict(
                                         orientation="h",
                                         yanchor="bottom",
@@ -179,8 +179,8 @@ def plot_ipi(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
 def plot_isac(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=data.index,y=data,name='ISAC',marker_color=blue),secondary_y=False)
-    fig.add_trace(go.Bar(x=data.index,y=var_m,name='Var. Mensual',marker_color=var_m.apply(lambda x: 'green' if x >= 0 else 'red'),opacity=0.5,marker_line_color=black,marker_line_width=1),secondary_y=True)
-    fig.add_trace(go.Scatter(x=data.index,y=var_a,name='Var. Interanual',line=dict(dash='dashdot',width=1.5),marker_color=lavender),secondary_y=True)
+    fig.add_trace(go.Bar(x=var_m.index,y=var_m,name='Var. Mensual',marker_color=var_m.apply(lambda x: 'green' if x >= 0 else 'red'),opacity=0.5,marker_line_color=black,marker_line_width=1),secondary_y=True)
+    fig.add_trace(go.Scatter(x=var_a.index,y=var_a,name='Var. Interanual',line=dict(dash='dashdot',width=1.5),marker_color=lavender),secondary_y=True)
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode="stack",bargap=0,height=450,legend=dict(
                                         orientation="h",
                                         yanchor="bottom",
