@@ -230,7 +230,7 @@ def make_actividad_web():
                 plot_isac(actividad['ISAC'].dropna(),var_men_act['ISAC'].dropna(),var_an_act['ISAC'].dropna())
         if S.indicador_actividad=='EMAE':
             _=actividad.iloc[-1]
-            st.write(_[0])
+            st.write(_['EMAE'])
         else:
             _=actividad.iloc[-1]
             st.write(_)
