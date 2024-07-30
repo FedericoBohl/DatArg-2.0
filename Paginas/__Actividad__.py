@@ -200,8 +200,8 @@ def make_actividad_web():
     c1,c2=st.columns((0.7,0.3),vertical_alignment='bottom')
     c1.number_input(value=2016,label='Datos desde',min_value=2004,max_value=2024,key="start_actividad")
     c2.link_button(":blue[**Descargar datos:\nActividad**]",url="https://1drv.ms/x/c/56f917c917f2e2f5/QfXi8hfJF_kggFaKFQAAAAAA7qhKZI81Oq7vDg",use_container_width=True)
-    var_men_act=actividad.pct_change()
-    var_an_act=actividad.pct_change(periods=12)
+    var_men_act=actividad.pct_change()*100
+    var_an_act=actividad.pct_change(periods=12)*100
     var_pbi=pbi.pct_change()
     actividad=actividad.loc[f"{S.start_actividad}":]
     var_men_act=var_men_act.loc[f"{S.start_actividad}":]
@@ -229,8 +229,13 @@ def make_actividad_web():
                 st.subheader('Construcción')
                 plot_isac(actividad['ISAC'].dropna(),var_men_act['ISAC'].dropna(),var_an_act['ISAC'].dropna())
         if S.indicador_actividad=='EMAE':
-            _=actividad.iloc[-1]
-            st.write(_['EMAE'])
+            _={'EMAE-Nivel General':'EMAE',
+             'Agricultura, ganadería, caza y silvicultura':'Campo',
+             'Explotación de minas y canteras':'Minas',
+             'Comercio mayorista, minorista y reparaciones':'Comercio',
+             'Actividades inmobiliarias, empresariales y de alquiler':'Inmobiliaria'}
+            _=actividad.iloc[-1][_['emae_elegido']]
+            st.metric(label=f"Último Dato ({actividad.index[-1]})",value=actividad.iloc[-1][_['emae_elegido']],delta=var_men_act.iloc[-1][_['emae_elegido']])
         else:
             _=actividad.iloc[-1]
             st.write(_)
