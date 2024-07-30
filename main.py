@@ -44,7 +44,8 @@ if S.is_session_pc:  #Fix momentaneo
         #st.markdown("""<hr data-testid="stHeadingDivider" color="#6cace4" class="st-emotion-cache-h8phe6 e1nzilvr0">""", unsafe_allow_html=True)
         st.header('Datos Argentina 🧉',divider='blue')
         c1,c2=st.columns((0.8,0.2))
-        with c1.expander("Calendario Económico",use_container_width=True,help="Los datos muy recientes pueden tardar unos pocos dias en ser agregados a las series oficiales. Aquí puede ver los últimos datos anunciados y las fechas de proximos anuncios."):
+        #with c1.popover("Calendario Económico",use_container_width=True,help="Los datos muy recientes pueden tardar unos pocos dias en ser agregados a las series oficiales. Aquí puede ver los últimos datos anunciados y las fechas de proximos anuncios."):
+        with c1.expander('Calendario económico'):
             #create_widget(w_calendar_tv,height=350,width=int(S.page_width*0.85))
             df = pd.read_csv('Calendar/calendar_events.csv')
             create_calendar(df)
