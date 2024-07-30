@@ -32,7 +32,7 @@ def create_calendar(df):
         },
         "slotMinTime": "06:00:00",
         "slotMaxTime": "18:00:00",
-        "initialView": "listMonth",
+        "initialView": "listWeek",
         "resourceGroupField": "building",
         'buttonText':{'today':'Hoy'},
         'locale': 'es',
