@@ -228,6 +228,13 @@ def make_actividad_web():
             else:
                 st.subheader('Construcción')
                 plot_isac(actividad['ISAC'].dropna(),var_men_act['ISAC'].dropna(),var_an_act['ISAC'].dropna())
+        if S.indicador_actividad=='EMAE':
+            _=actividad.iloc[-1]
+            st.write(_)
+        else:
+            _=actividad.iloc[-1]
+            st.write(_)
+            #c1.metric()
     c1,c2=st.columns(2)
     with c1.container(border=True):
         st.subheader('PBI Real')
