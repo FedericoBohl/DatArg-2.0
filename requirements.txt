@@ -17,3 +17,4 @@ user_agents
 python-certifi-win32
 certifi
 streamlit_extras
+streamlit_calendar

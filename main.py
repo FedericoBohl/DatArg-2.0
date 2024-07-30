@@ -7,7 +7,7 @@ from Paginas.__SectorFinanciero__ import make_merv_web
 from Paginas.__Actividad__ import make_actividad_web
 from Paginas.__Pobreza__ import make_pobreza_web
 from Paginas.__Precios__ import make_precios_web
-
+from Calendar.calendar import create_calendar
 
 
 st.set_page_config(
@@ -49,8 +49,9 @@ if S.is_session_pc:  #Fix momentaneo
             #with c1:
             #    components.html(w_calendar_investing, height=350,width=int(page_width*0.9*0.45))
             #with c2:
-            create_widget(w_calendar_tv,height=350,width=int(S.page_width*0.85))
-    
+            #create_widget(w_calendar_tv,height=350,width=int(S.page_width*0.85))
+            df = pd.read_csv('Calendar/calendar_events.csv')
+            create_calendar(df)
     
     t_info, t_actividad, t_PI, t_precios, t_bcra, t_SecExt, t_SecPub, t_Intl, t_Merv= st.tabs(["Info","Actividad","Pobreza y Empleo", "Precios", "BCRA", "Sector Externo","Sector Público","Internacional","Bolsa Argentina"])
 
