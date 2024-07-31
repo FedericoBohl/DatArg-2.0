@@ -7,29 +7,13 @@ from datetime import datetime,timedelta
 #from streamlit_javascript import st_javascript
 from user_agents import parse
 import streamlit.components.v1 as components
-from streamlit_lottie import st_lottie_spinner # type: ignore
 
-from Paginas.__Actividad__ import load_actividad
-from Paginas.__BCRA__ import load_bcra
-from Paginas.__SectorExterno__ import load_sect_ext
-from Paginas.__SectorPublico__ import load_data_sectpub,load_datos_deuda,load_data_map
 ########################    Lottie Animation    #######################
 def load_lottieurl(url: str):
     r = requests.get(url)
     if r.status_code != 200:
         return None
     return r.json()
-def lottie_animation():
-    lottie_progress_url = "https://lottie.host/61385cf3-564b-41cb-a243-3ce5c25c4134/uIUPGURgQ9.json"
-    lottie_progress = load_lottieurl(lottie_progress_url)
-    with st_lottie_spinner(lottie_progress, loop=True, key="progress"):
-        today=datetime.now().strftime("%Y%m%d")
-        S.actividad,S.pbi=load_actividad(today)
-        S.reservas,S.bcra,S.bcragdp,S.datatco,S.tasas,S.TCR,S.TC=load_bcra(today)
-        S.bop,S.bopgdp,S.ica,S.icagdp,S.tot=load_sect_ext(today)
-        S.deficit,S.datagdp,S.datatco,S.endeudamiento,S.endeudamientogdp,S.endeudamientotco,S.corr,S.corrgdp,S.corrtco=load_data_sectpub(today)
-        S.deuda,S.deuda_mon=load_datos_deuda(today)
-        S.data,S.geo,S.extras=load_data_map(today)
 
 
 #@st.cache_data()
