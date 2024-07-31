@@ -55,8 +55,8 @@ if not '__loaded__' in S:
            load_ALL(today) 
         del cont
     S.__loaded__=0
-else:
-    load_ALL(today)
+#else:
+#    load_ALL(today)
 
 
 #***************************************    ARMADO DE LA PÁGINA     ****************************************************************
