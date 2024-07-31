@@ -608,4 +608,4 @@ def make_sect_pub_web():
         with st.container(border=True):
             st.subheader('Déficit Provincial')
             #data,geo,extras=load_data_map(datetime.now().strftime("%Y%m%d"))
-            make_map(S.data,S.geo,S.extras)
+            make_map(S.data_map,S.geo_map,S.extras_map)
