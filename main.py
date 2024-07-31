@@ -39,8 +39,8 @@ def local_css(file_name):
 local_css('styles.css')
 #Estilado de la página
 st.markdown('''<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>''', unsafe_allow_html=True)
-st.markdown("<link href='https://fonts.googleapis.com/css?family=EB Garamond' rel='stylesheet'>",unsafe_allow_html=True)
-st.markdown("<style>body {font-family: 'EB Garamond';font-size: 22px;}</style>",unsafe_allow_html=True)
+#st.markdown("<link href='https://fonts.googleapis.com/css?family=EB Garamond' rel='stylesheet'>",unsafe_allow_html=True)
+#st.markdown("<style>body {font-family: 'EB Garamond';font-size: 22px;}</style>",unsafe_allow_html=True)
 
 
 #@st.cache_resource(show_spinner=False)
@@ -49,11 +49,8 @@ if not '__loaded__' in S:
     cont=st.container(border=False,height=500)
     lottie_progress_url = "https://lottie.host/61385cf3-564b-41cb-a243-3ce5c25c4134/uIUPGURgQ9.json"
     lottie_progress = load_lottieurl(lottie_progress_url)
-    with cont:
-        #st.markdown("""<h1 style='text-align: center; color: #000000; font-family: "EB Garamond", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>Cargando tu economía</h1>""", unsafe_allow_html=True)
-        with st_lottie_spinner(lottie_progress, loop=True, key="progress",height=480):
-           load_ALL(today)
-        del cont
+    with st_lottie_spinner(lottie_progress, loop=True, key="progress",height=480):
+        load_ALL(today)
     S.__loaded__=0
 #else:
 #    load_ALL(today)
