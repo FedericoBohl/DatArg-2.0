@@ -14,7 +14,7 @@ from Paginas.__Pobreza__ import make_pobreza_web
 from Paginas.__Precios__ import make_precios_web
 from Calendar.calendar import create_calendar
 
-from login_animation import load_ALL
+from pages.login_animation import load_ALL
 #***************************************    ARMADO DE LA PÁGINA     ****************************************************************
 st.set_page_config(
     page_title="DatArg",
