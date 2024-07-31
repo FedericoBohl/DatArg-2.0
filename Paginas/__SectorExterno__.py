@@ -252,7 +252,7 @@ def plot_ica(data,escala):
         figM['layout']['yaxis']['title']='PP del PBI en USD'
     return figX,figM
 
-def make_sect_ext_web(bop,bopgdp,ica,icagdp):
+def make_sect_ext_web():
     bop=S.bop_.copy()
     bopgdp=S.bopgdp_.copy()
     ica=S.ica_.copy()
