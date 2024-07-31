@@ -202,8 +202,8 @@ def plot_isac(data:pd.DataFrame,var_m:pd.DataFrame,var_a:pd.DataFrame):
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 def make_actividad_web():
-    actividad=S.actividad
-    pbi=S.pbi
+    actividad=S.actividad_.copy()
+    pbi=S.pbi_.copy()
     c1,c2=st.columns((0.7,0.3),vertical_alignment='bottom')
     c1.number_input(value=2016,label='Datos desde',min_value=2004,max_value=2024,key="start_actividad")
     c2.link_button(":blue[**Descargar datos:\nActividad**]",url="https://1drv.ms/x/c/56f917c917f2e2f5/QfXi8hfJF_kggFaKFQAAAAAA7qhKZI81Oq7vDg",use_container_width=True)

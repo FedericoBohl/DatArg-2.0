@@ -32,12 +32,12 @@ if not '__loaded__' in S:
         with st_lottie_spinner(lottie_progress, loop=True, key="progress",height=480):
             today=datetime.now().strftime("%Y%m%d")
             S.pbi_men=get_pbi()
-            S.actividad,S.pbi=load_actividad(today)
-            S.reservas,S.bcra,S.bcragdp,S.datatco,S.tasas,S.TCR,S.TC=load_bcra(today)
-            S.bop,S.bopgdp,S.ica,S.icagdp,S.tot=load_sect_ext(today)
-            S.deficit,S.datagdp,S.datatco,S.endeudamiento,S.endeudamientogdp,S.endeudamientotco,S.corr,S.corrgdp,S.corrtco=load_data_sectpub(today)
+            S.actividad_,S.pbi_=load_actividad(today)
+            S.reservas_,S.bcra_,S.bcragdp_,S.datatco_,S.tasas_,S.TCR,S.TC=load_bcra(today)
+            S.bop_,S.bopgdp_,S.ica_,S.icagdp_,S.tot=load_sect_ext(today)
+            S.deficit_,S.datagdp_,S.datatco_,S.endeudamiento_,S.endeudamientogdp_,S.endeudamientotco_,S.corr_,S.corrgdp_,S.corrtco_=load_data_sectpub(today)
             S.deuda,S.deuda_mon=load_datos_deuda(today)
-            S.data,S.geo,S.extras=load_data_map(today)
+            S.data_map,S.geo_map,S.extras_map=load_data_map(today)
         del cont
     S.__loaded__=0
 

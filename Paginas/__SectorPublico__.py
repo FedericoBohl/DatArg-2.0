@@ -540,15 +540,15 @@ def plot_ingresos_gastos(data,escala):
     t2.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 def make_sect_pub_web():
-    deficit=S.deficit
-    datagdp=S.datagdp
-    datatco=S.datatco
-    endeudamiento=S.endeudamiento
-    endeudamientogdp=S.endeudamientogdp
-    endeudamientotco=S.endeudamientotco
-    corr=S.corr
-    corrgdp=S.corrgdp
-    corrtco=S.corrtco
+    deficit=S.deficit_.copy()
+    datagdp=S.datagdp_.copy()
+    datatco=S.datatco_.copy()
+    endeudamiento=S.endeudamiento_.copy()
+    endeudamientogdp=S.endeudamientogdp_.copy()
+    endeudamientotco=S.endeudamientotco_.copy()
+    corr=S.corr_.copy()
+    corrgdp=S.corrgdp_.copy()
+    corrtco=S.corrtco_.copy()
     c1,c2=st.columns((0.7,0.3),vertical_alignment='center')
     with c1:
         with st.expander(label='Ajustar Gráficas',icon=":material/settings:"):

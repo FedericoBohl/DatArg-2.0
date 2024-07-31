@@ -89,11 +89,11 @@ def load_bcra(date):
 
 #@st.cache_data(show_spinner=False,experimental_allow_widgets=True)
 def make_BCRA_web():
-    reservas=S.reservas
-    bcra=S.bcra
-    bcragdp=S.bcragdp
-    datatco=S.datatco
-    tasas=S.tasas
+    reservas=S.reservas_.copy()
+    bcra=S.bcra_.copy()
+    bcragdp=S.bcragdp_.copy()
+    datatco=S.datatco_.copy()
+    tasas=S.tasas_.copy()
     c1,c2=st.columns((0.7,0.3),vertical_alignment='center')
     with c1:
         with st.expander(label='Ajustar Gráficas',icon=":material/settings:"):

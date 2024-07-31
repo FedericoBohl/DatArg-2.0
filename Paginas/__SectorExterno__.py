@@ -252,12 +252,11 @@ def plot_ica(data,escala):
         figM['layout']['yaxis']['title']='PP del PBI en USD'
     return figX,figM
 
-def make_sect_ext_web():
-    st.write(S.bop)
-    bop=S.bop
-    bopgdp=S.bopgdp
-    ica=S.ica
-    icagdp=S.icagdp
+def make_sect_ext_web(bop,bopgdp,ica,icagdp):
+    bop=S.bop_.copy()
+    bopgdp=S.bopgdp_.copy()
+    ica=S.ica_.copy()
+    icagdp=S.icagdp_.copy()
     c1,c2=st.columns((0.7,0.3),vertical_alignment='center')
     with c1:
         with st.expander(label='Ajustar Gráficas',icon=":material/settings:"):
