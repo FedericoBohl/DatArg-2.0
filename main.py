@@ -32,7 +32,7 @@ def local_css(file_name):
 local_css('styles.css')
 
 if not '__loaded__' in S:
-    st.switch_page('pages\login_animation.py')
+    st.switch_page('pages/login_animation.py')
 components.html(w_barra_stocks,height=80)
 col1,col2=st.columns((0.1,0.9))
 with col1:st.image("Icono.jpeg",caption="🐐")
