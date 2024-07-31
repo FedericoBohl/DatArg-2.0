@@ -1,4 +1,4 @@
-from librerias import *
+from Paginas.librerias import *
 
 
 def make_pobreza_web():

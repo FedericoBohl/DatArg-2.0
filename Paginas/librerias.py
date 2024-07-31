@@ -1,19 +1,14 @@
 import streamlit as st
-from streamlit import session_state as S
 import pandas as pd
 import requests
 from datetime import datetime,timedelta
 #from streamlit_js_eval import streamlit_js_eval
 #from streamlit_javascript import st_javascript
-from user_agents import parse
+#from user_agents import parse
 import streamlit.components.v1 as components
 
 ########################    Lottie Animation    #######################
-def load_lottieurl(url: str):
-    r = requests.get(url)
-    if r.status_code != 200:
-        return None
-    return r.json()
+
 
 
 #@st.cache_data()

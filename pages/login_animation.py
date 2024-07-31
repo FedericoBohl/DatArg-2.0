@@ -2,11 +2,13 @@ from Paginas.__BCRA__ import load_bcra
 from Paginas.__SectorExterno__ import load_sect_ext
 from Paginas.__SectorPublico__ import load_data_map,load_data_sectpub,load_datos_deuda
 from Paginas.__Actividad__ import load_actividad
-from librerias import load_lottieurl,get_pbi
+from Paginas.librerias import get_pbi
 from streamlit_lottie import st_lottie_spinner # type: ignore
 import streamlit as st
 from streamlit import session_state as S
 from datetime import datetime
+import requests
+
 
 st.set_page_config(
     page_title="DatArg",
@@ -14,7 +16,11 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="collapsed")
 
-
+def load_lottieurl(url: str):
+    r = requests.get(url)
+    if r.status_code != 200:
+        return None
+    return r.json()
 #local_css('styles.css')
 
 def load_ALL(today):
@@ -35,4 +41,4 @@ with cont:
     with st_lottie_spinner(lottie_progress, loop=True, key="progress",height=490):
         load_ALL(today)
 S.__loaded__=0
-st.switch_page('pages/app.py')
+st.switch_page('main.py')
