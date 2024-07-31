@@ -8,7 +8,7 @@ st.set_page_config(
     initial_sidebar_state="expanded")
 
 if not '__loaded__' in S:
-    st.switch_page('login_animation.py')
+    st.switch_page('pages/login_animation.py')
 
-st.switch_page('app.py')
+st.switch_page('pages/app.py')
 

@@ -31,4 +31,4 @@ with cont:
     with st_lottie_spinner(lottie_progress, loop=True, key="progress",height=490):
         load_ALL(today)
 S.__loaded__=0
-st.switch_page('app.py')
+st.switch_page('pages/app.py')
