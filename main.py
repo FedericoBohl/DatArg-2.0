@@ -25,16 +25,20 @@ st.set_page_config(
 
 #@st.cache_resource(show_spinner=False)
 if not '__loaded__' in S:
+    cont=st.container(border=False,height=500)
     lottie_progress_url = "https://lottie.host/61385cf3-564b-41cb-a243-3ce5c25c4134/uIUPGURgQ9.json"
     lottie_progress = load_lottieurl(lottie_progress_url)
-    with st_lottie_spinner(lottie_progress, loop=True, key="progress"):
-        today=datetime.now().strftime("%Y%m%d")
-        S.actividad,S.pbi=load_actividad(today)
-        S.reservas,S.bcra,S.bcragdp,S.datatco,S.tasas,S.TCR,S.TC=load_bcra(today)
-        S.bop,S.bopgdp,S.ica,S.icagdp,S.tot=load_sect_ext(today)
-        S.deficit,S.datagdp,S.datatco,S.endeudamiento,S.endeudamientogdp,S.endeudamientotco,S.corr,S.corrgdp,S.corrtco=load_data_sectpub(today)
-        S.deuda,S.deuda_mon=load_datos_deuda(today)
-        S.data,S.geo,S.extras=load_data_map(today)
+    with cont:
+        with st_lottie_spinner(lottie_progress, loop=True, key="progress",height=500):
+            today=datetime.now().strftime("%Y%m%d")
+            S.pbi_men=get_pbi()
+            S.actividad,S.pbi=load_actividad(today)
+            S.reservas,S.bcra,S.bcragdp,S.datatco,S.tasas,S.TCR,S.TC=load_bcra(today)
+            S.bop,S.bopgdp,S.ica,S.icagdp,S.tot=load_sect_ext(today)
+            S.deficit,S.datagdp,S.datatco,S.endeudamiento,S.endeudamientogdp,S.endeudamientotco,S.corr,S.corrgdp,S.corrtco=load_data_sectpub(today)
+            S.deuda,S.deuda_mon=load_datos_deuda(today)
+            S.data,S.geo,S.extras=load_data_map(today)
+        del cont
     S.__loaded__=0
 
 st.markdown('''<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>''', unsafe_allow_html=True)
@@ -73,7 +77,7 @@ if S.is_session_pc:  #Fix momentaneo
             st.write(st.form_submit_button)
     t_info, t_actividad, t_PI, t_precios, t_bcra, t_SecExt, t_SecPub, t_Intl, t_Merv= st.tabs(["Info","Actividad","Pobreza y Empleo", "Precios", "BCRA", "Sector Externo","Sector Público","Internacional","Bolsa Argentina"])
 
-    S.pbi_men=get_pbi()
+    
 
     with t_actividad:
         make_actividad_web()
