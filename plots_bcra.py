@@ -1,4 +1,10 @@
-from librerias import *
+from _globals_ import *
+import streamlit as st
+from streamlit import session_state as S
+import pandas as pd
+from plotly import graph_objects as go
+from plotly.subplots import make_subplots
+
 
 @st.cache_data(show_spinner=False)
 def plot_agregados(escala,bcra: pd.DataFrame, tasas: pd.DataFrame):

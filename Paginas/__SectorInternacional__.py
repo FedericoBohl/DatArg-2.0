@@ -1,4 +1,15 @@
-from librerias import *
+#from librerias import *
+from _globals_ import *
+import streamlit as st
+#from streamlit import session_state as S       #Not Used
+import pandas as pd
+from plotly import graph_objects as go
+from plotly.subplots import make_subplots
+import requests
+import io
+from datetime import datetime
+
+
 jp_id='7e63dd6ff7421e096fbdcf688af7b2c8ad69d814'
 
 @st.cache_resource(show_spinner=False)

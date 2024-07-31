@@ -1,5 +1,8 @@
-from librerias import *
-
+#from librerias import *
+import pandas as pd
+import requests
+import numpy as np
+import json
 
 def __convert_to_numeric_columns(df, columns):
     for col in columns:

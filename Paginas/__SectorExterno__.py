@@ -1,4 +1,12 @@
-from librerias import *
+from _globals_ import *
+import streamlit as st
+from streamlit import session_state as S
+import pandas as pd
+from librerias import get_data
+from plotly import graph_objects as go
+from plotly.subplots import make_subplots
+import plotly.express as px
+
 @st.cache_resource(show_spinner=False)
 def load_sect_ext(end):
     bop=pd.read_csv("His Data/his-BOP.csv",delimiter=";")

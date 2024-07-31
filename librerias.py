@@ -1,30 +1,13 @@
 import streamlit as st
 from streamlit import session_state as S
-from plotly.subplots import make_subplots
-import plotly.io as pio
-import numpy as np
-from fredapi import Fred
 import pandas as pd
-import plotly.graph_objects as go
-import plotly.express as px
 import requests
-import urllib.parse
-import time
-from bs4 import BeautifulSoup
-import re
 from datetime import datetime,timedelta
-fred = Fred(api_key="6050b935d2f878f1100c6f217cbe6753")
 #from streamlit_js_eval import streamlit_js_eval
 #from streamlit_javascript import st_javascript
 from user_agents import parse
 import streamlit.components.v1 as components
-from streamlit_extras.stylable_container import stylable_container as cont
-from streamlit_lottie import st_lottie_spinner,st_lottie # type: ignore
-
-import io
-import json
-import urllib3
-from pytz import timezone
+from streamlit_lottie import st_lottie_spinner # type: ignore
 
 from Paginas.__Actividad__ import load_actividad
 from Paginas.__BCRA__ import load_bcra
@@ -47,60 +30,7 @@ def lottie_animation():
         S.deficit,S.datagdp,S.datatco,S.endeudamiento,S.endeudamientogdp,S.endeudamientotco,S.corr,S.corrgdp,S.corrtco=load_data_sectpub(today)
         S.deuda,S.deuda_mon=load_datos_deuda(today)
         S.data,S.geo,S.extras=load_data_map(today)
-#   Meses en español
-meses_espanol = {
-1: 'enero', 2: 'febrero', 3: 'marzo', 4: 'abril',
-5: 'mayo', 6: 'junio', 7: 'julio', 8: 'agosto',
-9: 'septiembre', 10: 'octubre', 11: 'noviembre', 12: 'diciembre'
-}
 
-#__________Lista de colores____________________
-red="#FF9999"
-green="#90EE90"
-blue="#ADD8E6"
-yellow="#FFFF99"
-purple="#CC99FF"
-cyan="#93FFFF"
-orange="#FFCC99"
-pink="#FFB6C1"
-gray="#C0C0C0"
-black="#404040"
-white="#F0F0F0"
-brown="#CD853F"
-olive="#C0C080"
-teal="#80C0C0"
-lavender="#C080C0"
-salmon="#FFA07A"
-maroon="#B03060"
-navy="#3C3C64"
-beige="#F5F5DC"
-#______________________________________________
-
-colorscale = [
-    [0, '#632626'],  # Valor más bajo
-    [0.25, '#FF8080'],
-    [0.5, '#FFFFFF'],  # Valor medio (0)
-    [0.75,'#A5DD9B'],
-    [1, '#5F7161']   # Valor más alto
-            ]
-
-pio.templates["Oficial"] = go.layout.Template(
-    layout_annotations=[
-        dict(
-            name="watermark",
-            text="🧉DatArg",
-            textangle=-30,
-            opacity=0.1,
-            font=dict(color="black", size=50),
-            xref="paper",
-            yref="paper",
-            x=0.5,
-            y=0.5,
-            showarrow=False,
-        )
-    ]
-)
-pio.templates.default = "Oficial"
 
 #@st.cache_data()
 #def page_info():

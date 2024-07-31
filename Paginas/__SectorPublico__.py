@@ -1,4 +1,14 @@
-from librerias import *
+from _globals_ import *
+import streamlit as st
+from streamlit import session_state as S
+import pandas as pd
+from librerias import get_data
+from plotly import graph_objects as go
+from plotly.subplots import make_subplots
+import requests
+import json
+import plotly.express as px
+import io
 
 @st.cache_resource(show_spinner=False)
 def load_data_sectpub(date):

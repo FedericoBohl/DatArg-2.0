@@ -1,4 +1,9 @@
-from librerias import st,lottie_animation,w_barra_stocks,components,S,pd,get_pbi
+from _globals_ import *
+import streamlit as st
+from streamlit import session_state as S
+import pandas as pd
+from librerias import lottie_animation,get_pbi
+import streamlit.components.v1 as components
 from Paginas.__BCRA__ import make_BCRA_web
 from Paginas.__SectorExterno__ import make_sect_ext_web
 from Paginas.__SectorPublico__ import make_sect_pub_web

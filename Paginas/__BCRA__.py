@@ -1,4 +1,7 @@
-from librerias import *
+from _globals_ import *
+import streamlit as st
+from streamlit import session_state as S
+from librerias import get_data,add_gdp
 from plots_bcra import *
 #from get_data import *
 
