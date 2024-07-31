@@ -23,7 +23,7 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded")
 
-@st.cache_resource(show_spinner=False)
+#@st.cache_resource(show_spinner=False)
 def load_ALL(today):
     S.pbi_men=get_pbi()
     S.actividad_,S.pbi_=load_actividad(today)
@@ -47,10 +47,10 @@ st.markdown("<style>body {font-family: 'EB Garamond';font-size: 22px;}</style>",
 today=datetime.now().strftime("%Y%m%d")
 if not '__loaded__' in S:
     cont=st.container(border=False,height=500)
-    st.markdown("""<h1 style='text-align: center; color: #000000; font-family: "EB Garamond", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>Cargando tu economía</h1>""", unsafe_allow_html=True)
     lottie_progress_url = "https://lottie.host/61385cf3-564b-41cb-a243-3ce5c25c4134/uIUPGURgQ9.json"
     lottie_progress = load_lottieurl(lottie_progress_url)
     with cont:
+        st.markdown("""<h1 style='text-align: center; color: #000000; font-family: "EB Garamond", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>Cargando tu economía</h1>""", unsafe_allow_html=True)
         with st_lottie_spinner(lottie_progress, loop=True, key="progress",height=480):
            load_ALL(today) 
         del cont
