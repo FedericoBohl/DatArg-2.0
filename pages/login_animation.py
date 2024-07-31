@@ -8,7 +8,7 @@ import streamlit as st
 from streamlit import session_state as S
 from datetime import datetime
 
-from app import local_css
+from pages.app import local_css
 st.set_page_config(
     page_title="DatArg",
     page_icon="🧉",
