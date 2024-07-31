@@ -9,6 +9,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 import requests
 import urllib.parse
+import time
 from bs4 import BeautifulSoup
 import re
 from datetime import datetime,timedelta
@@ -18,6 +19,7 @@ fred = Fred(api_key="6050b935d2f878f1100c6f217cbe6753")
 from user_agents import parse
 import streamlit.components.v1 as components
 from streamlit_extras.stylable_container import stylable_container as cont
+from streamlit_lottie import st_lottie_spinner,st_lottie # type: ignore
 
 import io
 import json
@@ -26,8 +28,23 @@ from pytz import timezone
 
 import certifi
 
+########################    Lottie Animation    #######################
+def load_lottieurl(url: str):
+    r = requests.get(url)
+    if r.status_code != 200:
+        return None
+    return r.json()
+def lottie_animation():
+    lottie_progress_url = "https://assets5.lottiefiles.com/private_files/lf30_3ykigvxc.json"
+    lottie_progress = load_lottieurl(lottie_progress_url)
+    lottie_success_url = "https://assets7.lottiefiles.com/packages/lf20_TsKMbf.json"
+    lottie_error_url = "https://assets6.lottiefiles.com/packages/lf20_0pgmwzt3.json"
+    with st_lottie_spinner(lottie_progress, loop=True, key="progress"):
+        time.sleep(5)
+    st_lottie(lottie_success_url, loop=False, key="success")
 
 
+#   Meses en español
 meses_espanol = {
 1: 'enero', 2: 'febrero', 3: 'marzo', 4: 'abril',
 5: 'mayo', 6: 'junio', 7: 'julio', 8: 'agosto',
