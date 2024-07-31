@@ -530,7 +530,15 @@ def plot_ingresos_gastos(data,escala):
     t2.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 def make_sect_pub_web():
-    deficit,datagdp,datatco,endeudamiento,endeudamientogdp,endeudamientotco,corr,corrgdp,corrtco=load_data_sectpub(datetime.now().strftime("%Y%m%d"))
+    deficit=S.deficit
+    datagdp=S.datagdp
+    datatco=S.datatco
+    endeudamiento=S.endeudamiento
+    endeudamientogdp=S.endeudamientogdp
+    endeudamientotco=S.endeudamientotco
+    corr=S.corr
+    corrgdp=S.corrgdp
+    corrtco=S.corrtco
     c1,c2=st.columns((0.7,0.3),vertical_alignment='center')
     with c1:
         with st.expander(label='Ajustar Gráficas',icon=":material/settings:"):
@@ -583,11 +591,11 @@ def make_sect_pub_web():
     with c1:
         with st.container(border=True):
             st.subheader('Deuda Pública')
-            deuda,deuda_mon=load_datos_deuda(2)
+            #deuda,deuda_mon=load_datos_deuda(2)
             st.radio('Deuda Pública',options=['Endeudamiento Anual Acumulado','Composición de la Deuda Bruta','Pagos de Deuda por Moneda'],label_visibility='collapsed',horizontal=False,key='plot_deuda')
-            plot_deuda(deuda,S.plot_deuda) if S.plot_deuda=='Composición de la Deuda Bruta' else (plot_deuda(deuda_mon,S.plot_deuda) if S.plot_deuda=='Pagos de Deuda por Moneda' else plot_endeudamiento(S.endeudamiento,S.escala_sectpub))
+            plot_deuda(S.deuda,S.plot_deuda) if S.plot_deuda=='Composición de la Deuda Bruta' else (plot_deuda(S.deuda_mon,S.plot_deuda) if S.plot_deuda=='Pagos de Deuda por Moneda' else plot_endeudamiento(S.endeudamiento,S.escala_sectpub))
     with c2:
         with st.container(border=True):
             st.subheader('Déficit Provincial')
-            data,geo,extras=load_data_map(datetime.now().strftime("%Y%m%d"))
-            make_map(data,geo,extras)
+            #data,geo,extras=load_data_map(datetime.now().strftime("%Y%m%d"))
+            make_map(S.data,S.geo,S.extras)

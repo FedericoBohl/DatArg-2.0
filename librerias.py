@@ -26,8 +26,10 @@ import json
 import urllib3
 from pytz import timezone
 
-import certifi
-
+from Paginas.__Actividad__ import load_actividad
+from Paginas.__BCRA__ import load_bcra
+from Paginas.__SectorExterno__ import load_sect_ext
+from Paginas.__SectorPublico__ import load_data_sectpub,load_datos_deuda,load_data_map
 ########################    Lottie Animation    #######################
 def load_lottieurl(url: str):
     r = requests.get(url)
@@ -37,13 +39,14 @@ def load_lottieurl(url: str):
 def lottie_animation():
     lottie_progress_url = "https://lottie.host/61385cf3-564b-41cb-a243-3ce5c25c4134/uIUPGURgQ9.json"
     lottie_progress = load_lottieurl(lottie_progress_url)
-    lottie_success_url = "https://assets7.lottiefiles.com/packages/lf20_TsKMbf.json"
-    lottie_error_url = "https://assets6.lottiefiles.com/packages/lf20_0pgmwzt3.json"
     with st_lottie_spinner(lottie_progress, loop=True, key="progress"):
-        time.sleep(5)
-    st_lottie(lottie_success_url, loop=False, key="success")
-
-
+        today=datetime.now().strftime("%Y%m%d")
+        S.actividad,S.pbi=load_actividad(today)
+        S.reservas,S.bcra,S.bcragdp,S.datatco,S.tasas,S.TCR,S.TC=load_bcra(today)
+        S.bop,S.bopgdp,S.ica,S.icagdp,S.tot=load_sect_ext(today)
+        S.deficit,S.datagdp,S.datatco,S.endeudamiento,S.endeudamientogdp,S.endeudamientotco,S.corr,S.corrgdp,S.corrtco=load_data_sectpub(today)
+        S.deuda,S.deuda_mon=load_datos_deuda(today)
+        S.data,S.geo,S.extras=load_data_map(today)
 #   Meses en español
 meses_espanol = {
 1: 'enero', 2: 'febrero', 3: 'marzo', 4: 'abril',

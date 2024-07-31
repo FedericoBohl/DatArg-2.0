@@ -8,7 +8,7 @@ from plots_bcra import *
 
 #___________________________CARGA DE DATOS____________________________________________________________
 @st.cache_resource(show_spinner=False)
-def load_bcra_his(date): 
+def load_bcra(date): 
     ## Agregados Monetarios
     bcra=pd.read_csv("His Data/his-agregados.csv",delimiter=";")
     bcra['Unnamed: 0'] = pd.to_datetime(bcra.iloc[:, 0].values, format='%Y-%m-%d')
@@ -86,7 +86,11 @@ def load_bcra_his(date):
 
 #@st.cache_data(show_spinner=False,experimental_allow_widgets=True)
 def make_BCRA_web():
-    reservas,bcra,bcragdp,datatco,tasas,S.TCR,S.TC=load_bcra_his(datetime.now().strftime("%Y%m%d"))
+    reservas=S.reservas
+    bcra=S.bcra
+    bcragdp=S.bcragdp
+    datatco=S.datatco
+    tasas=S.tasas
     c1,c2=st.columns((0.7,0.3),vertical_alignment='center')
     with c1:
         with st.expander(label='Ajustar Gráficas',icon=":material/settings:"):

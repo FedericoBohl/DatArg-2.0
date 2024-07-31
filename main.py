@@ -17,6 +17,9 @@ st.set_page_config(
     initial_sidebar_state="expanded")
 
 #@st.cache_resource(show_spinner=False)
+if not '__loaded__' in S:
+    lottie_animation()
+    S.__loaded__=0
 
 st.markdown('''<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>''', unsafe_allow_html=True)
 def local_css(file_name):
@@ -52,9 +55,6 @@ if S.is_session_pc:  #Fix momentaneo
         with c2.popover('Bot de Telegram/Mail',use_container_width=True):
             st.caption('Poner algo corto para explicar de que trata el bot y el link a este o un formulario de inscripción (chequear esto de abajo)')
             st.write(st.form_submit_button)
-    with st.container(height=100):
-        if st.button('Animation'):
-            lottie_animation()
     t_info, t_actividad, t_PI, t_precios, t_bcra, t_SecExt, t_SecPub, t_Intl, t_Merv= st.tabs(["Info","Actividad","Pobreza y Empleo", "Precios", "BCRA", "Sector Externo","Sector Público","Internacional","Bolsa Argentina"])
 
     S.pbi_men=get_pbi()
