@@ -23,30 +23,39 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded")
 
+@st.cache_resource(show_spinner=False)
+def load_ALL(today):
+    S.pbi_men=get_pbi()
+    S.actividad_,S.pbi_=load_actividad(today)
+    S.reservas_,S.bcra_,S.bcragdp_,S.datatco_,S.tasas_,S.TCR,S.TC=load_bcra(today)
+    S.bop_,S.bopgdp_,S.ica_,S.icagdp_,S.tot=load_sect_ext(today)
+    S.deficit_,S.datagdp_,S.datatco_,S.endeudamiento_,S.endeudamientogdp_,S.endeudamientotco_,S.corr_,S.corrgdp_,S.corrtco_=load_data_sectpub(today)
+    S.deuda,S.deuda_mon=load_datos_deuda(today)
+    S.data_map,S.geo_map,S.extras_map=load_data_map(today)
+
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+local_css('styles.css')
+#Estilado de la página
+st.markdown('''<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>''', unsafe_allow_html=True)
+
 #@st.cache_resource(show_spinner=False)
+today=datetime.now().strftime("%Y%m%d")
 if not '__loaded__' in S:
     cont=st.container(border=False,height=500)
     lottie_progress_url = "https://lottie.host/61385cf3-564b-41cb-a243-3ce5c25c4134/uIUPGURgQ9.json"
     lottie_progress = load_lottieurl(lottie_progress_url)
     with cont:
         with st_lottie_spinner(lottie_progress, loop=True, key="progress",height=480):
-            today=datetime.now().strftime("%Y%m%d")
-            S.pbi_men=get_pbi()
-            S.actividad_,S.pbi_=load_actividad(today)
-            S.reservas_,S.bcra_,S.bcragdp_,S.datatco_,S.tasas_,S.TCR,S.TC=load_bcra(today)
-            S.bop_,S.bopgdp_,S.ica_,S.icagdp_,S.tot=load_sect_ext(today)
-            S.deficit_,S.datagdp_,S.datatco_,S.endeudamiento_,S.endeudamientogdp_,S.endeudamientotco_,S.corr_,S.corrgdp_,S.corrtco_=load_data_sectpub(today)
-            S.deuda,S.deuda_mon=load_datos_deuda(today)
-            S.data_map,S.geo_map,S.extras_map=load_data_map(today)
+           load_ALL(today) 
         del cont
     S.__loaded__=0
+else:
+    load_ALL(today)
 
-st.markdown('''<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>''', unsafe_allow_html=True)
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-local_css('styles.css')
 
+#***************************************    ARMADO DE LA PÁGINA     ****************************************************************
 try:
     S.page_width,S.is_session_pc=page_info()
 except:
