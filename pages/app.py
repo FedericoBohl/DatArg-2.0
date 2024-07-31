@@ -20,7 +20,7 @@ st.set_page_config(
     page_title="DatArg",
     page_icon="🧉",
     layout="wide",
-    initial_sidebar_state="expanded")
+    initial_sidebar_state="collapsed")
 
 @st.cache_resource(show_spinner=False)
 def local_css(file_name):

@@ -8,7 +8,6 @@ import streamlit as st
 from streamlit import session_state as S
 from datetime import datetime
 
-from pages.app import local_css
 st.set_page_config(
     page_title="DatArg",
     page_icon="🧉",
@@ -16,7 +15,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed")
 
 
-local_css('styles.css')
+#local_css('styles.css')
 
 def load_ALL(today):
     S.pbi_men=get_pbi()
@@ -29,7 +28,7 @@ def load_ALL(today):
 
 today=datetime.now().strftime("%Y%m%d")
 
-cont=st.container(border=False,height=500)
+cont=st.container(border=False,height=550)
 with cont:
     lottie_progress_url = "https://lottie.host/61385cf3-564b-41cb-a243-3ce5c25c4134/uIUPGURgQ9.json"
     lottie_progress = load_lottieurl(lottie_progress_url)
