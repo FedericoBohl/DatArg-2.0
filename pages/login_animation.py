@@ -8,11 +8,16 @@ import streamlit as st
 from streamlit import session_state as S
 from datetime import datetime
 
+from app import local_css
 st.set_page_config(
     page_title="DatArg",
     page_icon="🧉",
     layout="centered",
     initial_sidebar_state="collapsed")
+
+
+local_css('styles.css')
+
 def load_ALL(today):
     S.pbi_men=get_pbi()
     S.actividad_,S.pbi_=load_actividad(today)

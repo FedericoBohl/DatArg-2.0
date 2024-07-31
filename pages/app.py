@@ -14,6 +14,7 @@ from Paginas.__Pobreza__ import make_pobreza_web
 from Paginas.__Precios__ import make_precios_web
 from Calendar.calendar import create_calendar
 
+from login_animation import load_ALL
 #***************************************    ARMADO DE LA PÁGINA     ****************************************************************
 st.set_page_config(
     page_title="DatArg",
@@ -21,12 +22,14 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded")
 
+@st.cache_resource(show_spinner=False)
 def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 local_css('styles.css')
 
-
+if not 'extras_map' in S:
+    load_ALL()
 components.html(w_barra_stocks,height=80)
 col1,col2=st.columns((0.1,0.9))
 with col1:st.image("Icono.jpeg",caption="🐐")
