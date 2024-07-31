@@ -253,6 +253,7 @@ def plot_ica(data,escala):
     return figX,figM
 
 def make_sect_ext_web():
+    st.write(S.bop)
     bop=S.bop
     bopgdp=S.bopgdp
     ica=S.ica

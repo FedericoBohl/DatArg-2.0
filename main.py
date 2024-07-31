@@ -29,7 +29,7 @@ if not '__loaded__' in S:
     lottie_progress_url = "https://lottie.host/61385cf3-564b-41cb-a243-3ce5c25c4134/uIUPGURgQ9.json"
     lottie_progress = load_lottieurl(lottie_progress_url)
     with cont:
-        with st_lottie_spinner(lottie_progress, loop=True, key="progress",height=500):
+        with st_lottie_spinner(lottie_progress, loop=True, key="progress",height=480):
             today=datetime.now().strftime("%Y%m%d")
             S.pbi_men=get_pbi()
             S.actividad,S.pbi=load_actividad(today)
