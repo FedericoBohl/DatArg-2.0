@@ -18,7 +18,6 @@ from Paginas.__Precios__ import make_precios_web
 from Paginas.librerias import get_pbi
 from Calendar.calendar import create_calendar
 
-from pages.login_animation import load_ALL
 st.set_page_config(
     page_title="DatArg",
     page_icon="🧉",
