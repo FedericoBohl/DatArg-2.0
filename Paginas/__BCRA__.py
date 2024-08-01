@@ -94,7 +94,6 @@ def make_BCRA_web():
     bcragdp=S.bcragdp_.copy()
     datatco=S.bcratco_.copy()
     tasas=S.tasas_.copy()
-    st.dataframe(S.datatco_)
     c1,c2=st.columns((0.7,0.3),vertical_alignment='center')
     with c1:
         with st.expander(label='Ajustar Gráficas',icon=":material/settings:"):
