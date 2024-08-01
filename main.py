@@ -4,14 +4,18 @@ from streamlit import session_state as S
 import pandas as pd
 import streamlit.components.v1 as components
 from datetime import datetime
-from Paginas.__BCRA__ import make_BCRA_web
-from Paginas.__SectorExterno__ import make_sect_ext_web
-from Paginas.__SectorPublico__ import make_sect_pub_web
+import requests
+import time
+from streamlit_lottie import st_lottie
+from Paginas.__BCRA__ import make_BCRA_web,load_bcra
+from Paginas.__SectorExterno__ import make_sect_ext_web,load_sect_ext
+from Paginas.__SectorPublico__ import make_sect_pub_web,load_data_map,load_data_sectpub,load_datos_deuda
 from Paginas.__SectorInternacional__ import make_internacional_web
 from Paginas.__SectorFinanciero__ import make_merv_web
-from Paginas.__Actividad__ import make_actividad_web
+from Paginas.__Actividad__ import make_actividad_web,load_actividad
 from Paginas.__Pobreza__ import make_pobreza_web
 from Paginas.__Precios__ import make_precios_web
+from Paginas.librerias import get_pbi
 from Calendar.calendar import create_calendar
 
 from pages.login_animation import load_ALL
@@ -30,11 +34,34 @@ def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 local_css('styles.css')
-st.write(1)
+def load_lottieurl(url: str):
+    r = requests.get(url)
+    if r.status_code != 200:
+        return None
+    return r.json()
+
+def load_ALL(today):
+    S.pbi_men=get_pbi()
+    S.actividad_,S.pbi_=load_actividad(today)
+    S.reservas_,S.bcra_,S.bcragdp_,S.datatco_,S.tasas_,S.TCR,S.TC=load_bcra(today)
+    S.bop_,S.bopgdp_,S.ica_,S.icagdp_,S.tot=load_sect_ext(today)
+    S.deficit_,S.datagdp_,S.datatco_,S.endeudamiento_,S.endeudamientogdp_,S.endeudamientotco_,S.corr_,S.corrgdp_,S.corrtco_=load_data_sectpub(today)
+    S.deuda,S.deuda_mon=load_datos_deuda(today)
+    S.data_map,S.geo_map,S.extras_map=load_data_map(today)
+
 if not '__loaded__' in S:
-    st.write(2)
-    st.switch_page('pages/login_animation.py')
-st.write(3)
+    today=datetime.now().strftime("%Y%m%d")
+    cont=st.container(border=False,height=550)
+    with cont:
+        lottie_progress_url = "https://lottie.host/61385cf3-564b-41cb-a243-3ce5c25c4134/uIUPGURgQ9.json"
+        #lottie_progress = load_lottieurl(lottie_progress_url)
+        #with st_lottie_spinner(lottie_progress, loop=True, key="progress",height=490):
+        with st_lottie(lottie_progress_url):
+            load_ALL(today)
+    del cont
+    S.__loaded__=0
+    time.sleep(1.5)
+
 components.html(w_barra_stocks,height=80)
 col1,col2=st.columns((0.1,0.9))
 with col1:st.image("Icono.jpeg",caption="🐐")
