@@ -55,7 +55,7 @@ if not '__loaded__' in S:
         lottie_progress_url = "https://lottie.host/61385cf3-564b-41cb-a243-3ce5c25c4134/uIUPGURgQ9.json"
         #lottie_progress = load_lottieurl(lottie_progress_url)
         #with st_lottie_spinner(lottie_progress, loop=True, key="progress",height=490):
-        with st_lottie(lottie_progress_url):
+        with st_lottie(lottie_progress_url,key='login_animation'):
             load_ALL(today)
     del cont
     S.__loaded__=0
