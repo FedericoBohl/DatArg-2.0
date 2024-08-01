@@ -52,6 +52,7 @@ if not '__loaded__' in S:
     today=datetime.now().strftime("%Y%m%d")
     cont=st.container(border=False,height=550)
     with cont:
+        st.markdown("""<h1 style='text-align: center; color: #000000; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>Cargando tu Economía...</h1>""", unsafe_allow_html=True)
         lottie_progress_url = "https://lottie.host/61385cf3-564b-41cb-a243-3ce5c25c4134/uIUPGURgQ9.json"
         lottie_progress = load_lottieurl(lottie_progress_url)
         with st_lottie_spinner(lottie_progress, loop=True, key="progress",height=490):
