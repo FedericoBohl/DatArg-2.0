@@ -76,9 +76,9 @@ with col2:
         #create_widget(w_calendar_tv,height=350,width=int(S.page_width*0.85))
         df = pd.read_csv('Calendar/calendar_events.csv')
         calendario=create_calendar(df)
-    with c2.popover('Bot de Telegram/Mail',use_container_width=True):
-        st.caption('Poner algo corto para explicar de que trata el bot y el link a este o un formulario de inscripción (chequear esto de abajo)')
-        st.write(st.form_submit_button)
+    with c2.popover('Bot de Telegram',use_container_width=True):
+        st.caption('¿Queres enterarte cuando sale un nuevo dato? Subscribite al bot de Telegram para que te avisemos cuando salgan.')
+        st.page_link(page='https://t.me/calendario_economico_argentino',icon='Telegram Icon.png')
 
 
 t_info, t_actividad, t_PI, t_precios, t_bcra, t_SecExt, t_SecPub, t_Intl, t_Merv= st.tabs(["Info","Actividad","Pobreza y Empleo", "Precios", "BCRA", "Sector Externo","Sector Público","Internacional","Bolsa Argentina"])
