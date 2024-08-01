@@ -48,18 +48,6 @@ def load_ALL(today):
     S.deuda,S.deuda_mon=load_datos_deuda(today)
     S.data_map,S.geo_map,S.extras_map=load_data_map(today)
 
-if not '__loaded__' in S:
-    today=datetime.now().strftime("%Y%m%d")
-    cont=st.container(border=False,height=550)
-    with cont:
-        lottie_progress_url = "https://lottie.host/61385cf3-564b-41cb-a243-3ce5c25c4134/uIUPGURgQ9.json"
-        lottie_progress = load_lottieurl(lottie_progress_url)
-        with st_lottie_spinner(lottie_progress, loop=True, key="progress",height=490):
-            load_ALL(today)
-    del cont
-    S.__loaded__=0
-    time.sleep(1.5)
-
 components.html(w_barra_stocks,height=80)
 col1,col2=st.columns((0.1,0.9))
 with col1:st.image("Icono.jpeg",caption="🐐")
@@ -79,6 +67,17 @@ with col2:
     with c2.popover('Bot de Telegram/Mail',use_container_width=True):
         st.caption('Poner algo corto para explicar de que trata el bot y el link a este o un formulario de inscripción (chequear esto de abajo)')
         st.write(st.form_submit_button)
+if not '__loaded__' in S:
+    today=datetime.now().strftime("%Y%m%d")
+    cont=st.container(border=False,height=550)
+    with cont:
+        lottie_progress_url = "https://lottie.host/61385cf3-564b-41cb-a243-3ce5c25c4134/uIUPGURgQ9.json"
+        lottie_progress = load_lottieurl(lottie_progress_url)
+        with st_lottie_spinner(lottie_progress, loop=True, key="progress",height=490):
+            load_ALL(today)
+    del cont
+    S.__loaded__=0
+
 t_info, t_actividad, t_PI, t_precios, t_bcra, t_SecExt, t_SecPub, t_Intl, t_Merv= st.tabs(["Info","Actividad","Pobreza y Empleo", "Precios", "BCRA", "Sector Externo","Sector Público","Internacional","Bolsa Argentina"])
 
 
