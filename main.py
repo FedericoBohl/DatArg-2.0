@@ -77,6 +77,7 @@ if not '__loaded__' in S:
             load_ALL(today)
     del cont
     S.__loaded__=0
+    st.rerun()
 
 t_info, t_actividad, t_PI, t_precios, t_bcra, t_SecExt, t_SecPub, t_Intl, t_Merv= st.tabs(["Info","Actividad","Pobreza y Empleo", "Precios", "BCRA", "Sector Externo","Sector Público","Internacional","Bolsa Argentina"])
 
