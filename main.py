@@ -30,9 +30,11 @@ def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 local_css('styles.css')
-
+st.write(1)
 if not '__loaded__' in S:
+    st.write(2)
     st.switch_page('pages/login_animation.py')
+st.write(3)
 components.html(w_barra_stocks,height=80)
 col1,col2=st.columns((0.1,0.9))
 with col1:st.image("Icono.jpeg",caption="🐐")
