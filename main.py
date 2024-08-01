@@ -6,7 +6,7 @@ import streamlit.components.v1 as components
 from datetime import datetime
 import requests
 import time
-from streamlit_lottie import st_lottie
+from streamlit_lottie import st_lottie_spinner
 from Paginas.__BCRA__ import make_BCRA_web,load_bcra
 from Paginas.__SectorExterno__ import make_sect_ext_web,load_sect_ext
 from Paginas.__SectorPublico__ import make_sect_pub_web,load_data_map,load_data_sectpub,load_datos_deuda
@@ -54,8 +54,7 @@ if not '__loaded__' in S:
     with cont:
         lottie_progress_url = "https://lottie.host/61385cf3-564b-41cb-a243-3ce5c25c4134/uIUPGURgQ9.json"
         lottie_progress = load_lottieurl(lottie_progress_url)
-        #with st_lottie_spinner(lottie_progress, loop=True, key="progress",height=490):
-        with st_lottie(lottie_progress,key='login_animation'):
+        with st_lottie_spinner(lottie_progress, loop=True, key="progress",height=490):
             load_ALL(today)
     del cont
     S.__loaded__=0
