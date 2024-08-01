@@ -78,7 +78,7 @@ with col2:
         calendario=create_calendar(df)
     with c2.popover('Bot de Telegram',use_container_width=True):
         st.caption('¿Queres enterarte cuando sale un nuevo dato? Subscribite al bot de Telegram para que te avisemos cuando salgan.')
-        st.page_link(page='https://t.me/calendario_economico_argentino',icon='Telegram Icon.png')
+        st.page_link(page='https://t.me/calendario_economico_argentino',icon='🗓️')
 
 
 t_info, t_actividad, t_PI, t_precios, t_bcra, t_SecExt, t_SecPub, t_Intl, t_Merv= st.tabs(["Info","Actividad","Pobreza y Empleo", "Precios", "BCRA", "Sector Externo","Sector Público","Internacional","Bolsa Argentina"])
