@@ -34,11 +34,10 @@ def load_ALL(today):
 
 today=datetime.now().strftime("%Y%m%d")
 
-cont=st.container(border=False,height=550)
-with cont:
+with st.container(border=False,height=550):
     lottie_progress_url = "https://lottie.host/61385cf3-564b-41cb-a243-3ce5c25c4134/uIUPGURgQ9.json"
     lottie_progress = load_lottieurl(lottie_progress_url)
-    with st_lottie_spinner(lottie_progress, loop=True, key="progress",height=490):
-        load_ALL(today)
+    #with st_lottie_spinner(lottie_progress, loop=True, key="progress",height=490):
+    load_ALL(today)
 S.__loaded__=0
 st.switch_page('main.py')
