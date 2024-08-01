@@ -42,9 +42,9 @@ def load_lottieurl(url: str):
 def load_ALL(today):
     S.pbi_men=get_pbi()
     S.actividad_,S.pbi_=load_actividad(today)
-    S.reservas_,S.bcra_,S.bcragdp_,S.datatco_,S.tasas_,S.TCR,S.TC=load_bcra(today)
+    S.reservas_,S.bcra_,S.bcragdp_,S.bcratco_,S.tasas_,S.TCR,S.TC=load_bcra(today)
     S.bop_,S.bopgdp_,S.ica_,S.icagdp_,S.tot=load_sect_ext(today)
-    S.deficit_,S.datagdp_,S.datatco_,S.endeudamiento_,S.endeudamientogdp_,S.endeudamientotco_,S.corr_,S.corrgdp_,S.corrtco_=load_data_sectpub(today)
+    S.deficit_,S.deficitgdp_,S.deficittco_,S.endeudamiento_,S.endeudamientogdp_,S.endeudamientotco_,S.corr_,S.corrgdp_,S.corrtco_=load_data_sectpub(today)
     S.deuda,S.deuda_mon=load_datos_deuda(today)
     S.data_map,S.geo_map,S.extras_map=load_data_map(today)
 

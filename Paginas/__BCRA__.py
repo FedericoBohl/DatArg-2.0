@@ -92,7 +92,7 @@ def make_BCRA_web():
     reservas=S.reservas_.copy()
     bcra=S.bcra_.copy()
     bcragdp=S.bcragdp_.copy()
-    datatco=S.datatco_.copy()
+    datatco=S.bcratco_.copy()
     tasas=S.tasas_.copy()
     st.dataframe(S.datatco_)
     c1,c2=st.columns((0.7,0.3),vertical_alignment='center')

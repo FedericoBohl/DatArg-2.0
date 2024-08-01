@@ -541,8 +541,8 @@ def plot_ingresos_gastos(data,escala):
 
 def make_sect_pub_web():
     deficit=S.deficit_.copy()
-    datagdp=S.datagdp_.copy()
-    datatco=S.datatco_.copy()
+    datagdp=S.deficitgdp_.copy()
+    datatco=S.deficittco_.copy()
     endeudamiento=S.endeudamiento_.copy()
     endeudamientogdp=S.endeudamientogdp_.copy()
     endeudamientotco=S.endeudamientotco_.copy()
