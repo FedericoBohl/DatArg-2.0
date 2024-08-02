@@ -301,8 +301,8 @@ def make_internacional_web():
     with st.container(border=True):
         st.markdown("<h3 style='text-align: center;'>Canasta de Monedas de Latam</h3>", unsafe_allow_html=True)
         df,fx=load_canasta(datetime.now().strftime("%Y%m%d"))
-        df_men=df.pct_change()
-        df_an=df.pct_change(periods=12)
+        df_men=df.pct_change()*100
+        df_an=df.pct_change(periods=12)*100
         c1,c2=st.columns((0.6,0.4))
         with c1:
             fig=make_subplots(specs=[[{"secondary_y": True}]])
