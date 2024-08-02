@@ -29,8 +29,8 @@ def load_canasta(end):
         _=soup.find('div', {'data-source': 'USD'})
         __=float(_.get_text().split(' ')[0].replace('.','').replace(',','.'))
         _=100*__/data[i][2]
-        total+=_*data[i][0]
-        data[i][1]=_
+        total+=__*data[i][0]
+        data[i][1]=__
         st.write(f'{_}---{__}---{total}')
     df=pd.read_csv("His Data/his-canasta.csv",delimiter=';',index_col=0)
     df.index=pd.to_datetime(df.index,format='%d/%m/%Y')
