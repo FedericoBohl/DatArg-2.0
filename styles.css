@@ -46,6 +46,11 @@ div[data-testid="StyledFullScreenButton"]{
    visibility:collapse;
 }
 
+div[class="st-emotion-cache-4uzi61 e1f1d6gn0"] div[class="element-container st-emotion-cache-uakmm e1f1d6gn4"] div[data-testid="stMetricValue"]{
+   background-image: url("https://www.worldometers.info/img/flags/ar-flag.gif");
+   background-size: cover;
+}
+
 
 /*Estilos para tablas*/
 
