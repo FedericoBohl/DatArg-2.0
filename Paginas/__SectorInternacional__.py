@@ -13,21 +13,21 @@ from bs4 import BeautifulSoup
 
 jp_id='7e63dd6ff7421e096fbdcf688af7b2c8ad69d814'
 
-@st.cache_resource(show_spinner=False)
+#@st.cache_resource(show_spinner=False)
 def load_canasta(end):
     data={
-        'ARS':[0.0692911639106725,'https://www.google.com/finance/quote/USD-ARS?hl=es'],
-        'COP':[0.0604214503862096,'https://www.google.com/finance/quote/USD-COP?hl=es'],
-        'BRL':[0.301541171878207,'https://www.google.com/finance/quote/USD-BRL?hl=es'],
-        'MXN':[0.484520491738942,'https://www.google.com/finance/quote/USD-MXN?hl=es'],
-        'CLP':[0.0842257220859683,'https://www.google.com/finance/quote/USD-CLP?hl=es']
+        'ARS':[0.0692911639106725,'https://www.google.com/finance/quote/USD-ARS?hl=es',0.9998],
+        'COP':[0.0604214503862096,'https://www.google.com/finance/quote/USD-COP?hl=es',1976.5],
+        'BRL':[0.301541171878207,'https://www.google.com/finance/quote/USD-BRL?hl=es',1.784],
+        'MXN':[0.484520491738942,'https://www.google.com/finance/quote/USD-MXN?hl=es',9.587],
+        'CLP':[0.0842257220859683,'https://www.google.com/finance/quote/USD-CLP?hl=es',517.95]
         }
     total=0
     for i in data:
         response=requests.get(data[i][1])
         soup=BeautifulSoup(response.text, 'html.parser')
         _=soup.find('div', {'data-source': 'USD'})
-        _=float(_.get_text().split(' ')[0].replace('.','').replace(',','.'))
+        _=100*float(_.get_text().split(' ')[0].replace('.','').replace(',','.'))/data[i][2]
         total+=_*data[i][0]
         data[i][1]=_
     df=pd.read_csv("His Data/his-canasta.csv",delimiter=';',index_col=0)
@@ -302,7 +302,6 @@ def make_internacional_web():
         df,fx=load_canasta(datetime.now().strftime("%Y%m%d"))
         df_men=df.pct_change()
         df_an=df.pct_change(periods=12)
-        st.caption('La idea es crear una canasta de monedas comparadas con el USD y poderadas por la participación en el comercio mundial\nA priori los países por un tema de complejidad serían Argentina, Colombia, Brasil, Chile y Mexico y que la serie sea mensual.')
         c1,c2=st.columns((0.6,0.4))
         with c1:
             fig=make_subplots(specs=[[{"secondary_y": True}]])
@@ -319,7 +318,7 @@ def make_internacional_web():
                             borderwidth=2
                         ),
                 yaxis=dict(showgrid=False, zeroline=True, showline=True,title="%"),
-                yaxis2=dict(showgrid=False, zeroline=True, showline=True,title="USD"),
+                yaxis2=dict(showgrid=False, zeroline=True, showline=True,title="Índice"),
                 xaxis=dict(
                             rangeselector=dict(
                                 buttons=list([
@@ -343,13 +342,12 @@ def make_internacional_web():
                             )
                         )
                     )  
-            fig['layout']['yaxis2']['type']='log'
             st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
         with c2:
-            st.caption('Variaciónes Intermensuales !!')
             c21,c22=st.columns(2)
             c21.metric('Argentina',f"{fx['ARS'][1]:.2f} USD",delta=f'Share: {(100*fx["ARS"][0]):.2f}%',delta_color='off')
             c22.metric('Brasil',f"{fx['BRL'][1]:.2f} USD",delta=f'Share: {(100*fx["BRL"][0]):.2f}%',delta_color='off')
             c21.metric('Colombia',f"{fx['COP'][1]:.2f} USD",delta=f'Share: {(100*fx["COP"][0]):.2f}%',delta_color='off')
             c22.metric('Chile',f"{fx['CLP'][1]:.2f} USD",delta=f'Share: {(100*fx["CLP"][0]):.2f}%',delta_color='off')
             c21.metric('México',f"{fx['MXN'][1]:.2f} USD",delta=f'Share: {(100*fx["MXN"][0]):.2f}%',delta_color='off')
+        st.caption('El índice en en base Enero-2000=100 y las ponderaciones en base a la participación en el comercio mundial de cada año.')
