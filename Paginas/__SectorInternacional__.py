@@ -26,8 +26,9 @@ def load_canasta(end):
     for i in data:
         response=requests.get(data[i][1])
         soup=BeautifulSoup(response.text, 'html.parser')
-        __=soup.find('div', {'data-source': 'USD'})
-        _=100*float(__.get_text().split(' ')[0].replace('.','').replace(',','.'))/data[i][2]
+        _=soup.find('div', {'data-source': 'USD'})
+        __=float(_.get_text().split(' ')[0].replace('.','').replace(',','.'))
+        _=100*__/data[i][2]
         total+=_*data[i][0]
         data[i][1]=_
         st.write(f'{_}---{__}---{total}')
