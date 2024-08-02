@@ -13,7 +13,7 @@ from bs4 import BeautifulSoup
 
 jp_id='7e63dd6ff7421e096fbdcf688af7b2c8ad69d814'
 
-#@st.cache_resource(show_spinner=False)
+@st.cache_resource(show_spinner=False)
 def load_canasta(end):
     data={
         'ARS':[0.0692911639106725,'https://www.google.com/finance/quote/USD-ARS?hl=es',0.9998],
@@ -31,7 +31,6 @@ def load_canasta(end):
         _=100*__/data[i][2]
         total+=__*data[i][0]
         data[i][1]=__
-        st.write(f'{_}---{__}---{total}')
     df=pd.read_csv("His Data/his-canasta.csv",delimiter=';',index_col=0)
     df.index=pd.to_datetime(df.index,format='%d/%m/%Y')
     new_val=pd.DataFrame({df.columns[0]:[total]},index=[datetime.today()])
