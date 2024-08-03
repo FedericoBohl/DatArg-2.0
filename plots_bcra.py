@@ -66,7 +66,7 @@ def plot_BM(escala, bcra: pd.DataFrame):
 
 @st.cache_data(show_spinner=False)
 def plot_pasivos_rem(escala,bcra: pd.DataFrame,tasas: pd.DataFrame): # El botón de BM está andando mal
-    st.subheader("Pases Netos   &   LELIQ/LEBAC")
+    st.subheader("Pasivos Remunerados")
     #if not st.checkbox("%BM",value=False,key="BM_bcra"):
     fig = make_subplots(rows=2, cols=1, specs=[[{"secondary_y": True}], [{"secondary_y": True}]])
     fig.add_trace(go.Bar(x=bcra.index, y=(bcra["LeLiq"]), name='LELIQ', marker_color='navy'), row=1, col=1, secondary_y=False)
