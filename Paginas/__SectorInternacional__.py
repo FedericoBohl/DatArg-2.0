@@ -46,10 +46,10 @@ def get_eu(_) -> None:
     mro.TIME_PERIOD=pd.to_datetime(mro.TIME_PERIOD, format='%Y-%m-%d')
     mro.set_index('TIME_PERIOD',inplace=True)
     mro=mro.rename(columns={'OBS_VALUE':'MRO'})
-    mro_last=mro.iloc[-1]
+    mro_last=mro.iloc[-1]['MRO']
+    index_last=mro.index[-1]
     mro=mro.resample('M').last()
-    st.write(mro_last.index)
-    c2.metric(f"MRO ({pd.to_datetime(mro_last.index[0]).strftime('%d-%b')})",f"{mro_last.iloc[0]['MRO']}%",f"{round(mro_last.iloc[0]['MRO']-mro.iloc[-2]['MRO'],2)}PP",delta_color="inverse")
+    c2.metric(f"MRO ({index_last.strftime('%d-%b')})",f"{mro_last}%",f"{round(mro_last-mro.iloc[-2]['MRO'],2)}PP",delta_color="inverse")
 
 
     #mro.index=mro.index.strftime('%b-%Y') 
