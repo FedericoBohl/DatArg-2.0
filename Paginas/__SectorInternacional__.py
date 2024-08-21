@@ -40,14 +40,15 @@ def load_canasta(end):
 @st.cache_resource(show_spinner=False)
 def get_eu(_) -> None:
     c1,c2,c3=st.columns((0.3,0.7/2,0.7/2))
-    with c1:st.header('Europa')
+    c1.header('Europa')
     mro=pd.read_csv('https://data-api.ecb.europa.eu/service/data/FM/D.U2.EUR.4F.KR.MRR_FR.LEV?startPeriod=2000-01&detail=dataonly&format=csvdata')
     mro=mro[['TIME_PERIOD','OBS_VALUE']]
     mro.TIME_PERIOD=pd.to_datetime(mro.TIME_PERIOD, format='%Y-%m-%d')
     mro.set_index('TIME_PERIOD',inplace=True)
     mro=mro.rename(columns={'OBS_VALUE':'MRO'})
+    mro_last=mro.iloc[-1]['MRO']
     mro=mro.resample('M').last()
-    with c2:st.metric(f"MRO ({mro.index[-1].strftime('%d-%b')})",f"{mro.iloc[-1]['MRO']}%",f"{round(mro.iloc[-1]['MRO']-mro.iloc[-2]['MRO'],2)}PP",delta_color="inverse")
+    c2.metric(f"MRO ({mro_last.index[-1].strftime('%d-%b')})",f"{mro_last.iloc[-1]['MRO']}%",f"{round(mro_last.iloc[-1]['MRO']-mro.iloc[-2]['MRO'],2)}PP",delta_color="inverse")
 
 
     #mro.index=mro.index.strftime('%b-%Y') 
@@ -225,16 +226,16 @@ def get_usa(_):
     df_cpi['Inflacion']=round(df_cpi['Inflacion']/df_cpi['Inflacion'].shift(12) -1,4)*100
     df_cpi=df_cpi.dropna()
     inf_t=df_cpi.iloc[-1]['Inflacion']
-    inf_t1=df_cpi.iloc[-1]['Inflacion']
-    with c3:st.metric(f"Inflación ({df_cpi.index[-1].strftime('%b')})",f"{inf_t}%",f"{round(inf_t-inf_t1,2)}PP",delta_color="inverse")
+    inf_t1=df_cpi.iloc[-2]['Inflacion']
+    with c3:st.metric(f"Inflación ({df_cpi.index[-1].strftime('%b')})",f"{inf_t:.2f}%",f"{round(inf_t-inf_t1,2)}PP",delta_color="inverse")
 
     unemployment_data = fred.get_series('UNRATE').loc[f'{2000}':]
     df_unemployment = pd.DataFrame(unemployment_data, columns=['Desempleo'])
     fed_funds_data = fred.get_series('FEDFUNDS').loc[f'{2000}':]
     df_fed_funds = pd.DataFrame(fed_funds_data, columns=['Tasa'])
     fed_t=df_fed_funds.iloc[-1]['Tasa']
-    fed_t1=df_fed_funds.iloc[-1]['Tasa']
-    with c2:st.metric(f"Fed Funds Rate ({datetime.now().strftime('%d-%b')})",f"{fed_t}%",f"{round(fed_t-fed_t1,2)}PP",delta_color="inverse")
+    fed_t1=df_fed_funds.iloc[-2]['Tasa']
+    with c2:st.metric(f"Fed Funds Rate ({datetime.now().strftime('%d-%b')})",f"{fed_t:.2f}%",f"{round(fed_t-fed_t1,2)}PP",delta_color="inverse")
 
 
     graph_usa,table_usa=st.tabs(['Gráfico','Tabla'])
