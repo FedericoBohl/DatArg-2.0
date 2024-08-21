@@ -380,8 +380,8 @@ def get_jp(_):
     rate.index=rate.index.strftime('%b-%Y')
     inf.index=inf.index.strftime('%b-%Y')
     df.index=df.index.strftime('%b-%Y')
-    data=pd.merge(rate,inf,left_index=True,right_index=True)
-    data=pd.merge(data,df,left_index=True,right_index=True)
+    data=pd.concat([rate['Rate'],inf['Inflación']],axis=1)
+    data=pd.concat([data,df['Unemployment']],axis=1)
     table_jp.dataframe(data,use_container_width=True)
     
     
