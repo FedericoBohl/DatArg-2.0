@@ -339,7 +339,7 @@ def get_jp(_):
     graph_jp,table_jp=st.tabs(['Gráfico','Tabla'])
     fig=make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=rate.index,y=rate['Rate']*100,name='Call Overnight',line=dict(width=3,dash="dashdot"),marker_color="#BC002D"),secondary_y=False)
-    fig.add_trace(go.Bar(x=inf.index,y=inf['Inflación'],name="Inflación",marker_color="#7A1CAC"),secondary_y=False)
+    fig.add_trace(go.Bar(x=inf.index,y=inf['Inflación'],name="Inflación",marker_color="#7A1CAC"),secondary_y=True)
     fig.add_trace(go.Scatter(x=df.index,y=df['Unemployment'],name='Desempleo',line=dict(width=2),marker_color='#3C3D37'),secondary_y=True)
 
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1), legend=dict( 
@@ -351,8 +351,8 @@ def get_jp(_):
                             bordercolor=black,
                             borderwidth=2
                         ),
-                yaxis=dict(showgrid=False, zeroline=True, showline=True,title="% - Inflación/Overnight(Basis Points)"),
-                yaxis2=dict(showgrid=False, zeroline=True, showline=True,title="% - Desempleo"),
+                yaxis=dict(showgrid=False, zeroline=True, showline=True,title="Basis Points - Call Overnight"),
+                yaxis2=dict(showgrid=False, zeroline=True, showline=True,title="% - Inflación/Desempleo"),
                 xaxis=dict(
                             rangeselector=dict(
                                 buttons=list([
