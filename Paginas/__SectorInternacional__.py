@@ -319,7 +319,7 @@ def get_jp(_):
     df.columns=['Fecha','Inflación']
     df.Fecha=pd.to_datetime(df.Fecha,format='%Y/%m')
     df.set_index('Fecha',inplace=True)
-    df=df.loc['2000-01-01':]
+    df=df.loc['2000':]
     df['Inflación'] = df['Inflación'].str.replace(',', '').astype(float)
     df.dropna(inplace=True)
     with c3:st.metric(f"Inflación ({df.index[-1].strftime('%b')})",f"{df.iloc[-1]['Inflación']}%",f"{round(df.iloc[-1]['Inflación']-df.iloc[-2]['Inflación'],2)}PP",delta_color="inverse")
