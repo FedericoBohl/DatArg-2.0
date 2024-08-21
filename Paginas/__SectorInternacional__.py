@@ -49,7 +49,7 @@ def get_eu(_) -> None:
     mro_last=mro.iloc[-1]
     mro=mro.resample('M').last()
     st.write(mro_last)
-    c2.metric(f"MRO ({mro_last.index[0].strftime('%d-%b')})",f"{mro_last.iloc[0]['MRO']}%",f"{round(mro_last.iloc[0]['MRO']-mro.iloc[-2]['MRO'],2)}PP",delta_color="inverse")
+    c2.metric(f"MRO ({pd.to_datetime(mro_last.index[0]).strftime('%d-%b')})",f"{mro_last.iloc[0]['MRO']}%",f"{round(mro_last.iloc[0]['MRO']-mro.iloc[-2]['MRO'],2)}PP",delta_color="inverse")
 
 
     #mro.index=mro.index.strftime('%b-%Y') 
