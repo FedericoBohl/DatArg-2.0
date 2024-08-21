@@ -113,7 +113,7 @@ def get_eu(_) -> None:
     inf.index=inf.index.strftime('%b-%Y')
     une.index=une.index.strftime('%b-%Y')
     data=pd.concat([mro,inf],axis=1)
-    data=pd.concat(data,une,axis=1)
+    data=pd.concat([data,une],axis=1)
     data.index.name='Fecha'
     with table_eu:st.dataframe(data,use_container_width=True)
 
