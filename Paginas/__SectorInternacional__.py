@@ -215,6 +215,9 @@ def get_uk(_) -> None:
     data=pd.concat([tas,inf],axis=1)
     data=pd.concat([data,une],axis=1)
     with table_uk:st.dataframe(data,use_container_width=True)
+    st.write(tas)
+    st.write(inf)
+    st.write(une)
 
 @st.cache_resource(show_spinner=False)
 def get_usa(_):
