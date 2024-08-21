@@ -48,7 +48,7 @@ def get_eu(_) -> None:
     mro=mro.rename(columns={'OBS_VALUE':'MRO'})
     mro_last=mro.iloc[-1]['MRO']
     mro=mro.resample('M').last()
-    c2.metric(f"MRO ({mro_last.index[-1].strftime('%d-%b')})",f"{mro_last.iloc[-1]['MRO']}%",f"{round(mro_last.iloc[-1]['MRO']-mro.iloc[-2]['MRO'],2)}PP",delta_color="inverse")
+    c2.metric(f"MRO ({mro_last.index[0].strftime('%d-%b')})",f"{mro_last.iloc[0]['MRO']}%",f"{round(mro_last.iloc[0]['MRO']-mro.iloc[-2]['MRO'],2)}PP",delta_color="inverse")
 
 
     #mro.index=mro.index.strftime('%b-%Y') 
