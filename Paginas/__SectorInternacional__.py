@@ -11,8 +11,6 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 
 
-jp_id='7e63dd6ff7421e096fbdcf688af7b2c8ad69d814'
-
 @st.cache_resource(show_spinner=False)
 def load_canasta(end):
     data={
@@ -144,10 +142,11 @@ def get_uk(_) -> None:
     tas = pd.read_csv(io.BytesIO(response.content),names=['Fecha','Tasa'],skiprows=1)
     tas['Fecha']=pd.to_datetime(tas['Fecha'], format='%d %b %Y')
     tas.set_index('Fecha',inplace=True)
-    tas=tas.resample('M').median()
-    tas_t=tas['Tasa'].iloc[-1]
+    tas_last=tas.iloc[-1]['Tasa']
+    index_last=tas.index[-1]
+    tas=tas.resample('M').last()
     tas_t1=tas['Tasa'].iloc[-2]
-    with c2:st.metric(f"Bank Rate ({tas.index[-1].strftime('%d-%b')})",f"{tas_t}%",f"{round(tas_t-tas_t1,2)}PP",delta_color="inverse")
+    with c2:st.metric(f"Bank Rate ({index_last.strftime('%d-%b')})",f"{tas_last}%",f"{round(tas_last-tas_t1,2)}PP",delta_color="inverse")
 
     url='https://www.ons.gov.uk/generator?format=csv&uri=/economy/inflationandpriceindices/timeseries/l55o/mm23'
     response=requests.get(url)
@@ -236,7 +235,7 @@ def get_usa(_):
     df_fed_funds = pd.DataFrame(fed_funds_data, columns=['Tasa'])
     fed_t=df_fed_funds.iloc[-1]['Tasa']
     fed_t1=df_fed_funds.iloc[-2]['Tasa']
-    with c2:st.metric(f"Fed Funds Rate ({datetime.now().strftime('%d-%b')})",f"{fed_t:.2f}%",f"{round(fed_t-fed_t1,2)}PP",delta_color="inverse")
+    with c2:st.metric(f"Fed Funds Rate ({df_fed_funds.index[-1].strftime('%b')})",f"{fed_t:.2f}%",f"{round(fed_t-fed_t1,2)}PP",delta_color="inverse")
 
 
     graph_usa,table_usa=st.tabs(['Gráfico','Tabla'])
@@ -287,7 +286,105 @@ def get_usa(_):
     data=pd.merge(data,df_unemployment,left_index=True,right_index=True)
     with table_usa:st.dataframe(data,use_container_width=True)
 
+@st.cache_resource(show_spinner=False)
+def get_jp(_):
+    c1,c2,c3=st.columns((0.4,0.6/2,0.6/2))
+    with c1:st.header('Japón')
+    #       Tasa de Interés
+    url = 'https://www.stat-search.boj.or.jp/ssi/mtshtml/fm01_d_1_en.html'
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, 'html.parser')
+    tables = soup.find_all('table')
+    df = pd.read_html(str(tables[0]))[0]
+    df=df.iloc[7:]
+    df.columns=['Fecha','Rate']
+    df.Fecha=pd.to_datetime(df.Fecha,format='%Y/%m/%d')
+    df.set_index('Fecha',inplace=True)
+    df['Rate'] = df['Rate'].str.replace(',', '').astype(float)
+    df.dropna(inplace=True)
+    jp_last=df.iloc[-1]['Rate']
+    index_last=df.index[-1]
+    df=df.resample('M').last()
+    c2.metric(f"Call Overnight ({index_last.strftime('%d-%b')})",f"{jp_last}%",f"{round(jp_last-df.iloc[-2]['Rate'],2)}PP",delta_color="inverse")
+    rate=df.copy()
+    
+    #       Inflación
+    url = 'https://www.stat-search.boj.or.jp/ssi/mtshtml/pr01_m_1_en.html'
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, 'html.parser')
+    tables = soup.find_all('table')
+    df = pd.read_html(str(tables[0]))[0]
+    df=df.iloc[7:][[0,1]]
+    df.columns=['Fecha','Inflación']
+    df.Fecha=pd.to_datetime(df.Fecha,format='%Y/%m')
+    df.set_index('Fecha',inplace=True)
+    df=df.loc['2000-01-01':]
+    df['Inflación'] = df['Inflación'].str.replace(',', '').astype(float)
+    df.dropna(inplace=True)
+    with c3:st.metric(f"Inflación ({df.index[-1].strftime('%b')})",f"{df.iloc[-1]['Inflación']}%",f"{round(df.iloc[-1]['Inflación']-df.iloc[-2]['Inflación'],2)}PP",delta_color="inverse")
+    inf=df.copy()
+    #       Desempleo
+    url = "https://www.e-stat.go.jp/en/stat-search/file-download?statInfId=000031831365&fileKind=0"
+    response = requests.get(url)
+    response.raise_for_status()
+    df = pd.read_excel(io.BytesIO(response.content))
+    df=df.iloc[369:][df.columns[1:5]]
+    df.index=pd.date_range(start='2000-01-01', periods=len(df), freq='M')
+    df.columns=['1','2','3','Unemployment']
+    df.drop(columns=['1','2','3'],inplace=True)
+    df['Unemployment'] = pd.to_numeric(df['Unemployment'], errors='coerce')
+    df = df.dropna()
 
+    #   Plot y datos
+    graph_jp,table_jp=st.tabs(['Gráfico','Tabla'])
+    fig=make_subplots(specs=[[{"secondary_y": True}]])
+    fig.add_trace(go.Scatter(x=rate.index,y=rate['Rate'],name='Call Overnight',line=dict(width=3,dash="dashdot"),marker_color="#BC002D"),secondary_y=False)
+    fig.add_trace(go.Bar(x=inf.index,y=inf['Inflacion'],name="Inflación",marker_color="#7A1CAC"),secondary_y=False)
+    fig.add_trace(go.Scatter(x=df.index,y=df['Unemployment'],name='Desempleo',line=dict(width=2),marker_color='#3C3D37'),secondary_y=True)
+
+    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1), legend=dict( 
+                            orientation="h",
+                            yanchor="bottom",
+                            y=1.02,
+                            xanchor="right",
+                            x=1,
+                            bordercolor=black,
+                            borderwidth=2
+                        ),
+                yaxis=dict(showgrid=False, zeroline=True, showline=True,title="% - Inflación/Tasa Overnight"),
+                yaxis2=dict(showgrid=False, zeroline=True, showline=True,title="% - Desempleo"),
+                xaxis=dict(
+                            rangeselector=dict(
+                                buttons=list([
+                                    dict(count=6,
+                                        label="6m",
+                                        step="month",
+                                        stepmode="backward"),
+                                    dict(count=1,
+                                        label="1y",
+                                        step="year",
+                                        stepmode="backward"),
+                                    dict(count=5,
+                                        label="5y",
+                                        step="year",
+                                        stepmode="backward"),
+                                    dict(step="all")
+                                ])
+                            ),
+                            rangeslider=dict(
+                                visible=True
+                            )
+                        )
+                    )    
+    graph_jp.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
+    rate.index=rate.index.strftime('%b-%Y')
+    inf.index=inf.index.strftime('%b-%Y')
+    df.index=df.index.strftime('%b-%Y')
+    data=pd.merge(rate,inf,left_index=True,right_index=True)
+    data=pd.merge(data,df,left_index=True,right_index=True)
+    table_jp.dataframe(data,use_container_width=True)
+    
+    
 def make_internacional_web():
     c1,c2=st.columns(2)
     with c1:
@@ -299,7 +396,7 @@ def make_internacional_web():
     with c1:
         with st.container(border=True):get_uk(datetime.now().strftime("%Y%m%d"))
     with c2:
-        st.header('Brasil')
+        with st.container(border=True):get_jp(datetime.now().strftime("%Y%m%d"))
     with st.container(border=True):
         st.markdown("<h3 style='text-align: center;'>Canasta de Monedas de Latam</h3>", unsafe_allow_html=True)
         df,fx=load_canasta(datetime.now().strftime("%Y%m%d"))
