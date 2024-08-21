@@ -305,6 +305,7 @@ def get_jp(_):
     jp_last=df.iloc[-1]['Rate']
     index_last=df.index[-1]
     df=df.resample('M').last()
+    df=df.loc['2000':]
     c2.metric(f"Call Overnight ({index_last.strftime('%d-%b')})",f"{jp_last}%",f"{round(jp_last-df.iloc[-2]['Rate'],2)}PP",delta_color="inverse")
     rate=df.copy()
     
