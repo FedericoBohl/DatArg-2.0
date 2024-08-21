@@ -112,8 +112,8 @@ def get_eu(_) -> None:
     mro.index=mro.index.strftime('%b-%Y')
     inf.index=inf.index.strftime('%b-%Y')
     une.index=une.index.strftime('%b-%Y')
-    data=pd.merge(mro,inf,left_index=True,right_index=True)
-    data=pd.merge(data,une,left_index=True,right_index=True)
+    data=pd.concat([mro,inf],axis=1)
+    data=pd.concat(data,une,axis=1)
     data.index.name='Fecha'
     with table_eu:st.dataframe(data,use_container_width=True)
 
@@ -212,8 +212,8 @@ def get_uk(_) -> None:
     tas.index=tas.index.strftime('%b-%Y')
     inf.index=inf.index.strftime('%b-%Y')
     une.index=une.index.strftime('%b-%Y')
-    data=pd.merge(tas,inf,left_index=True,right_index=True)
-    data=pd.merge(data,une,left_index=True,right_index=True)
+    data=pd.concat([tas,inf],axis=1)
+    data=pd.concat([data,une],axis=1)
     with table_uk:st.dataframe(data,use_container_width=True)
 
 @st.cache_resource(show_spinner=False)
@@ -282,8 +282,8 @@ def get_usa(_):
     df_fed_funds.index=df_fed_funds.index.strftime('%b-%Y')
     df_cpi.index=df_cpi.index.strftime('%b-%Y')
     df_unemployment.index=df_unemployment.index.strftime('%b-%Y')
-    data=pd.merge(df_fed_funds,df_cpi,left_index=True,right_index=True)
-    data=pd.merge(data,df_unemployment,left_index=True,right_index=True)
+    data=pd.concat([df_fed_funds,df_cpi],axis=1)
+    data=pd.concat([data,df_unemployment],axis=1)
     with table_usa:st.dataframe(data,use_container_width=True)
 
 @st.cache_resource(show_spinner=False)
@@ -297,16 +297,16 @@ def get_jp(_):
     tables = soup.find_all('table')
     df = pd.read_html(io.StringIO(str(tables[0])))[0]
     df=df.iloc[7:]
-    df.columns=['Fecha','Rate']
+    df.columns=['Fecha','Tasa']
     df.Fecha=pd.to_datetime(df.Fecha,format='%Y/%m/%d')
     df.set_index('Fecha',inplace=True)
-    df['Rate'] = df['Rate'].str.replace(',', '').astype(float)
+    df['Tasa'] = df['Tasa'].str.replace(',', '').astype(float)
     df.dropna(inplace=True)
-    jp_last=df.iloc[-1]['Rate']
+    jp_last=df.iloc[-1]['Tasa']
     index_last=df.index[-1]
     df=df.resample('M').last()
     df=df.loc['2000':]
-    c2.metric(f"Call Overnight ({index_last.strftime('%d-%b')})",f"{jp_last}%",f"{round(jp_last-df.iloc[-2]['Rate'],2)}PP",delta_color="inverse")
+    c2.metric(f"Call Overnight ({index_last.strftime('%d-%b')})",f"{jp_last}%",f"{round(jp_last-df.iloc[-2]['Tasa'],2)}PP",delta_color="inverse")
     rate=df.copy()
     
     #       Inflación
@@ -332,17 +332,17 @@ def get_jp(_):
     df = pd.read_excel(io.BytesIO(response.content))
     df=df.iloc[369:][df.columns[1:5]]
     df.index=pd.date_range(start='2000-01-01', periods=len(df), freq='M')
-    df.columns=['1','2','3','Unemployment']
+    df.columns=['1','2','3','Desempleo']
     df.drop(columns=['1','2','3'],inplace=True)
-    df['Unemployment'] = pd.to_numeric(df['Unemployment'], errors='coerce')
+    df['Desempleo'] = pd.to_numeric(df['Desempleo'], errors='coerce')
     df = df.dropna()
 
     #   Plot y datos
     graph_jp,table_jp=st.tabs(['Gráfico','Tabla'])
     fig=make_subplots(specs=[[{"secondary_y": True}]])
-    fig.add_trace(go.Scatter(x=rate.index,y=rate['Rate']*100,name='Call Overnight',line=dict(width=3,dash="dashdot"),marker_color="#BC002D"),secondary_y=False)
+    fig.add_trace(go.Scatter(x=rate.index,y=rate['Tasa']*100,name='Call Overnight',line=dict(width=3,dash="dashdot"),marker_color="#BC002D"),secondary_y=False)
     fig.add_trace(go.Bar(x=inf.index,y=inf['Inflación'],name="Inflación",marker_color="#7A1CAC"),secondary_y=True)
-    fig.add_trace(go.Scatter(x=df.index,y=df['Unemployment'],name='Desempleo',line=dict(width=2),marker_color='#3C3D37'),secondary_y=True)
+    fig.add_trace(go.Scatter(x=df.index,y=df['Desempleo'],name='Desempleo',line=dict(width=2),marker_color='#3C3D37'),secondary_y=True)
 
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1), legend=dict( 
                             orientation="h",
@@ -382,8 +382,8 @@ def get_jp(_):
     rate.index=rate.index.strftime('%b-%Y')
     inf.index=inf.index.strftime('%b-%Y')
     df.index=df.index.strftime('%b-%Y')
-    data=pd.concat([rate['Rate'],inf['Inflación']],axis=1)
-    data=pd.concat([data,df['Unemployment']],axis=1)
+    data=pd.concat([rate['Tasa'],inf['Inflación']],axis=1)
+    data=pd.concat([data,df['Desempleo']],axis=1)
     table_jp.dataframe(data,use_container_width=True)
     
     
