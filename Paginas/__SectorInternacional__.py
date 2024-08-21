@@ -295,7 +295,7 @@ def get_jp(_):
     response = requests.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
     tables = soup.find_all('table')
-    df = pd.read_html(str(tables[0]))[0]
+    df = pd.read_html(io.StringIO(str(tables[0])))[0]
     df=df.iloc[7:]
     df.columns=['Fecha','Rate']
     df.Fecha=pd.to_datetime(df.Fecha,format='%Y/%m/%d')
@@ -313,7 +313,7 @@ def get_jp(_):
     response = requests.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
     tables = soup.find_all('table')
-    df = pd.read_html(str(tables[0]))[0]
+    df = pd.read_html(io.StringIO(str(tables[0])))[0]
     df=df.iloc[7:][[0,1]]
     df.columns=['Fecha','Inflación']
     df.Fecha=pd.to_datetime(df.Fecha,format='%Y/%m')
@@ -339,7 +339,7 @@ def get_jp(_):
     graph_jp,table_jp=st.tabs(['Gráfico','Tabla'])
     fig=make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=rate.index,y=rate['Rate'],name='Call Overnight',line=dict(width=3,dash="dashdot"),marker_color="#BC002D"),secondary_y=False)
-    fig.add_trace(go.Bar(x=inf.index,y=inf['Inflacion'],name="Inflación",marker_color="#7A1CAC"),secondary_y=False)
+    fig.add_trace(go.Bar(x=inf.index,y=inf['Inflación'],name="Inflación",marker_color="#7A1CAC"),secondary_y=False)
     fig.add_trace(go.Scatter(x=df.index,y=df['Unemployment'],name='Desempleo',line=dict(width=2),marker_color='#3C3D37'),secondary_y=True)
 
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1), legend=dict( 
