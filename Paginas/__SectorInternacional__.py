@@ -294,8 +294,8 @@ def get_usa(_):
     data=pd.concat([df_fed_funds,df_cpi],axis=1)
     data=pd.concat([data,df_unemployment],axis=1)
     table_usa.dataframe(data,use_container_width=True)
-    st.write(prob_df.columns[0])
     df=[prob_df[prob_df.columns[0]]>0]#[prob_df.columns[0]]
+    st.dataframe(df)
     fig = go.Figure()
     fig.add_trace(go.Bar(
         x=df.index,
