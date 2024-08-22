@@ -7,9 +7,40 @@ from plotly import graph_objects as go
 from plotly.subplots import make_subplots
 import requests
 import io
-from datetime import datetime
+from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
 from bs4 import BeautifulSoup
 
+@st.cache_resource(show_spinner=False)
+def get_prob(_):
+    url = "https://cmegroup-tools.quikstrike.net/User/QuikStrikeView.aspx?viewitemid=IntegratedFedWatchTool&userId=lwolf&jobRole=&company=&companyType=&userId=lwolf&jobRole=&company=&companyType=&insid=134330738&qsid=cd7c9839-5cb4-4b1e-884c-2e559f28b43d"
+    response = requests.get(url)
+    response.raise_for_status()
+    soup = BeautifulSoup(response.content, 'html.parser')
+    tables = soup.find_all('table')
+    table = tables[4]
+
+    headers = []
+    for th in table.find_all('th'):
+        headers.append(th.get_text(strip=True).replace('\n', ' '))
+    rows = []
+    for tr in table.find_all('tr', {'class': ['hide', '']}):
+        cells = tr.find_all('td')
+        row = [cell.get_text(strip=True) for cell in cells]
+        if row:  # Ignorar filas vacías
+            rows.append(row)
+    df = pd.DataFrame(rows, columns=headers[:len(rows[0])])
+    df['Now*'] = df['Now*'].replace('', '0.0%')
+    df['Now*'] = df['Now*'].str.rstrip('%').astype(float)
+    df = df[(df['Now*'] != 0.0) | (df['Target Rate (bps)'].str.contains(r'\(Current\)'))].copy()
+    df['Now*'] = df['Now*'].astype(str) + '%'
+    df.columns=['Tasa','Hoy','Ayer','1Sem','1Mes']
+    df['Tasa'] = df['Tasa'].str.replace(r'\(Current\)', '', regex=True).str.strip()
+    df['Hoy'] = df['Hoy'].str.rstrip('%').astype(float)
+    df['Ayer'] = df['Ayer'].str.rstrip('%').astype(float)
+    df['1Sem'] = df['1Sem'].str.rstrip('%').astype(float)
+    df['1Mes'] = df['1Mes'].str.rstrip('%').astype(float)
+    return df
 
 @st.cache_resource(show_spinner=False)
 def load_canasta(end):
@@ -218,6 +249,7 @@ def get_uk(_) -> None:
 
 @st.cache_resource(show_spinner=False)
 def get_usa(_):
+    prob_df=get_prob(_)
     c1,c2,c3=st.columns((0.3,0.7/2,0.7/2))
     with c1:st.header('EE.UU.')
     fred = Fred(api_key="6050b935d2f878f1100c6f217cbe6753")
@@ -238,7 +270,7 @@ def get_usa(_):
     with c2:st.metric(f"Fed Funds Rate ({df_fed_funds.index[-1].strftime('%b')})",f"{fed_t:.2f}%",f"{round(fed_t-fed_t1,2)}PP",delta_color="inverse")
 
 
-    graph_usa,table_usa=st.tabs(['Gráfico','Tabla'])
+    graph_usa,table_usa,probabilities=st.tabs(['Gráfico','Tabla','Probabilidades de Tasa'])
     fig=make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=df_fed_funds.index,y=df_fed_funds['Tasa'],name='FED',line=dict(width=3,dash="dashdot"),marker_color="#B31942"),secondary_y=False)
     fig.add_trace(go.Bar(x=df_fed_funds.index,y=df_cpi['Inflacion'],name="Inflación",marker_color="#0A3161"),secondary_y=False)
@@ -278,13 +310,63 @@ def get_usa(_):
                             )
                         )
                     )    
-    with graph_usa:st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
+    graph_usa.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
     df_fed_funds.index=df_fed_funds.index.strftime('%b-%Y')
     df_cpi.index=df_cpi.index.strftime('%b-%Y')
     df_unemployment.index=df_unemployment.index.strftime('%b-%Y')
     data=pd.concat([df_fed_funds,df_cpi],axis=1)
     data=pd.concat([data,df_unemployment],axis=1)
-    with table_usa:st.dataframe(data,use_container_width=True)
+    table_usa.dataframe(data,use_container_width=True)
+
+    hoy = datetime.today()
+    ayer = hoy - timedelta(days=1)
+    una_semana_atras = hoy - timedelta(weeks=1)
+    un_mes_atras = hoy - relativedelta(months=1)
+    fig = go.Figure()
+    fig.add_trace(go.Bar(
+        x=prob_df['Tasa'],
+        y=prob_df['1Mes'],
+        name=un_mes_atras.strftime("%d de %b"),
+        marker_color='violet',  # Color bordo
+        text=prob_df['1Mes'].apply(lambda x: f'{x:.2f}%'),  # Mostrar valores en porcentaje
+        textposition='outside',
+        marker=dict(cornerradius="15%",line=dict(color='purple',width=2))
+    ))
+    fig.add_trace(go.Bar(
+        x=prob_df['Tasa'],
+        y=prob_df['1Sem'],
+        name=una_semana_atras.strftime("%d de %b"),
+        marker_color='green',  # Color bordo
+        text=prob_df['1Sem'].apply(lambda x: f'{x:.2f}%'),  # Mostrar valores en porcentaje
+        textposition='outside',
+        marker=dict(cornerradius="15%",line=dict(color='darkgreen',width=2))
+    ))
+    fig.add_trace(go.Bar(
+        x=prob_df['Tasa'],
+        y=prob_df['Ayer'],
+        name='Ayer',
+        marker_color='royalblue',  # Color bordo
+        text=prob_df['Ayer'].apply(lambda x: f'{x:.2f}%'),  # Mostrar valores en porcentaje
+        textposition='outside',
+        marker=dict(cornerradius="15%",line=dict(color='darkblue',width=2))
+    ))
+    fig.add_trace(go.Bar(
+        x=prob_df['Tasa'],
+        y=prob_df['Hoy'],
+        name='Hoy',
+        marker_color='crimson',  # Color bordo
+        text=prob_df['Hoy'].apply(lambda x: f'{x:.2f}%'),  # Mostrar valores en porcentaje
+        textposition='outside',
+        marker=dict(cornerradius="15%",line=dict(color='darkred',width=2))
+    ))
+    fig.update_layout(
+        plot_bgcolor='white',
+        yaxis=dict(range=[0, 100],showline=True, linewidth=2, linecolor='black',gridcolor='lightslategrey',gridwidth=0.35),
+        title="Distribución de la Probabilidad de la Tasa de la Fed",
+        xaxis_title="Tasa objetivo (Basis Points)",
+        yaxis_title="Probabilidad",
+        showlegend=True)
+    probabilities.plotly_chart(fig,use_container_width=True)
 
 @st.cache_resource(show_spinner=False)
 def get_jp(_):
