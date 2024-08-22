@@ -310,7 +310,7 @@ def get_usa(_):
         title="Policy Rate esperada para la siguiente meeting de decissión de tasa",
         xaxis_title="Tasa objetivo (Basis Points)",
         yaxis_title="Probabilidad",
-        showlegend=True)
+        showlegend=False)
     probabilities.plotly_chart(fig,use_container_width=True)
     st.dataframe(prob_df)
 
