@@ -247,7 +247,7 @@ def get_uk(_) -> None:
     data=pd.concat([data,une.iloc[1:]],axis=1)
     with table_uk:st.dataframe(data,use_container_width=True)
 
-@st.cache_resource(show_spinner=False)
+#@st.cache_resource(show_spinner=False)
 def get_usa(_):
     prob_df=get_prob(_)
     c1,c2,c3=st.columns((0.3,0.7/2,0.7/2))
