@@ -301,7 +301,7 @@ def get_usa(_):
         x=df.index,
         y=df.values,
         marker_color='crimson',  # Color bordo
-        text=df.values.tolist.apply(lambda x: f'{x:.2f}%'),  # Mostrar valores en porcentaje
+        text=df.values.tolist().apply(lambda x: f'{x:.2f}%'),  # Mostrar valores en porcentaje
         textposition='outside',
         marker=dict(cornerradius="15%",line=dict(color='darkred',width=2))
     ))
