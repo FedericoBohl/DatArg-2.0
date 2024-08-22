@@ -225,7 +225,7 @@ def get_usa(_):
     prob_df['MEETING DATE']=pd.to_datetime(prob_df['MEETING DATE'],format='%m/%d/%Y')
     prob_df.set_index('MEETING DATE',inplace=True)
     prob_df.index=prob_df.index.strftime('%d de %b %Y')
-    prob_df=prob_df#.transpose()
+    prob_df=prob_df.transpose()
     
     c1,c2,c3=st.columns((0.3,0.7/2,0.7/2))
     with c1:st.header('EE.UU.')
