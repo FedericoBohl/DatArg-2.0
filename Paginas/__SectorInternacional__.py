@@ -1,7 +1,7 @@
 #from librerias import *
 from _globals_ import *
 import streamlit as st
-#from streamlit import session_state as S       #Not Used
+from streamlit import session_state as S       #Not Used
 import pandas as pd
 from plotly import graph_objects as go
 from plotly.subplots import make_subplots
@@ -11,36 +11,6 @@ from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from bs4 import BeautifulSoup
 
-#@st.cache_resource(show_spinner=False)
-def get_prob(_):
-    url = "https://cmegroup-tools.quikstrike.net/User/QuikStrikeView.aspx?viewitemid=IntegratedFedWatchTool&userId=lwolf&jobRole=&company=&companyType=&userId=lwolf&jobRole=&company=&companyType=&insid=134330738&qsid=cd7c9839-5cb4-4b1e-884c-2e559f28b43d"
-    response = requests.get(url)
-    response.raise_for_status()
-    soup = BeautifulSoup(response.content, 'html.parser')
-    tables = soup.find_all('table')
-    table = tables[4]
-
-    headers = []
-    for th in table.find_all('th'):
-        headers.append(th.get_text(strip=True).replace('\n', ' '))
-    rows = []
-    for tr in table.find_all('tr', {'class': ['hide', '']}):
-        cells = tr.find_all('td')
-        row = [cell.get_text(strip=True) for cell in cells]
-        if row:  # Ignorar filas vacías
-            rows.append(row)
-    df = pd.DataFrame(rows, columns=headers[:len(rows[0])])
-    df['Now*'] = df['Now*'].replace('', '0.0%')
-    df['Now*'] = df['Now*'].str.rstrip('%').astype(float)
-    df = df[(df['Now*'] != 0.0) | (df['Target Rate (bps)'].str.contains(r'\(Current\)'))].copy()
-    df['Now*'] = df['Now*'].astype(str) + '%'
-    df.columns=['Tasa','Hoy','Ayer','1Sem','1Mes']
-    df['Tasa'] = df['Tasa'].str.replace(r'\(Current\)', '', regex=True).str.strip()
-    df['Hoy'] = df['Hoy'].str.rstrip('%').astype(float)
-    df['Ayer'] = df['Ayer'].str.rstrip('%').astype(float)
-    df['1Sem'] = df['1Sem'].str.rstrip('%').astype(float)
-    df['1Mes'] = df['1Mes'].str.rstrip('%').astype(float)
-    return df
 
 @st.cache_resource(show_spinner=False)
 def load_canasta(end):
@@ -247,9 +217,16 @@ def get_uk(_) -> None:
     data=pd.concat([data,une.iloc[1:]],axis=1)
     with table_uk:st.dataframe(data,use_container_width=True)
 
-#@st.cache_resource(show_spinner=False)
+@st.cache_resource(show_spinner=False)
 def get_usa(_):
-    prob_df=get_prob(_)
+    prob_df=pd.read_csv('fed_rate_data.csv')
+    for i in prob_df.columns[1:]:
+        prob_df[i] = prob_df[i].str.rstrip('%').astype(float)
+    prob_df['MEETING DATE']=pd.to_datetime(prob_df['MEETING DATE'],format='%m/%d/%Y')
+    prob_df.set_index('MEETING DATE',inplace=True)
+    prob_df.index=prob_df.index.strftime('%d de %b %Y')
+    prob_df=prob_df.transpose()
+    
     c1,c2,c3=st.columns((0.3,0.7/2,0.7/2))
     with c1:st.header('EE.UU.')
     fred = Fred(api_key="6050b935d2f878f1100c6f217cbe6753")
@@ -318,44 +295,14 @@ def get_usa(_):
     data=pd.concat([data,df_unemployment],axis=1)
     table_usa.dataframe(data,use_container_width=True)
 
-    hoy = datetime.today()
-    ayer = hoy - timedelta(days=1)
-    una_semana_atras = hoy - timedelta(weeks=1)
-    un_mes_atras = hoy - relativedelta(months=1)
+    st.selectbox('Meeting de la FED',options=prob_df.index,key='meeting')
+    df=[prob_df[S.meeting]>0][S.meeting]
     fig = go.Figure()
     fig.add_trace(go.Bar(
-        x=prob_df['Tasa'],
-        y=prob_df['1Mes'],
-        name=un_mes_atras.strftime("%d de %b"),
-        marker_color='violet',  # Color bordo
-        text=prob_df['1Mes'].apply(lambda x: f'{x:.2f}%'),  # Mostrar valores en porcentaje
-        textposition='outside',
-        marker=dict(cornerradius="15%",line=dict(color='purple',width=2))
-    ))
-    fig.add_trace(go.Bar(
-        x=prob_df['Tasa'],
-        y=prob_df['1Sem'],
-        name=una_semana_atras.strftime("%d de %b"),
-        marker_color='green',  # Color bordo
-        text=prob_df['1Sem'].apply(lambda x: f'{x:.2f}%'),  # Mostrar valores en porcentaje
-        textposition='outside',
-        marker=dict(cornerradius="15%",line=dict(color='darkgreen',width=2))
-    ))
-    fig.add_trace(go.Bar(
-        x=prob_df['Tasa'],
-        y=prob_df['Ayer'],
-        name='Ayer',
-        marker_color='royalblue',  # Color bordo
-        text=prob_df['Ayer'].apply(lambda x: f'{x:.2f}%'),  # Mostrar valores en porcentaje
-        textposition='outside',
-        marker=dict(cornerradius="15%",line=dict(color='darkblue',width=2))
-    ))
-    fig.add_trace(go.Bar(
-        x=prob_df['Tasa'],
-        y=prob_df['Hoy'],
-        name='Hoy',
+        x=df.index,
+        y=df.values,
         marker_color='crimson',  # Color bordo
-        text=prob_df['Hoy'].apply(lambda x: f'{x:.2f}%'),  # Mostrar valores en porcentaje
+        text=prob_df['1Mes'].apply(lambda x: f'{x:.2f}%'),  # Mostrar valores en porcentaje
         textposition='outside',
         marker=dict(cornerradius="15%",line=dict(color='darkred',width=2))
     ))
