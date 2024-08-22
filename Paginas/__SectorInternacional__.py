@@ -295,13 +295,12 @@ def get_usa(_):
     data=pd.concat([data,df_unemployment],axis=1)
     table_usa.dataframe(data,use_container_width=True)
     df=prob_df[prob_df[prob_df.columns[0]]>0][prob_df.columns[0]]
-    st.dataframe(df)
     fig = go.Figure()
     fig.add_trace(go.Bar(
         x=df.index,
         y=df.values,
         marker_color='crimson',  # Color bordo
-        text=df.values+'%',  # Mostrar valores en porcentaje
+        text=[f'{value}%' for value in df.values],  # Mostrar valores en porcentaje
         textposition='outside',
         marker=dict(cornerradius="15%",line=dict(color='darkred',width=2))
     ))
