@@ -295,25 +295,25 @@ def get_usa(_):
     data=pd.concat([data,df_unemployment],axis=1)
     table_usa.dataframe(data,use_container_width=True)
 
-    st.selectbox('Meeting de la FED',options=prob_df.index,key='meeting')
-    df=[prob_df[S.meeting]>0][S.meeting]
+    df=[prob_df[prob_df.columns[0]]>0][prob_df.columns[0]]
     fig = go.Figure()
     fig.add_trace(go.Bar(
         x=df.index,
         y=df.values,
         marker_color='crimson',  # Color bordo
-        text=prob_df['1Mes'].apply(lambda x: f'{x:.2f}%'),  # Mostrar valores en porcentaje
+        text=df.values.apply(lambda x: f'{x:.2f}%'),  # Mostrar valores en porcentaje
         textposition='outside',
         marker=dict(cornerradius="15%",line=dict(color='darkred',width=2))
     ))
     fig.update_layout(
         plot_bgcolor='white',
         yaxis=dict(range=[0, 100],showline=True, linewidth=2, linecolor='black',gridcolor='lightslategrey',gridwidth=0.35),
-        title="Distribución de la Probabilidad de la Tasa de la Fed",
+        title="Policy Rate esperada para la siguiente meeting de decissión de tasa",
         xaxis_title="Tasa objetivo (Basis Points)",
         yaxis_title="Probabilidad",
         showlegend=True)
     probabilities.plotly_chart(fig,use_container_width=True)
+    st.dataframe(prob_df)
 
 @st.cache_resource(show_spinner=False)
 def get_jp(_):
