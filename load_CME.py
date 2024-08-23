@@ -62,6 +62,8 @@ def extract_data():
             except:
                 attempts += 1
         data.append(row_data)
+    df=pd.DataFrame(data=data,columns=column)
+    df.to_csv('dotplot.csv',index=False)
     driver.quit()
 
 
