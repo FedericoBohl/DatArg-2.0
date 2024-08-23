@@ -247,7 +247,7 @@ def get_usa(_):
     with c2:st.metric(f"Fed Funds Rate ({df_fed_funds.index[-1].strftime('%b')})",f"{fed_t:.2f}%",f"{round(fed_t-fed_t1,2)}PP",delta_color="inverse")
 
 
-    graph_usa,table_usa,probabilities=st.tabs(['Gráfico','Tabla','Probabilidades de Tasa'])
+    graph_usa,table_usa,probabilities,dotplot=st.tabs(['Gráfico','Tabla','Probabilidades de Tasa','Dot-Plot'])
     fig=make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=df_fed_funds.index,y=df_fed_funds['Tasa'],name='FED',line=dict(width=3,dash="dashdot"),marker_color="#B31942"),secondary_y=False)
     fig.add_trace(go.Bar(x=df_fed_funds.index,y=df_cpi['Inflacion'],name="Inflación",marker_color="#0A3161"),secondary_y=False)
@@ -314,6 +314,58 @@ def get_usa(_):
     probabilities.plotly_chart(fig,use_container_width=True)
     st.dataframe(prob_df)
 
+    data=pd.read_csv('dotplot.csv')
+    data.set_index('TARGET RATE',inplace=True)
+    def generar_numeros(base, numero):
+        mitad = numero // 2
+        if numero % 2 != 0:  # Si es impar
+            numeros=[]
+            for i in range(1,1+mitad):
+                numeros.append(base+0.05*i)
+                numeros.append(base-0.05*i)
+            numeros.append(base)
+            numeros.sort()
+        else:  # Si es par
+            numeros=[]
+            for i in range(1,1+mitad):
+                numeros.append(base+0.05*i)
+                numeros.append(base-0.05*i)
+            numeros.sort()
+        return numeros
+    plot_dict={}
+    for col in data.columns:
+        plot_data={}
+        if col=='Largo Plazo':
+            year=int(data.columns[-2])+1
+        else:
+            year=int(col)
+        year_data=data.dropna(subset=[col])[col]
+        for val in year_data.index:
+            plot_data[val]=generar_numeros(int(year),int(year_data[val]))
+        plot_dict[col]=plot_data
+
+    fig = go.Figure()
+    for year, rates in plot_dict.items():
+        for rate, votes in rates.items():
+            fig.add_trace(go.Scatter(
+                x=votes,
+                y=[rate] * len(votes),
+                mode='markers',
+                marker=dict(size=10,color='navy'),
+                name=str(year)
+            ))
+    texts=[k for k in plot_dict.keys()]
+    vals=[(int(k) if k!="Largo Plazo" else (int(texts[-2])+1)) for k in texts]
+    fig.update_layout(
+        title="Dot Plot del FOMC",
+        plot_bgcolor='white',
+        xaxis_title="Año",
+        yaxis_title="Tasa de Interés (%)",
+        showlegend=False,
+        xaxis=dict(tickmode='array',tickvals=vals,ticktext=texts),
+        yaxis=dict(range=[0,data.index.max().max()*1.1],showline=True, linewidth=0.5, linecolor='black',gridcolor='lightslategrey',gridwidth=0.35)
+    )
+    dotplot.plotly_chart(fig,use_container_width=True)
 @st.cache_resource(show_spinner=False)
 def get_jp(_):
     c1,c2,c3=st.columns((0.4,0.6/2,0.6/2))
