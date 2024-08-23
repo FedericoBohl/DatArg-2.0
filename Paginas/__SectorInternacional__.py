@@ -321,15 +321,15 @@ def get_usa(_):
         if numero % 2 != 0:  # Si es impar
             numeros=[]
             for i in range(1,1+mitad):
-                numeros.append(base+0.15*i)
-                numeros.append(base-0.15*i)
+                numeros.append(base+0.1*i)
+                numeros.append(base-0.1*i)
             numeros.append(base)
             numeros.sort()
         else:  # Si es par
             numeros=[]
             for i in range(1,1+mitad):
-                numeros.append(base+0.15*i)
-                numeros.append(base-0.15*i)
+                numeros.append(base+0.1*i)
+                numeros.append(base-0.1*i)
             numeros.sort()
         return numeros
     plot_dict={}
