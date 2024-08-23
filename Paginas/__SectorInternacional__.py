@@ -307,7 +307,7 @@ def get_usa(_):
     fig.update_layout(
         plot_bgcolor='white',
         yaxis=dict(range=[0, 100],showline=True, linewidth=2, linecolor='black',gridcolor='lightslategrey',gridwidth=0.35),
-        title="Policy Rate esperada para la siguiente meeting de decissión de tasa",
+        title="Policy Rate esperada para la siguiente meeting de decisión de tasa",
         xaxis_title="Tasa objetivo (Basis Points)",
         yaxis_title="Probabilidad",
         showlegend=False)

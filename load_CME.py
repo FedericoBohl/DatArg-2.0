@@ -10,11 +10,11 @@ def extract_data():
     driver = webdriver.Chrome()
     # Navega al sitio web
     driver.get(url)
-    driver.implicitly_wait(10)
+    time.sleep(5)
     # Haz clic en la pestaña "Probabilities"
     probabilities_tab = driver.find_element(By.ID, "ctl00_MainContent_ucViewControl_IntegratedFedWatchTool_lbPTree")
     probabilities_tab.click()
-    driver.implicitly_wait(5)
+    time.sleep(5)
     table = driver.find_elements(By.TAG_NAME, "table")[2]
     rows = table.find_elements(By.TAG_NAME, "tr")
     columns=[col.text for col in rows[1].find_elements(By.TAG_NAME, "th")]
@@ -32,15 +32,43 @@ def extract_data():
                 remplazar.append(j)
             data2.append(remplazar)
         else: data2.append(data[i])
+    df = pd.DataFrame(data, columns=columns)
+    df.to_csv('fed_rate_data.csv',index=False)
+
+    time.sleep(5)
+    # Haz clic en la pestaña "Probabilities"
+    dotplot_tab = driver.find_element(By.ID, "ctl00_MainContent_ucViewControl_IntegratedFedWatchTool_lbDotPlotTable")
+    dotplot_tab.click()
+    time.sleep(5)
+    table=driver.find_elements(By.TAG_NAME, "table")[1]
+    rows = table.find_elements(By.TAG_NAME, "tr")
+    column=rows[0].text.split(' ')
+    column.remove('RUN')
+    column[-1]='Largo Plazo'
+    column[0]=column[0].replace('\n',' ')
+    data=[]
+    time.sleep(1)
+    for row in rows[1:]:
+        row_data=[]
+        attempts = 0
+        success = False
+        while attempts<3:
+            try:
+                cols=row.find_elements(By.TAG_NAME, "td")
+                for i in cols:
+                    row_data.append(float(i.text) if i.text!='' else None)
+                success = True
+                break
+            except:
+                attempts += 1
+        data.append(row_data)
     driver.quit()
-    return data2,columns
+
+
 strikes=0
 while strikes!=3:
     try:
-        data,columns=extract_data()
-        columns = columns
-        df = pd.DataFrame(data, columns=columns)
-        df.to_csv('fed_rate_data.csv',index=False)
+        extract_data()
         print('Datos Obtenidos')
         break
     except:
