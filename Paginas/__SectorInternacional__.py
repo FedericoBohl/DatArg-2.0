@@ -312,7 +312,7 @@ def get_usa(_):
         yaxis_title="Probabilidad",
         showlegend=False)
     probabilities.plotly_chart(fig,use_container_width=True)
-    st.dataframe(prob_df)
+    probabilities.dataframe(prob_df)
 
     data=pd.read_csv('dotplot.csv')
     data.set_index('TARGET RATE',inplace=True)
@@ -321,15 +321,15 @@ def get_usa(_):
         if numero % 2 != 0:  # Si es impar
             numeros=[]
             for i in range(1,1+mitad):
-                numeros.append(base+0.05*i)
-                numeros.append(base-0.05*i)
+                numeros.append(base+0.15*i)
+                numeros.append(base-0.15*i)
             numeros.append(base)
             numeros.sort()
         else:  # Si es par
             numeros=[]
             for i in range(1,1+mitad):
-                numeros.append(base+0.05*i)
-                numeros.append(base-0.05*i)
+                numeros.append(base+0.15*i)
+                numeros.append(base-0.15*i)
             numeros.sort()
         return numeros
     plot_dict={}
