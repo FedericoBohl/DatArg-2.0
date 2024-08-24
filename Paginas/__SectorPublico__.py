@@ -310,8 +310,8 @@ def make_map(data,geo,extras,eleccion):
         marker_line_color='black',
         hovertemplate="<br>".join([
             "<b>%{customdata[0]}</b>",  # Asegúrate de cerrar la etiqueta <b> correctamente aquí
-            "Presupuesto Brindado: %{customdata[1]:.2f}" if eleccion=='Presupuesado' else "Presupuesto Ejecutado: $%{customdata[1]:.2f}",
-            "Proporción del total: %{customdata[2]:.2f}%" if eleccion=='Presupuesado' else "Presupuesto Ejecutado: $%{customdata[2]:.2f}"
+            "Presupuesto Brindado: $%{customdata[1]:.2f}" if eleccion=='Presupuesado' else "Presupuesto Ejecutado: $%{customdata[1]:.2f}",
+            "Proporción del total: %{customdata[2]:.2f}%" if eleccion=='Presupuesado' else "Presupuesto Ejecutado: %{customdata[2]:.2f}%"
         ])
     )
     # Actualizar el layout del mapa
