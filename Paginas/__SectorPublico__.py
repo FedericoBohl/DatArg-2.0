@@ -111,7 +111,7 @@ def load_data_sectpub(date):
     
     return data.rolling(12).sum().dropna(), datagdp.dropna(), datatco.rolling(12).sum().dropna(),endeudamiento_cur.rolling(12).sum().dropna(), endeudamiento_curgdp.dropna(), endeudamientotco.rolling(12).sum().dropna(),corr.rolling(12).sum().dropna(),corrgdp.dropna(),corrtco.rolling(12).sum().dropna()
 
-#@st.cache_resource(show_spinner=False)
+@st.cache_resource(show_spinner=False)
 def load_data_map(end):
     provincias={#'Ciudad Autónoma de Buenos Aires':'Capital Federal',
         'Provincia de Buenos Aires':'Buenos Aires',
@@ -310,8 +310,8 @@ def make_map(data,geo,extras,eleccion):
         marker_line_color='black',
         hovertemplate="<br>".join([
             "<b>%{customdata[0]}</b>",  # Asegúrate de cerrar la etiqueta <b> correctamente aquí
-            "Presupuesto Brindado: %{customdata[1]:.2f}" if eleccion=='Presupuesado' else "Presupuesto Ejecutado: %{customdata[1]}",
-            "Proporción del total: %{customdata[2]:.2f}%" if eleccion=='Presupuesado' else "Presupuesto Ejecutado: %{customdata[1]}"
+            "Presupuesto Brindado: %{customdata[1]:.2f}" if eleccion=='Presupuesado' else "Presupuesto Ejecutado: $%{customdata[1]:.2f}",
+            "Proporción del total: %{customdata[2]:.2f}%" if eleccion=='Presupuesado' else "Presupuesto Ejecutado: $%{customdata[2]:.2f}"
         ])
     )
     # Actualizar el layout del mapa
