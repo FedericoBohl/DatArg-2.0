@@ -9,7 +9,7 @@ import requests
 import json
 import plotly.express as px
 import io
-
+from _globals_ import colorscale
 @st.cache_resource(show_spinner=False)
 def load_data_sectpub(date):
     deficit=pd.read_csv("His Data/his-deficit.csv",delimiter=";")
@@ -299,7 +299,7 @@ def make_map(data,geo,extras,eleccion):
         color=f'% {eleccion}', # Asegúrate de que esta columna contiene el gasto fiscal
         hover_name='properties.nombre',
         custom_data=['properties.nombre',f'{eleccion}',f'% {eleccion}'],
-        color_continuous_scale='magma',
+        color_continuous_scale=colorscale.reverse(),
                             mapbox_style= "carto-positron" , # formatos de diseño del mapa : "carto-positron", "carto-positron",   "white-bg",
                             zoom=2.6, center = {"lat": -38.40, "lon": -63.60},
                             opacity=1,
