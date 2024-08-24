@@ -2,13 +2,25 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import pandas as pd
 import time
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import time
+import os
 
 # Configuración del webdriver (asegúrate de tener el webdriver correcto instalado)
-url = "https://cmegroup-tools.quikstrike.net/User/QuikStrikeView.aspx?viewitemid=IntegratedFedWatchTool&userId=lwolf&jobRole=&company=&companyType=&userId=lwolf&jobRole=&company=&companyType=&insid=134330738&qsid=cd7c9839-5cb4-4b1e-884c-2e559f28b43d"
+
 
 def extract_data():
-    driver = webdriver.Chrome()
+    # Configurar opciones de Chrome para definir la carpeta de descargas
+    download_dir = os.getcwd()  # Esto usará la carpeta donde se ejecuta el script
+    chrome_options = webdriver.ChromeOptions()
+    prefs = {'download.default_directory': download_dir}
+    chrome_options.add_experimental_option('prefs', prefs)
+    # Inicializar el navegador
+    driver = webdriver.Chrome(options=chrome_options)
     # Navega al sitio web
+    url = "https://cmegroup-tools.quikstrike.net/User/QuikStrikeView.aspx?viewitemid=IntegratedFedWatchTool&userId=lwolf&jobRole=&company=&companyType=&userId=lwolf&jobRole=&company=&companyType=&insid=134330738&qsid=cd7c9839-5cb4-4b1e-884c-2e559f28b43d"
     driver.get(url)
     time.sleep(5)
     # Haz clic en la pestaña "Probabilities"
@@ -64,16 +76,37 @@ def extract_data():
         data.append(row_data)
     df=pd.DataFrame(data=data,columns=column)
     df.to_csv('dotplot.csv',index=False)
+    
+    
+
+    # Datos del presupuesto
+    url = 'https://www.presupuestoabierto.gob.ar/sici/destacado-donde-se-gasta#'
+    driver.get(url)
+    time.sleep(5)
+    table_tab = driver.find_element(By.ID, "tab-tabla")
+    table_tab.click()
+    download_button = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.CLASS_NAME, "export"))
+    )
+    download_button.click()
+
+    csv_option = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, "//li[@data-type='csv']/a"))
+    )
+    csv_option.click()
+    time.sleep(3)
     driver.quit()
 
-
+extract_data()
 strikes=0
 while strikes!=3:
     try:
         extract_data()
         print('Datos Obtenidos')
         break
-    except:
+    except Exception as e:
         time.sleep(5)
         strikes+=1
+        if strikes==3:
+            print(e)
         pass

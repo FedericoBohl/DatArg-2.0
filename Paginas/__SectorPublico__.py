@@ -113,77 +113,19 @@ def load_data_sectpub(date):
 
 @st.cache_resource(show_spinner=False)
 def load_data_map(end):
-    #load new data
-    try:
-        # URL del endpoint de la API
-        url = "https://www.presupuestoabierto.gob.ar/api/v1/credito?format=csv"
+    df = pd.read_csv('donde-se-gasta.csv')
+    df['Ubicacion geografica'] = df['Ubicacion geografica'].replace(provincias)
+    df['Presupuestado']=df['Presupuestado'].str.replace(',','').astype(float)
+    df['Ejecutado']=df['Ejecutado'].str.replace(',','').astype(float)
+    df['% Ejecutado']=df['% Ejecutado'].astype(float)
 
-        # Cabeceras de la solicitud
-        headers = {
-            'Authorization': 'ee7f6d62-90ad-4a31-8db0-844acf12ee27',  # Reemplaza con tu token
-            'Content-Type': 'application/json'
-        }
-
-        # Datos de la solicitud
-        data = {
-            "title": "Credito vigente por jurisdiccion",
-            "columns": [
-                "impacto_presupuestario_mes",
-                "jurisdiccion_desc",
-                "finalidad_desc",
-                "fuente_financiamiento_desc",
-                "ubicacion_geografica_desc",
-                "credito_vigente"
-            ]
-        }
-
-        # Realizar la solicitud POST a la API
-        response = requests.post(url, headers=headers, data=json.dumps(data))
-
-
-        with open('presupuestos.csv', 'w', encoding='utf-8') as file:
-            file.write(response.text)
-    except: pass
-    provincias={'Ciudad Autónoma de Buenos Aires':'Capital Federal',
-    'Provincia de Buenos Aires':'Buenos Aires',
-    'Provincia de Catamarca':'Catamarca',
-    'Provincia de Corrientes':'Corrientes',
-    'Provincia de Córdoba':'Córdoba',
-    'Provincia de Entre Ríos':'Entre Ríos',
-    'Provincia de Formosa':'Formosa',
-    'Provincia de Jujuy':'Jujuy',
-    'Provincia de La Pampa':'La Pampa',
-    'Provincia de La Rioja':'La Rioja',
-    'Provincia de Mendoza':'Mendoza',
-    'Provincia de Misiones':'Misiones',
-    'Provincia de Río Negro':'Río Negro',
-    'Provincia de Salta':'Salta',
-    'Provincia de San Juan':'San Juan',
-    'Provincia de San Luis':'San Luis',
-    'Provincia de Santa Cruz':'Santa Cruz',
-    'Provincia de Santa Fe':'Santa Fe',
-    'Provincia de Santiago del Estero':'Santiago del Estero',
-    'Provincia de Tierra del Fuego, Antártida e Islas del Atlántico Sur':'Tierra del Fuego, Antártida e Islas del Atlántico Sur',
-    'Provincia de Tucumán':'Tucumán',
-    'Provincia del Chaco':'Chaco',
-    'Provincia del Chubut':'Chubut',
-    'Provincia del Neuquén':'Neuquén'}
-    df=pd.read_csv('presupuestos.csv',encoding='utf-8')
-
-    df1=df.groupby(by=['ubicacion_geografica_desc']).sum()#.reset_index()
-    df1['%']=100*df1['credito_vigente']/df1['credito_vigente'].sum()
-    extras=df1.iloc[0:4]
-    df1=df1.drop(index=['Binacional','No Clasificado','Interprovincial','Nacional'],)
-    df1=df1.reset_index()
-    df1['ubicacion_geografica_desc'] = df1['ubicacion_geografica_desc'].replace(provincias)
-
-
+    df['% Presupuestado']=df['Presupuestado']/sum(df['Presupuestado'])*100
+    extras=df.iloc[-4:]
+    df=df.iloc[:-4]
     geo=json.load(open('provincias.geojson', encoding='utf-8'))
     provincias_geo_df = pd.json_normalize(geo['features'])
-    #provincias_geo_df['properties.nombre'] = 'Provincia de ' + provincias_geo_df['properties.nombre']
-
-    merged_df = provincias_geo_df.merge(df1, left_on='properties.nombre', right_on='ubicacion_geografica_desc')
-    return merged_df, geo, extras
+    df=provincias_geo_df.merge(df, left_on='properties.nombre', right_on='Ubicacion geografica')
+    return df, geo, extras
 
 @st.cache_resource(show_spinner=False)
 def load_datos_deuda(end) -> pd.DataFrame|None:
@@ -323,20 +265,19 @@ def plot_deficit(escala,data:pd.DataFrame):
     t2.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 @st.cache_data(show_spinner=False)
-def make_map(data,geo,extras):
+def make_map(data,geo,extras,eleccion):
     fig = px.choropleth_mapbox(
         data,
         geojson=geo,
-        locations='ubicacion_geografica_desc',
+        locations='Ubicacion geografica',
         featureidkey='properties.nombre',
-        color='%', # Asegúrate de que esta columna contiene el gasto fiscal
+        color=f'% {eleccion}', # Asegúrate de que esta columna contiene el gasto fiscal
         hover_name='properties.nombre',
-        custom_data=['properties.nombre','credito_vigente','%'],
+        custom_data=['properties.nombre',f'{eleccion}',f'% {eleccion}'],
         color_continuous_scale='magma',
                             mapbox_style= "carto-positron" , # formatos de diseño del mapa : "carto-positron", "carto-positron",   "white-bg",
                             zoom=2.6, center = {"lat": -38.40, "lon": -63.60},
                             opacity=1,
-                            labels={'promedio acessos por cada 100 hogares':'acceso a internet'},
                             color_discrete_sequence=["blue"],
                             )
     fig.update_traces(
@@ -344,8 +285,8 @@ def make_map(data,geo,extras):
         marker_line_color='black',
         hovertemplate="<br>".join([
             "<b>%{customdata[0]}</b>",  # Asegúrate de cerrar la etiqueta <b> correctamente aquí
-            "Presupuesto Brindado: %{customdata[1]}",
-            "Proporción en relación al presupuesto total: %{customdata[2]:.2f}%"
+            "Presupuesto Brindado: %{customdata[1]:.2f}" if eleccion=='Presupuesado' else "Presupuesto Ejecutado: %{customdata[1]}",
+            "Proporción del total: %{customdata[2]:.2f}%" if eleccion=='Presupuesado' else "Presupuesto Ejecutado: %{customdata[1]}"
         ])
     )
     # Actualizar el layout del mapa
@@ -606,6 +547,8 @@ def make_sect_pub_web():
             plot_deuda(S.deuda,S.plot_deuda) if S.plot_deuda=='Composición de la Deuda Bruta' else (plot_deuda(S.deuda_mon,S.plot_deuda) if S.plot_deuda=='Pagos de Deuda por Moneda' else plot_endeudamiento(S.endeudamiento,S.escala_sectpub))
     with c2:
         with st.container(border=True):
-            st.subheader('Déficit Provincial')
+            c1,c2=st.columns((0.4,0.6))
+            c1.subheader('Gasto Provincial')
+            c2.radio('deficit_proc',label_visibility='collapsed',options=['Presupuestado','Ejecutado'],key='deficit_elegido',horizontal=True)
             #data,geo,extras=load_data_map(datetime.now().strftime("%Y%m%d"))
-            make_map(S.data_map,S.geo_map,S.extras_map)
+            make_map(S.data_map,S.geo_map,S.extras_map,S.deficit_elegido)
