@@ -113,6 +113,31 @@ def load_data_sectpub(date):
 
 #@st.cache_resource(show_spinner=False)
 def load_data_map(end):
+    provincias={#'Ciudad Autónoma de Buenos Aires':'Capital Federal',
+        'Provincia de Buenos Aires':'Buenos Aires',
+        'Provincia de Catamarca':'Catamarca',
+        'Provincia de Corrientes':'Corrientes',
+        'Provincia de Córdoba':'Córdoba',
+        'Provincia de Entre Ríos':'Entre Ríos',
+        'Provincia de Formosa':'Formosa',
+        'Provincia de Jujuy':'Jujuy',
+        'Provincia de La Pampa':'La Pampa',
+        'Provincia de La Rioja':'La Rioja',
+        'Provincia de Mendoza':'Mendoza',
+        'Provincia de Misiones':'Misiones',
+        'Provincia de Río Negro':'Río Negro',
+        'Provincia de Salta':'Salta',
+        'Provincia de San Juan':'San Juan',
+        'Provincia de San Luis':'San Luis',
+        'Provincia de Santa Cruz':'Santa Cruz',
+        'Provincia de Santa Fe':'Santa Fe',
+        'Provincia de Santiago del Estero':'Santiago del Estero',
+        'Provincia de Tierra del Fuego, Antártida e Islas del Atlántico Sur':'Tierra del Fuego, Antártida e Islas del Atlántico Sur',
+        'Provincia de Tucumán':'Tucumán',
+        'Provincia del Chaco':'Chaco',
+        'Provincia del Chubut':'Chubut',
+        'Provincia del Neuquén':'Neuquén'}
+
     df = pd.read_csv('donde-se-gasta.csv')
     df['Ubicacion geografica'] = df['Ubicacion geografica'].replace(provincias)
     df['Presupuestado']=df['Presupuestado'].str.replace(',','').astype(float)
