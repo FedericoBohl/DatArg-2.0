@@ -111,7 +111,7 @@ def load_data_sectpub(date):
     
     return data.rolling(12).sum().dropna(), datagdp.dropna(), datatco.rolling(12).sum().dropna(),endeudamiento_cur.rolling(12).sum().dropna(), endeudamiento_curgdp.dropna(), endeudamientotco.rolling(12).sum().dropna(),corr.rolling(12).sum().dropna(),corrgdp.dropna(),corrtco.rolling(12).sum().dropna()
 
-@st.cache_resource(show_spinner=False)
+#@st.cache_resource(show_spinner=False)
 def load_data_map(end):
     df = pd.read_csv('donde-se-gasta.csv')
     df['Ubicacion geografica'] = df['Ubicacion geografica'].replace(provincias)
