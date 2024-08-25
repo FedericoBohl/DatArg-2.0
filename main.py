@@ -14,7 +14,7 @@ from Paginas.__SectorInternacional__ import make_internacional_web
 from Paginas.__SectorFinanciero__ import make_merv_web
 from Paginas.__Actividad__ import make_actividad_web,load_actividad
 from Paginas.__Pobreza__ import make_pobreza_web
-from Paginas.__Precios__ import make_precios_web
+from Paginas.__Precios__ import make_precios_web,load_precios
 from Paginas.librerias import get_pbi
 from Calendar.calendar import create_calendar
 
@@ -42,6 +42,7 @@ def load_lottieurl(url: str):
 def load_ALL(today):
     S.pbi_men=get_pbi()
     S.actividad_,S.pbi_=load_actividad(today)
+    S.precios,S.rem=load_precios(today)
     S.reservas_,S.bcra_,S.bcragdp_,S.bcratco_,S.tasas_,S.TCR,S.TC=load_bcra(today)
     S.bop_,S.bopgdp_,S.ica_,S.icagdp_,S.tot=load_sect_ext(today)
     S.deficit_,S.deficitgdp_,S.deficittco_,S.endeudamiento_,S.endeudamientogdp_,S.endeudamientotco_,S.corr_,S.corrgdp_,S.corrtco_=load_data_sectpub(today)
