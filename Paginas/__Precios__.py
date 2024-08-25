@@ -2,7 +2,7 @@
 import streamlit as st
 from streamlit import session_state as S
 from _globals_ import *
-from librerias import get_data
+from Paginas.librerias import get_data
 from plotly import graph_objects as go
 from plotly.subplots import make_subplots
 import pandas as pd
