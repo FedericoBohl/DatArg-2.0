@@ -93,7 +93,7 @@ def make_precios_web():
     with c1.container(border=False):
         st.subheader("Inflación - IPC(Base 2016=100)$\\text{ }^{1;2}$")
         st.slider(value=[2010,precios.index[-1].year],label="Datos desde-hasta",min_value=1943,max_value=precios.index[-1].year,key="start_precios")
-        plot_inflacion(precios,S.start_precios[0],S.start_precios[1])
+        plot_inflacion(precios,rem,S.start_precios[0],S.start_precios[1])
     with c2.container(border=False):
         st.header('Componentes del IPC')
     c1,c2=st.columns(2)
