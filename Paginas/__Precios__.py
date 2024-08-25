@@ -83,12 +83,23 @@ def plot_inflacion(data,rem,start,end):
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 def plot_categorias(data:pd.DataFrame,start,end):
-    data=data.drop(columns=['IPC','IPC-InfM','IPC-InfA'])
     st.dataframe(data.dropna())
 
+def data_selected():
+    data:pd.DataFrame=S.precios.copy()
+    options={'IPC Núcleo':'Nucleo',
+            'IPC Estacionales':'Estacionales',
+            'IPC Regulados':'Regulados',
+            'Alimentos y bebidas no alcohólicas':'Alimentos',
+            'Vivienda, agua, electricidad y otros combustibles':'Vivienda',
+            'Salud':'Salud',
+            'Transporte':'Transporte'}
+    data=data[[options[S.categoria_IPC]]]
+    return data.dropna()
+
 def make_precios_web():
-    precios=S.precios
-    rem=S.rem
+    precios=S.precios.copy()
+    rem=S.rem.copy()
     c1,c2=st.columns((0.7,0.3),vertical_alignment='center')
     c1,c2=st.columns(2)
     with c1.container(border=True):
@@ -96,9 +107,18 @@ def make_precios_web():
         st.slider(value=[2020,precios.index[-1].year],label="Datos desde-hasta",min_value=1943,max_value=precios.index[-1].year,key="start_precios")
         plot_inflacion(precios,rem,S.start_precios[0],S.start_precios[1])
     with c2.container(border=False):
+        c21,c22=st.columns(2)
         st.subheader('Componentes y Categorías del IPC')
-        st.slider(value=[2020,precios.index[-1].year],label="aaa",min_value=1943,max_value=precios.index[-1].year)
-        plot_categorias(precios,2016,2024)
+        data_categoria=c21.selectbox('Indicador',label_visibility='collapsed',options=['IPC Núcleo',
+                                                                        'IPC Estacionales',
+                                                                        'IPC Regulados',
+                                                                        'Alimentos y bebidas no alcohólicas',
+                                                                        'Vivienda, agua, electricidad y otros combustibles',
+                                                                        'Salud',
+                                                                        'Transporte'],key='categoria_IPC',on_change=data_selected)
+        
+        c22.slider(value=[2020,precios.index[-1].year],label="Datos desde-hasta",min_value=2016,max_value=precios.index[-1].year)
+        plot_categorias(data_categoria,2016,2024)
     c1,c2=st.columns(2)
     with c1.container(border=False):
         st.header('TC y Brecha')
