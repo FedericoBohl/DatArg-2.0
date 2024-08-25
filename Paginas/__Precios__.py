@@ -105,9 +105,14 @@ def plot_categorias(data:pd.DataFrame,start,end):
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 st.cache_resource(show_spinner=False)
-def make_metrics():
-    ...
+def make_metrics(precios,rem):
+    with st.container(border=True):
+        c11,c12,c13,c14=st.columns(4,vertical_alignment='center')
+        c11.metric('Inflación Mensual',value=f'{precios['IPC-InfM'][-1]*100:.2f}%',delta=f'{(precios['IPC-InfM'][-1]-precios['IPC-InfM'][-2])*100:.2f} PP')
+        c12.metric('Inflación Interanual',value=f'{precios['IPC-InfA'][-1]*100:.2f}%',delta=f'{(precios['IPC-InfA'][-1]-precios['IPC-InfA'][-2])*100:.2f} PP')
+        c13.metric('Inflación Núcleo',value=f'{precios['Nucleo-InfM'][-1]*100:.2f}%',delta=f'{(precios['Nucleo-InfM'][-1]-precios['Nucleo-InfM'][-2])*100:.2f} PP')
 
+        
 def data_selected():
     data:pd.DataFrame=S.precios.copy()
     options={'IPC Núcleo':'Nucleo',
@@ -127,6 +132,8 @@ def make_precios_web():
     precios=S.precios.copy()
     rem=S.rem.copy()
     c1,c2=st.columns((0.7,0.3),vertical_alignment='center')
+    with c1:make_metrics(precios,rem)
+    c2.link_button(":blue[**Descargar datos:\nPrecios**]",url="https://1drv.ms/x/c/56f917c917f2e2f5/QfXi8hfJF_kggFZ4FQAAAAAAr3wUsfOZo5CUFA",use_container_width=True)
     c1,c2=st.columns(2,vertical_alignment='bottom')
     with c1.container(border=True):
         st.subheader("Inflación - IPC(Base 2016=100)$\\text{ }^{1;2}$")
