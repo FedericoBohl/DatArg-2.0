@@ -83,7 +83,25 @@ def plot_inflacion(data,rem,start,end):
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 def plot_categorias(data:pd.DataFrame,start,end):
-    st.write(data)
+    data=data.loc[f"{start}":f"{end}"]
+    col=S.col_categoria
+    fig=make_subplots(specs=[[{"secondary_y": True}]])
+    fig.add_trace(go.Scatter(x=data.index,y=data[f"{col}-InfA"]*100,name="Var. Interanual",marker_color="darkcyan",mode='lines'),secondary_y=False)
+    fig.add_trace(go.Bar(x=data.index,y=data[f"{col}-InfM"]*100,name="Var. Mensual",marker_color=navy),secondary_y=True)
+    fig.update_layout(hovermode="x unified", margin=dict(l=1, r=1, t=75, b=1),height=450,bargap=0.2,legend=dict(
+                                        orientation="h",
+                                        yanchor="bottom",
+                                        y=-0.75,
+                                        xanchor="center",
+                                        x=0.5,
+                                        bordercolor=black,
+                                        borderwidth=2
+                                    ),
+                                    yaxis=dict(title="%-Var. Interanual",showgrid=False, zeroline=True, showline=True),
+                                    yaxis2=dict(title='%-Var. Mensual', side='right',showgrid=False, zeroline=True, showline=True)
+                                    )
+    st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
+
 
 def data_selected():
     data:pd.DataFrame=S.precios.copy()
@@ -96,7 +114,7 @@ def data_selected():
             'Transporte':'Transporte'}
     data=data[[options[S.categoria_IPC],f'{options[S.categoria_IPC]}-InfM',f'{options[S.categoria_IPC]}-InfA']]
     S.data_categoria=data.dropna().copy()
-    return None
+    S.col_categoria = options[S.categoria_IPC]
 
 def make_precios_web():
     precios=S.precios.copy()
