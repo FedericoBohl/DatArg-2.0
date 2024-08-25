@@ -113,7 +113,7 @@ def make_metrics(precios,rem):
         c13.metric('Inflación Núcleo',value=f'{precios['Nucleo-InfM'][-1]*100:.2f}%',delta=f'{(precios['Nucleo-InfM'][-1]-precios['Nucleo-InfM'][-2])*100:.2f} PP')
         t=precios.index[-1]
         t1=pd.Timestamp(precios.index[-1].year,precios.index[-1].month+1,1)
-        st.write(rem['REM'].loc[precios.index[-1]])
+        c14.metric('Inflación esperada para el siguiente mes',rem['REM'].loc[precios.index[-1]])
         
 def data_selected():
     data:pd.DataFrame=S.precios.copy()
