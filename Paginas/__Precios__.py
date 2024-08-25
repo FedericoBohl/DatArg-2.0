@@ -87,7 +87,7 @@ def plot_categorias(data:pd.DataFrame,start,end):
     col=S.col_categoria
     fig=make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=data.index,y=data[f"{col}-InfA"]*100,name="Var. Interanual",marker_color=navy,mode='lines'),secondary_y=False)
-    fig.add_trace(go.Bar(x=data.index,y=data[f"{col}-InfM"]*100,name="Var. Mensual",marker_color='darkcyan'),secondary_y=True)
+    fig.add_trace(go.Bar(x=data.index,y=data[f"{col}-InfM"]*100,name="Var. Mensual",marker_color='cornflowerblue'),secondary_y=True)
     fig.update_layout(hovermode="x unified", margin=dict(l=1, r=1, t=75, b=1),height=450,bargap=0.2,legend=dict(
                                         orientation="h",
                                         yanchor="bottom",
@@ -108,6 +108,8 @@ def data_selected():
     options={'IPC Núcleo':'Nucleo',
             'IPC Estacionales':'Estacionales',
             'IPC Regulados':'Regulados',
+            'IPIM':'IPIM',
+            'IPIB':'IPIB',
             'Alimentos y bebidas no alcohólicas':'Alimentos',
             'Vivienda, agua, electricidad y otros combustibles':'Vivienda',
             'Salud':'Salud',
@@ -123,25 +125,22 @@ def make_precios_web():
     c1,c2=st.columns(2,vertical_alignment='bottom')
     with c1.container(border=True):
         st.subheader("Inflación - IPC(Base 2016=100)$\\text{ }^{1;2}$")
-        st.slider(value=[2020,precios.index[-1].year],label="Datos desde-hasta",min_value=1943,max_value=precios.index[-1].year,key="start_precios")
+        st.slider(value=[2022,precios.index[-1].year],label="Datos desde-hasta",min_value=1943,max_value=precios.index[-1].year,key="start_precios")
         plot_inflacion(precios,rem,S.start_precios[0],S.start_precios[1])
-    with c2.container(border=False):
+    with c2.container(border=True):
         st.subheader('Componentes y Categorías del IPC')
         c21,c22=st.columns(2,vertical_alignment='bottom')
         c21.selectbox('Indicador',label_visibility='collapsed',options=['IPC Núcleo',
                                                                         'IPC Estacionales',
                                                                         'IPC Regulados',
+                                                                        'IPIM',
+                                                                        'IPIB',
                                                                         'Alimentos y bebidas no alcohólicas',
                                                                         'Vivienda, agua, electricidad y otros combustibles',
                                                                         'Salud',
-                                                                        'Transporte'],key='categoria_IPC',on_change=data_selected)
+                                                                        'Transporte',],key='categoria_IPC',on_change=data_selected)
         c22.slider(value=[2020,S.data_categoria.index[-1].year],label="Datos desde-hasta",min_value=S.data_categoria.index[0].year,max_value=S.data_categoria.index[-1].year)
         plot_categorias(S.data_categoria,2016,2024)
-    c1,c2=st.columns(2)
-    with c1.container(border=False):
-        st.header('TC y Brecha')
-    with c2.container(border=False):
-        st.header('Expectativas de Inflación')
     st.divider()
     st.caption("$\\text{ }^1$Debido a la intervención del INDEC entre 2007 y 2015(zona marcada en gris), los datos son provisorios, creados a partir del IPC de San Luís y el IPC de CABA.")
     st.caption("$\\text{ }^2$Los datos anteriores a 2016 son el IPC de GBA, empalmados con el reciente IPC nacional con base 2016=100.")
