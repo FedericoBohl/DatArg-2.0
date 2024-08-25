@@ -62,10 +62,9 @@ def plot_inflacion(data,rem,start,end):
     fig=make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=data.index,y=data["IPC-InfA"]*100,name="Inflación Interanual",marker_color="green"),secondary_y=False)
     fig.add_trace(go.Bar(x=data.index,y=data["IPC-InfM"]*100,name="Inflación Mensual",marker_color=green),secondary_y=True)
-    if rem.index[0].year<=end:
-        fig.add_trace(go.Bar(x=rem.index.strftime('%b-%Y')[:-1],y=rem['REM'][:-1]*100,name='Infl. Esperada',marker_color='crimson',legendgroup='rem'),secondary_y=False)
-        fig.add_trace(go.Bar(x=rem.index.strftime('%b-%Y')[-1],y=rem['REM'][-1]*100,name='Infl. Esperada-IA',marker_color='crimson',showlegend=False,legendgroup='rem'),secondary_y=True)
-    #if (2007<S.start_precios[0] and 2015<S.start_precios[0]) or (2007>S.start_precios[0] and 2015>S.start_precios[0]):
+    #if rem.index[0].year<=end:
+    #    fig.add_trace(go.Bar(x=rem.index.strftime('%b-%Y')[:-1],y=rem['REM'][:-1]*100,name='Infl. Esperada',marker_color='crimson',legendgroup='rem'),secondary_y=False)
+    #    fig.add_trace(go.Bar(x=rem.index.strftime('%b-%Y')[-1],y=rem['REM'][-1]*100,name='Infl. Esperada-IA',marker_color='crimson',showlegend=False,legendgroup='rem'),secondary_y=True)
     if (start in range (2007,2015)) or (end in range (2007,2015)) or (2007<=end and 2015>=start):
         fig.add_vrect(x0=f"{max(2007,start)}-01", x1=f"{min(2015,end)}-12", 
             fillcolor="gray", opacity=0.25, line_width=0,label=dict(text="Intervención del INDEC",textposition="top center",font=dict(size=14, color='black')))
