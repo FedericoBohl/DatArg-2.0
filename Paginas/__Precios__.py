@@ -95,7 +95,7 @@ def data_selected():
             'Salud':'Salud',
             'Transporte':'Transporte'}
     data=data[[options[S.categoria_IPC],f'{options[S.categoria_IPC]}-InfM',f'{options[S.categoria_IPC]}-InfA']]
-    S.data_categoria=data.copy()
+    S.data_categoria=data.dropna().copy()
     return None
 
 def make_precios_web():
