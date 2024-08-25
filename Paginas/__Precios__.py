@@ -57,6 +57,7 @@ def load_precios(end):
     
     return precios, rem
 
+st.cache_resource(show_spinner=False)
 def plot_inflacion(data,rem,start,end):
     data=data.loc[f"{start}":f"{end}"]
     fig=make_subplots(specs=[[{"secondary_y": True}]])
@@ -82,6 +83,7 @@ def plot_inflacion(data,rem,start,end):
                                     )
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
+st.cache_resource(show_spinner=False)
 def plot_categorias(data:pd.DataFrame,start,end):
     data=data.loc[f"{start}":f"{end}"]
     col=S.col_categoria
@@ -102,6 +104,9 @@ def plot_categorias(data:pd.DataFrame,start,end):
                                     )
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
+st.cache_resource(show_spinner=False)
+def make_metrics():
+    ...
 
 def data_selected():
     data:pd.DataFrame=S.precios.copy()
@@ -139,8 +144,8 @@ def make_precios_web():
                                                                         'Vivienda, agua, electricidad y otros combustibles',
                                                                         'Salud',
                                                                         'Transporte',],key='categoria_IPC',on_change=data_selected)
-        c22.slider(value=[2020,S.data_categoria.index[-1].year],label="Datos desde-hasta",min_value=S.data_categoria.index[0].year,max_value=S.data_categoria.index[-1].year)
-        plot_categorias(S.data_categoria,2016,2024)
+        c22.slider(value=[2020,S.data_categoria.index[-1].year],label="Datos desde-hasta",min_value=S.data_categoria.index[0].year,max_value=S.data_categoria.index[-1].year,key='start_categorias')
+        plot_categorias(S.data_categoria,S.start_categorias[0],S.start_categorias[1])
     st.divider()
     st.caption("$\\text{ }^1$Debido a la intervención del INDEC entre 2007 y 2015(zona marcada en gris), los datos son provisorios, creados a partir del IPC de San Luís y el IPC de CABA.")
     st.caption("$\\text{ }^2$Los datos anteriores a 2016 son el IPC de GBA, empalmados con el reciente IPC nacional con base 2016=100.")
