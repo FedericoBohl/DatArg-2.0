@@ -83,7 +83,7 @@ def plot_inflacion(data,rem,start,end):
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 def plot_categorias(data:pd.DataFrame,start,end):
-    st.dataframe(data.dropna())
+    st.write(data)
 
 def data_selected():
     data:pd.DataFrame=S.precios.copy()
@@ -95,7 +95,7 @@ def data_selected():
             'Salud':'Salud',
             'Transporte':'Transporte'}
     data=data[[options[S.categoria_IPC]]]
-    return data.dropna()
+    return data
 
 def make_precios_web():
     precios=S.precios.copy()
