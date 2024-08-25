@@ -65,10 +65,9 @@ def plot_inflacion(data,rem,start,end):
     #if rem.index[0].year<=end:
     #    fig.add_trace(go.Bar(x=rem.index.strftime('%b-%Y')[:-1],y=rem['REM'][:-1]*100,name='Infl. Esperada',marker_color='crimson',legendgroup='rem'),secondary_y=False)
     #    fig.add_trace(go.Bar(x=rem.index.strftime('%b-%Y')[-1],y=rem['REM'][-1]*100,name='Infl. Esperada-IA',marker_color='crimson',showlegend=False,legendgroup='rem'),secondary_y=True)
-    st.write(start in range (2007,2015))
     if (start in range (2007,2015)) or (end in range (2007,2015)) or (2007<=end and 2015>=start):
         fig.add_vrect(x0=f"{max(2007,start)}-01", x1=f"{min(2015,end)}-12", 
-            fillcolor="gray", opacity=0.25, line_width=0,label=dict(text="Intervención del INDEC",textposition="top center",font=dict(size=14, color='black')))
+            fillcolor="lightslategrey", opacity=0.25, line_width=0,label=dict(text="Intervención del INDEC",textposition="top center",font=dict(size=14, color='black')))
     fig.update_layout(margin=dict(l=1, r=1, t=75, b=1),height=450,bargap=0.2,legend=dict(
                                         orientation="h",
                                         yanchor="bottom",
@@ -89,7 +88,7 @@ def make_precios_web():
     rem=S.rem
     c1,c2=st.columns((0.7,0.3),vertical_alignment='center')
     c1,c2=st.columns(2)
-    with c1.container(border=False):
+    with c1.container(border=True):
         st.subheader("Inflación - IPC(Base 2016=100)$\\text{ }^{1;2}$")
         st.slider(value=[2010,precios.index[-1].year],label="Datos desde-hasta",min_value=1943,max_value=precios.index[-1].year,key="start_precios")
         plot_inflacion(precios,rem,S.start_precios[0],S.start_precios[1])
