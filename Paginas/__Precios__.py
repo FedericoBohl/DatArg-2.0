@@ -58,7 +58,6 @@ def load_precios(end):
 
 def plot_inflacion(data,rem,start,end):
     data=data.loc[f"{start}":f"{end}"]
-    data.index=data.index.strftime('%b-%Y')
     fig=make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=data.index,y=data["IPC-InfA"]*100,name="Inflación Interanual",marker_color="green"),secondary_y=False)
     fig.add_trace(go.Bar(x=data.index,y=data["IPC-InfM"]*100,name="Inflación Mensual",marker_color=green),secondary_y=True)
