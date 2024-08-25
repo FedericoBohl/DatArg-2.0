@@ -128,14 +128,13 @@ def make_precios_web():
     with c2.container(border=False):
         c21,c22=st.columns(2)
         st.subheader('Componentes y Categorías del IPC')
-        _=c21.selectbox('Indicador',label_visibility='collapsed',options=['IPC Núcleo',
+        c21.selectbox('Indicador',label_visibility='collapsed',options=['IPC Núcleo',
                                                                         'IPC Estacionales',
                                                                         'IPC Regulados',
                                                                         'Alimentos y bebidas no alcohólicas',
                                                                         'Vivienda, agua, electricidad y otros combustibles',
                                                                         'Salud',
                                                                         'Transporte'],key='categoria_IPC',on_change=data_selected)
-        st.write(data_selected())
         c22.slider(value=[2020,S.data_categoria.index[-1].year],label="Datos desde-hasta",min_value=S.data_categoria.index[0].year,max_value=S.data_categoria.index[-1].year)
         plot_categorias(S.data_categoria,2016,2024)
     c1,c2=st.columns(2)
