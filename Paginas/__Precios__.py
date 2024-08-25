@@ -94,14 +94,15 @@ def data_selected():
             'Vivienda, agua, electricidad y otros combustibles':'Vivienda',
             'Salud':'Salud',
             'Transporte':'Transporte'}
-    data=data[options[S.categoria_IPC]]
-    return data.dropna()
+    data=data[[options[S.categoria_IPC],f'{options[S.categoria_IPC]}-InfM',f'{options[S.categoria_IPC]}-InfA']]
+    S.data_categoria=data.copy()
+    return None
 
 def make_precios_web():
     precios=S.precios.copy()
     rem=S.rem.copy()
     c1,c2=st.columns((0.7,0.3),vertical_alignment='center')
-    c1,c2=st.columns(2)
+    c1,c2=st.columns(2,vertical_alignment='bottom')
     with c1.container(border=True):
         st.subheader("Inflación - IPC(Base 2016=100)$\\text{ }^{1;2}$")
         st.slider(value=[2020,precios.index[-1].year],label="Datos desde-hasta",min_value=1943,max_value=precios.index[-1].year,key="start_precios")
@@ -109,7 +110,7 @@ def make_precios_web():
     with c2.container(border=False):
         c21,c22=st.columns(2)
         st.subheader('Componentes y Categorías del IPC')
-        data_categoria=c21.selectbox('Indicador',label_visibility='collapsed',options=['IPC Núcleo',
+        c21.selectbox('Indicador',label_visibility='collapsed',options=['IPC Núcleo',
                                                                         'IPC Estacionales',
                                                                         'IPC Regulados',
                                                                         'Alimentos y bebidas no alcohólicas',
@@ -117,8 +118,8 @@ def make_precios_web():
                                                                         'Salud',
                                                                         'Transporte'],key='categoria_IPC',on_change=data_selected)
         st.write(data_selected())
-        c22.slider(value=[2020,precios.index[-1].year],label="Datos desde-hasta",min_value=2016,max_value=precios.index[-1].year)
-        plot_categorias(data_categoria,2016,2024)
+        c22.slider(value=[2020,S.data_categoria.index[-1].year],label="Datos desde-hasta",min_value=S.data_categoria.index[0].year,max_value=S.data_categoria.index[-1].year)
+        plot_categorias(S.data_categoria,2016,2024)
     c1,c2=st.columns(2)
     with c1.container(border=False):
         st.header('TC y Brecha')
