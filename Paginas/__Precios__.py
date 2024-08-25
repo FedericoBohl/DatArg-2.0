@@ -82,6 +82,9 @@ def plot_inflacion(data,rem,start,end):
                                     )
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
+def plot_categorias(data:pd.DataFrame,start,end):
+    data=data.drop(columns=['IPC','IPC-InfM','IPC-InfA'])
+    st.dataframe(data.dropna())
 
 def make_precios_web():
     precios=S.precios
@@ -90,12 +93,18 @@ def make_precios_web():
     c1,c2=st.columns(2)
     with c1.container(border=True):
         st.subheader("Inflación - IPC(Base 2016=100)$\\text{ }^{1;2}$")
-        st.slider(value=[2010,precios.index[-1].year],label="Datos desde-hasta",min_value=1943,max_value=precios.index[-1].year,key="start_precios")
+        st.slider(value=[2020,precios.index[-1].year],label="Datos desde-hasta",min_value=1943,max_value=precios.index[-1].year,key="start_precios")
         plot_inflacion(precios,rem,S.start_precios[0],S.start_precios[1])
     with c2.container(border=False):
-        st.header('Componentes del IPC')
+        st.subheader('Componentes y Categorías del IPC')
+        st.slider(value=[2020,precios.index[-1].year],label="Datos desde-hasta",min_value=1943,max_value=precios.index[-1].year,key="start_precios")
+        plot_categorias(precios,2016,2024)
     c1,c2=st.columns(2)
     with c1.container(border=False):
         st.header('TC y Brecha')
     with c2.container(border=False):
         st.header('Expectativas de Inflación')
+    st.divider()
+    st.caption("$\\text{ }^1$Debido a la intervención del INDEC entre 2007 y 2015(zona marcada en gris), los datos son provisorios, creados a partir del IPC de San Luís y el IPC de CABA.")
+    st.caption("$\\text{ }^2$Los datos anteriores a 2016 son el IPC de GBA, empalmados con el reciente IPC nacional con base 2016=100.")
+
