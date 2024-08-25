@@ -299,13 +299,7 @@ def make_map(data,geo,extras,eleccion):
         color=f'% {eleccion}', # Asegúrate de que esta columna contiene el gasto fiscal
         hover_name='properties.nombre',
         custom_data=['properties.nombre',f'{eleccion}',f'% {eleccion}'],
-        color_continuous_scale=[
-                                [0, '#5F7161'],  # Valor más bajo
-                                [0.25, '#A5DD9B'],
-                                [0.5, '#FFFFFF'],  # Valor medio (0)
-                                [0.75,'#FF8080'],
-                                [1, '#632626']   # Valor más alto
-                                        ],
+        color_continuous_scale='Picnic',#[[0, '#5F7161'],[0.25, '#A5DD9B'],[0.5, '#FFFFFF'],[0.75,'#FF8080'],[1, '#632626']],
                             mapbox_style= "carto-positron" , # formatos de diseño del mapa : "carto-positron", "carto-positron",   "white-bg",
                             zoom=2.6, center = {"lat": -38.40, "lon": -63.60},
                             opacity=1,
