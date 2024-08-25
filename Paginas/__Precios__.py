@@ -94,7 +94,7 @@ def data_selected():
             'Vivienda, agua, electricidad y otros combustibles':'Vivienda',
             'Salud':'Salud',
             'Transporte':'Transporte'}
-    data=data[[options[S.categoria_IPC]]]
+    data=data[options[S.categoria_IPC]]
     return data
 
 def make_precios_web():
