@@ -128,7 +128,7 @@ def make_precios_web():
     with c2.container(border=False):
         c21,c22=st.columns(2)
         st.subheader('Componentes y Categorías del IPC')
-        c21.selectbox('Indicador',label_visibility='collapsed',options=['IPC Núcleo',
+        _=c21.selectbox('Indicador',label_visibility='collapsed',options=['IPC Núcleo',
                                                                         'IPC Estacionales',
                                                                         'IPC Regulados',
                                                                         'Alimentos y bebidas no alcohólicas',
