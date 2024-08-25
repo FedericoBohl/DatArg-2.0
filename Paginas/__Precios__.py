@@ -62,7 +62,7 @@ def plot_inflacion(data,rem,start,end):
     fig=make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=data.index,y=data["IPC-InfA"]*100,name="Inflación Interanual",marker_color="green"),secondary_y=False)
     fig.add_trace(go.Bar(x=data.index,y=data["IPC-InfM"]*100,name="Inflación Mensual",marker_color=green),secondary_y=True)
-    if S.rem.index[0].year<=end:
+    if S.rem.index[0].year<=int(end):
         rem.index=rem.index.strftime('%b-%Y')
         fig.add_trace(go.Bar(x=rem.index[:-1],y=rem['REM'][:-1]*100,name='Infl. Esperada',marker_color='crimson',legendgroup='rem'),secondary_y=False)
         fig.add_trace(go.Bar(x=rem.index[-1],y=rem['REM'][-1]*100,name='Infl. Esperada-IA',marker_color='crimson',showlegend=False,legendgroup='rem'),secondary_y=True)
