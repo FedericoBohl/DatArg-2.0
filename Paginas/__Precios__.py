@@ -89,7 +89,6 @@ def make_precios_web():
     precios=S.precios
     rem=S.rem
     c1,c2=st.columns((0.7,0.3),vertical_alignment='center')
-    c1.date_input()
     c1,c2=st.columns(2)
     with c1.container(border=False):
         st.subheader("Inflación - IPC(Base 2016=100)$\\text{ }^{1;2}$")
