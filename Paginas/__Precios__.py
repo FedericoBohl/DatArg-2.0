@@ -65,7 +65,7 @@ def plot_inflacion(data,rem,start,end):
     #if rem.index[0].year<=end:
     #    fig.add_trace(go.Bar(x=rem.index.strftime('%b-%Y')[:-1],y=rem['REM'][:-1]*100,name='Infl. Esperada',marker_color='crimson',legendgroup='rem'),secondary_y=False)
     #    fig.add_trace(go.Bar(x=rem.index.strftime('%b-%Y')[-1],y=rem['REM'][-1]*100,name='Infl. Esperada-IA',marker_color='crimson',showlegend=False,legendgroup='rem'),secondary_y=True)
-    st.write(start)
+    st.write(start in range (2007,2015))
     if (start in range (2007,2015)) or (end in range (2007,2015)) or (2007<=end and 2015>=start):
         fig.add_vrect(x0=f"{max(2007,start)}-01", x1=f"{min(2015,end)}-12", 
             fillcolor="gray", opacity=0.25, line_width=0,label=dict(text="Intervención del INDEC",textposition="top center",font=dict(size=14, color='black')))
