@@ -34,7 +34,7 @@ def load_precios(end):
     for col in data.columns:
         data[f'{col}-InfM']=data[col].pct_change(1)
         data[f'{col}-InfA']=data[col].pct_change(12)
-
+    precios=data.copy()
     ids=[
         "430.1_REM_IPC_NAL_T_M_0_0_25_28",
         "430.1_MEDIANA_IPT_1_M_0_0_31_29",
@@ -54,7 +54,7 @@ def load_precios(end):
         data[(date+timedelta(days=31*int(rem_t.index[i][2:])))]=rem_t[i]
     rem=pd.DataFrame(data.values(),index=data.keys(),columns=['REM'])
     
-    return data, rem
+    return precios, rem
 
 def plot_inflacion(data,rem,start,end):
     data=data.loc[f"{start}":f"{end}"]
@@ -92,6 +92,8 @@ def make_precios_web():
     c1,c2=st.columns(2)
     with c1.container(border=False):
         st.subheader("Inflación - IPC(Base 2016=100)$\\text{ }^{1;2}$")
+        st.write(precios.index)
+        st.write(precios.index[-1])
         st.slider(value=[2010,precios.index[-1].year],label="Datos desde-hasta",min_value=1943,max_value=precios.index[-1].year,key="start_precios")
         plot_inflacion(precios,rem,S.start_precios[0],S.start_precios[1])
     with c2.container(border=False):
