@@ -111,9 +111,8 @@ def make_metrics(precios,rem):
         c11.metric('Inflación Mensual',value=f'{precios['IPC-InfM'][-1]*100:.2f}%',delta=f'{(precios['IPC-InfM'][-1]-precios['IPC-InfM'][-2])*100:.2f} PP')
         c12.metric('Inflación Interanual',value=f'{precios['IPC-InfA'][-1]*100:.2f}%',delta=f'{(precios['IPC-InfA'][-1]-precios['IPC-InfA'][-2])*100:.2f} PP')
         c13.metric('Inflación Núcleo',value=f'{precios['Nucleo-InfM'][-1]*100:.2f}%',delta=f'{(precios['Nucleo-InfM'][-1]-precios['Nucleo-InfM'][-2])*100:.2f} PP')
-        t=precios.index[-1]
         t1=pd.Timestamp(precios.index[-1].year,precios.index[-1].month+1,1)
-        c14.metric(f'REM para {meses_espanol[t.month]}',rem['REM'].loc[precios.index[-1]])
+        c14.metric(f'REM para {meses_espanol[t1.month]}',f'{rem['REM'].loc[t1]*100:.2f}%',delta=f'{(rem['REM'].loc[t1]-precios['IPC-InfM'][-1])*100:.2f} PP')
         
 def data_selected():
     data:pd.DataFrame=S.precios.copy()
