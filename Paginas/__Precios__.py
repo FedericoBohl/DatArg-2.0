@@ -97,7 +97,7 @@ def make_precios_web():
         plot_inflacion(precios,rem,S.start_precios[0],S.start_precios[1])
     with c2.container(border=False):
         st.subheader('Componentes y Categorías del IPC')
-        st.slider(value=[2020,precios.index[-1].year],label="Datos desde-hasta",min_value=1943,max_value=precios.index[-1].year,key="start_precios")
+        st.slider(value=[2020,precios.index[-1].year],label="aaa",min_value=1943,max_value=precios.index[-1].year)
         plot_categorias(precios,2016,2024)
     c1,c2=st.columns(2)
     with c1.container(border=False):
