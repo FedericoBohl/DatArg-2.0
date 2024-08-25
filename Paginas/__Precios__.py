@@ -94,8 +94,6 @@ def data_selected():
             'Vivienda, agua, electricidad y otros combustibles':'Vivienda',
             'Salud':'Salud',
             'Transporte':'Transporte'}
-    st.write(data.head())
-    st.write(options[S.categoria_IPC])
     data=data[options[S.categoria_IPC]]
     return data
 
@@ -118,6 +116,7 @@ def make_precios_web():
                                                                         'Vivienda, agua, electricidad y otros combustibles',
                                                                         'Salud',
                                                                         'Transporte'],key='categoria_IPC',on_change=data_selected)
+        st.write(data_selected())
         c22.slider(value=[2020,precios.index[-1].year],label="Datos desde-hasta",min_value=2016,max_value=precios.index[-1].year)
         plot_categorias(data_categoria,2016,2024)
     c1,c2=st.columns(2)
