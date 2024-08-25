@@ -52,6 +52,7 @@ def load_precios(end):
     data={date:rem_t[0]}
     for i in range(1,8):
         data[(date+timedelta(days=31*int(rem_t.index[i][2:])))]=rem_t[i]
+    data={pd.Timestamp(date.year, date.month, 1): value for date, value in data.items()}
     rem=pd.DataFrame(data.values(),index=data.keys(),columns=['REM'])
     
     return precios, rem
@@ -59,7 +60,7 @@ def load_precios(end):
 def plot_inflacion(data,rem,start,end):
     data=data.loc[f"{start}":f"{end}"]
     fig=make_subplots(specs=[[{"secondary_y": True}]])
-    fig.add_trace(go.Scatter(x=data.index,y=data["IPC-InfA"]*100,name="Inflación Interanual",marker_color="green"),secondary_y=False)
+    fig.add_trace(go.Scatter(x=data.index,y=data["IPC-InfA"]*100,name="Inflación Interanual",marker_color="green",mode='lines+markers'),secondary_y=False)
     fig.add_trace(go.Bar(x=data.index,y=data["IPC-InfM"]*100,name="Inflación Mensual",marker_color=green),secondary_y=True)
     if rem.index[0].year<=end:
         fig.add_trace(go.Bar(x=rem.index[:-1],y=rem['REM'][:-1]*100,name='Infl. Esperada',marker_color='crimson',legendgroup='rem'),secondary_y=True)
