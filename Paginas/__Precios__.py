@@ -153,6 +153,7 @@ def make_precios_web():
                                                                         'Salud',
                                                                         'Transporte',],key='categoria_IPC')
         )
+        if not 'data_categoria' in S:data_selected('IPC Núcleo')
         c22.slider(value=[2020,S.data_categoria.index[-1].year],label="Datos desde-hasta",min_value=S.data_categoria.index[0].year,max_value=S.data_categoria.index[-1].year,key='start_categorias')
         plot_categorias(S.data_categoria,S.start_categorias[0],S.start_categorias[1])
     st.divider()
