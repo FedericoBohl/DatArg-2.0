@@ -4,6 +4,7 @@ from streamlit import session_state as S
 import pandas as pd
 from plotly import graph_objects as go
 from plotly.subplots import make_subplots
+from statsmodels.tsa.filters import hp_filter
 
 
 @st.cache_data(show_spinner=False)
@@ -228,14 +229,11 @@ def plot_reservas(reservas): # Está andando medio mal, no reacciona bien con el
     st.subheader("Reservas Internacionales & Tipo de Cambio Real Multilateral")
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     #if st.checkbox("Post Convertibilidad",value=True,key='reservas_post'):
-    fig.add_trace(go.Scatter(x=reservas.loc["Jan-2002":].index, y=reservas.loc["Jan-2002":]["TCR"], name="TCR", marker_color="rgb(220, 20, 60)", line=dict(width=3.5,dash="dashdot")), secondary_y=False)
-    fig.add_trace(go.Scatter(x=reservas.loc["Jan-2002":].index, y=reservas["TCR"].rolling(24).mean().loc["Jan-2002":], name="Media bianual-TCR", marker_color="darkgreen", line=dict(width=2.5,dash="dash")), secondary_y=False)
-    fig.add_trace(go.Scatter(x=reservas.loc["Jan-2002":].index, y=reservas.loc["Jan-2002":]["Res Int"], name="Reservas", marker_color="royalblue", line=dict(width=3),fill="tozeroy"), secondary_y=True)
-    #else:                                                      #y=reservas["TCR"].ewm(span=12, adjust=False).mean().loc["Jan-2002":]
-    #    fig.add_trace(go.Scatter(x=reservas.index, y=reservas["Res Int"], name="Reservas Internacionales", marker_color="royalblue", line=dict(width=3),fill="tozeroy"), secondary_y=True)
-    #    fig.add_trace(go.Scatter(x=reservas.index, y=reservas["TCR"], name="TCR", marker_color="rgb(220, 20, 60)", line=dict(width=3.5,dash="dashdot")), secondary_y=False)
-    #    fig.add_trace(go.Scatter(x=reservas.index, y=reservas["TCR"].ewm(span=12, adjust=False).mean(), name="EMA(12)-TCR", marker_color="darkgreen", line=dict(width=2.5,dash="dash")), secondary_y=False)
-    
+    _,tcreq=hp_filter(reservas["TCR"],129600)
+    fig.add_trace(go.Scatter(x=reservas.index, y=reservas["TCR"], name="TCR", marker_color="#EF5A6F", line=dict(width=2)), secondary_y=True)
+    fig.add_trace(go.Scatter(x=reservas.index, y=tcreq, name="TCR de equilibrio", marker_color="#D4BDAC", line=dict(width=2,dash="dash")), secondary_y=True)
+    fig.add_trace(go.Scatter(x=reservas.index, y=reservas["Res Int"], name="Reservas", marker_color="#536493", line=dict(width=3),fill="tozeroy"), secondary_y=False)
+
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),
         height=450, 
         legend=dict(
@@ -247,8 +245,8 @@ def plot_reservas(reservas): # Está andando medio mal, no reacciona bien con el
             bordercolor="Black",
             borderwidth=2
         ),
-        yaxis=dict(showgrid=False, zeroline=True, showline=True, title="TCR",rangemode="tozero",type='log'),
-        yaxis2=dict(showgrid=False, zeroline=True, showline=True, title="Millones de USD-Oficial"),
+        yaxis=dict(showgrid=False, zeroline=True, showline=True, title="Millones de USD-Oficial"),
+        yaxis2=dict(showgrid=False, zeroline=True, showline=True, title="ITCRM"),
         xaxis=dict(
                     rangeselector=dict(
                         buttons=list([

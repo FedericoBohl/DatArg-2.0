@@ -19,3 +19,4 @@ certifi
 streamlit_extras
 streamlit_calendar
 streamlit-lottie>=0.0.5
+statsmodels

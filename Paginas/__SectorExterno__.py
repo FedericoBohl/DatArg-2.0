@@ -103,7 +103,7 @@ def plot_balcom(data,escala):
     _.index=_.index.strftime('%b-%Y')
     fig.add_trace(go.Scatter(x=data.index,y=_.values.tolist(),name="ToT",line=dict(width=3),marker_color='#FF7F3E'),secondary_y=True)
     _=S.TCR.resample('Q').mean().rolling(4).mean().dropna()
-    _=_.iloc[4:]*100/69.82120981
+    _=_.iloc[4:]*100/159.602847383312
     _=_.loc[f"{S.start_sectext}":]
     _.index=_.index.strftime('%b-%Y')
     fig.add_trace(go.Scatter(x=data.index,y=_.values.tolist(),name="TCR",line=dict(width=4,dash="dot"),marker_color="#F19ED2"),secondary_y=True)
