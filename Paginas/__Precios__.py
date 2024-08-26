@@ -126,8 +126,9 @@ def data_selected(categoria_IPC):
             'Salud':'Salud',
             'Transporte':'Transporte'}
     data=data[[options[categoria_IPC],f'{options[categoria_IPC]}-InfM',f'{options[categoria_IPC]}-InfA']]
-    S.data_categoria=data.dropna().copy()
-    S.col_categoria = options[categoria_IPC]
+    data_categoria=data.dropna().copy()
+    col_categoria = options[categoria_IPC]
+    return data_categoria,col_categoria
 
 def make_precios_web():
     precios=S.precios.copy()
@@ -143,7 +144,7 @@ def make_precios_web():
     with c2.container(border=True):
         st.subheader('Componentes y Categorías del IPC')
         c21,c22=st.columns(2,vertical_alignment='bottom')
-        data_selected(c21.selectbox('Indicador',label_visibility='collapsed',options=['IPC Núcleo',
+        c21.selectbox('Indicador',label_visibility='collapsed',options=['IPC Núcleo',
                                                                         'IPC Estacionales',
                                                                         'IPC Regulados',
                                                                         'IPIM',
@@ -152,8 +153,7 @@ def make_precios_web():
                                                                         'Vivienda, agua, electricidad y otros combustibles',
                                                                         'Salud',
                                                                         'Transporte',],key='categoria_IPC')
-        )
-        if not 'data_categoria' in S:data_selected('IPC Núcleo')
+        S.data_categoria,S.col_categoria=data_selected(S.categoria_IPC)
         c22.slider(value=[2020,S.data_categoria.index[-1].year],label="Datos desde-hasta",min_value=S.data_categoria.index[0].year,max_value=S.data_categoria.index[-1].year,key='start_categorias')
         plot_categorias(S.data_categoria,S.start_categorias[0],S.start_categorias[1])
     st.divider()
