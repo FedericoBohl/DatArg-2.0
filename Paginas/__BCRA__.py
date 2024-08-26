@@ -55,6 +55,7 @@ def load_bcra(date):
 
     ## Reservas
     his_data=pd.read_csv('His Data/his-reservas.csv',delimiter=';')
+    st.write(his_data)
     his_data['Unnamed: 0'] = pd.to_datetime(his_data.iloc[:, 0].values, format='%Y-%m-%d')
     his_data.set_index('Unnamed: 0', inplace=True)
     ids=['92.1_RID_0_0_32','92.1_TCV_0_0_21','116.3_TCRMA_0_M_36']
