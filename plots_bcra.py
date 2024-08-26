@@ -229,7 +229,7 @@ def plot_reservas(reservas): # Está andando medio mal, no reacciona bien con el
     st.subheader("Reservas Internacionales & Tipo de Cambio Real Multilateral")
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     #if st.checkbox("Post Convertibilidad",value=True,key='reservas_post'):
-    _,__=hp_filter([1,2,2,2,2,4,5,5,5,5,5,5,5,5,5,5,5],1000)
+    st.write(hp_filter)
     _,tcreq=hp_filter(reservas["TCR"],129600)
     st.write(_)
     st.write(tcreq)
