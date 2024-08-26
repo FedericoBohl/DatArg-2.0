@@ -143,7 +143,7 @@ def make_precios_web():
     with c2.container(border=True):
         st.subheader('Componentes y Categorías del IPC')
         c21,c22=st.columns(2,vertical_alignment='bottom')
-        c21.selectbox('Indicador',label_visibility='collapsed',options=['IPC Núcleo',
+        data_selected(c21.selectbox('Indicador',label_visibility='collapsed',options=['IPC Núcleo',
                                                                         'IPC Estacionales',
                                                                         'IPC Regulados',
                                                                         'IPIM',
@@ -152,7 +152,7 @@ def make_precios_web():
                                                                         'Vivienda, agua, electricidad y otros combustibles',
                                                                         'Salud',
                                                                         'Transporte',],key='categoria_IPC')
-        data_selected(S.categoria_IPC)
+        )
         c22.slider(value=[2020,S.data_categoria.index[-1].year],label="Datos desde-hasta",min_value=S.data_categoria.index[0].year,max_value=S.data_categoria.index[-1].year,key='start_categorias')
         plot_categorias(S.data_categoria,S.start_categorias[0],S.start_categorias[1])
     st.divider()
