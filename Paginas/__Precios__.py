@@ -113,8 +113,8 @@ def make_metrics(precios,rem):
         c13.metric('Inflación Núcleo',value=f'{precios['Nucleo-InfM'][-1]*100:.2f}%',delta=f'{(precios['Nucleo-InfM'][-1]-precios['Nucleo-InfM'][-2])*100:.2f} PP')
         t1=pd.Timestamp(precios.index[-1].year,precios.index[-1].month+1,1)
         c14.metric(f'REM para {meses_espanol[t1.month]}',f'{rem['REM'].loc[t1]*100:.2f}%',delta=f'{(rem['REM'].loc[t1]-precios['IPC-InfM'][-1])*100:.2f} PP')
-        
-def data_selected():
+@st.cache_data(show_spinner=False)
+def data_selected(categoria_IPC):
     data:pd.DataFrame=S.precios.copy()
     options={'IPC Núcleo':'Nucleo',
             'IPC Estacionales':'Estacionales',
@@ -125,9 +125,9 @@ def data_selected():
             'Vivienda, agua, electricidad y otros combustibles':'Vivienda',
             'Salud':'Salud',
             'Transporte':'Transporte'}
-    data=data[[options[S.categoria_IPC],f'{options[S.categoria_IPC]}-InfM',f'{options[S.categoria_IPC]}-InfA']]
+    data=data[[options[categoria_IPC],f'{options[categoria_IPC]}-InfM',f'{options[categoria_IPC]}-InfA']]
     S.data_categoria=data.dropna().copy()
-    S.col_categoria = options[S.categoria_IPC]
+    S.col_categoria = options[categoria_IPC]
 
 def make_precios_web():
     precios=S.precios.copy()
@@ -151,7 +151,8 @@ def make_precios_web():
                                                                         'Alimentos y bebidas no alcohólicas',
                                                                         'Vivienda, agua, electricidad y otros combustibles',
                                                                         'Salud',
-                                                                        'Transporte',],key='categoria_IPC',on_change=data_selected)
+                                                                        'Transporte',],key='categoria_IPC')
+        data_selected(S.categoria_IPC)
         c22.slider(value=[2020,S.data_categoria.index[-1].year],label="Datos desde-hasta",min_value=S.data_categoria.index[0].year,max_value=S.data_categoria.index[-1].year,key='start_categorias')
         plot_categorias(S.data_categoria,S.start_categorias[0],S.start_categorias[1])
     st.divider()
