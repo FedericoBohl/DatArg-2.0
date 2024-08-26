@@ -230,11 +230,9 @@ def plot_reservas(reservas): # Está andando medio mal, no reacciona bien con el
     st.subheader("Reservas Internacionales & Tipo de Cambio Real Multilateral")
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     #if st.checkbox("Post Convertibilidad",value=True,key='reservas_post'):
-    _,tcreq=sm.tsa.filters.hpfilter(reservas.TCR,129600)
-    st.write(reservas["TCR"]) 
-    st.write(tcreq)
+    _,tcreq=sm.tsa.filters.hpfilter(reservas.dropna().TCR,129600)
     fig.add_trace(go.Scatter(x=reservas.index, y=reservas["TCR"], name="TCR", marker_color="#EF5A6F", line=dict(width=2)), secondary_y=True)
-    fig.add_trace(go.Scatter(x=reservas.index, y=tcreq, name="TCR de equilibrio", marker_color="#D4BDAC", line=dict(width=2,dash="dash")), secondary_y=True)
+    fig.add_trace(go.Scatter(x=reservas.dropna().index, y=tcreq, name="TCR de equilibrio", marker_color="#D4BDAC", line=dict(width=2,dash="dash")), secondary_y=True)
     fig.add_trace(go.Scatter(x=reservas.index, y=reservas["Res Int"], name="Reservas", marker_color="#536493", line=dict(width=3),fill="tozeroy"), secondary_y=False)
 
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),
