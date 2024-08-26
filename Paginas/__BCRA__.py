@@ -10,7 +10,7 @@ from plots_bcra import *
 
 
 #___________________________CARGA DE DATOS____________________________________________________________
-@st.cache_resource(show_spinner=False)
+#@st.cache_resource(show_spinner=False)
 def load_bcra(date): 
     ## Agregados Monetarios
     bcra=pd.read_csv("His Data/his-agregados.csv",delimiter=";")
