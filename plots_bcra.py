@@ -272,7 +272,7 @@ def plot_reservas(reservas): # Está andando medio mal, no reacciona bien con el
                 )
     )
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
-    st.caption("El TCR es una elaboración propia en base el IPC de EEUU, el IPC ajustado de la sección Precios y el Tipo de cambio nominal oficial")
+    st.caption("El TCR de equilibrio fue estimado utilizando un filtro HP.")
 
 
 
