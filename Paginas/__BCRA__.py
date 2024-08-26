@@ -57,14 +57,9 @@ def load_bcra(date):
     his_data=pd.read_csv('His Data/his-reservas.csv',delimiter=';')
     his_data['Unnamed: 0'] = pd.to_datetime(his_data.iloc[:, 0].values, format='%Y-%m-%d')
     his_data.set_index('Unnamed: 0', inplace=True)
-    ids=['92.1_RID_0_0_32','92.1_TCV_0_0_21','145.3_INGNACNAL_DICI_M_15']
-    cols=["Res Int",'TC','IPC']
+    ids=['92.1_RID_0_0_32','92.1_TCV_0_0_21','116.3_TCRMA_0_M_36']
+    cols=["Res Int",'TC','TCR']
     cur_data=get_data(ids,start_date="2024-01-01",col_list=cols)
-    _ = fred.get_series('CPIAUCNS').loc[f'{2024}':]
-    cur_data=pd.concat([cur_data,_],axis=1)
-    cur_data=cur_data.rename(columns={0:'IPC*'})
-    cur_data['TCR']=cur_data['TC']*cur_data['IPC*']/cur_data['IPC']
-    cur_data=cur_data.reindex(columns=his_data.columns)
     reservas=pd.concat([his_data,cur_data],axis=0)
 
     datatco=data.copy()

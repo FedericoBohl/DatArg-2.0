@@ -225,7 +225,7 @@ def plot_depositos(escala, bcra:pd.DataFrame, tasas: pd.DataFrame)->None:
 
 @st.cache_data(show_spinner=False)
 def plot_reservas(reservas): # Está andando medio mal, no reacciona bien con el botón
-    st.subheader("Reservas Internacionales & Tipo de Cambio Real Bilateral")
+    st.subheader("Reservas Internacionales & Tipo de Cambio Real Multilateral")
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     #if st.checkbox("Post Convertibilidad",value=True,key='reservas_post'):
     fig.add_trace(go.Scatter(x=reservas.loc["Jan-2002":].index, y=reservas.loc["Jan-2002":]["TCR"], name="TCR", marker_color="rgb(220, 20, 60)", line=dict(width=3.5,dash="dashdot")), secondary_y=False)
