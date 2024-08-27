@@ -31,6 +31,7 @@ def load_precios(end):
     his_data.columns=data.columns
     data.reindex(columns=his_data.columns)
     data=pd.concat([his_data,data],axis=0)
+    S.IPC=data.loc['2004':,'IPC']
     for col in data.columns:
         data[f'{col}-InfM']=data[col].pct_change(1)
         data[f'{col}-InfA']=data[col].pct_change(12)
