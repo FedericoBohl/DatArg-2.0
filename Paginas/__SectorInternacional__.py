@@ -366,6 +366,7 @@ def get_usa(_):
         yaxis=dict(range=[0,data.index.max().max()*1.1],showline=True, linewidth=0.5, linecolor='black',gridcolor='lightslategrey',gridwidth=0.35)
     )
     dotplot.plotly_chart(fig,use_container_width=True)
+
 @st.cache_resource(show_spinner=False)
 def get_jp(_):
     c1,c2,c3=st.columns((0.4,0.6/2,0.6/2))

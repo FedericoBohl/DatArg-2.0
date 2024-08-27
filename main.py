@@ -4,6 +4,7 @@ from streamlit import session_state as S
 import pandas as pd
 import streamlit.components.v1 as components
 from datetime import datetime
+import pytz
 import requests
 import time
 from streamlit_lottie import st_lottie_spinner
@@ -50,7 +51,7 @@ def load_ALL(today):
     S.data_map,S.geo_map,S.extras_map=load_data_map(today)
 
 if not '__loaded__' in S:
-    today=datetime.now().strftime("%Y%m%d")
+    today=datetime.now(pytz.timezone('America/Argentina/Buenos_Aires')).strftime("%Y-%m-%d")
     cont=st.container(border=False,height=550)
     with cont:
         st.markdown("""<h1 style='text-align: center; color: #000000; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>Cargando tu Economía...</h1>""", unsafe_allow_html=True)
