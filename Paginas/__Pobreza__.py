@@ -30,11 +30,11 @@ def load_pobreza(end):
     for col in ["IS Real-Total","IS Real-Formal","IS Real-Informal"]:
         data[col]=data[col]/data['IPC']*100*(100/96.73343191)
     data=pd.concat([his_data,data],axis=0)
-    data['IPC']=list(zip_longest(S.IPC, [], fillvalue=None))
-    data['TC']=list(zip_longest(S.TC, [], fillvalue=None))
+    data['IPC']=S.IPC.reindex(data.index)#list(zip_longest(S.IPC, [], fillvalue=None))
+    data['TC']=S.TC.reindex(data.index)#list(zip_longest(S.TC, [], fillvalue=None))
     for col in ["Canasta Basica","Linea Indigencia","Linea Pobreza","SalMVM","Haber Jub"]:
-        data[f'{col}-real'] = data.apply(lambda row: row[f'{col}'] / row['IPC'] if row['IPC'] is not None else None, axis=1)
-        data[f'{col}-USD'] = data.apply(lambda row: row[f'{col}'] / row['TC'] if row['TC'] is not None else None, axis=1)   
+        data[f'{col}-real'] = data[col]/data['IPC']#data.apply(lambda row: row[f'{col}'] / row['IPC'] if row['IPC'] is not None else None, axis=1)
+        data[f'{col}-USD'] = data[col]/data['TC']#data.apply(lambda row: row[f'{col}'] / row['TC'] if row['TC'] is not None else None, axis=1)   
     salarios=data.copy()
     
     his_data=pd.read_csv("His Data/his-mercado laboral.csv",delimiter=";")
