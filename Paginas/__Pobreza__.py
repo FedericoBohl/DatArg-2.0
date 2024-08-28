@@ -198,8 +198,8 @@ def plot_pobreza_indigencia(data):
     fig.add_vrect(x0=[2007,'I'], x1=[2015,'II'], opacity=1, line_width=0,
                 label=dict(text="Intervención del INDEC", textposition="top center", font=dict(size=18, color="black")))
     fig.add_vrect(x0="I Sem. 2010", x1="II Sem. 2015", fillcolor="gray", opacity=0.25, line_width=0)
-    fig.add_vline(x="II Sem. 2007", line_width=1, line_color="black")
-    fig.add_vline(x="II Sem. 2015", line_width=1, line_color="black")
+    fig.add_vline(x=[2007,'I'], line_width=1, line_color="black")
+    fig.add_vline(x=[2015,'II'], line_width=1, line_color="black")
 
     # Actualizar el diseño del gráfico
     fig.update_layout(
