@@ -117,6 +117,8 @@ def plot_salarios(data):
 @st.cache_resource(show_spinner=False)
 def plot_pobreza_indigencia(data):
     fig=go.Figure()
+    st.write(data)
+    st.write(data.loc[:'II Sem. 2007'])
     fig.add_trace(go.Scatter(x=data.index,y=np.full(len(data.index), np.nan),showlegend=False,name="",line=dict(width=0)))
     fig.add_trace(go.Scatter(x=data.loc[:'I Sem. 2016'].index,y=data.loc[:'I Sem. 2016']["Indigencia"]*100,name="Indigencia",line=dict(width=2.5),fill="tozeroy",legendgroup="Indigencia",showlegend=False,marker_color="#665A48",fillcolor="#D0B8A8",mode="lines"))
     fig.add_trace(go.Scatter(x=data.loc[:'I Sem. 2016'].index,y=data.loc[:'I Sem. 2016']["Pobreza"]*100,name="Pobreza",line=dict(width=2.5),fill="tozeroy",legendgroup="Pobreza",showlegend=False,marker_color="indigo",fillcolor="#BEADFA",mode="lines"))
