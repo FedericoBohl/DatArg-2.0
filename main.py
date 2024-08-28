@@ -41,45 +41,9 @@ def load_lottieurl(url: str):
     return r.json()
 
 def make_info():
-    ...
+    cafecito='''<a href='https://cafecito.app/datarg' rel='noopener' target='_blank'><img srcset='https://cdn.cafecito.app/imgs/buttons/button_6.png 1x, https://cdn.cafecito.app/imgs/buttons/button_6_2x.png 2x, https://cdn.cafecito.app/imgs/buttons/button_6_3.75x.png 3.75x' src='https://cdn.cafecito.app/imgs/buttons/button_6.png' alt='Invitame un café en cafecito.app' /></a>'''
+    st.html(cafecito)
 
-def cafecito(
-    username: str,
-    floating: bool = True,
-    text: str = "Buy me a coffee",
-    emoji: str = "",
-    bg_color: str = "#FFDD00",
-    font_color: str = "#000000",
-    coffee_color: str = "#000000",
-    width: int = 220,
-    ):
-    button = f"""
-        <script type="text/javascript"
-            src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
-            data-name="bmc-button"
-            data-slug="{username}"
-            data-color="{bg_color}"
-            data-emoji="{emoji}"
-            data-text="{text}"
-            data-outline-color="#000000"
-            data-font-color="{font_color}"
-            data-coffee-color="{coffee_color}" >
-        </script>
-    """
-    st.html(button)
-    if floating:
-        st.markdown(
-            f"""
-            <style>
-                iframe[width="{width}"] {{
-                    position: fixed;
-                    bottom: 60px;
-                    right: 40px;
-                }}
-            </style>
-            """,
-            unsafe_allow_html=True,
-        )
 
 def load_ALL(today):
     S.pbi_men=get_pbi()
@@ -129,9 +93,7 @@ with col2:
 t_info, t_actividad, t_PI, t_precios, t_bcra, t_SecExt, t_SecPub, t_Intl, t_Merv= st.tabs(["Info","Actividad","Pobreza y Empleo", "Precios", "BCRA", "Sector Externo","Sector Público","Internacional","Bolsa Argentina"])
 
 with t_info:
-    cafecito(username="fake-username", floating=False, width=221)
-    cafecito(username="fake-username", floating=False)
-    cafecito(username="fake-username", width=221)
+    make_info()
 with t_actividad:
     make_actividad_web()
 with t_PI:
