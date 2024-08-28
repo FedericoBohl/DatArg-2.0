@@ -248,6 +248,7 @@ def plot_pobreza_indigencia(data):
             borderwidth=2
         ),
     )
+    fig.update_xaxes(tickangle=90)
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
     st.caption("Entre 2010 y 2015 los datos son estimaciones realizadas por el :blue[**ODSA**]. Al ser estimaciones anuales, el dato se repite para ambos semestres de cada año.")
 
