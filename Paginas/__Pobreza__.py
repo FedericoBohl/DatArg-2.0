@@ -34,7 +34,7 @@ def load_pobreza(end):
     data['IPC']=S.IPC.reindex(data.index)#list(zip_longest(S.IPC, [], fillvalue=None))
     data['TC']=S.TC.reindex(data.index)#list(zip_longest(S.TC, [], fillvalue=None))
     for col in ["Canasta Basica","Linea Indigencia","Linea Pobreza","SalMVM","Haber Jub"]:
-        data[f'{col}-real'] = data[col]/data['IPC']#data.apply(lambda row: row[f'{col}'] / row['IPC'] if row['IPC'] is not None else None, axis=1)
+        data[f'{col}-real'] = data['IPC'][-1]*data[col]/data['IPC']#data.apply(lambda row: row[f'{col}'] / row['IPC'] if row['IPC'] is not None else None, axis=1)
         data[f'{col}-USD'] = data[col]/data['TC']#data.apply(lambda row: row[f'{col}'] / row['TC'] if row['TC'] is not None else None, axis=1)   
     salarios=data.copy()
     
@@ -120,8 +120,8 @@ def plot_pobreza_indigencia(data):
     fig.add_trace(go.Scatter(x=data.index,y=np.full(len(data.index), np.nan),showlegend=False,name="",line=dict(width=0)))
     fig.add_trace(go.Scatter(x=data.index[29:],y=data["Pobreza"][29:]*100,name="Pobreza",line=dict(width=2.5),marker_color="indigo",legendgroup="Pobreza",showlegend=False,fillcolor="#BEADFA",fill="tozeroy",mode="lines"))
     fig.add_trace(go.Scatter(x=data.index[29:],y=data["Indigencia"][29:]*100,name="Indigencia",line=dict(width=2.5),fill="tozeroy",legendgroup="Indigencia",showlegend=False,marker_color="#665A48",fillcolor="#D0B8A8",mode="lines"))
-    fig.add_trace(go.Scatter(x=data.index[:18],y=data["Pobreza"][:18]*100,name="Pobreza",line=dict(width=2.5),marker_color="indigo",legendgroup="Pobreza",fillcolor="#BEADFA",fill="tozeroy",mode="lines"))
-    fig.add_trace(go.Scatter(x=data.index[:18],y=data["Indigencia"][:18]*100,name="Indigencia",line=dict(width=2.5),fill="tozeroy",legendgroup="Indigencia",marker_color="#665A48",fillcolor="#D0B8A8",mode="lines"))
+    fig.add_trace(go.Scatter(x=data.index[:19],y=data["Pobreza"][:19]*100,name="Pobreza",line=dict(width=2.5),marker_color="indigo",legendgroup="Pobreza",fillcolor="#BEADFA",fill="tozeroy",mode="lines"))
+    fig.add_trace(go.Scatter(x=data.index[:19],y=data["Indigencia"][:19]*100,name="Indigencia",line=dict(width=2.5),fill="tozeroy",legendgroup="Indigencia",marker_color="#665A48",fillcolor="#D0B8A8",mode="lines"))
     fig.add_vrect(x0="II Sem. 2007",x1="II Sem. 2015", opacity=1, line_width=0,label=dict(text="Intervención del INDEC",textposition="top center",font=dict(size=18, color=black)))
     fig.add_vrect(x0="I Sem. 2010",x1="II Sem. 2015",fillcolor="gray", opacity=0.25, line_width=0)
     fig.add_vline(x="II Sem. 2007",line_width=1,col=black)
@@ -165,6 +165,8 @@ def plot_ingresos(data:pd.DataFrame):
                                 ),
                                     yaxis=dict(showgrid=False, zeroline=True, showline=True),
                                     )
+    if 2007<= S.start_pobreza <=2016:
+        fig.add_vrect(x0=f"{S.start_pobreza}-01",x1=f"2016-04",fillcolor=black, opacity=1, line_width=0,label=dict(textposition="top center",font=dict(size=14, color='black')))
     if S.metrica_ingresos=='Pesos Corrientes':
         fig['layout']['yaxis']['title']='ARS'
         fig['layout']['yaxis']['type']='log'
