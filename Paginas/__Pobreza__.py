@@ -127,13 +127,13 @@ def plot_pobreza_indigencia(data):
     fig = go.Figure()
 
     # Agregar la primera sección con una línea sólida
-    fig.add_trace(go.Scatter(x=segment1['formatted_index'], y=segment1['value'], mode='lines+markers', name='Segmento 1'))
+    fig.add_trace(go.Scatter(x=segment1['formatted_index'], y=segment1['Pobreza'], mode='lines+markers', name='Segmento 1'))
 
     # Agregar la segunda sección con línea dashdot
-    fig.add_trace(go.Scatter(x=segment2['formatted_index'], y=segment2['value'], mode='lines+markers', line=dict(dash='dashdot'), name='Segmento 2'))
+    fig.add_trace(go.Scatter(x=segment2['formatted_index'], y=segment2['Pobreza'], mode='lines+markers', line=dict(dash='dashdot'), name='Segmento 2'))
 
     # Agregar la tercera sección con una línea sólida
-    fig.add_trace(go.Scatter(x=segment3['formatted_index'], y=segment3['value'], mode='lines+markers', name='Segmento 3'))
+    fig.add_trace(go.Scatter(x=segment3['formatted_index'], y=segment3['Pobreza'], mode='lines+markers', name='Segmento 3'))
 
     '''    st.write(data)
     st.write(data.loc[:'II Sem. 2007'])
