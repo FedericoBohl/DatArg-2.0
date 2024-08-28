@@ -63,6 +63,8 @@ def load_pobreza(end):
         semester = "I Sem." if date.month == 1 else "II Sem."
         return f"{semester} {year}"
     # Aplicar la transformación al índice
+    data['year']=[y.year for y in data.index]
+    data['semester']=[('I' if y.month==1 else 'II') for y in data.index]
     data.index = data.index.map(format_semester)
 
     return salarios, empleo, data
@@ -122,8 +124,6 @@ def plot_pobreza_indigencia(data):
     fig.add_trace(go.Scatter(x=data.loc['I Sem. 2010':'II Sem. 2015'].index,y=data.loc['I Sem. 2010':'II Sem. 2015']["Pobreza"]*100,name="Pobreza",line=dict(width=2.5,dash="dash"),marker_color="indigo",showlegend=False,legendgroup="Pobreza",mode="lines"))
     fig.add_trace(go.Scatter(x=data.loc['I Sem. 2010':'II Sem. 2015'].index,y=data.loc['I Sem. 2010':'II Sem. 2015']["Indigencia"]*100,name="Indigencia",line=dict(width=2.5,dash="dash"),showlegend=False,legendgroup="Indigencia",marker_color="#665A48",mode="lines"))
     
-
-    
     fig.add_trace(go.Scatter(x=data.loc[:'I Sem. 2008'].index,y=data.loc[:'I Sem. 2008']["Pobreza"]*100,name="Pobreza",line=dict(width=2.5),marker_color="indigo",legendgroup="Pobreza",fillcolor="#BEADFA",fill="tozeroy",mode="lines"))
     fig.add_trace(go.Scatter(x=data.loc[:'I Sem. 2008'].index,y=data.loc[:'I Sem. 2008']["Indigencia"]*100,name="Indigencia",line=dict(width=2.5),fill="tozeroy",legendgroup="Indigencia",marker_color="#665A48",fillcolor="#D0B8A8",mode="lines"))
     fig.add_vrect(x0="II Sem. 2007",x1="II Sem. 2015", opacity=1, line_width=0,label=dict(text="Intervención del INDEC",textposition="top center",font=dict(size=18, color=black)))
@@ -132,7 +132,7 @@ def plot_pobreza_indigencia(data):
     fig.add_vline(x="II Sem. 2015",line_width=1,col=black)
 
     tickvals = data.index
-    ticktext = [f"{s.split()[0]}\n{s.split()[2]}" for s in data.index]
+    ticktext = [data['year'],data['semester']]
 
     # Actualizar el diseño del gráfico
     fig.update_layout(
