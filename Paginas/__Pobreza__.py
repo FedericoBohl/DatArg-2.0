@@ -118,8 +118,6 @@ def plot_salarios(data):
 @st.cache_resource(show_spinner=False)
 def plot_pobreza_indigencia(data):
     fig=go.Figure()
-    st.write([data['year'], data['semester']])
-    st.write(np.full(len(data.index), np.nan))
     fig.add_trace(go.Scatter(
         x=[data['year'], data['semester']],y=np.full(len(data.index), np.nan), showlegend=False, name="", line=dict(width=0)))
     fig.add_trace(go.Scatter(
@@ -150,7 +148,7 @@ def plot_pobreza_indigencia(data):
     
     fig.add_trace(go.Scatter(
         x=[data.loc['I Sem. 2007':'I Sem. 2010']['year'], data.loc['I Sem. 2007':'I Sem. 2010']['semester']],
-        y=data.loc['I Sem. 2007':'I Sem. 2010']["Pobreza"]*100,
+        y=np.full(len(data.loc['I Sem. 2007':'I Sem. 2010']["Pobreza"]), np.nan),
         name="Pobreza",
         line=dict(width=2.5),
         fill="tozeroy",
@@ -163,7 +161,7 @@ def plot_pobreza_indigencia(data):
 
     fig.add_trace(go.Scatter(
         x=[data.loc['I Sem. 2007':'I Sem. 2010']['year'], data.loc['I Sem. 2007':'I Sem. 2010']['semester']],
-        y=data.loc['I Sem. 2007':'I Sem. 2010']["Indigencia"]*100,
+        y=np.full(len(data.loc['I Sem. 2007':'I Sem. 2010']["Pobreza"]), np.nan),
         name="Indigencia",
         line=dict(width=2.5),
         fill="tozeroy",
