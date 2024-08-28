@@ -82,6 +82,9 @@ def plot_inflacion(data,rem,start,end):
                                     yaxis=dict(title="%-Var. Interanual",showgrid=False, zeroline=True, showline=True),
                                     yaxis2=dict(title='%-Var. Mensual', side='right',showgrid=False, zeroline=True, showline=True)
                                     )
+    fig.update_xaxes(
+    dtick="M1",
+    tickformat="%b\n%Y")
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 st.cache_resource(show_spinner=False)

@@ -277,7 +277,7 @@ def plot_ingresos(data:pd.DataFrame):
                                     bordercolor=black,
                                     borderwidth=2
                                 ),
-                                    yaxis=dict(showgrid=False, zeroline=True, showline=True),
+                                    yaxis=dict(showgrid=True, zeroline=True, showline=True),
                                     )
     if S.metrica_ingresos=='Pesos Corrientes':
         fig['layout']['yaxis']['title']='ARS'
@@ -314,7 +314,7 @@ def make_pobreza_web():
         st.subheader('Tasa de pobreza indigencia')
         plot_pobreza_indigencia(S.pobind)
     with c2.container(border=True):
-        st.subheader('Sal Min Vit y Mov & Haber Min Jub')
+        st.subheader('Ingresos mínimos y líneas de pobreza')
         st.radio('Datos-Ingresos',label_visibility='collapsed',options=['Pesos Corrientes','Moneda Constante','Dólares'],horizontal=True,key='metrica_ingresos')
 
         if S.metrica_ingresos=='Pesos Corrientes':
