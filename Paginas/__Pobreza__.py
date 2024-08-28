@@ -118,7 +118,7 @@ def plot_salarios(data):
 @st.cache_resource(show_spinner=False)
 def plot_pobreza_indigencia(data):
     fig=go.Figure()
-    
+    st.write(data)
     # Dividir el DataFrame en tres segmentos
     segment1 = data[data['formatted_index'] < "II Sem. 2007"]
     segment2 = data[(data['formatted_index'] >= "I Sem. 2010") & (data['formatted_index'] < "I Sem. 2016")]
