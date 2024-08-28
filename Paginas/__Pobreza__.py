@@ -25,6 +25,7 @@ def load_pobreza(end):
         '149.1_SOR_PRIADO_OCTU_0_28',
         '145.3_INGNACNAL_DICI_M_15'
         ]
+    
     cols=["Canasta Basica","Linea Indigencia","Linea Pobreza","SalMVM","Haber Jub","IS Real-Total","IS Real-Formal","IS Real-Informal",'IPC']
     data=get_data(ids,start_date="2024-01-01",col_list=cols)
     data.index = pd.to_datetime(data.index, format='%d/%m/%Y')
