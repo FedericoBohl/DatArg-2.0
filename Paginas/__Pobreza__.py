@@ -232,10 +232,10 @@ def plot_pobreza_indigencia(data):
     # Actualizar el diseño del gráfico
     fig.update_layout(
         hovermode="x unified",
-        margin=dict(l=1, r=1, t=75, b=25),
+        margin=dict(l=1, r=1, t=75, b=1),
         barmode='stack',
         bargap=0,
-        height=450,
+        height=500,
         xaxis_title="Semestre",
         yaxis=dict(title="% de la población", showgrid=True, zeroline=True, showline=True,ticksuffix="%"),
         legend=dict(
@@ -310,7 +310,7 @@ def make_pobreza_web():
         plot_empleo(empleo)
     with c2.container(border=True):
         c21,c22=st.columns(2)
-        c21.subheader('Indice de Salarios Reales')
+        c21.subheader('Índice de Salarios Reales')
         c22.slider('Datos desde:',min_value=2016,max_value=2024,key='start_IS',value=2020)
         indicesalarios=indicesalarios.loc[f"{S.start_IS}":]
         plot_salarios(indicesalarios)
