@@ -259,7 +259,7 @@ def plot_ingresos(data:pd.DataFrame):
     fig.add_trace(go.Scatter(x=data.index,y=data["SalMVM"],name="",showlegend=False,line=dict(width=0),marker_color=navy))
     if 2007<= S.start_pobreza <=2015:
         fig.add_vrect(x0=f"{S.start_pobreza}-01",x1=f"2015-12",fillcolor='lightslategrey', opacity=0.25, line_width=0,label=dict(textposition="top center",font=dict(size=14, color='black')))
-        fig.add_vrect(x0=f'{S.start_pobreza}-01', x1=f"2015-12", opacity=1, line_width=0,label=dict(text="Intervención del INDEC\nFalta de datos", textposition="top center", font=dict(size=18, color="black")))
+        fig.add_vrect(x0=f'{S.start_pobreza}-01', x1=f"2015-12", opacity=1, line_width=0,label=dict(text="Intervención del INDEC<br>Falta de datos", textposition="top center", font=dict(size=18, color="black")))
         fig.add_vline(x='2015-12', line_width=1, line_color="black")
     elif 2007> S.start_pobreza:
         fig.add_vrect(x0=f"2007-01",x1=f"2015-12",fillcolor='lightslategrey', opacity=0.25, line_width=0,label=dict(textposition="top center",font=dict(size=14, color='black')))
