@@ -122,3 +122,38 @@ with t_Intl:
 with t_Merv:
     make_merv_web()
 
+# Crear el rectángulo negro al final de la página
+footer = '''
+<div style="
+    background-color: black;
+    padding: 20px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+">
+    <a href='https://cafecito.app/datarg' rel='noopener' target='_blank'>
+        <img srcset='https://cdn.cafecito.app/imgs/buttons/button_6.png 1x, 
+                     https://cdn.cafecito.app/imgs/buttons/button_6_2x.png 2x, 
+                     https://cdn.cafecito.app/imgs/buttons/button_6_3.75x.png 3.75x' 
+             src='https://cdn.cafecito.app/imgs/buttons/button_6.png' 
+             alt='Invitame un café en cafecito.app' />
+    </a>
+    <br/>
+    <p style="color:white;">Déjanos tus sugerencias o comentarios:</p>
+</div>
+'''
+
+# Mostrar el HTML del footer
+st.markdown(footer, unsafe_allow_html=True)
+
+# Crear el campo de texto para sugerencias y comentarios
+suggestion = st.text_input(label="", placeholder="Escribe aquí tus sugerencias o comentarios...")
+
+# Opcional: agregar lógica para manejar las sugerencias
+if suggestion:
+    st.write(f"Gracias por tus sugerencias: {suggestion}")
