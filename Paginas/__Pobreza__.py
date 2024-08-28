@@ -34,7 +34,7 @@ def load_pobreza(end):
     data['IPC']=S.IPC.reindex(data.index)#list(zip_longest(S.IPC, [], fillvalue=None))
     data['TC']=S.TC.reindex(data.index)#list(zip_longest(S.TC, [], fillvalue=None))
     for col in ["Canasta Basica","Linea Indigencia","Linea Pobreza","SalMVM","Haber Jub"]:
-        data[f'{col}-real'] = data['IPC'][-1]*data[col]/data['IPC']#data.apply(lambda row: row[f'{col}'] / row['IPC'] if row['IPC'] is not None else None, axis=1)
+        data[f'{col}-real'] = S.IPC[-1]*data[col]/data['IPC']#data.apply(lambda row: row[f'{col}'] / row['IPC'] if row['IPC'] is not None else None, axis=1)
         data[f'{col}-USD'] = data[col]/data['TC']#data.apply(lambda row: row[f'{col}'] / row['TC'] if row['TC'] is not None else None, axis=1)   
     salarios=data.copy()
     
@@ -165,8 +165,6 @@ def plot_ingresos(data:pd.DataFrame):
                                 ),
                                     yaxis=dict(showgrid=False, zeroline=True, showline=True),
                                     )
-    
-    st.write(S.start_pobreza)
     if 2007<= S.start_pobreza <=2016:
         fig.add_vrect(x0=f"{S.start_pobreza}-01",x1=f"2016-04",fillcolor=black, opacity=1, line_width=0,label=dict(textposition="top center",font=dict(size=14, color='black')))
     if S.metrica_ingresos=='Pesos Corrientes':
