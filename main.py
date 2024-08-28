@@ -68,7 +68,7 @@ def make_info():
                         "https://www.linkedin.com/in/federico-bohl/",
                         "https://x.com/BohlFede"
                         ]
-                SocialMediaIcons(social_media_links).render(sidebar=False, justify_content="center")
+                SocialMediaIcons(social_media_links).render(sidebar=False, justify_content="left")
         with st.container(border=True):
             c1,c2=st.columns((0.2,0.8)) 
             with c1:st.image("valen.jpeg")
@@ -79,7 +79,7 @@ def make_info():
                         "https://www.linkedin.com/in/valentin-vedda-35024720a/",
                         "https://github.com/valenvedda"
                         ]
-                SocialMediaIcons(social_media_links).render(sidebar=False, justify_content="center")
+                SocialMediaIcons(social_media_links).render(sidebar=False, justify_content="left")
 
 
 
