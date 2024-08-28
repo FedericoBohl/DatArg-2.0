@@ -261,9 +261,9 @@ def plot_ingresos(data:pd.DataFrame):
         fig.add_vrect(x0=f"{S.start_pobreza}-01",x1=f"2016-04",fillcolor='lightslategrey', opacity=0.25, line_width=0,label=dict(textposition="top center",font=dict(size=14, color='black')))
     elif 2007> S.start_pobreza:
         fig.add_vrect(x0=f"2007-01",x1=f"2016-04",fillcolor='lightslategrey', opacity=0.25, line_width=0,label=dict(textposition="top center",font=dict(size=14, color='black')))
-    fig.add_trace(go.Scatter(x=data.index,y=data["Linea Indigencia"],name="Línea de indigencia",fill="tozeroy",fillcolor="#F38BA0",line=dict(width=2),mode="none"))
-    fig.add_trace(go.Scatter(x=data.index,y=data["Linea Pobreza"],name="Línea de Pobreza",fill="tozeroy",line=dict(width=2),mode="none"))
-    fig.add_trace(go.Scatter(x=data.index,y=data["Canasta Basica"],name="Canasta Básica",fill="tozeroy",fillcolor="#B2B8A3",line=dict(width=2),mode="none"))
+    fig.add_trace(go.Scatter(x=data.dropna(subset='Linea Indigencia').index,y=data.dropna(subset='Linea Indigencia')["Linea Indigencia"],name="Línea de indigencia",fill="tozeroy",fillcolor="#F38BA0",line=dict(width=2),mode="none"))
+    fig.add_trace(go.Scatter(x=data.dropna(subset='Linea Pobreza').index,y=data.dropna(subset='Linea Pobreza')["Linea Pobreza"],name="Línea de Pobreza",fill="tozeroy",line=dict(width=2),mode="none"))
+    fig.add_trace(go.Scatter(x=data.dropna(subset='Canasta Basica').index,y=data.dropna(subset='Canasta Basica')["Canasta Basica"],name="Canasta Básica",fill="tozeroy",fillcolor="#B2B8A3",line=dict(width=2),mode="none"))
     fig.add_trace(go.Scatter(x=data.index,y=data["SalMVM"],name="Salario Mín. Vit. y Mov.",line=dict(width=3),marker_color=navy))
     fig.add_trace(go.Scatter(x=data.index,y=data["Haber Jub"],name="Haber Jubilatorio Mínimo",line=dict(width=3),marker_color="#632626"))
 
