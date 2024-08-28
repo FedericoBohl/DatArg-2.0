@@ -119,9 +119,9 @@ def plot_salarios(data):
 def plot_pobreza_indigencia(data):
     fig=go.Figure()
     st.write([data['year'], data['semester']])
-    st.write(np.full(len(data)))
+    st.write(np.full(len(data.index)))
     fig.add_trace(go.Scatter(
-        x=[data['year'], data['semester']],y=np.full(len(data), np.nan), showlegend=False, name="", line=dict(width=0)))
+        x=[data['year'], data['semester']],y=np.full(len(data.index), np.nan), showlegend=False, name="", line=dict(width=0)))
     fig.add_trace(go.Scatter(
         x=[data.loc[:'I Sem. 2007']['year'], data.loc[:'I Sem. 2007']['semester']],
         y=data.loc[:'I Sem. 2007']["Pobreza"]*100,
