@@ -99,9 +99,9 @@ def plot_empleo(data):
 @st.cache_resource(show_spinner=False)
 def plot_salarios(data):
     fig=go.Figure()
-    fig.add_trace(go.Scatter(x=data.index,y=data['IS Real-Total'],name='Total',marker_color=black,line=dict(width=2)))
-    fig.add_trace(go.Scatter(x=data.index,y=data['IS Real-Formal'],name='Sector Formal'))
-    fig.add_trace(go.Scatter(x=data.index,y=data['IS Real-Informal'],name='Sector Informal'))
+    fig.add_trace(go.Scatter(x=data.index,y=data['IS Real-Total'],name='Total',marker_color='#1A2130',line=dict(width=2)))
+    fig.add_trace(go.Scatter(x=data.index,y=data['IS Real-Formal'],name='Sector Formal',marker_color='#5A72A0',line=dict(width=2)))
+    fig.add_trace(go.Scatter(x=data.index,y=data['IS Real-Informal'],name='Sector Informal',marker_color='#83B4FF',line=dict(width=2)))
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode='stack',bargap=0,height=450,legend=dict(
                                         orientation="h",
                                         yanchor="bottom",
@@ -235,7 +235,7 @@ def plot_pobreza_indigencia(data):
         margin=dict(l=1, r=1, t=75, b=75),
         barmode='stack',
         bargap=0,
-        height=500,
+        height=450,
         xaxis_title="Semestre",
         yaxis=dict(title="% de la población", showgrid=True, zeroline=True, showline=True,ticksuffix="%"),
         legend=dict(
