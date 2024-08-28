@@ -118,21 +118,88 @@ def plot_salarios(data):
 @st.cache_resource(show_spinner=False)
 def plot_pobreza_indigencia(data):
     fig=go.Figure()
-    fig.add_trace(go.Scatter(x=data.index,y=np.full(len(data.index), np.nan),showlegend=False,name="",line=dict(width=0)))
-    fig.add_trace(go.Scatter(x=data.loc['II Sem. 2015':].index,y=data.loc['II Sem. 2015':]["Pobreza"]*100,name="Pobreza",line=dict(width=2.5),fill="tozeroy",legendgroup="Pobreza",showlegend=False,marker_color="indigo",fillcolor="#BEADFA",mode="lines"))
-    fig.add_trace(go.Scatter(x=data.loc['II Sem. 2015':].index,y=data.loc['II Sem. 2015':]["Indigencia"]*100,name="Indigencia",line=dict(width=2.5),fill="tozeroy",legendgroup="Indigencia",showlegend=False,marker_color="#665A48",fillcolor="#D0B8A8",mode="lines"))
-    fig.add_trace(go.Scatter(x=data.loc['I Sem. 2010':'II Sem. 2015'].index,y=data.loc['I Sem. 2010':'II Sem. 2015']["Pobreza"]*100,name="Pobreza",line=dict(width=2.5,dash="dash"),marker_color="indigo",showlegend=False,legendgroup="Pobreza",mode="lines"))
-    fig.add_trace(go.Scatter(x=data.loc['I Sem. 2010':'II Sem. 2015'].index,y=data.loc['I Sem. 2010':'II Sem. 2015']["Indigencia"]*100,name="Indigencia",line=dict(width=2.5,dash="dash"),showlegend=False,legendgroup="Indigencia",marker_color="#665A48",mode="lines"))
-    
-    fig.add_trace(go.Scatter(x=data.loc[:'I Sem. 2008'].index,y=data.loc[:'I Sem. 2008']["Pobreza"]*100,name="Pobreza",line=dict(width=2.5),marker_color="indigo",legendgroup="Pobreza",fillcolor="#BEADFA",fill="tozeroy",mode="lines"))
-    fig.add_trace(go.Scatter(x=data.loc[:'I Sem. 2008'].index,y=data.loc[:'I Sem. 2008']["Indigencia"]*100,name="Indigencia",line=dict(width=2.5),fill="tozeroy",legendgroup="Indigencia",marker_color="#665A48",fillcolor="#D0B8A8",mode="lines"))
-    fig.add_vrect(x0="II Sem. 2007",x1="II Sem. 2015", opacity=1, line_width=0,label=dict(text="Intervención del INDEC",textposition="top center",font=dict(size=18, color=black)))
-    fig.add_vrect(x0="I Sem. 2010",x1="II Sem. 2015",fillcolor="gray", opacity=0.25, line_width=0)
-    fig.add_vline(x="II Sem. 2007",line_width=1,col=black)
-    fig.add_vline(x="II Sem. 2015",line_width=1,col=black)
+    fig.add_trace(go.Scatter(
+        x=[data.loc[:'I Sem. 2008']['year'], data.loc[:'I Sem. 2008']['semester']],
+        y=data.loc[:'I Sem. 2008']["Pobreza"]*100,
+        name="Pobreza",
+        line=dict(width=2.5),
+        fill="tozeroy",
+        legendgroup="Pobreza",
+        showlegend=False,
+        marker_color="indigo",
+        fillcolor="#BEADFA",
+        mode="lines"
+    ))
 
-    tickvals = data.index
-    ticktext = [data['year'],data['semester']]
+    fig.add_trace(go.Scatter(
+        x=[data.loc[:'I Sem. 2008']['year'], data.loc[:'I Sem. 2008']['semester']],
+        y=data.loc[:'I Sem. 2008']["Indigencia"]*100,
+        name="Indigencia",
+        line=dict(width=2.5),
+        fill="tozeroy",
+        legendgroup="Indigencia",
+        showlegend=False,
+        marker_color="#665A48",
+        fillcolor="#D0B8A8",
+        mode="lines"
+    ))
+
+    # Segunda sección (I Sem. 2010 a II Sem. 2015)
+    fig.add_trace(go.Scatter(
+        x=[data.loc['I Sem. 2010':'II Sem. 2015']['year'], data.loc['I Sem. 2010':'II Sem. 2015']['semester']],
+        y=data.loc['I Sem. 2010':'II Sem. 2015']["Pobreza"]*100,
+        name="Pobreza",
+        line=dict(width=2.5, dash="dash"),
+        marker_color="indigo",
+        showlegend=False,
+        legendgroup="Pobreza",
+        mode="lines"
+    ))
+
+    fig.add_trace(go.Scatter(
+        x=[data.loc['I Sem. 2010':'II Sem. 2015']['year'], data.loc['I Sem. 2010':'II Sem. 2015']['semester']],
+        y=data.loc['I Sem. 2010':'II Sem. 2015']["Indigencia"]*100,
+        name="Indigencia",
+        line=dict(width=2.5, dash="dash"),
+        showlegend=False,
+        legendgroup="Indigencia",
+        marker_color="#665A48",
+        mode="lines"
+    ))
+
+    # Tercer sección (desde II Sem. 2015)
+    fig.add_trace(go.Scatter(
+        x=[data.loc['II Sem. 2015':]['year'], data.loc['II Sem. 2015':]['semester']],
+        y=data.loc['II Sem. 2015':]["Pobreza"]*100,
+        name="Pobreza",
+        line=dict(width=2.5),
+        fill="tozeroy",
+        legendgroup="Pobreza",
+        showlegend=False,
+        marker_color="indigo",
+        fillcolor="#BEADFA",
+        mode="lines"
+    ))
+
+    fig.add_trace(go.Scatter(
+        x=[data.loc['II Sem. 2015':]['year'], data.loc['II Sem. 2015':]['semester']],
+        y=data.loc['II Sem. 2015':]["Indigencia"]*100,
+        name="Indigencia",
+        line=dict(width=2.5),
+        fill="tozeroy",
+        legendgroup="Indigencia",
+        showlegend=False,
+        marker_color="#665A48",
+        fillcolor="#D0B8A8",
+        mode="lines"
+    ))
+
+    # Agregar los rectángulos y líneas verticales
+    fig.add_vrect(x0="II Sem. 2007", x1="II Sem. 2015", opacity=1, line_width=0,
+                label=dict(text="Intervención del INDEC", textposition="top center", font=dict(size=18, color="black")))
+    fig.add_vrect(x0="I Sem. 2010", x1="II Sem. 2015", fillcolor="gray", opacity=0.25, line_width=0)
+    fig.add_vline(x="II Sem. 2007", line_width=1, line_color="black")
+    fig.add_vline(x="II Sem. 2015", line_width=1, line_color="black")
 
     # Actualizar el diseño del gráfico
     fig.update_layout(
@@ -142,21 +209,16 @@ def plot_pobreza_indigencia(data):
         bargap=0,
         height=450,
         xaxis_title="Semestre",
-        xaxis=dict(
-            tickmode='array',
-            tickvals=tickvals,
-            ticktext=ticktext,
-            tickangle=0  # Para asegurar que las etiquetas se vean correctamente
-        ),
         yaxis=dict(title="% de la población", showgrid=True, zeroline=True, showline=True),
-        legend=dict(orientation="h",
-                    yanchor="bottom",
-                    y=1.05,
-                    xanchor="right",
-                    x=1,
-                    bordercolor="black",
-                    borderwidth=2
-                    ),
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.05,
+            xanchor="right",
+            x=1,
+            bordercolor="black",
+            borderwidth=2
+        ),
     )
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
     st.caption("Entre 2010 y 2015 los datos son estimaciones realizadas por el :blue[**ODSA**]. Al ser estimaciones anuales, el dato se repite para ambos semestres de cada año.")
