@@ -264,7 +264,7 @@ def plot_ingresos(data:pd.DataFrame):
     fig.add_trace(go.Scatter(x=data.index,y=data["Linea Indigencia"],name="Línea de indigencia",marker_color='#219C90',line=dict(width=2)))
     fig.add_trace(go.Scatter(x=data.index,y=data["Linea Pobreza"],name="Línea de Pobreza",marker_color='#FFF455',line=dict(width=2)))
     fig.add_trace(go.Scatter(x=data.index,y=data["Canasta Basica"],name="Canasta Básica",marker_color='#FFC700',line=dict(width=2)))
-    fig.add_trace(go.Scatter(x=data.index,y=data["SalMVM"],name="Salario Mín. Vit. y Mov.",marker_color='#EE4E4E',line=dict(width=3),marker_color='#365E32'))
+    fig.add_trace(go.Scatter(x=data.index,y=data["SalMVM"],name="Salario Mín. Vit. y Mov.",marker_color='#EE4E4E',line=dict(width=3)))
     fig.add_trace(go.Scatter(x=data.index,y=data["Haber Jub"],name="Haber Jubilatorio Mínimo",line=dict(width=3),marker_color="#83B4FF"))
 
     ult=S.IPC.index[-1]
