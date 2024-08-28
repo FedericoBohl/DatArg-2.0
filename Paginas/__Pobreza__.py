@@ -256,6 +256,7 @@ def plot_pobreza_indigencia(data):
 def plot_ingresos(data:pd.DataFrame):
     data.columns=["Canasta Basica","Linea Indigencia","Linea Pobreza","SalMVM","Haber Jub"]
     fig=go.Figure()
+    st.write(S.start_pobreza+100000)
     fig.add_trace(go.Scatter(x=data.index,y=data["SalMVM"],name="",showlegend=False,line=dict(width=0),marker_color=navy))
     if 2007<= S.start_pobreza <=2015:
         fig.add_vrect(x0=f"{S.start_pobreza}-01",x1=f"2015-12",fillcolor='lightslategrey', opacity=0.25, line_width=0,label=dict(textposition="top center",font=dict(size=14, color='black')))
