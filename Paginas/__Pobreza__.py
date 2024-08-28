@@ -145,6 +145,32 @@ def plot_pobreza_indigencia(data):
         fillcolor="#D0B8A8",
         mode="lines"
     ))
+    
+    fig.add_trace(go.Scatter(
+        x=[data.loc['II Sem. 2007':'I Sem. 2010']['year'], data.loc['II Sem. 2007':'I Sem. 2010']['semester']],
+        y=data.loc['II Sem. 2007':'I Sem. 2010']["Pobreza"]*100,
+        name="Pobreza",
+        line=dict(width=2.5),
+        fill="tozeroy",
+        legendgroup="Pobreza",
+        showlegend=False,
+        marker_color="indigo",
+        fillcolor="#BEADFA",
+        mode="lines"
+    ))
+
+    fig.add_trace(go.Scatter(
+        x=[data.loc['II Sem. 2007':'I Sem. 2010']['year'], data.loc['II Sem. 2007':'I Sem. 2010']['semester']],
+        y=data.loc['II Sem. 2007':'I Sem. 2010']["Indigencia"]*100,
+        name="Indigencia",
+        line=dict(width=2.5),
+        fill="tozeroy",
+        legendgroup="Indigencia",
+        showlegend=False,
+        marker_color="#665A48",
+        fillcolor="#D0B8A8",
+        mode="lines"
+    ))
 
     # Segunda sección (I Sem. 2010 a II Sem. 2015)
     fig.add_trace(go.Scatter(
