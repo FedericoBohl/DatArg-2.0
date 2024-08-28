@@ -126,13 +126,13 @@ with st.container():
     st.markdown(
         """
         <style>
-        .footer-container {
+        
             background-color: black;
             padding: 20px;
             margin-top: 50px;
             color: white;
             border-radius: 10px;
-        }
+        
         </style>
                     """, unsafe_allow_html=True)
 
