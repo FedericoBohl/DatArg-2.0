@@ -72,12 +72,12 @@ def load_pobreza(end):
 @st.cache_resource(show_spinner=False)
 def plot_empleo(data):
     fig=make_subplots(specs=[[{"secondary_y": True}]]) 
-    fig.add_trace(go.Scatter(x=data.index,y=data["actividad"]*100,name="Actividad",marker_color="rgb(220, 20, 60)",fill="tozeroy",fillcolor=red,line=dict(width=3)),secondary_y=False)
-    fig.add_trace(go.Scatter(x=data.index,y=data["empleo"]*100,name="Empleo",marker_color="green",line=dict(width=3),fill="tozeroy",fillcolor=green),secondary_y=False)
-    fig.add_trace(go.Scatter(x=data.index,y=data["desempleo"]*100,name="Desempleo",marker_color="royalblue",line=dict(width=3,dash="dashdot")),secondary_y=True)
+    fig.add_trace(go.Scatter(x=data.index,y=data["actividad"]*100,name="Actividad",marker_color="#E90074",fill="tozeroy",fillcolor="#FFC7ED",line=dict(width=3)),secondary_y=False)
+    fig.add_trace(go.Scatter(x=data.index,y=data["empleo"]*100,name="Empleo",marker_color="#0F67B1",line=dict(width=3),fill="tozeroy",fillcolor='#96C9F4'),secondary_y=False)
+    fig.add_trace(go.Scatter(x=data.index,y=data["desempleo"]*100,name="Desempleo",marker_color="#F4CE14",line=dict(width=3,dash="dashdot")),secondary_y=True)
     fig.add_trace(go.Scatter(x=data.index,y=data['sub-total']*100,name='Subempleados',marker_color=black,line=dict(width=2.5)),secondary_y=True)
-    fig.add_trace(go.Scatter(x=data.index,y=data['sub-dem']*100,name='Sub-Demandantes',marker_color='violet',line=dict(width=2,dash='dash')),secondary_y=True)
-    fig.add_trace(go.Scatter(x=data.index,y=data['sub-Ndem']*100,name='Sub-No Demandantes',marker_color='burlywood',line=dict(width=2,dash='dash')),secondary_y=True)
+    fig.add_trace(go.Scatter(x=data.index,y=data['sub-dem']*100,name='Sub-Demandantes',marker_color='#597445',line=dict(width=2,dash='dash')),secondary_y=True)
+    fig.add_trace(go.Scatter(x=data.index,y=data['sub-Ndem']*100,name='Sub-No Demandantes',marker_color='#939185',line=dict(width=2,dash='dash')),secondary_y=True)
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode='stack',bargap=0,height=450,legend=dict(
                                         orientation="h",
                                         yanchor="bottom",
@@ -87,8 +87,8 @@ def plot_empleo(data):
                                     bordercolor=black,
                                     borderwidth=2
                                 ),
-                                yaxis=dict(title="%-Empleo/Actividad",showgrid=False, zeroline=True, showline=True),
-                                yaxis2=dict(title="%-Desempleo/Subocupados",showgrid=True, zeroline=False, showline=True)
+                                yaxis=dict(title="Empleo/Actividad",showgrid=False, zeroline=True, showline=True,ticksuffix="%"),
+                                yaxis2=dict(title="Desempleo/Subocupados",showgrid=True, zeroline=False, showline=True,ticksuffix="%")
                                 )
     if S.start_pobreza <=2015:
         fig.add_vrect(x0=f"2015-07",x1=f"2016-04",fillcolor=black, opacity=1, line_width=0,label=dict(textposition="top center",font=dict(size=14, color='black')))
@@ -225,7 +225,7 @@ def plot_pobreza_indigencia(data):
     # Agregar los rectángulos y líneas verticales
     fig.add_vrect(x0=[2007,'I'], x1=[2015,'II'], opacity=1, line_width=0,
                 label=dict(text="Intervención del INDEC", textposition="top center", font=dict(size=18, color="black")))
-    fig.add_vrect(x0=[2010,'I'], x1=[2015,'II'], fillcolor="gray", opacity=0.25, line_width=0)
+    fig.add_vrect(x0=[2010,'I'], x1=[2015,'II'], fillcolor="lightslategrey", opacity=0.25, line_width=0)
     fig.add_vline(x=[2007,'I'], line_width=1, line_color="black")
     fig.add_vline(x=[2015,'II'], line_width=1, line_color="black")
 
@@ -258,9 +258,9 @@ def plot_ingresos(data:pd.DataFrame):
     fig=go.Figure()
     fig.add_trace(go.Scatter(x=data.index,y=data["SalMVM"],name="",showlegend=False,line=dict(width=0),marker_color=navy))
     if 2007<= S.start_pobreza <=2016:
-        fig.add_vrect(x0=f"{S.start_pobreza}-01",x1=f"2016-04",fillcolor=black, opacity=1, line_width=0,label=dict(textposition="top center",font=dict(size=14, color='black')))
+        fig.add_vrect(x0=f"{S.start_pobreza}-01",x1=f"2016-04",fillcolor='lightslategrey', opacity=0.25, line_width=0,label=dict(textposition="top center",font=dict(size=14, color='black')))
     elif 2007> S.start_pobreza:
-        fig.add_vrect(x0=f"2007-01",x1=f"2016-04",fillcolor=black, opacity=1, line_width=0,label=dict(textposition="top center",font=dict(size=14, color='black')))
+        fig.add_vrect(x0=f"2007-01",x1=f"2016-04",fillcolor='lightslategrey', opacity=0.25, line_width=0,label=dict(textposition="top center",font=dict(size=14, color='black')))
     fig.add_trace(go.Scatter(x=data.index,y=data["Linea Indigencia"],name="Línea de indigencia",fill="tozeroy",fillcolor="#F38BA0",line=dict(width=2),mode="none"))
     fig.add_trace(go.Scatter(x=data.index,y=data["Linea Pobreza"],name="Línea de Pobreza",fill="tozeroy",line=dict(width=2),mode="none"))
     fig.add_trace(go.Scatter(x=data.index,y=data["Canasta Basica"],name="Canasta Básica",fill="tozeroy",fillcolor="#B2B8A3",line=dict(width=2),mode="none"))
