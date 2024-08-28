@@ -201,7 +201,7 @@ def make_pobreza_web():
         plot_pobreza_indigencia(S.pobind)
     with c2.container(border=True):
         st.subheader('Sal Min Vit y Mov & Haber Min Jub')
-        st.radio('Datos-Ingresos',options=['Pesos Corrientes','Moneda Constante','Dólares'],horizontal=True,key='metrica_ingresos')
+        st.radio('Datos-Ingresos',label_visibility='collapsed',options=['Pesos Corrientes','Moneda Constante','Dólares'],horizontal=True,key='metrica_ingresos')
 
         if S.metrica_ingresos=='Pesos Corrientes':
             plot_pobreza_indigencia(salarios[["Canasta Basica","Linea Indigencia","Linea Pobreza","SalMVM","Haber Jub"]])
