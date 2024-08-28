@@ -118,25 +118,6 @@ def plot_salarios(data):
 @st.cache_resource(show_spinner=False)
 def plot_pobreza_indigencia(data):
     fig=go.Figure()
-    st.write(data)
-    # Dividir el DataFrame en tres segmentos
-    segment1 = data[data['formatted_index'] < "II Sem. 2007"]
-    segment2 = data[(data['formatted_index'] >= "I Sem. 2010") & (data['formatted_index'] < "I Sem. 2016")]
-    segment3 = data[data['formatted_index'] >= "I Sem. 2016"]
-
-    # Crear el gráfico
-    fig = go.Figure()
-
-    # Agregar la primera sección con una línea sólida
-    fig.add_trace(go.Scatter(x=segment1['formatted_index'], y=segment1['Pobreza'], mode='lines+markers', name='Segmento 1'))
-
-    # Agregar la segunda sección con línea dashdot
-    fig.add_trace(go.Scatter(x=segment2['formatted_index'], y=segment2['Pobreza'], mode='lines+markers', line=dict(dash='dashdot'), name='Segmento 2'))
-
-    # Agregar la tercera sección con una línea sólida
-    fig.add_trace(go.Scatter(x=segment3['formatted_index'], y=segment3['Pobreza'], mode='lines+markers', name='Segmento 3'))
-
-    '''    st.write(data)
     st.write(data.loc[:'II Sem. 2007'])
     fig.add_trace(go.Scatter(x=data.index,y=np.full(len(data.index), np.nan),showlegend=False,name="",line=dict(width=0)))
     fig.add_trace(go.Scatter(x=data.loc[:'I Sem. 2016'].index,y=data.loc[:'I Sem. 2016']["Indigencia"]*100,name="Indigencia",line=dict(width=2.5),fill="tozeroy",legendgroup="Indigencia",showlegend=False,marker_color="#665A48",fillcolor="#D0B8A8",mode="lines"))
@@ -153,7 +134,7 @@ def plot_pobreza_indigencia(data):
     fig.add_vrect(x0="II Sem. 2007",x1="II Sem. 2015", opacity=1, line_width=0,label=dict(text="Intervención del INDEC",textposition="top center",font=dict(size=18, color=black)))
     fig.add_vrect(x0="I Sem. 2010",x1="II Sem. 2015",fillcolor="gray", opacity=0.25, line_width=0)
     fig.add_vline(x="II Sem. 2007",line_width=1,col=black)
-    fig.add_vline(x="II Sem. 2015",line_width=1,col=black)'''
+    fig.add_vline(x="II Sem. 2015",line_width=1,col=black)
 
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode='stack',bargap=0,height=450,
                       xaxis_title="Semestre", xaxis=dict(tickmode='array',
