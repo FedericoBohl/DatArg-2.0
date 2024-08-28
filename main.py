@@ -126,13 +126,12 @@ with st.container():
     st.markdown(
         """
         <style>
-        
+        .container {
             background-color: black;
             padding: 20px;
-            margin-top: 50px;
-            color: white;
             border-radius: 10px;
-        
+            color: white;
+        }
         </style>
                     """, unsafe_allow_html=True)
 
