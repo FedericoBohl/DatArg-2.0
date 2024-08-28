@@ -8,6 +8,7 @@ import pytz
 import requests
 import time
 from streamlit_lottie import st_lottie_spinner
+#from st_social_media_links import SocialMediaIcons
 from Paginas.__BCRA__ import make_BCRA_web,load_bcra
 from Paginas.__SectorExterno__ import make_sect_ext_web,load_sect_ext
 from Paginas.__SectorPublico__ import make_sect_pub_web,load_data_map,load_data_sectpub,load_datos_deuda
@@ -40,20 +41,38 @@ def load_lottieurl(url: str):
         return None
     return r.json()
 
+@st.cache_resource(show_spinner=False)
 def make_info():
-    cafecito = '''
-    <div style="display: flex; justify-content: center;">
-        <a href='https://cafecito.app/datarg' rel='noopener' target='_blank'>
-            <img srcset='https://cdn.cafecito.app/imgs/buttons/button_6.png 1x, 
-                        https://cdn.cafecito.app/imgs/buttons/button_6_2x.png 2x, 
-                        https://cdn.cafecito.app/imgs/buttons/button_6_3.75x.png 3.75x' 
-                src='https://cdn.cafecito.app/imgs/buttons/button_6.png' 
-                alt='Invitame un café en cafecito.app' />
-        </a>
-    </div>
-    '''
+    st.header("¿Quienes somos?")
+    st.text("DatArg es una aplicación sin fines de lucro que busca promover la transparencia de los datos económicos oficiales mediante un entorno que presente en *tiempo real* las principales variables de los distintos sectores económicos que involucran la coyuntura económica de un país, permitiendo su analisis y fácil comprensión, *todo en un solo lugar*. Su uso es tan extenso que preferimos que lo compruebes por vos mismo/a: analistas, consultores, profesores, periodistas y mucho más.")
+    st.text("Esta aplicación surge como una iniciativa para democratizar el acceso a datos económicos en tiempo real sobre Argentina. Nuestro objetivo es ofrecer una herramienta gratuita que permita a cualquier persona, sin importar su nivel de conocimientos en economía, acceder a información clara y transparente.La creación de esta plataforma responde a nuestra convicción de que el acceso a la información es un derecho fundamental. Al ofrecer esta aplicación de manera gratuita, buscamos contribuir al desarrollo de una sociedad más informada y, en última instancia, más justa.")
+    st.text("Somos un equipo pequeño, pero estamos comprometidos con la idea de que el conocimiento es poder, y el acceso al conocimiento debe ser universal. Esperamos que esta herramienta te sea útil y te invitamos a explorarla todo con libertad.")
+    st.header("¿Como funciona la página?")
+    st.caption("Los datos económicos estan divididos en sectores (Actividad, Precios, Sector Externo, entre otros). Al mismo tiempo, como se ve en el siguiente video de abajo, el usuario puede filtrar por fechas, variables y según diferentes aspectos que hemos elegido para ciertos casos particulares.")
+    st.caption("No sólo puede filtrarse por fechas, sino que **los gráficos también son editables** como se ve en el video de abajo. Se puede expandir el gráfico a pantalla completa, deseleccionarle y volverle seleccionar las variables graficadas, recortar y ver sólo una parte elegida con el mouse, ¡¡y hasta incluso descargarlo!!")
+    col1,col2=st.columns((1,1))
+    with col1:
+        with st.container(height=500,border=False):
+            st.header('¿Cómo utilizar la aplicación?')
+            st.video("https://www.youtube.com/watch?v=hn2WqRX75DI")
+            st.caption("Este video es puramente demostración, cuando se finalize la aplicación mostrara como esta se usa")
+    with col2:
+        st.header("Nuestro Equipo")
+        with st.container(border=True):
+            c1,c2=st.columns((0.2,0.8)) 
+            with c1:st.image("fede.jpeg")
+            with c2:
+                st.subheader("Federico Bohl")
+                st.write("**Rol:** Creador y desarrollador")
+                st.write("[LinkedIn](URL_LINKEDIN_DESARROLLADOR1) | [Twitter](URL_TWITTER_DESARROLLADOR1)")
+        with st.container(border=True):
+            c1,c2=st.columns((0.2,0.8)) 
+            with c1:st.image("fede.jpeg")
+            with c2:
+                st.subheader("Valentín Vedda")
+                st.write("**Rol:** Calendario económico y bot de Telegram")
+                st.write("[LinkedIn](URL_LINKEDIN_DESARROLLADOR1) | [Twitter](URL_TWITTER_DESARROLLADOR1)")
 
-    st.markdown(cafecito, unsafe_allow_html=True)
 
 
 def load_ALL(today):
