@@ -122,7 +122,7 @@ with t_Intl:
 with t_Merv:
     make_merv_web()
 
-with st.container() as container:
+with st.container():
     # Aplicar estilos al container
     st.markdown(
         """
@@ -139,26 +139,25 @@ with st.container() as container:
     )
 
     # Incrustar contenido en el container
-    with container:
-        cafecito = '''
-        <div style="display: flex; justify-content: center; margin-bottom: 20px;">
-            <a href='https://cafecito.app/datarg' rel='noopener' target='_blank'>
-                <img srcset='https://cdn.cafecito.app/imgs/buttons/button_6.png 1x, 
-                             https://cdn.cafecito.app/imgs/buttons/button_6_2x.png 2x, 
-                             https://cdn.cafecito.app/imgs/buttons/button_6_3.75x.png 3.75x' 
-                     src='https://cdn.cafecito.app/imgs/buttons/button_6.png' 
-                     alt='Invitame un café en cafecito.app' />
-            </a>
-        </div>
-        '''
-        st.markdown(cafecito, unsafe_allow_html=True)
-        
-        # Campo de texto para sugerencias
-        suggestion = st.text_input(
-            label="Déjanos tus sugerencias o comentarios:", 
-            placeholder="Escribe aquí tus sugerencias o comentarios..."
-        )
-        
-        # Lógica para manejar las sugerencias (opcional)
-        if suggestion:
-            st.write(f"Gracias por tus sugerencias: {suggestion}")
+    cafecito = '''
+    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+        <a href='https://cafecito.app/datarg' rel='noopener' target='_blank'>
+            <img srcset='https://cdn.cafecito.app/imgs/buttons/button_6.png 1x, 
+                            https://cdn.cafecito.app/imgs/buttons/button_6_2x.png 2x, 
+                            https://cdn.cafecito.app/imgs/buttons/button_6_3.75x.png 3.75x' 
+                    src='https://cdn.cafecito.app/imgs/buttons/button_6.png' 
+                    alt='Invitame un café en cafecito.app' />
+        </a>
+    </div>
+    '''
+    st.markdown(cafecito, unsafe_allow_html=True)
+    
+    # Campo de texto para sugerencias
+    suggestion = st.text_input(
+        label="Déjanos tus sugerencias o comentarios:", 
+        placeholder="Escribe aquí tus sugerencias o comentarios..."
+    )
+    
+    # Lógica para manejar las sugerencias (opcional)
+    if suggestion:
+        st.write(f"Gracias por tus sugerencias: {suggestion}")
