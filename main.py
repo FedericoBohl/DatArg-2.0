@@ -43,7 +43,7 @@ def load_lottieurl(url: str):
 def make_info():
     ...
 
-def button(
+def cafecito(
     username: str,
     floating: bool = True,
     text: str = "Buy me a coffee",
@@ -66,7 +66,6 @@ def button(
             data-coffee-color="{coffee_color}" >
         </script>
     """
-
     html(button, height=70, width=width)
     if floating:
         st.markdown(
@@ -130,9 +129,9 @@ with col2:
 t_info, t_actividad, t_PI, t_precios, t_bcra, t_SecExt, t_SecPub, t_Intl, t_Merv= st.tabs(["Info","Actividad","Pobreza y Empleo", "Precios", "BCRA", "Sector Externo","Sector Público","Internacional","Bolsa Argentina"])
 
 with t_info:
-    button(username="fake-username", floating=False, width=221)
-    button(username="fake-username", floating=False)
-    button(username="fake-username", width=221)
+    cafecito(username="fake-username", floating=False, width=221)
+    cafecito(username="fake-username", floating=False)
+    cafecito(username="fake-username", width=221)
 with t_actividad:
     make_actividad_web()
 with t_PI:
