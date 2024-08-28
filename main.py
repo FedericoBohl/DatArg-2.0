@@ -68,7 +68,7 @@ def cafecito(
             data-coffee-color="{coffee_color}" >
         </script>
     """
-    html(button, height=70, width=width)
+    html(button)
     if floating:
         st.markdown(
             f"""
