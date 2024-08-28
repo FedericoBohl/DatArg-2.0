@@ -75,8 +75,8 @@ def plot_empleo(data):
     fig.add_trace(go.Scatter(x=data.index,y=data["empleo"]*100,name="Empleo",marker_color="green",line=dict(width=3),fill="tozeroy",fillcolor=green),secondary_y=False)
     fig.add_trace(go.Scatter(x=data.index,y=data["desempleo"]*100,name="Desempleo",marker_color="royalblue",line=dict(width=3,dash="dashdot")),secondary_y=True)
     fig.add_trace(go.Scatter(x=data.index,y=data['sub-total']*100,name='Subempleados',marker_color=black,line=dict(width=2.5)),secondary_y=True)
-    fig.add_trace(go.Bar(x=data.index,y=data['sub-dem']*100,name='Sub-Demandantes',marker_color='violet',line=dict(width=2,dash='dash')),secondary_y=True)
-    fig.add_trace(go.Bar(x=data.index,y=data['sub-Ndem']*100,name='Sub-No Demandantes',marker_color='burlywood',line=dict(width=2,dash='dash')),secondary_y=True)
+    fig.add_trace(go.Scatter(x=data.index,y=data['sub-dem']*100,name='Sub-Demandantes',marker_color='violet',line=dict(width=2,dash='dash')),secondary_y=True)
+    fig.add_trace(go.Scatter(x=data.index,y=data['sub-Ndem']*100,name='Sub-No Demandantes',marker_color='burlywood',line=dict(width=2,dash='dash')),secondary_y=True)
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode='stack',bargap=0,height=450,legend=dict(
                                         orientation="h",
                                         yanchor="bottom",
