@@ -8,6 +8,7 @@ import pandas as pd
 from datetime import datetime,timedelta
 from itertools import zip_longest
 import numpy as np
+
 st.cache_resource(show_spinner=False)
 def load_pobreza(end):
     his_data=pd.read_csv("His Data/his-salarios.csv",delimiter=";")
@@ -72,10 +73,10 @@ def plot_empleo(data):
     fig=make_subplots(specs=[[{"secondary_y": True}]]) 
     fig.add_trace(go.Scatter(x=data.index,y=data["actividad"]*100,name="Actividad",marker_color="rgb(220, 20, 60)",fill="tozeroy",fillcolor=red,line=dict(width=3)),secondary_y=False)
     fig.add_trace(go.Scatter(x=data.index,y=data["empleo"]*100,name="Empleo",marker_color="green",line=dict(width=3),fill="tozeroy",fillcolor=green),secondary_y=False)
-    fig.add_trace(go.Scatter(x=data.index,y=data["desempleo"]*100,name="Desempleo",marker_color="royalblue",line=dict(width=4,dash="dashdot")),secondary_y=True)
-    fig.add_trace(go.Scatter(x=data.index,y=data['sub-total']*100,name='Subempleados'),secondary_y=True)
-    fig.add_trace(go.Bar(x=data.index,y=data['sub-dem']*100,name='Sub-Demandantes'),secondary_y=True)
-    fig.add_trace(go.Bar(x=data.index,y=data['sub-Ndem']*100,name='Sub-No Demandantes'),secondary_y=True)
+    fig.add_trace(go.Scatter(x=data.index,y=data["desempleo"]*100,name="Desempleo",marker_color="royalblue",line=dict(width=3,dash="dashdot")),secondary_y=True)
+    fig.add_trace(go.Scatter(x=data.index,y=data['sub-total']*100,name='Subempleados',marker_color=black,line=dict(width=2.5)),secondary_y=True)
+    fig.add_trace(go.Bar(x=data.index,y=data['sub-dem']*100,name='Sub-Demandantes',marker_color='violet',line=dict(width=2,dash='dash')),secondary_y=True)
+    fig.add_trace(go.Bar(x=data.index,y=data['sub-Ndem']*100,name='Sub-No Demandantes',marker_color='burlywood',line=dict(width=2,dash='dash')),secondary_y=True)
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode='stack',bargap=0,height=450,legend=dict(
                                         orientation="h",
                                         yanchor="bottom",
@@ -91,7 +92,7 @@ def plot_empleo(data):
     if S.start_pobreza <=2015:
         fig.add_vrect(x0=f"2015-07",x1=f"2016-04",fillcolor=black, opacity=1, line_width=0,label=dict(textposition="top center",font=dict(size=14, color='black')))
     elif S.start_pobreza==2016:
-        fig.add_vrect(x0=f"2016-02",x1=f"2016-04",fillcolor=black, opacity=1, line_width=0,label=dict(textposition="top left",font=dict(size=14, color='black')))
+        fig.add_vrect(x0=f"2016-01",x1=f"2016-04",fillcolor=black, opacity=1, line_width=0,label=dict(textposition="top left",font=dict(size=14, color='black')))
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 @st.cache_resource(show_spinner=False)
@@ -117,16 +118,16 @@ def plot_salarios(data):
 def plot_pobreza_indigencia(data):
     fig=go.Figure()
     fig.add_trace(go.Scatter(x=data.index,y=np.full(len(data.index), np.nan),showlegend=False,name="",line=dict(width=0)))
-    fig.add_trace(go.Scatter(x=data.index[-15:],y=data["Pobreza"][-15:],name="Pobreza",line=dict(width=2.5),marker_color="indigo",legendgroup="Pobreza",showlegend=False,fillcolor="#BEADFA",fill="tozeroy",mode="lines"))
-    fig.add_trace(go.Scatter(x=data.index[-15:],y=data["Indigencia"][-15:],name="Indigencia",line=dict(width=2.5),fill="tozeroy",legendgroup="Indigencia",showlegend=False,marker_color="#665A48",fillcolor="#D0B8A8",mode="lines"))
-    fig.add_trace(go.Scatter(x=data.index[:8],y=data["Pobreza"][:8],name="Pobreza",line=dict(width=2.5),marker_color="indigo",legendgroup="Pobreza",fillcolor="#BEADFA",fill="tozeroy",mode="lines"))
-    fig.add_trace(go.Scatter(x=data.index[:8],y=data["Indigencia"][:8],name="Indigencia",line=dict(width=2.5),fill="tozeroy",legendgroup="Indigencia",marker_color="#665A48",fillcolor="#D0B8A8",mode="lines"))
+    fig.add_trace(go.Scatter(x=data.index[30:],y=data["Pobreza"][30:],name="Pobreza",line=dict(width=2.5),marker_color="indigo",legendgroup="Pobreza",showlegend=False,fillcolor="#BEADFA",fill="tozeroy",mode="lines"))
+    fig.add_trace(go.Scatter(x=data.index[30:],y=data["Indigencia"][30:],name="Indigencia",line=dict(width=2.5),fill="tozeroy",legendgroup="Indigencia",showlegend=False,marker_color="#665A48",fillcolor="#D0B8A8",mode="lines"))
+    fig.add_trace(go.Scatter(x=data.index[:17],y=data["Pobreza"][:17],name="Pobreza",line=dict(width=2.5),marker_color="indigo",legendgroup="Pobreza",fillcolor="#BEADFA",fill="tozeroy",mode="lines"))
+    fig.add_trace(go.Scatter(x=data.index[:17],y=data["Indigencia"][:17],name="Indigencia",line=dict(width=2.5),fill="tozeroy",legendgroup="Indigencia",marker_color="#665A48",fillcolor="#D0B8A8",mode="lines"))
     fig.add_vrect(x0="II Sem. 2007",x1="II Sem. 2015", opacity=1, line_width=0,label=dict(text="Falta de datos del INDEC",textposition="top center",font=dict(size=18, color=black)))
     fig.add_vrect(x0="I Sem. 2010",x1="II Sem. 2015",fillcolor="gray", opacity=0.25, line_width=0)
     fig.add_vline(x="II Sem. 2007",line_width=1,col=black)
     fig.add_vline(x="II Sem. 2015",line_width=1,col=black)
-    fig.add_trace(go.Scatter(x=data.index[20:31],y=data["Pobreza"][20:31],name="Pobreza",line=dict(width=2.5,dash="dash"),marker_color="indigo",showlegend=False,legendgroup="Pobreza",mode="lines"))
-    fig.add_trace(go.Scatter(x=data.index,y=data["Indigencia"][20:31],name="Indigencia",line=dict(width=2.5,dash="dash"),showlegend=False,legendgroup="Indigencia",marker_color="#665A48",mode="lines"))
+    fig.add_trace(go.Scatter(x=data.index[18:30],y=data["Pobreza"][18:30],name="Pobreza",line=dict(width=2.5,dash="dash"),marker_color="indigo",showlegend=False,legendgroup="Pobreza",mode="lines"))
+    fig.add_trace(go.Scatter(x=data.index[18:30],y=data["Indigencia"][18:30],name="Indigencia",line=dict(width=2.5,dash="dash"),showlegend=False,legendgroup="Indigencia",marker_color="#665A48",mode="lines"))
 
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode='stack',bargap=0,height=450,legend=dict(
                                         orientation="h",
@@ -190,7 +191,7 @@ def make_pobreza_web():
     with c2.container(border=True):
         c21,c22=st.columns(2)
         c21.subheader('Indice de Salarios Reales')
-        c22.slider('Datos desde:',min_value=2016,max_value=2024,key='start_IS')
+        c22.slider('Datos desde:',min_value=2016,max_value=2024,key='start_IS',value=2020)
         indicesalarios=indicesalarios.loc[f"{S.start_IS}":]
         plot_salarios(indicesalarios)
         st.caption('Índice realizado en base al índice de salarios publicado por el INDEC y el IPC Nacional, tomando de base Octubre del 2016.')
@@ -203,8 +204,8 @@ def make_pobreza_web():
         st.radio('Datos-Ingresos',options=['Pesos Corrientes','Moneda Constante','Dólares'],horizontal=True,key='metrica_ingresos')
 
         if S.metrica_ingresos=='Pesos Corrientes':
-            plot_pobreza_indigencia[["Canasta Basica","Linea Indigencia","Linea Pobreza","SalMVM","Haber Jub"]]
+            plot_pobreza_indigencia(salarios[["Canasta Basica","Linea Indigencia","Linea Pobreza","SalMVM","Haber Jub"]])
         elif S.metrica_ingresos=='Moneda Constante':
-            plot_pobreza_indigencia[["Canasta Basica-real","Linea Indigencia-real","Linea Pobreza-real","SalMVM-real","Haber Jub-real"]]
+            plot_pobreza_indigencia(salarios[["Canasta Basica-real","Linea Indigencia-real","Linea Pobreza-real","SalMVM-real","Haber Jub-real"]])
         else:
-            plot_pobreza_indigencia[["Canasta Basica-USD","Linea Indigencia-USD","Linea Pobreza-USD","SalMVM-USD","Haber Jub-USD"]]
+            plot_pobreza_indigencia(salarios[["Canasta Basica-USD","Linea Indigencia-USD","Linea Pobreza-USD","SalMVM-USD","Haber Jub-USD"]])
