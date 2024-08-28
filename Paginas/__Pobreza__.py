@@ -120,8 +120,8 @@ def plot_pobreza_indigencia(data):
     fig.add_trace(go.Scatter(x=data.index,y=np.full(len(data.index), np.nan),showlegend=False,name="",line=dict(width=0)))
     fig.add_trace(go.Scatter(x=data.index[29:],y=data["Pobreza"][29:]*100,name="Pobreza",line=dict(width=2.5),marker_color="indigo",legendgroup="Pobreza",showlegend=False,fillcolor="#BEADFA",fill="tozeroy",mode="lines"))
     fig.add_trace(go.Scatter(x=data.index[29:],y=data["Indigencia"][29:]*100,name="Indigencia",line=dict(width=2.5),fill="tozeroy",legendgroup="Indigencia",showlegend=False,marker_color="#665A48",fillcolor="#D0B8A8",mode="lines"))
-    fig.add_trace(go.Scatter(x=data.index[:19],y=data["Pobreza"][:19]*100,name="Pobreza",line=dict(width=2.5),marker_color="indigo",legendgroup="Pobreza",fillcolor="#BEADFA",fill="tozeroy",mode="lines"))
-    fig.add_trace(go.Scatter(x=data.index[:19],y=data["Indigencia"][:19]*100,name="Indigencia",line=dict(width=2.5),fill="tozeroy",legendgroup="Indigencia",marker_color="#665A48",fillcolor="#D0B8A8",mode="lines"))
+    fig.add_trace(go.Scatter(x=data.index[:20],y=data["Pobreza"][:20]*100,name="Pobreza",line=dict(width=2.5),marker_color="indigo",legendgroup="Pobreza",fillcolor="#BEADFA",fill="tozeroy",mode="lines"))
+    fig.add_trace(go.Scatter(x=data.index[:20],y=data["Indigencia"][:20]*100,name="Indigencia",line=dict(width=2.5),fill="tozeroy",legendgroup="Indigencia",marker_color="#665A48",fillcolor="#D0B8A8",mode="lines"))
     fig.add_vrect(x0="II Sem. 2007",x1="II Sem. 2015", opacity=1, line_width=0,label=dict(text="Intervención del INDEC",textposition="top center",font=dict(size=18, color=black)))
     fig.add_vrect(x0="I Sem. 2010",x1="II Sem. 2015",fillcolor="gray", opacity=0.25, line_width=0)
     fig.add_vline(x="II Sem. 2007",line_width=1,col=black)
@@ -147,13 +147,18 @@ def plot_pobreza_indigencia(data):
 def plot_ingresos(data:pd.DataFrame):
     data.columns=["Canasta Basica","Linea Indigencia","Linea Pobreza","SalMVM","Haber Jub"]
     fig=go.Figure()
+    fig.add_trace(go.Scatter(x=data.index,y=data["SalMVM"],name="",showlegend=False,line=dict(width=0),marker_color=navy))
+    if 2007<= S.start_pobreza <=2016:
+        fig.add_vrect(x0=f"{S.start_pobreza}-01",x1=f"2016-04",fillcolor=black, opacity=1, line_width=0,label=dict(textposition="top center",font=dict(size=14, color='black')))
+    elif 2007< S.start_pobreza:
+        fig.add_vrect(x0=f"2007-01",x1=f"2016-04",fillcolor=black, opacity=1, line_width=0,label=dict(textposition="top center",font=dict(size=14, color='black')))
     fig.add_trace(go.Scatter(x=data.index,y=data["Linea Indigencia"],name="Línea de indigencia",fill="tozeroy",fillcolor="#F38BA0",line=dict(width=2),mode="none"))
     fig.add_trace(go.Scatter(x=data.index,y=data["Linea Pobreza"],name="Línea de Pobreza",fill="tozeroy",line=dict(width=2),mode="none"))
     fig.add_trace(go.Scatter(x=data.index,y=data["Canasta Basica"],name="Canasta Básica",fill="tozeroy",fillcolor="#B2B8A3",line=dict(width=2),mode="none"))
     fig.add_trace(go.Scatter(x=data.index,y=data["SalMVM"],name="Salario Mín. Vit. y Mov.",line=dict(width=3),marker_color=navy))
     fig.add_trace(go.Scatter(x=data.index,y=data["Haber Jub"],name="Haber Jubilatorio Mínimo",line=dict(width=3),marker_color="#632626"))
 
-    ult=data.index[-1]
+    ult=S.IPC.index[-1]
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode='stack',bargap=0,height=450,legend=dict(
                                         orientation="h",
                                         yanchor="bottom",
@@ -165,8 +170,7 @@ def plot_ingresos(data:pd.DataFrame):
                                 ),
                                     yaxis=dict(showgrid=False, zeroline=True, showline=True),
                                     )
-    if 2007<= S.start_pobreza <=2016:
-        fig.add_vrect(x0=f"{S.start_pobreza}-01",x1=f"2016-04",fillcolor=black, opacity=1, line_width=0,label=dict(textposition="top center",font=dict(size=14, color='black')))
+
     if S.metrica_ingresos=='Pesos Corrientes':
         fig['layout']['yaxis']['title']='ARS'
         fig['layout']['yaxis']['type']='log'
