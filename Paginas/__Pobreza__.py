@@ -122,8 +122,6 @@ def plot_pobreza_indigencia(data):
     fig.add_trace(go.Scatter(x=data.loc['I Sem. 2010':'II Sem. 2015'].index,y=data.loc['I Sem. 2010':'II Sem. 2015']["Pobreza"]*100,name="Pobreza",line=dict(width=2.5,dash="dash"),marker_color="indigo",showlegend=False,legendgroup="Pobreza",mode="lines"))
     fig.add_trace(go.Scatter(x=data.loc['I Sem. 2010':'II Sem. 2015'].index,y=data.loc['I Sem. 2010':'II Sem. 2015']["Indigencia"]*100,name="Indigencia",line=dict(width=2.5,dash="dash"),showlegend=False,legendgroup="Indigencia",marker_color="#665A48",mode="lines"))
     
-    fig.add_trace(go.Scatter(x=data.loc['II Sem. 2007':'I Sem. 2010'].index,y=data.loc['II Sem. 2007':'I Sem. 2010']["Pobreza"],name=" ",line=dict(width=0,dash="dash"),marker_color="indigo",showlegend=False,legendgroup="Pobreza",mode="lines"))
-    fig.add_trace(go.Scatter(x=data.loc['II Sem. 2007':'I Sem. 2010'].index,y=data.loc['II Sem. 2007':'I Sem. 2010']["Indigencia"],name=" ",line=dict(width=0,dash="dash"),showlegend=False,legendgroup="Indigencia",marker_color="#665A48",mode="lines"))
 
     
     fig.add_trace(go.Scatter(x=data.loc[:'I Sem. 2008'].index,y=data.loc[:'I Sem. 2008']["Pobreza"]*100,name="Pobreza",line=dict(width=2.5),marker_color="indigo",legendgroup="Pobreza",fillcolor="#BEADFA",fill="tozeroy",mode="lines"))
