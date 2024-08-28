@@ -156,8 +156,8 @@ def plot_pobreza_indigencia(data):
 
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode='stack',bargap=0,height=450,
                       xaxis_title="Semestre", xaxis=dict(tickmode='array',
-                                                tickvals=data.index,
-                                                ticktext=data.index
+                                                tickvals=data['formatted_index'],
+                                                ticktext=data['formatted_index']
                                                          ),
                       legend=dict(orientation="h",
                                         yanchor="bottom",
