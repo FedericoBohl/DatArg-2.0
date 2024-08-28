@@ -123,8 +123,8 @@ def plot_pobreza_indigencia(data):
     fig.add_trace(go.Scatter(
         x=[data['year'], data['semester']],y=np.full(len(data), np.nan), showlegend=False, name="", line=dict(width=0)))
     fig.add_trace(go.Scatter(
-        x=[data.loc[:'II Sem. 2007']['year'], data.loc[:'II Sem. 2007']['semester']],
-        y=data.loc[:'II Sem. 2007']["Pobreza"]*100,
+        x=[data.loc[:'I Sem. 2007']['year'], data.loc[:'I Sem. 2007']['semester']],
+        y=data.loc[:'I Sem. 2007']["Pobreza"]*100,
         name="Pobreza",
         line=dict(width=2.5),
         fill="tozeroy",
@@ -136,8 +136,8 @@ def plot_pobreza_indigencia(data):
     ))
 
     fig.add_trace(go.Scatter(
-        x=[data.loc[:'II Sem. 2007']['year'], data.loc[:'II Sem. 2007']['semester']],
-        y=data.loc[:'II Sem. 2007']["Indigencia"]*100,
+        x=[data.loc[:'I Sem. 2007']['year'], data.loc[:'I Sem. 2007']['semester']],
+        y=data.loc[:'I Sem. 2007']["Indigencia"]*100,
         name="Indigencia",
         line=dict(width=2.5),
         fill="tozeroy",
@@ -149,8 +149,8 @@ def plot_pobreza_indigencia(data):
     ))
     
     fig.add_trace(go.Scatter(
-        x=[data.loc['II Sem. 2007':'I Sem. 2010']['year'], data.loc['II Sem. 2007':'I Sem. 2010']['semester']],
-        y=data.loc['II Sem. 2007':'I Sem. 2010']["Pobreza"]*100,
+        x=[data.loc['I Sem. 2007':'I Sem. 2010']['year'], data.loc['I Sem. 2007':'I Sem. 2010']['semester']],
+        y=data.loc['I Sem. 2007':'I Sem. 2010']["Pobreza"]*100,
         name="Pobreza",
         line=dict(width=2.5),
         fill="tozeroy",
@@ -162,8 +162,8 @@ def plot_pobreza_indigencia(data):
     ))
 
     fig.add_trace(go.Scatter(
-        x=[data.loc['II Sem. 2007':'I Sem. 2010']['year'], data.loc['II Sem. 2007':'I Sem. 2010']['semester']],
-        y=data.loc['II Sem. 2007':'I Sem. 2010']["Indigencia"]*100,
+        x=[data.loc['I Sem. 2007':'I Sem. 2010']['year'], data.loc['I Sem. 2007':'I Sem. 2010']['semester']],
+        y=data.loc['I Sem. 2007':'I Sem. 2010']["Indigencia"]*100,
         name="Indigencia",
         line=dict(width=2.5),
         fill="tozeroy",
