@@ -2,7 +2,7 @@ from _globals_ import w_barra_stocks
 import streamlit as st
 from streamlit import session_state as S
 import pandas as pd
-import streamlit.components.v1 as components
+import streamlit.components.v1 as components,html
 from datetime import datetime
 import pytz
 import requests
@@ -39,6 +39,48 @@ def load_lottieurl(url: str):
     if r.status_code != 200:
         return None
     return r.json()
+
+def make_info():
+    ...
+
+def button(
+    username: str,
+    floating: bool = True,
+    text: str = "Buy me a coffee",
+    emoji: str = "",
+    bg_color: str = "#FFDD00",
+    font_color: str = "#000000",
+    coffee_color: str = "#000000",
+    width: int = 220,
+    ):
+    button = f"""
+        <script type="text/javascript"
+            src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
+            data-name="bmc-button"
+            data-slug="{username}"
+            data-color="{bg_color}"
+            data-emoji="{emoji}"
+            data-text="{text}"
+            data-outline-color="#000000"
+            data-font-color="{font_color}"
+            data-coffee-color="{coffee_color}" >
+        </script>
+    """
+
+    html(button, height=70, width=width)
+    if floating:
+        st.markdown(
+            f"""
+            <style>
+                iframe[width="{width}"] {{
+                    position: fixed;
+                    bottom: 60px;
+                    right: 40px;
+                }}
+            </style>
+            """,
+            unsafe_allow_html=True,
+        )
 
 def load_ALL(today):
     S.pbi_men=get_pbi()
@@ -87,8 +129,10 @@ with col2:
 
 t_info, t_actividad, t_PI, t_precios, t_bcra, t_SecExt, t_SecPub, t_Intl, t_Merv= st.tabs(["Info","Actividad","Pobreza y Empleo", "Precios", "BCRA", "Sector Externo","Sector Público","Internacional","Bolsa Argentina"])
 
-
-
+with t_info:
+    button(username="fake-username", floating=False, width=221)
+    button(username="fake-username", floating=False)
+    button(username="fake-username", width=221)
 with t_actividad:
     make_actividad_web()
 with t_PI:
