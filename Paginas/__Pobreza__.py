@@ -131,18 +131,33 @@ def plot_pobreza_indigencia(data):
     fig.add_vline(x="II Sem. 2007",line_width=1,col=black)
     fig.add_vline(x="II Sem. 2015",line_width=1,col=black)
 
-    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode='stack',bargap=0,height=450,
-                      xaxis_title="Semestre",
-                      legend=dict(orientation="h",
-                                        yanchor="bottom",
-                                        y=1.05,
-                                        xanchor="right",
-                                        x=1,
-                                    bordercolor=black,
-                                    borderwidth=2
-                                ),
-                                yaxis=dict(title="% de la población",showgrid=True, zeroline=True, showline=True),
-                                )
+    tickvals = data.index
+    ticktext = [f"{s.split()[0]}\n{s.split()[2]}" for s in data.index]
+
+    # Actualizar el diseño del gráfico
+    fig.update_layout(
+        hovermode="x unified",
+        margin=dict(l=1, r=1, t=75, b=1),
+        barmode='stack',
+        bargap=0,
+        height=450,
+        xaxis_title="Semestre",
+        xaxis=dict(
+            tickmode='array',
+            tickvals=tickvals,
+            ticktext=ticktext,
+            tickangle=0  # Para asegurar que las etiquetas se vean correctamente
+        ),
+        yaxis=dict(title="% de la población", showgrid=True, zeroline=True, showline=True),
+        legend=dict(orientation="h",
+                    yanchor="bottom",
+                    y=1.05,
+                    xanchor="right",
+                    x=1,
+                    bordercolor="black",
+                    borderwidth=2
+                    ),
+    )
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
     st.caption("Entre 2010 y 2015 los datos son estimaciones realizadas por el :blue[**ODSA**]. Al ser estimaciones anuales, el dato se repite para ambos semestres de cada año.")
 
