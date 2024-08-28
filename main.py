@@ -123,21 +123,6 @@ with t_Merv:
     make_merv_web()
 
 with st.container():
-    # Aplicar estilos al container
-    st.markdown(
-        """
-        <style>
-        .container {
-            background-color: black;
-            padding: 20px;
-            border-radius: 10px;
-            color: white;
-        }
-        </style>
-        """, 
-        unsafe_allow_html=True
-    )
-
     # Incrustar contenido en el container
     cafecito = '''
     <div style="display: flex; justify-content: center; margin-bottom: 20px;">
