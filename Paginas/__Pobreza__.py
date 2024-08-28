@@ -232,7 +232,7 @@ def plot_pobreza_indigencia(data):
     # Actualizar el diseño del gráfico
     fig.update_layout(
         hovermode="x unified",
-        margin=dict(l=1, r=1, t=75, b=1),
+        margin=dict(l=1, r=1, t=75, b=75),
         barmode='stack',
         bargap=0,
         height=500,
