@@ -49,6 +49,7 @@ def cafecito(
     text: str = "Buy me a coffee",
     emoji: str = "",
     bg_color: str = "#FFDD00",
+    font = "Cookie",
     font_color: str = "#000000",
     coffee_color: str = "#000000",
     width: int = 220,
@@ -60,6 +61,7 @@ def cafecito(
             data-slug="{username}"
             data-color="{bg_color}"
             data-emoji="{emoji}"
+            data-font="{font}"
             data-text="{text}"
             data-outline-color="#000000"
             data-font-color="{font_color}"
