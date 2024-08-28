@@ -265,7 +265,7 @@ def plot_ingresos(data:pd.DataFrame):
         fig.add_vrect(x0=f"2007-01",x1=f"2015-12",fillcolor='lightslategrey', opacity=0.25, line_width=0,label=dict(textposition="top center",font=dict(size=14, color='black')))
         fig.add_vline(x='2007-01', line_width=1, line_color="black")
         fig.add_vline(x='2015-12', line_width=1, line_color="black")
-        fig.add_vrect(x0=f"2007-01",x1=f"2015-12", opacity=1, line_width=0,label=dict(text="Intervención del INDEC\nFalta de datos", textposition="top center", font=dict(size=18, color="black")))
+        fig.add_vrect(x0=f"2007-01",x1=f"2015-12", opacity=1, line_width=0,label=dict(text="Intervención del INDEC<br>Falta de datos", textposition="top center", font=dict(size=18, color="black")))
     fig.add_trace(go.Scatter(x=data.index,y=data["Linea Indigencia"],name="Línea de indigencia",marker_color='#219C90',line=dict(width=2)))
     fig.add_trace(go.Scatter(x=data.index,y=data["Linea Pobreza"],name="Línea de Pobreza",marker_color='#FFF455',line=dict(width=2)))
     fig.add_trace(go.Scatter(x=data.index,y=data["Canasta Basica"],name="Canasta Básica",marker_color='#FFC700',line=dict(width=2)))
