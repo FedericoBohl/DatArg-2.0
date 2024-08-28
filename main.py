@@ -133,36 +133,23 @@ with st.container():
             color: white;
             border-radius: 10px;
         }
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
         </style>
-        <div class="footer-container">
-            <div class="footer-content">
-                <a href='https://cafecito.app/datarg' rel='noopener' target='_blank'>
-                    <img srcset='https://cdn.cafecito.app/imgs/buttons/button_6.png 1x, 
-                                 https://cdn.cafecito.app/imgs/buttons/button_6_2x.png 2x, 
-                                 https://cdn.cafecito.app/imgs/buttons/button_6_3.75x.png 3.75x' 
-                         src='https://cdn.cafecito.app/imgs/buttons/button_6.png' 
-                         alt='Invitame un café en cafecito.app' />
-                </a>
-                <div>
-                    <p style="color:white;">Déjanos tus sugerencias o comentarios:</p>
                     """, unsafe_allow_html=True)
 
-    # Crear el campo de texto para sugerencias y comentarios dentro del container
-    suggestion = st.text_input(label="", placeholder="Escribe aquí tus sugerencias o comentarios...")
+    cafecito = '''
+    <div style="display: flex; justify-content: center;">
+        <a href='https://cafecito.app/datarg' rel='noopener' target='_blank'>
+            <img srcset='https://cdn.cafecito.app/imgs/buttons/button_6.png 1x, 
+                        https://cdn.cafecito.app/imgs/buttons/button_6_2x.png 2x, 
+                        https://cdn.cafecito.app/imgs/buttons/button_6_3.75x.png 3.75x' 
+                src='https://cdn.cafecito.app/imgs/buttons/button_6.png' 
+                alt='Invitame un café en cafecito.app' />
+        </a>
+    </div>
+    '''
 
-    # Cerrar el div del footer
-    st.markdown(
-        """
-                </div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-# Opcional: agregar lógica para manejar las sugerencias
-if suggestion:
-    st.write(f"Gracias por tus sugerencias: {suggestion}")
+    st.markdown(cafecito, unsafe_allow_html=True)
+    suggestion = st.text_input(label="Déjanos tus sugerencias o comentarios:", placeholder="Escribe aquí tus sugerencias o comentarios...")
+    # Opcional: agregar lógica para manejar las sugerencias
+    if suggestion:
+        st.write(f"Gracias por tus sugerencias: {suggestion}")
