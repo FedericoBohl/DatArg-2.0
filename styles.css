@@ -184,3 +184,10 @@ div[role="radiogroup"] {
 .viewerBadge_container__r5tak{
    visibility: collapse;
 }
+
+div[class="st-emotion-cache-0 e1f1d6gn0"]{
+   background-color: black;
+   padding: 20px;
+   border-radius: 10px;
+   color: white;
+}
