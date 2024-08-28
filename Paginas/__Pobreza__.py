@@ -119,8 +119,8 @@ def plot_salarios(data):
 def plot_pobreza_indigencia(data):
     fig=go.Figure()
     fig.add_trace(go.Scatter(
-        x=[data.loc[:'I Sem. 2008']['year'], data.loc[:'I Sem. 2008']['semester']],
-        y=data.loc[:'I Sem. 2008']["Pobreza"]*100,
+        x=[data.loc[:'II Sem. 2007']['year'], data.loc[:'II Sem. 2007']['semester']],
+        y=data.loc[:'II Sem. 2007']["Pobreza"]*100,
         name="Pobreza",
         line=dict(width=2.5),
         fill="tozeroy",
@@ -132,8 +132,8 @@ def plot_pobreza_indigencia(data):
     ))
 
     fig.add_trace(go.Scatter(
-        x=[data.loc[:'I Sem. 2008']['year'], data.loc[:'I Sem. 2008']['semester']],
-        y=data.loc[:'I Sem. 2008']["Indigencia"]*100,
+        x=[data.loc[:'II Sem. 2007']['year'], data.loc[:'II Sem. 2007']['semester']],
+        y=data.loc[:'II Sem. 2007']["Indigencia"]*100,
         name="Indigencia",
         line=dict(width=2.5),
         fill="tozeroy",
@@ -197,7 +197,7 @@ def plot_pobreza_indigencia(data):
     # Agregar los rectángulos y líneas verticales
     fig.add_vrect(x0=[2007,'I'], x1=[2015,'II'], opacity=1, line_width=0,
                 label=dict(text="Intervención del INDEC", textposition="top center", font=dict(size=18, color="black")))
-    fig.add_vrect(x0="I Sem. 2010", x1="II Sem. 2015", fillcolor="gray", opacity=0.25, line_width=0)
+    fig.add_vrect(x0=[2010,'I'], x1=[2015,'II'], fillcolor="gray", opacity=0.25, line_width=0)
     fig.add_vline(x=[2007,'I'], line_width=1, line_color="black")
     fig.add_vline(x=[2015,'II'], line_width=1, line_color="black")
 
