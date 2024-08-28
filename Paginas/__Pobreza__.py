@@ -261,11 +261,11 @@ def plot_ingresos(data:pd.DataFrame):
         fig.add_vrect(x0=f"{S.start_pobreza}-01",x1=f"2016-04",fillcolor='lightslategrey', opacity=0.25, line_width=0,label=dict(textposition="top center",font=dict(size=14, color='black')))
     elif 2007> S.start_pobreza:
         fig.add_vrect(x0=f"2007-01",x1=f"2016-04",fillcolor='lightslategrey', opacity=0.25, line_width=0,label=dict(textposition="top center",font=dict(size=14, color='black')))
-    fig.add_trace(go.Scatter(x=data.index,y=data["Linea Indigencia"],name="Línea de indigencia",line=dict(width=2)))
-    fig.add_trace(go.Scatter(x=data.index,y=data["Linea Pobreza"],name="Línea de Pobreza",line=dict(width=2)))
-    fig.add_trace(go.Scatter(x=data.index,y=data["Canasta Basica"],name="Canasta Básica",line=dict(width=2)))
-    fig.add_trace(go.Scatter(x=data.index,y=data["SalMVM"],name="Salario Mín. Vit. y Mov.",line=dict(width=3),marker_color=navy))
-    fig.add_trace(go.Scatter(x=data.index,y=data["Haber Jub"],name="Haber Jubilatorio Mínimo",line=dict(width=3),marker_color="#632626"))
+    fig.add_trace(go.Scatter(x=data.index,y=data["Linea Indigencia"],name="Línea de indigencia",marker_color='#219C90',line=dict(width=2)))
+    fig.add_trace(go.Scatter(x=data.index,y=data["Linea Pobreza"],name="Línea de Pobreza",marker_color='#FFF455',line=dict(width=2)))
+    fig.add_trace(go.Scatter(x=data.index,y=data["Canasta Basica"],name="Canasta Básica",marker_color='#FFC700',line=dict(width=2)))
+    fig.add_trace(go.Scatter(x=data.index,y=data["SalMVM"],name="Salario Mín. Vit. y Mov.",marker_color='#EE4E4E',line=dict(width=3),marker_color='#365E32'))
+    fig.add_trace(go.Scatter(x=data.index,y=data["Haber Jub"],name="Haber Jubilatorio Mínimo",line=dict(width=3),marker_color="#83B4FF"))
 
     ult=S.IPC.index[-1]
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),barmode='stack',bargap=0,height=450,legend=dict(
