@@ -122,37 +122,46 @@ with t_Intl:
 with t_Merv:
     make_merv_web()
 
-# Crear el rectángulo negro al final de la página
-footer = '''
-<div style="
-    background-color: black;
-    padding: 20px;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-">
-    <a href='https://cafecito.app/datarg' rel='noopener' target='_blank'>
-        <img srcset='https://cdn.cafecito.app/imgs/buttons/button_6.png 1x, 
-                     https://cdn.cafecito.app/imgs/buttons/button_6_2x.png 2x, 
-                     https://cdn.cafecito.app/imgs/buttons/button_6_3.75x.png 3.75x' 
-             src='https://cdn.cafecito.app/imgs/buttons/button_6.png' 
-             alt='Invitame un café en cafecito.app' />
-    </a>
-    <br/>
-    <p style="color:white;">Déjanos tus sugerencias o comentarios:</p>
-</div>
-'''
+with st.container():
+    st.markdown(
+        """
+        <style>
+        .footer-container {
+            background-color: black;
+            padding: 20px;
+            margin-top: 50px;
+            color: white;
+            border-radius: 10px;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        </style>
+        <div class="footer-container">
+            <div class="footer-content">
+                <a href='https://cafecito.app/datarg' rel='noopener' target='_blank'>
+                    <img srcset='https://cdn.cafecito.app/imgs/buttons/button_6.png 1x, 
+                                 https://cdn.cafecito.app/imgs/buttons/button_6_2x.png 2x, 
+                                 https://cdn.cafecito.app/imgs/buttons/button_6_3.75x.png 3.75x' 
+                         src='https://cdn.cafecito.app/imgs/buttons/button_6.png' 
+                         alt='Invitame un café en cafecito.app' />
+                </a>
+                <div>
+                    <p style="color:white;">Déjanos tus sugerencias o comentarios:</p>
+                    """, unsafe_allow_html=True)
 
-# Mostrar el HTML del footer
-st.markdown(footer, unsafe_allow_html=True)
+    # Crear el campo de texto para sugerencias y comentarios dentro del container
+    suggestion = st.text_input(label="", placeholder="Escribe aquí tus sugerencias o comentarios...")
 
-# Crear el campo de texto para sugerencias y comentarios
-suggestion = st.text_input(label="", placeholder="Escribe aquí tus sugerencias o comentarios...")
+    # Cerrar el div del footer
+    st.markdown(
+        """
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
 # Opcional: agregar lógica para manejar las sugerencias
 if suggestion:
