@@ -153,3 +153,4 @@ with st.container():
     # Opcional: agregar lógica para manejar las sugerencias
     if suggestion:
         st.write(f"Gracias por tus sugerencias: {suggestion}")
+    st.empty()
