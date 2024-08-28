@@ -118,6 +118,8 @@ def plot_salarios(data):
 @st.cache_resource(show_spinner=False)
 def plot_pobreza_indigencia(data):
     fig=go.Figure()
+    st.write([data['year'], data['semester']])
+    st.write(np.full(len(data)))
     fig.add_trace(go.Scatter(
         x=[data['year'], data['semester']],y=np.full(len(data), np.nan), showlegend=False, name="", line=dict(width=0)))
     fig.add_trace(go.Scatter(
