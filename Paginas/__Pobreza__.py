@@ -184,7 +184,7 @@ def make_pobreza_web():
     c2.link_button(":blue[**Descargar datos:\nEmpleo y Pobreza**]",url="https://1drv.ms/x/c/56f917c917f2e2f5/EfXi8hfJF_kggFZ2FQAAAAAB010QqFpwX5jKQsspWhva-A?e=Lsp49b",use_container_width=True)
     salarios=salarios.loc[f"{S.start_pobreza}":]
     empleo=empleo.loc[f"{S.start_pobreza}":]
-    c1,c2=st.columns(2)
+    c1,c2=st.columns(2) 
     with c1.container(border=True):
         st.subheader('Actividad, empleo y desempleo')
         plot_empleo(empleo)
