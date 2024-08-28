@@ -8,7 +8,7 @@ import pytz
 import requests
 import time
 from streamlit_lottie import st_lottie_spinner
-#from st_social_media_links import SocialMediaIcons
+from st_social_media_links import SocialMediaIcons
 from Paginas.__BCRA__ import make_BCRA_web,load_bcra
 from Paginas.__SectorExterno__ import make_sect_ext_web,load_sect_ext
 from Paginas.__SectorPublico__ import make_sect_pub_web,load_data_map,load_data_sectpub,load_datos_deuda
@@ -64,14 +64,22 @@ def make_info():
             with c2:
                 st.subheader("Federico Bohl")
                 st.write("**Rol:** Creador y desarrollador")
-                st.write("[LinkedIn](URL_LINKEDIN_DESARROLLADOR1) | [Twitter](URL_TWITTER_DESARROLLADOR1)")
+                social_media_links = [
+                        "https://www.linkedin.com/in/federico-bohl/",
+                        "https://x.com/BohlFede"
+                        ]
+                SocialMediaIcons(social_media_links).render(sidebar=False, justify_content="center")
         with st.container(border=True):
             c1,c2=st.columns((0.2,0.8)) 
-            with c1:st.image("fede.jpeg")
+            with c1:st.image("valen.jpeg")
             with c2:
                 st.subheader("Valentín Vedda")
                 st.write("**Rol:** Calendario económico y bot de Telegram")
-                st.write("[LinkedIn](URL_LINKEDIN_DESARROLLADOR1) | [Twitter](URL_TWITTER_DESARROLLADOR1)")
+                social_media_links = [
+                        "https://www.linkedin.com/in/valentin-vedda-35024720a/",
+                        "https://github.com/valenvedda"
+                        ]
+                SocialMediaIcons(social_media_links).render(sidebar=False, justify_content="center")
 
 
 
