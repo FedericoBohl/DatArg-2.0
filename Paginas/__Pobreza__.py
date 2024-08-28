@@ -302,6 +302,9 @@ def make_pobreza_web():
     with c1.container(border=True):
         c11,c12,c13,c14=st.columns(4)
         c11.metric('Salarios',f'{indicesalarios['IS Real-Total'][-1]:.2f}',delta=f'{100*(indicesalarios['IS Real-Total'][-1]/indicesalarios['IS Real-Total'][-2]-1):.2f}%')
+        c12.metric('Desempleo',f'{empleo['desempleo'][-1]:.2f}',f'{100(empleo['desempleo'][-1]-empleo['desempleo'][-2]):.2f} PP')
+        c13.metric('Pobreza',f'{S.pobind['Pobreza'][-1]:.2f}',f'{100*(S.pobind['Pobreza'][-1]-S.pobind['Pobreza'][-2]):.2f} PP')
+        c14.metric('Indigencia',f'{S.pobind['Indigencia'][-1]:.2f}',f'{100*(S.pobind['Indigencia'][-1]-S.pobind['Indigencia'][-2]):.2f} PP')
     with c1.container(border=True):
         st.subheader('Actividad, empleo y desempleo')
         plot_empleo(empleo)
