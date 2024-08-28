@@ -195,7 +195,7 @@ def plot_pobreza_indigencia(data):
     ))
 
     # Agregar los rectángulos y líneas verticales
-    fig.add_vrect(x0="II Sem. 2007", x1="II Sem. 2015", opacity=1, line_width=0,
+    fig.add_vrect(x0=[2007,'I'], x1=[2015,'II'], opacity=1, line_width=0,
                 label=dict(text="Intervención del INDEC", textposition="top center", font=dict(size=18, color="black")))
     fig.add_vrect(x0="I Sem. 2010", x1="II Sem. 2015", fillcolor="gray", opacity=0.25, line_width=0)
     fig.add_vline(x="II Sem. 2007", line_width=1, line_color="black")
@@ -250,7 +250,6 @@ def plot_ingresos(data:pd.DataFrame):
                                 ),
                                     yaxis=dict(showgrid=False, zeroline=True, showline=True),
                                     )
-
     if S.metrica_ingresos=='Pesos Corrientes':
         fig['layout']['yaxis']['title']='ARS'
         fig['layout']['yaxis']['type']='log'
