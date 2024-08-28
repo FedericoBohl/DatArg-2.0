@@ -7,7 +7,7 @@ from plotly.subplots import make_subplots
 import pandas as pd
 import numpy as np
 
-st.cache_resource(show_spinner=False)
+#st.cache_resource(show_spinner=False)
 def load_pobreza(end):
     his_data=pd.read_csv("His Data/his-salarios.csv",delimiter=";")
     his_data['Unnamed: 0'] = pd.to_datetime(his_data.iloc[:, 0].values, format='%d/%m/%Y')
