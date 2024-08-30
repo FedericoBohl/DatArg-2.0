@@ -74,7 +74,7 @@ def plot_inflacion(data,rem,start,end):
                 prod=1
                 ind_t=rem.index[i]
                 inf_M=data.loc[pd.Timestamp(ind_t.year-1, ind_t.month, 1):,'IPC-InfM']
-                for inf in inf_M[1:]['UPC-InfM']:
+                for inf in inf_M[1:]['IPC-InfM']:
                     prod*=(1+inf)
                 for t in rem.iloc[0:i]['REM']:
                     prod*=t
