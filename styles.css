@@ -191,3 +191,7 @@ div[data-testid="stVerticalBlock"]> div.element-container > div.stMarkdown > div
    border-radius: 10px;
    color: white;
 }
+
+button[data-testid="manage-app-button"]{
+   visibility:hidden
+}
