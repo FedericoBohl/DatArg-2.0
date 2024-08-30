@@ -69,6 +69,7 @@ def plot_inflacion(data,rem,start,end):
         #Para la inflA esperada debo agarrar el produco de las últimas 11 inflaciones mensuales y usar el REM si fuera necesario. Por ej. la infIA de diciembre 2023 es el producto de inflaciones desde enero 2022 hasta diciemrbre 2023
         if 1==1:
             rem_IA=[]
+            st.write(rem)
             for i in range(rem.index-1):
                 prod=1
                 ind_t=rem.index[i]
