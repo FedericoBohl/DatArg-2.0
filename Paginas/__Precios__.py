@@ -69,7 +69,6 @@ def plot_inflacion(data,rem,start,end):
         #Para la inflA esperada debo agarrar el produco de las últimas 11 inflaciones mensuales y usar el REM si fuera necesario. Por ej. la infIA de diciembre 2023 es el producto de inflaciones desde enero 2022 hasta diciemrbre 2023
         if 1==1:
             rem_IA=[]
-            st.write(rem)
             for i in range(len(rem.index)-1):
                 prod=1
                 ind_t=rem.index[i]
@@ -78,12 +77,9 @@ def plot_inflacion(data,rem,start,end):
                     prod*=(1+inf)
                 for t in rem.iloc[0:i]['REM']:
                     prod*=(1+t)
-                rem_IA.append(prod-1)
-            rem_IA.append(rem['REM'][-1])
-            fig.add_trace(go.Scatter(x=rem.index,y=rem_IA*100,name='Infl. Esperada-IA',marker_color='crimson',showlegend=False,legendgroup='rem'),secondary_y=False)
-            st.write(rem_IA)
-            st.write(prod)
-            
+                rem_IA.append((prod-1)*100)
+            rem_IA.append(rem['REM'][-1]*100)
+            fig.add_trace(go.Scatter(x=rem.index,y=rem_IA,name='Infl. Esperada-IA',marker_color='crimson',showlegend=False,legendgroup='rem'),secondary_y=False)
     if (start in range (2007,2015)) or (end in range (2007,2015)) or (2007<=end and 2015>=start):
         fig.add_vrect(x0=f"{max(2007,start)}-01", x1=f"{min(2015,end)}-12", 
             fillcolor="lightslategrey", opacity=0.25, line_width=0,label=dict(text="Intervención del INDEC",textposition="top center",font=dict(size=14, color='black')))
