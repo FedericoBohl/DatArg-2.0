@@ -193,5 +193,6 @@ div[data-testid="stVerticalBlock"]> div.element-container > div.stMarkdown > div
 }
 
 button[data-testid="manage-app-button"]{
-   visibility:hidden
+   display: flex;
+   visibility:hidden;
 }
