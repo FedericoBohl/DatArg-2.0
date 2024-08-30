@@ -77,7 +77,7 @@ def plot_inflacion(data,rem,start,end):
                 for inf in inf_M[1:]:
                     prod*=(1+inf)
                 for t in rem.iloc[0:i]['REM']:
-                    prod*=t
+                    prod*=(1+t)
                 rem_IA.append(prod-1)
             rem_IA.append(rem['REM'][-1])
             fig.add_trace(go.Scatter(x=rem.index,y=rem_IA*100,name='Infl. Esperada-IA',marker_color='crimson',showlegend=False,legendgroup='rem'),secondary_y=False)
