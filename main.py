@@ -74,7 +74,7 @@ def make_info():
                 st.write("**Rol:** Calendario económico y bot de Telegram")
                 social_media_links = [
                         "https://www.linkedin.com/in/valentin-vedda-35024720a/",
-                        "https://github.com/valenvedda"
+                        "valenvedda@gmail.com"#"https://github.com/valenvedda"
                         ]
                 SocialMediaIcons(social_media_links).render(sidebar=False, justify_content="left")
 
