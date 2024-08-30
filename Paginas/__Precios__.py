@@ -79,7 +79,7 @@ def plot_inflacion(data,rem,start,end):
                     prod*=t
                 rem_IA.append(prod-1)
             rem_IA.append(rem['REM'][-1])
-            fig.add_trace(go.Scatter(x=rem.index,y=rem_I*100,name='Infl. Esperada-IA',marker_color='crimson',showlegend=False,legendgroup='rem'),secondary_y=False)
+            fig.add_trace(go.Scatter(x=rem.index,y=rem_IA*100,name='Infl. Esperada-IA',marker_color='crimson',showlegend=False,legendgroup='rem'),secondary_y=False)
 
     if (start in range (2007,2015)) or (end in range (2007,2015)) or (2007<=end and 2015>=start):
         fig.add_vrect(x0=f"{max(2007,start)}-01", x1=f"{min(2015,end)}-12", 
