@@ -146,7 +146,7 @@ div[data-testid="stToolbar"]{
    gap: 10px;
 }
 
-.stRadio label {
+.stRadio > [data-baseweb="radio"] label {
    background-color: white;
    padding: 10px 20px;
    border-radius: 10px;
