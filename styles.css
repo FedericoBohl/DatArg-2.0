@@ -145,7 +145,7 @@ div[data-testid="stToolbar"]{
    flex-direction: column;
    gap: 10px;
 }
-
+/*
 .stRadio label {
    background-color: white;
    padding: 10px 20px;
@@ -155,10 +155,8 @@ div[data-testid="stToolbar"]{
    transition: all 0.3s ease;
    color: #2b4f81;
    display: flex;
-   align-items: center;
-   justify-content: center;
 }
-
+*/
 .stRadio label:hover {
    background-color: #dbe9f9;
 }
