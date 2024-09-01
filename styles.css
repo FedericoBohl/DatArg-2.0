@@ -85,7 +85,7 @@ div[data-testid="stToolbar"]{
 }
 
 /*Editar Tabs*/
-div[data-testid="stTabs"]{
+.stTabs[data-testid="stTabs"]{
    display:contents;
    justify-content: center;
 }
