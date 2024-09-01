@@ -130,21 +130,33 @@ div[data-testid="stToolbar"]{
 
 
  /*Editar Radio*/
- .stRadio > div {
+ .stRadio {
+   background-color: #f0f7ff; /* Fondo del contenedor de todo el radio */
+   padding: 20px;
+   border-radius: 15px;
+   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+   border: 1px solid #b3c7e6;
+   width: fit-content;
+   margin: auto;
+}
+
+.stRadio > div {
    display: flex;
-   justify-content: center;
-   gap: 16px;
+   flex-direction: column;
+   gap: 10px;
 }
 
 .stRadio label {
-   background-color: #f0f7ff;
+   background-color: white;
    padding: 10px 20px;
-   border-radius: 15px;
-   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+   border-radius: 10px;
    border: 1px solid #b3c7e6;
    cursor: pointer;
    transition: all 0.3s ease;
    color: #2b4f81;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
 
 .stRadio label:hover {
@@ -158,7 +170,6 @@ div[data-testid="stToolbar"]{
 .stRadio input[type="radio"]:checked + label {
    background-color: #accbeb;
    color: white;
-   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
    border-color: #8baed5;
 }
 
