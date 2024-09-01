@@ -84,63 +84,54 @@ div[data-testid="stToolbar"]{
    visibility: hidden;
 }
 
-/*Editar Tabs*/
+/*Editar Tabs
 div[data-testid="stTabs"]{
    display:contents;
    justify-content: center;
 }
-
+*/
 /* Centro la lista de tabs */
 .stTabs[data-baseweb="tab-list"] {
    display: flex;
-   justify-content: center;
-   border-radius: 5rem;
-   position: relative;
-   cursor: pointer;
-   transition: color 0.15s ease-in;
+   justify-content: space-between;
 }
 
 /* Estilo del borde inferior de las tabs */
-div[data-baseweb="tab"] {
-   border-bottom: 2px solid transparent;
-   padding: 0 10px; /* Añadir algo de padding para que no estén tan pegadas entre sí */
+.stTabs[role="tab"] {
+   padding: 8px 16px;
+   border-radius: 15px;
+   background-color: white;
+   border: 1px solid #ccc;
+   margin-right: 8px;
+   transition: all 0.4s ease;
 }
 
-div[data-baseweb="tab"][aria-selected="true"] {
-   border-bottom: 2px solid #FF4B4B; /* Puedes cambiar el color según tus necesidades */
+.stTabs [role="tab"]:hover {
+   background-color: #f0f0f0;
 }
 
-/* Remuevo el borde del contenedor de las tabs */
-div[data-baseweb="tab-list"]::before {
-   /*content: ''; */
-   display: block;
-   width: 100%;
-   border-bottom: 0; /* Quita el borde inferior del contenedor */
+.stTabs [role="tab"]:focus, .stTabs [aria-selected="true"] {
+   background-color: #ADD8E6;
+   border: 2px solid #ccc;
 }
 
-/* Bordes inferiores personalizados para cada tab */
-div[data-baseweb="tab"]:not([aria-selected="true"]) {
-   border-bottom: 2px solid transparent;
+.stTabs [role="tab"] + [role="tab"] {
+   margin-left: 16px;
 }
 
-/* Estilo del contenedor de las tabs para evitar el borde inferior */
-div[data-baseweb="tabs"] {
-   border-bottom: none;
+.stTabs [role="tabpanel"] {
+   padding-top: 24px;
+   animation: slide 0.4s ease-in-out;
 }
 
-.stTabs [aria-selected="true"] {
-   background-color:#6CACE4 !important;
-   color: white !important;
-   border-radius: 10px !important; /* Ajusta el valor según el nivel de redondeado que desees */
-   padding: 10px !important; /* Ajusta el relleno según sea necesario */
- }
-.stTabs [data-baseweb="tab-highlight"] {
-   visibility: collapse;
+@keyframes slide {
+   from {
+       transform: translateX(100%);
+   }
+   to {
+       transform: translateX(0);
+   }
 }
-.stTabs [data-baseweb="tab-border"]{
-   visibility: collapse;
-}
-
 
  /*Editar Radio*/
 div.row-widget.stRadio > div {
