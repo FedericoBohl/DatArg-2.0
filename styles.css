@@ -89,8 +89,8 @@ div[data-testid="stToolbar"]{
    display: flex;
    justify-content: center;
    border-radius: 15px;
-   background-color:#cfd1f1;
-   border: 3px solid #ccc;
+   background-color: #f0f7ff; /* Un azul pastel muy claro */
+   border: 2px solid #b3c7e6; /* Un borde azul suave */
 }
 
 /* Estilo del borde inferior de las tabs */
@@ -106,11 +106,17 @@ div[data-testid="stToolbar"]{
 }
 
 .stTabs [aria-selected="true"] {
-   background-color:#6CACE4 !important;
+   background-color: #accbeb !important; /* Azul pastel suave para la tab seleccionada */
    color: white !important;
-   border-radius: 10px !important; /* Ajusta el valor según el nivel de redondeado que desees */
-   padding: 10px !important; /* Ajusta el relleno según sea necesario */
- }
+   border-radius: 15px !important;
+   padding: 10px !important;
+   border: 1px solid #8baed5 !important; /* Un borde ligeramente más oscuro pero aún suave */
+}
+
+.stTabs [role="tab"]:hover {
+   background-color: #dbe9f9; /* Un color de fondo suave para cuando se pasa el mouse por encima */
+   color: #2b4f81 !important; /* Azul más oscuro para el texto cuando se hace hover */
+}
 .stTabs [data-baseweb="tab-highlight"] {
    visibility: collapse;
 }
