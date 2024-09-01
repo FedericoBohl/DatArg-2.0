@@ -89,8 +89,8 @@ div[data-testid="stToolbar"]{
    display: flex;
    justify-content: center;
    border-radius: 15px;
-   background-color: white;
-   border: 1px solid #ccc;
+   background-color:#cfd1f1;
+   border: 3px solid #ccc;
 }
 
 /* Estilo del borde inferior de las tabs */
