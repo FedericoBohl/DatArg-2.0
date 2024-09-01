@@ -106,17 +106,7 @@ div[data-testid="stToolbar"]{
    padding: 0 10px; /* Añadir algo de padding para que no estén tan pegadas entre sí */
 }
 
-div[data-baseweb="tab"][aria-selected="true"] {
-   border-bottom: 2px solid #FF4B4B; /* Puedes cambiar el color según tus necesidades */
-}
 
-/* Remuevo el borde del contenedor de las tabs */
-div[data-baseweb="tab-list"]::before {
-   /*content: ''; */
-   display: block;
-   width: 100%;
-   border-bottom: 0; /* Quita el borde inferior del contenedor */
-}
 
 /* Bordes inferiores personalizados para cada tab */
 .stTabs[data-baseweb="tab"]:not([aria-selected="true"]) {
