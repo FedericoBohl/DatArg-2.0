@@ -91,8 +91,8 @@ div[data-testid="stTabs"]{
 }
 
 /* Centro la lista de tabs */
-div[role="tablist"] {
-   display:grid;
+.stTabs[data-baseweb="tab-list"] {
+   display: flex;
    justify-content: center;
    border-radius: 5rem;
    position: relative;
@@ -126,7 +126,6 @@ div[data-baseweb="tab"]:not([aria-selected="true"]) {
 /* Estilo del contenedor de las tabs para evitar el borde inferior */
 div[data-baseweb="tabs"] {
    border-bottom: none;
-   border-radius: 5rem;
 }
 
 .stTabs [aria-selected="true"] {
