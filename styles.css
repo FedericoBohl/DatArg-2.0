@@ -126,6 +126,7 @@ div[data-baseweb="tab"]:not([aria-selected="true"]) {
 /* Estilo del contenedor de las tabs para evitar el borde inferior */
 div[data-baseweb="tabs"] {
    border-bottom: none;
+   border-radius: 5rem;
 }
 
 .stTabs [aria-selected="true"] {
