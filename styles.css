@@ -85,19 +85,9 @@ div[data-testid="stToolbar"]{
 }
 
 /*Editar Tabs*/
-.stTabs[data-testid="stTabs"]{
-   display:contents;
-   justify-content: center;
-}
-
-/* Centro la lista de tabs */
-.stTabs[data-baseweb="tab-list"] {
+.stTabs [role="tablist"] {
    display: flex;
-   justify-content: center;
-   border-radius: 5rem;
-   position: relative;
-   cursor: pointer;
-   transition: color 0.15s ease-in;
+   justify-content: space-between;
 }
 
 /* Estilo del borde inferior de las tabs */
@@ -105,8 +95,6 @@ div[data-testid="stToolbar"]{
    border-bottom: 2px solid transparent;
    padding: 0 10px; /* Añadir algo de padding para que no estén tan pegadas entre sí */
 }
-
-
 
 /* Bordes inferiores personalizados para cada tab */
 .stTabs[data-baseweb="tab"]:not([aria-selected="true"]) {
@@ -125,6 +113,7 @@ div[data-testid="stToolbar"]{
 .stTabs [data-baseweb="tab-border"]{
    visibility: collapse;
 }
+
 
 
  /*Editar Radio*/
