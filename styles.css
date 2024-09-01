@@ -111,11 +111,14 @@ div[data-testid="stToolbar"]{
    border-radius: 15px !important;
    padding: 10px !important;
    border: 1px solid #8baed5 !important; /* Un borde ligeramente más oscuro pero aún suave */
+   
 }
 
 .stTabs [role="tab"]:hover {
    background-color: #dbe9f9; /* Un color de fondo suave para cuando se pasa el mouse por encima */
    color: #2b4f81 !important; /* Azul más oscuro para el texto cuando se hace hover */
+   border-radius: 15px !important;
+   padding: 10px !important;
 }
 .stTabs [data-baseweb="tab-highlight"] {
    visibility: collapse;
@@ -127,38 +130,36 @@ div[data-testid="stToolbar"]{
 
 
  /*Editar Radio*/
-div.row-widget.stRadio > div {
-   flex-direction: row;
-   align-items: stretch;
+ .stRadio > div {
+   display: flex;
+   justify-content: center;
+   gap: 16px;
 }
 
-div[role="radiogroup"] {
-   flex-direction:row;
+.stRadio label {
+   background-color: #f0f7ff;
+   padding: 10px 20px;
+   border-radius: 15px;
+   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+   border: 1px solid #b3c7e6;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   color: #2b4f81;
 }
-input[type="radio"] + div {
-   background: #6CACE4 !important;
-   color: #17455C;
-   border-radius: 38px !important;
-   padding: 8px 18px !important;
-   align-items: stretch;
+
+.stRadio label:hover {
+   background-color: #dbe9f9;
 }
-input[type="radio"][tabindex="0"] + div {
-   background: #E6FF4D !important;
-   color: #17455C !important;
-   align-items: stretch;
+
+.stRadio input[type="radio"] {
+   display: none;
 }
-input[type="radio"][tabindex="0"] + div p {
-   color: #17455C !important;
-   align-items: stretch !important;
-}
-div[role="radiogroup"] label > div:first-child {
-   display: none !important;
-}
-div[role="radiogroup"] label {
-   margin-right: 0px !important;
-}
-div[role="radiogroup"] {
-   gap: 12px;
+
+.stRadio input[type="radio"]:checked + label {
+   background-color: #accbeb;
+   color: white;
+   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+   border-color: #8baed5;
 }
 
 
