@@ -87,7 +87,7 @@ div[data-testid="stToolbar"]{
 /*Editar Tabs*/
 .stTabs [role="tablist"] {
    display: flex;
-   justify-content: center;
+   justify-content: space-between;
    border-radius: 15px;
    background-color: white;
    border: 1px solid #ccc;
