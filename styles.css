@@ -113,11 +113,6 @@ div[data-testid="stToolbar"]{
    border-bottom: 2px solid transparent;
 }
 
-/* Estilo del contenedor de las tabs para evitar el borde inferior */
-div[data-baseweb="tabs"] {
-   border-bottom: none;
-}
-
 .stTabs [aria-selected="true"] {
    background-color:#6CACE4 !important;
    color: white !important;
