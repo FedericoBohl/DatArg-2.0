@@ -156,11 +156,13 @@ div[data-testid="stToolbar"]{
    color: #2b4f81;
    display: flex;
 }
-
-.stRadio label:hover {
+*/
+.stRadio:hover {
    background-color: #dbe9f9;
 }
-*/
+.stRadio label:hover {
+   background-color: #b3c7e6;
+}
 .stRadio input[type="radio"] {
    display: none;
 }
