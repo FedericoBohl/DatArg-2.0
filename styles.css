@@ -94,6 +94,10 @@ div[data-testid="stTabs"]{
 div[data-baseweb="tab-list"] {
    display: flex;
    justify-content: center;
+   border-radius: 5rem;
+   position: relative;
+   cursor: pointer;
+   transition: color 0.15s ease-in;
 }
 
 /* Estilo del borde inferior de las tabs */
