@@ -92,7 +92,7 @@ div[data-testid="stTabs"]{
 
 /* Centro la lista de tabs */
 div[data-baseweb="tab-list"] {
-   display: flex;
+   display:grid;
    justify-content: center;
    border-radius: 5rem;
    position: relative;
