@@ -91,7 +91,7 @@ div[data-testid="stTabs"]{
 }
 
 /* Centro la lista de tabs */
-div[data-baseweb="tab-list"] {
+div[role="tablist"] {
    display:grid;
    justify-content: center;
    border-radius: 5rem;
