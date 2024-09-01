@@ -88,6 +88,8 @@ div[data-testid="stToolbar"]{
 .stTabs [role="tablist"] {
    display: flex;
    justify-content: center;
+   border-radius: 5rem;
+   border-color: #82858d;
 }
 
 /* Estilo del borde inferior de las tabs */
