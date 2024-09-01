@@ -87,7 +87,7 @@ div[data-testid="stToolbar"]{
 /*Editar Tabs*/
 .stTabs [role="tablist"] {
    display: flex;
-   justify-content: space-between;
+   justify-content: center;
 }
 
 /* Estilo del borde inferior de las tabs */
