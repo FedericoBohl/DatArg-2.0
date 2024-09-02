@@ -106,7 +106,7 @@ if not '__loaded__' in S:
 
 components.html(w_barra_stocks,height=80)
 st.header('Datos Argentina 🧉',divider='blue')
-c1,c2=st.columns((0.9,0.1))
+c1,c2=st.columns((0.8,0.2))
 with c1.popover("Calendario Económico",use_container_width=True,help="Los datos muy recientes pueden tardar unos pocos dias en ser agregados a las series oficiales. Aquí puede ver los últimos datos anunciados y las fechas de proximos anuncios."):
 #with st.expander(label='Calendario económico',icon=":material/settings:"):
     #create_widget(w_calendar_tv,height=350,width=int(S.page_width*0.85))
