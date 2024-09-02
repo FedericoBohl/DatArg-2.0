@@ -246,7 +246,7 @@ div[data-testid="stNumberInputStepUp"]{
    background-color: #f0f7ff;
 }
 
-div[class="st-f3 st-en st-eo st-ep st-eq st-f4 st-bh st-cm st-f5"]{
+div[class="st-f3 st-en st-eo st-ep st-eq st-f4 st-bh st-cm st-f5"]>.st-et{
    background-color:#f0f7ff ;
    border-bottom-left-radius: 35%;
    border-bottom-right-radius: 35%;
