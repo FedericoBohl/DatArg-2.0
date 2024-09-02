@@ -299,6 +299,70 @@ def make_map(data,geo,extras,eleccion):
         vertical_spacing=0.05  # Ajusta el espacio vertical entre el mapa y las métricas
     )
 
+    # Añadir el mapa al subplot
+    mapa = px.choropleth_mapbox(
+        data,
+        geojson=geo,
+        locations='Ubicacion geografica',
+        featureidkey='properties.nombre',
+        color=f'% {eleccion}',
+        hover_name='properties.nombre',
+        custom_data=['properties.nombre',f'{eleccion}',f'% {eleccion}'],
+        color_continuous_scale='RdBu',
+        mapbox_style="carto-positron",
+        zoom=2.6, center={"lat": -38.40, "lon": -63.60},
+        opacity=1
+    )
+
+    # Actualizar las trazas del mapa
+    mapa.update_traces(
+        marker_line_width=1.5,
+        marker_line_color='black',
+        hovertemplate="<br>".join([
+            "<b>%{customdata[0]}</b>",
+            "Presupuesto Brindado: $%{customdata[1]:.2f}" if eleccion == 'Presupuesado' else "Presupuesto Ejecutado: $%{customdata[1]:.2f}",
+            "Proporción del total: %{customdata[2]:.2f}%" if eleccion == 'Presupuesado' else "Presupuesto Ejecutado: %{customdata[2]:.2f}%"
+        ])
+    )
+
+    # Añadir la figura del mapa al subplot
+    fig.add_traces(mapa.data, rows=1, cols=1)
+
+    # Añadir las tres métricas como gráficos individuales (ejemplo de pie charts)
+    fig.add_trace(go.Indicator(
+    mode="gauge+number",  # Modo del indicador que incluye el gauge y el número
+    value=extras[extras['Ubicación geografica']=='Nacional'][f'% {eleccion}'],  # Valor para el gauge (68%)
+    number={'valueformat': 'd'},  # Formato del número
+    gauge={
+        'axis': {'range': [0, 100]},  # Rango del gauge de 0 a 100%
+        'bar': {'color': "darkblue"},  # Color de la barra del gauge
+        'steps': [
+            {'range': [0, 50], 'color': "lightgray"},  # Colores opcionales por pasos
+            {'range': [50, 100], 'color': "lightgreen"}
+        ],
+        'threshold': {
+            'line': {'color': "red", 'width': 4},  # Línea de umbral opcional
+            'thickness': 0.75,
+            'value': 68  # Valor del umbral que indica la posición en el gauge
+        }
+    },
+    number={'value': extras[extras['Ubicación geografica']=='Nacional'][f'{eleccion}'], 'suffix': " units"},  # Valor que se muestra como número
+    domain={'x': [0, 1], 'y': [0, 1]}  # Dominios para el tamaño y posición del gauge
+    ), row=2, col=1)
+    #fig.add_trace(go.Pie(labels=["Métrica 2"], values=[20], name="Métrica 2"), row=2, col=1)
+    #fig.add_trace(go.Pie(labels=["Métrica 3"], values=[30], name="Métrica 3"), row=2, col=1)
+    st.write(extras)
+    # Actualizar el layout de la figura
+    fig.update_layout(
+        mapbox=dict(
+            center={"lat": -38.4161, "lon": -63.6167},
+            style="white-bg",
+            zoom=2.65,
+            layers=[dict(below='traces', type='fill', source=geo, color="lightblue")]
+        ),
+        showlegend=False,
+        margin=dict(t=0, b=0, l=0, r=0)
+    )
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 @st.cache_data(show_spinner=False)
