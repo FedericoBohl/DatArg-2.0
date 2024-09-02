@@ -290,7 +290,8 @@ def plot_deficit(escala,data:pd.DataFrame):
     t2.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 #@st.cache_data(show_spinner=False)
-def make_map(data,geo,extras,eleccion):
+def make_map(data,geo,extras:pd.DataFrame,eleccion):
+    st.write(extras.to_dict())
     fig = make_subplots(
         rows=2, cols=1,
         row_heights=[0.7, 0.3], # Ajusta la altura de las filas según tu preferencia
