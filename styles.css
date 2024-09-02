@@ -226,6 +226,7 @@ div[data-baseweb="input"]{
    background-color: #f0f7ff;
 }
 div[data-testid="stNumberInputContainer"]{
+   display: flex;
    background-color: #f0f7ff;
 }
 div[data-testid="stNumberInputStepUp"]{
