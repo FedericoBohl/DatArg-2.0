@@ -332,7 +332,7 @@ def make_map(data,geo,extras,eleccion):
     fig.add_trace(go.Indicator(
     mode="gauge+number",  # Modo del indicador que incluye el gauge y el número
     value=extras[extras['Ubicación geografica']=='Nacional'][f'% {eleccion}'],  # Valor para el gauge (68%)
-    number={'valueformat': 'd'},  # Formato del número
+    #number={'valueformat': 'd'},  # Formato del número
     gauge={
         'axis': {'range': [0, 100]},  # Rango del gauge de 0 a 100%
         'bar': {'color': "darkblue"},  # Color de la barra del gauge
