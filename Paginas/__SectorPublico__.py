@@ -348,7 +348,7 @@ def make_map(data,geo,extras,eleccion):
     },
     number={'value': extras[extras['Ubicación geografica']=='Nacional'][f'{eleccion}'], 'suffix': " units"},  # Valor que se muestra como número
     domain={'x': [0, 1], 'y': [0, 1]}  # Dominios para el tamaño y posición del gauge
-), row=2, col=1)
+    ), row=2, col=1)
     #fig.add_trace(go.Pie(labels=["Métrica 2"], values=[20], name="Métrica 2"), row=2, col=1)
     #fig.add_trace(go.Pie(labels=["Métrica 3"], values=[30], name="Métrica 3"), row=2, col=1)
     st.write(extras)
