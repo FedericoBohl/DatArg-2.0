@@ -291,54 +291,59 @@ def plot_deficit(escala,data:pd.DataFrame):
 
 @st.cache_data(show_spinner=False)
 def make_map(data,geo,extras,eleccion):
-    fig = px.choropleth_mapbox(
+    fig = make_subplots(
+        rows=2, cols=1,
+        row_heights=[0.7, 0.3], # Ajusta la altura de las filas según tu preferencia
+        specs=[[{"type": "choroplethmapbox"}],
+            [{"type": "domain"}]],
+        vertical_spacing=0.02  # Ajusta el espacio vertical entre el mapa y las métricas
+    )
+
+    # Añadir el mapa al subplot
+    mapa = px.choropleth_mapbox(
         data,
         geojson=geo,
         locations='Ubicacion geografica',
         featureidkey='properties.nombre',
-        color=f'% {eleccion}', # Asegúrate de que esta columna contiene el gasto fiscal
+        color=f'% {eleccion}',
         hover_name='properties.nombre',
         custom_data=['properties.nombre',f'{eleccion}',f'% {eleccion}'],
-        color_continuous_scale='Picnic',#[[0, '#5F7161'],[0.25, '#A5DD9B'],[0.5, '#FFFFFF'],[0.75,'#FF8080'],[1, '#632626']],
-                            mapbox_style= "carto-positron" , # formatos de diseño del mapa : "carto-positron", "carto-positron",   "white-bg",
-                            zoom=2.6, center = {"lat": -38.40, "lon": -63.60},
-                            opacity=1,
-                            color_discrete_sequence=["blue"],
-                            )
-    fig.update_traces(
+        color_continuous_scale='Picnic',
+        mapbox_style="carto-positron",
+        zoom=2.6, center={"lat": -38.40, "lon": -63.60},
+        opacity=1
+    )
+
+    # Actualizar las trazas del mapa
+    mapa.update_traces(
         marker_line_width=1.5,
         marker_line_color='black',
         hovertemplate="<br>".join([
-            "<b>%{customdata[0]}</b>",  # Asegúrate de cerrar la etiqueta <b> correctamente aquí
-            "Presupuesto Brindado: $%{customdata[1]:.2f}" if eleccion=='Presupuesado' else "Presupuesto Ejecutado: $%{customdata[1]:.2f}",
-            "Proporción del total: %{customdata[2]:.2f}%" if eleccion=='Presupuesado' else "Presupuesto Ejecutado: %{customdata[2]:.2f}%"
+            "<b>%{customdata[0]}</b>",
+            "Presupuesto Brindado: $%{customdata[1]:.2f}" if eleccion == 'Presupuesado' else "Presupuesto Ejecutado: $%{customdata[1]:.2f}",
+            "Proporción del total: %{customdata[2]:.2f}%" if eleccion == 'Presupuesado' else "Presupuesto Ejecutado: %{customdata[2]:.2f}%"
         ])
     )
-    # Actualizar el layout del mapa
-    #fig.update_geos(fitbounds="locations", visible=False)
-    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+
+    # Añadir la figura del mapa al subplot
+    fig.add_traces(mapa.data, rows=1, cols=1)
+
+    # Añadir las tres métricas como gráficos individuales (ejemplo de pie charts)
+    #fig.add_trace(go.Pie(labels=["Métrica 1"], values=[10], name="Métrica 1"), row=2, col=1)
+    #fig.add_trace(go.Pie(labels=["Métrica 2"], values=[20], name="Métrica 2"), row=2, col=1)
+    #fig.add_trace(go.Pie(labels=["Métrica 3"], values=[30], name="Métrica 3"), row=2, col=1)
+    st.write(extras)
+    # Actualizar el layout de la figura
     fig.update_layout(
         mapbox=dict(
             center={"lat": -38.4161, "lon": -63.6167},
             style="white-bg",
             zoom=2.65,
-            layers=[
-                dict(
-                    below='traces',
-                    type='fill',
-                    source=geo,
-                    color="lightblue"
-                )
-            ]
+            layers=[dict(below='traces', type='fill', source=geo, color="lightblue")]
         ),
         showlegend=False,
-        margin=dict(t=0, b=0, l=0, r=0),
-        geo=dict(
-            showland=False,  # No mostrar etiquetas de países
-            showcountries=False,  # No mostrar bordes de países
-        )
+        margin=dict(t=0, b=0, l=0, r=0)
     )
-
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 @st.cache_data(show_spinner=False)
