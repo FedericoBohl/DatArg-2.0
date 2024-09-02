@@ -105,7 +105,7 @@ if not '__loaded__' in S:
     st.rerun()
 
 components.html(w_barra_stocks,height=80)
-st.header('Datos Argentina 🧉',divider='blue')
+st.header('Datos Argentina 🧉')
 c1,c2=st.columns((0.8,0.2))
 with c1.popover("Calendario Económico",use_container_width=True,help="Los datos muy recientes pueden tardar unos pocos dias en ser agregados a las series oficiales. Aquí puede ver los últimos datos anunciados y las fechas de proximos anuncios."):
 #with st.expander(label='Calendario económico',icon=":material/settings:"):
