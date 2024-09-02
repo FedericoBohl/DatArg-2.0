@@ -191,9 +191,7 @@ div[data-testid="stToolbar"]{
    display: flex;
    justify-content: center;
 }
-.st-emotion-cache-1dtefog:hover{
-   display: flex;
-   justify-content: center;
+div[data-testid="stExpander"]:hover{
    color: black;
 }
 div[data-testid="stExpander"]{
