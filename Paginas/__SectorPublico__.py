@@ -346,7 +346,7 @@ def make_map(data,geo,extras,eleccion):
             'value': 68  # Valor del umbral que indica la posición en el gauge
         }
     },
-    number={'value': extras[extras['Ubicacion geografica']=='Nacional'][f'{eleccion}'], 'suffix': " units"},  # Valor que se muestra como número
+    number={'value': extras[f'{eleccion}'][2], 'suffix': " units"},  # Valor que se muestra como número
     domain={'x': [0, 1], 'y': [0, 1]}  # Dominios para el tamaño y posición del gauge
     ), row=2, col=1)
     #fig.add_trace(go.Pie(labels=["Métrica 2"], values=[20], name="Métrica 2"), row=2, col=1)
