@@ -180,8 +180,7 @@ div[data-testid="stToolbar"]{
    background-color: white;
    cursor: pointer;
    transition: all 0.3s ease;
-   margin-left: auto; /* Centra el contenedor dentro de su parent */
-   margin-right: auto; /* Centra el contenedor dentro de su parent */
+   margin:auto
 
 }
 
