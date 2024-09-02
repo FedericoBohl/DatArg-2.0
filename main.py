@@ -156,12 +156,10 @@ with st.container():
                                 src='https://cdn.cafecito.app/imgs/buttons/button_6.png' 
                                 alt='Invitame un café en cafecito.app' />
                     </a>
+                </div>
                 ''',unsafe_allow_html=True)  
     # Campo de texto para sugerencias
     suggestion = st.text_input(
         label="Déjanos tus sugerencias o comentarios:", 
         placeholder="Escribe aquí tus sugerencias o comentarios..."
     )
-    st.markdown('''
-                </div>
-                ''',unsafe_allow_html=True) 

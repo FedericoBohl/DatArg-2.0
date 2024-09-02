@@ -202,6 +202,13 @@ div[data-testid="stExpander"]{
    padding: 5px;
 }
 
+/*Editar st.text_input*/
+div[data-testid="stTextInput"]{
+   background-color: black;
+   color: whitesmoke;
+}
+
+
 
 /*Ocultar logo streamlit*/
 .viewerBadge_container__r5tak{
@@ -225,6 +232,7 @@ button[data-testid="manage-app-button"]{
 div[data-baseweb="input"]{
    display: flex;
    background-color: #f0f7ff;
+   color: black;
 }
 div[data-testid="stNumberInputContainer"]{
    display: flex;
