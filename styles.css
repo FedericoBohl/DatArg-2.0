@@ -246,18 +246,10 @@ div[data-testid="stNumberInputStepUp"]{
    background-color: #f0f7ff;
 }
 
-.st-cw{
+div[class="st-b1 st-f2 st-en st-eo st-ep st-eq st-ds st-ah st-er st-bw st-es st-aw st-et st-av st-bj st-eu st-ev st-e3 st-bh st-cm"]{
    background-color:#f0f7ff ;
-}
-.st-eg {
    border-bottom-left-radius: 35%;
-}
-.st-ef {
    border-bottom-right-radius: 35%;
-}
-.st-ee {
    border-top-right-radius: 35%;
-}
-.st-ed {
    border-top-left-radius: 35%;
 }
