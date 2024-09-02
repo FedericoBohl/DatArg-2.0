@@ -118,7 +118,7 @@ with c2.popover('Bot de Telegram',use_container_width=True,help='Agradecimientos
 
 
 
-t_info, t_actividad, t_PI, t_precios, t_bcra, t_SecExt, t_SecPub, t_Intl, t_Merv= st.tabs(["Info","Actividad","Pobreza y Empleo", "Precios", "BCRA", "Sector Externo","Sector Público","Internacional","Bolsa Argentina"])
+t_info, t_actividad, t_PI, t_precios, t_bcra, t_SecExt, t_SecPub, t_Intl, t_Merv, t_cal= st.tabs(["Info","Actividad","Pobreza y Empleo", "Precios", "BCRA", "Sector Externo","Sector Público","Internacional","Bolsa Argentina",'Calendario'])
 
 with t_info:
     make_info()
@@ -139,6 +139,7 @@ with t_Intl:
 with t_Merv:
     make_merv_web()
 
+
 with st.container():
     st.markdown('''
                 <div style="background-color: black; width: 100%; color: white; padding: 20px; box-sizing: border-box; display: flex; justify-content: center">
@@ -156,3 +157,6 @@ with st.container():
         label="Déjanos tus sugerencias o comentarios:", 
         placeholder="Escribe aquí tus sugerencias o comentarios..."
     )
+with t_cal:
+    df = pd.read_csv('Calendar/calendar_events.csv')
+    calendario=create_calendar(df)
