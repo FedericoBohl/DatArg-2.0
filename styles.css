@@ -249,3 +249,18 @@ div[data-testid="stNumberInputStepUp"]{
 .st-cw{
    background-color:#f0f7ff ;
 }
+.st-eg {
+   border-bottom-left-radius: 35%;
+}
+.st-ef {
+   border-bottom-right-radius: 35%;
+}
+.st-ee {
+   border-top-right-radius: 35%;
+}
+.st-ed {
+   border-top-left-radius: 35%;
+}
+.st-em {
+   height: 0;
+}
