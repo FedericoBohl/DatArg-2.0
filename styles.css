@@ -191,6 +191,7 @@ div[data-testid="stToolbar"]{
    color: black;
    border-color: #8baed5;
    border-radius: 10px;
+   margin-right: 3px;
 }
 
 
