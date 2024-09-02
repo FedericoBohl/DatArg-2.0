@@ -188,8 +188,9 @@ div[data-testid="stToolbar"]{
 
 .stRadio input[type="radio"]:checked + div {
    background-color: #accbeb;
-   color: white;
+   color: black;
    border-color: #8baed5;
+   border-radius: 10px;
 }
 
 
