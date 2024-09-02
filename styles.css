@@ -253,3 +253,26 @@ div[class="st-f3 st-en st-eo st-ep st-eq st-f4 st-bh st-cm st-f5"]>.st-et{
    border-top-right-radius: 35%;
    border-top-left-radius: 35%;
 }
+
+@keyframes show{
+   from{
+      opacity: 0;
+      scale: 25%;
+   }
+
+   to{
+      opacity: 1;
+      scale: 100%;
+   }
+}
+
+.stContainer {
+   view-timeline: --container; /* Asigna un timeline de vista personalizado */
+   view-timeline-axis: block; /* Define el eje del timeline (vertical) */
+
+   animation-timeline: --container; /* Asigna el timeline para la animación */
+   animation-name: show; /* Aplica la animación 'show' */
+   
+   animation-range: entry 25% cover 30%; /* Define cuándo comienza y termina la animación */
+   animation-fill-mode: both; /* Mantén el estado final de la animación */
+}
