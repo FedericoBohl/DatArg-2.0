@@ -296,7 +296,7 @@ def make_map(data,geo,extras,eleccion):
         row_heights=[0.7, 0.3], # Ajusta la altura de las filas según tu preferencia
         specs=[[{"type": "choroplethmapbox"}],
             [{"type": "domain"}]],
-        vertical_spacing=0.02  # Ajusta el espacio vertical entre el mapa y las métricas
+        vertical_spacing=0.05  # Ajusta el espacio vertical entre el mapa y las métricas
     )
 
     # Añadir el mapa al subplot
@@ -308,7 +308,7 @@ def make_map(data,geo,extras,eleccion):
         color=f'% {eleccion}',
         hover_name='properties.nombre',
         custom_data=['properties.nombre',f'{eleccion}',f'% {eleccion}'],
-        color_continuous_scale='Picnic',
+        color_continuous_scale='RdBu',
         mapbox_style="carto-positron",
         zoom=2.6, center={"lat": -38.40, "lon": -63.60},
         opacity=1
@@ -329,7 +329,26 @@ def make_map(data,geo,extras,eleccion):
     fig.add_traces(mapa.data, rows=1, cols=1)
 
     # Añadir las tres métricas como gráficos individuales (ejemplo de pie charts)
-    #fig.add_trace(go.Pie(labels=["Métrica 1"], values=[10], name="Métrica 1"), row=2, col=1)
+    fig.add_trace(go.Indicator(
+    mode="gauge+number",  # Modo del indicador que incluye el gauge y el número
+    value=extras[extras['Ubicación geografica']=='Nacional'][f'% {eleccion}'],  # Valor para el gauge (68%)
+    number={'valueformat': 'd'},  # Formato del número
+    gauge={
+        'axis': {'range': [0, 100]},  # Rango del gauge de 0 a 100%
+        'bar': {'color': "darkblue"},  # Color de la barra del gauge
+        'steps': [
+            {'range': [0, 50], 'color': "lightgray"},  # Colores opcionales por pasos
+            {'range': [50, 100], 'color': "lightgreen"}
+        ],
+        'threshold': {
+            'line': {'color': "red", 'width': 4},  # Línea de umbral opcional
+            'thickness': 0.75,
+            'value': 68  # Valor del umbral que indica la posición en el gauge
+        }
+    },
+    number={'value': extras[extras['Ubicación geografica']=='Nacional'][f'{eleccion}'], 'suffix': " units"},  # Valor que se muestra como número
+    domain={'x': [0, 1], 'y': [0, 1]}  # Dominios para el tamaño y posición del gauge
+), row=2, col=1)
     #fig.add_trace(go.Pie(labels=["Métrica 2"], values=[20], name="Métrica 2"), row=2, col=1)
     #fig.add_trace(go.Pie(labels=["Métrica 3"], values=[30], name="Métrica 3"), row=2, col=1)
     st.write(extras)
