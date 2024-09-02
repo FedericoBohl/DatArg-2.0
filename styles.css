@@ -131,7 +131,7 @@ div[data-testid="stToolbar"]{
 
  /*Editar Radio*/
  .stRadio {
-   background-color: #f0f7ff; /* Fondo del contenedor de todo el radio */
+   background-color: #f0f7ff; /* Fondo del contenedor principal */
    padding: 20px;
    border-radius: 15px;
    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
@@ -140,33 +140,53 @@ div[data-testid="stToolbar"]{
    margin: auto;
 }
 
-.stRadio > div {
+.stRadio > div:first-child {
+   margin-bottom: 10px;
+   font-size: 1.2em;
+   font-weight: bold;
+   color: #2b4f81;
+}
+
+.stRadio > div:last-child {
    display: flex;
    flex-direction: column;
    gap: 10px;
 }
 
-.stRadio > [data-baseweb="radio"] label {
-   background-color: white;
-   padding: 10px 20px;
+.stRadio div[data-baseweb="radio"] {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   padding: 10px;
    border-radius: 10px;
    border: 1px solid #b3c7e6;
+   background-color: white;
    cursor: pointer;
    transition: all 0.3s ease;
-   color: #2b4f81;
-   display: flex;
-
 }
 
-.stRadio label:hover {
+.stRadio div[data-baseweb="radio"]:hover {
    background-color: #dbe9f9;
+}
+
+.stRadio div[data-baseweb="radio"] > div:first-child {
+   width: 20px;
+   height: 20px;
+   border-radius: 4px;
+   border: 1px solid #b3c7e6;
+   background-color: #fff;
 }
 
 .stRadio input[type="radio"] {
    display: none;
 }
 
-.stRadio input[type="radio"]:checked + label {
+.stRadio input[type="radio"]:checked + div > div:first-child {
+   background-color: #accbeb;
+   border-color: #8baed5;
+}
+
+.stRadio input[type="radio"]:checked + div {
    background-color: #accbeb;
    color: white;
    border-color: #8baed5;
