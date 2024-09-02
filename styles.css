@@ -225,6 +225,12 @@ button[data-testid="manage-app-button"]{
 div[data-baseweb="input"]{
    background-color: #f0f7ff;
 }
+div[data-testid="stNumberInputStepDown"]{
+   background-color: #f0f7ff;
+}
+div[data-testid="stNumberInputStepUp"]{
+   background-color: #f0f7ff;
+}
 
 .st-cw{
    background-color:#f0f7ff ;
