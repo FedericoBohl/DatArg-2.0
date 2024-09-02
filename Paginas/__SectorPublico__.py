@@ -349,7 +349,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                 'value': 68  # Valor del umbral que indica la posición en el gauge
             }
         },
-        number={'value': extras[f'{eleccion}'][k], 'suffix': " units"},  # Valor que se muestra como número
+        number=extras[f'{eleccion}'][k],  # Valor que se muestra como número
         domain={'x': [0, 1], 'y': [0, 1]}  # Dominios para el tamaño y posición del gauge
         ), row=2, col=col)
         col+=1
