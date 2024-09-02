@@ -191,6 +191,12 @@ div[data-testid="stToolbar"]{
    display: flex;
    justify-content: center;
 }
+.st-emotion-cache-1dtefog :hover{
+   display: flex;
+   justify-content: center;
+   color: black;
+   background-color: #accbeb;
+}
 
 /*Ocultar logo streamlit*/
 .viewerBadge_container__r5tak{
