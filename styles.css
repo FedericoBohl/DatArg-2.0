@@ -232,6 +232,11 @@ div[data-testid="stTextInput"]>div[data-testid="stWidgetLabel"]>div[data-testid=
 
 /* Estilo cuando el popover está expandido */
 .stTooltipHoverTarget[aria-expanded="true"] {
+   border: 2px solid #b3c7e6; /* Un borde azul suave */
+   border-radius: 15px; /* Bordes redondeados */
+   background-color: white; /* Fondo blanco por defecto */
+   padding: 10px;
+   margin-bottom: 15px; /* Espacio debajo del popover */
    background-color: #accbeb; /* Azul pastel suave cuando está expandido */
    color: white; /* Texto blanco cuando está expandido */
 }
