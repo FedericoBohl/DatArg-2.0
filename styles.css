@@ -218,10 +218,9 @@ div[data-testid="stTextInput"]>div[data-testid="stWidgetLabel"]>div[data-testid=
 
 /*Editar st.popover*/
 /* Contenedor principal del popover */
-.stPopover>div[data-testid="stTooltipIcon"] {
+.stPopover {
    background-color: white; /* Fondo blanco por defecto */
    padding: 10px;
-   margin-bottom: 15px; /* Espacio debajo del popover */
    transition: all 0.2s ease-in-out; /* Transición suave */
 }
 
