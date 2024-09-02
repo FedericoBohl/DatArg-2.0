@@ -14,7 +14,7 @@ div[data-testid="stAppViewBlockContainer"] div[data-testid="stHorizontalBlock"] 
    background-color:white;
    padding:5px;
    border-radius:15px;
-   border: 2px solid #b3c7e6; /* Un borde azul suave */
+   /*border: silver solid 2px;]*/
    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
 
 }
