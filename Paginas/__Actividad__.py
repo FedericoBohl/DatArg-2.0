@@ -220,7 +220,7 @@ def make_actividad_web():
     actividad.index=actividad.index.strftime('%b-%Y')
     var_men_act.index=var_men_act.index.strftime('%b-%Y')
     var_an_act.index=var_an_act.index.strftime('%b-%Y')
-    with st.container(border=True):
+    with st.container(border=False):
         c1,c2=st.columns([0.3,0.7],vertical_alignment='center')
         c1.radio('¿Qué indicador de actividad desea ver?',options=['EMAE','IPI','ISAC'],horizontal=False,key='indicador_actividad')
         with c2:
