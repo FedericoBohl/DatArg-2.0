@@ -198,7 +198,7 @@ div[data-testid="stToolbar"]{
 }
 div[data-testid="stExpander"]{
    border-radius: 15px;
-   border: 2px solid #b3c7e6; /* Un borde azul suave */
+   border: 0px solid #b3c7e6; /* Un borde azul suave */
    padding: 5px;
 }
 
