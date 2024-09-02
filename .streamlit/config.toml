@@ -1,6 +1,6 @@
 [theme]
 base="light"
-primaryColor="#6CACE4"
+primaryColor="#8baed5"
 backgroundColor="#FFFFFF"
 font="serif"
 showSidebarNavigation = false

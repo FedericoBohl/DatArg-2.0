@@ -222,6 +222,6 @@ button[data-testid="manage-app-button"]{
 
 
 
-.stLinkButton{
-   height: 100%;
+div[data-testid="stNumberInputContainer"]{
+   background-color: #f0f7ff;
 }
