@@ -217,7 +217,7 @@ div[data-testid="stTextInput"]>div[data-testid="stWidgetLabel"]>div[data-testid=
 }
 
 /*Editar st.popover*/
-div[data-testid="stPopover"]:hover div[aria-expanded="false"]{
+.stPopover:hover div[aria-expanded="false"]{
    display: flex;
    background-color: #dbe9f9; /* Un color de fondo suave para cuando se pasa el mouse por encima */
    color: #2b4f81 !important; /* Azul más oscuro para el texto cuando se hace hover */
