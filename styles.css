@@ -152,8 +152,9 @@ div[data-testid="stToolbar"]{
    border-radius: 15px;
    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
    border: 1px solid #b3c7e6;
-   width: fit-content;
-   margin: auto;
+   width: fit-content; /* Ajusta el ancho al contenido */
+   margin-left: auto; /* Centra el contenedor dentro de su parent */
+   margin-right: auto; /* Centra el contenedor dentro de su parent */
 }
 
 .stRadio > div:first-child {
