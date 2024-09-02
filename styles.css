@@ -208,6 +208,7 @@ div[data-testid="stTextInput"]{
    color: whitesmoke;
 }
 div[data-testid="stTextInput"]>div[data-testid="stWidgetLabel"]>div[data-testid="stMarkdownContainer"]{
+   display: flex;
    color: white;
 }
 
