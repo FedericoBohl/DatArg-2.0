@@ -217,12 +217,38 @@ div[data-testid="stTextInput"]>div[data-testid="stWidgetLabel"]>div[data-testid=
 }
 
 /*Editar st.popover*/
-.stPopover{
-   display: flex;
-   background-color: #dbe9f9; /* Un color de fondo suave para cuando se pasa el mouse por encima */
-   color: #2b4f81 !important; /* Azul más oscuro para el texto cuando se hace hover */
-
+/* Contenedor principal del popover */
+.stPopover {
+   border: 2px solid #b3c7e6; /* Un borde azul suave */
+   border-radius: 15px; /* Bordes redondeados */
+   background-color: white; /* Fondo blanco por defecto */
+   padding: 10px;
+   margin-bottom: 15px; /* Espacio debajo del popover */
+   transition: all 0.2s ease-in-out; /* Transición suave */
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
 }
+
+/* Estilo cuando el cursor está sobre el popover pero no está expandido */
+.stPopover:hover:not([aria-expanded="true"]) {
+   background-color: #f0f7ff; /* Cambia el fondo a un azul pastel muy claro al hacer hover */
+   border-color: #8baed5; /* Borde ligeramente más oscuro al hacer hover */
+   cursor: pointer; /* Cambia el cursor para indicar interactividad */
+}
+
+/* Estilo cuando el popover está expandido */
+.stPopover[aria-expanded="true"] {
+   background-color: #accbeb; /* Azul pastel suave cuando está expandido */
+   color: white; /* Texto blanco cuando está expandido */
+   border-color: #8baed5; /* Mantiene el borde ligeramente más oscuro */
+}
+
+/* Contenido dentro del popover */
+.stPopover > div:nth-child(2) {
+   padding: 10px;
+   background-color: white; /* Fondo blanco para el contenido expandido */
+   border-radius: 10px; /* Bordes redondeados */
+}
+
 
 /*Ocultar logo streamlit*/
 .viewerBadge_container__r5tak{
