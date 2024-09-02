@@ -170,3 +170,6 @@ with st.container():
     # Lógica para manejar las sugerencias (opcional)
     if suggestion:
         st.write(f"Gracias por tus sugerencias: {suggestion}")
+    st.markdown('''
+                <style>background-color: black</style>
+                ''')
