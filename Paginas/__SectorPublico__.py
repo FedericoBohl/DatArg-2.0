@@ -330,6 +330,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
     fig.add_traces(mapa.data, rows=1, cols=1)
 
     # Añadir las tres métricas como gráficos individuales (ejemplo de pie charts)
+    col=1
     for k in extras['Ejercicio'].keys():
         fig.add_trace(go.Indicator(
         mode="gauge+number",  # Modo del indicador que incluye el gauge y el número
@@ -350,7 +351,8 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
         },
         number={'value': extras[f'{eleccion}'][k], 'suffix': " units"},  # Valor que se muestra como número
         domain={'x': [0, 1], 'y': [0, 1]}  # Dominios para el tamaño y posición del gauge
-        ), row=2, col=1)
+        ), row=2, col=col)
+        col+=1
     #fig.add_trace(go.Pie(labels=["Métrica 2"], values=[20], name="Métrica 2"), row=2, col=1)
     #fig.add_trace(go.Pie(labels=["Métrica 3"], values=[30], name="Métrica 3"), row=2, col=1)
     # Actualizar el layout de la figura
