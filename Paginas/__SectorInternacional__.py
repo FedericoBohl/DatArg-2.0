@@ -38,7 +38,7 @@ def load_canasta(end):
 
 @st.cache_resource(show_spinner=False)
 def get_eu(_) -> None:
-    c1,c2,c3=st.columns((0.3,0.7/2,0.7/2))
+    c1,c2,c3=st.columns((0.4,0.6/2,0.6/2),vertical_alignment='center')
     c1.header('Europa')
     mro=pd.read_csv('https://data-api.ecb.europa.eu/service/data/FM/D.U2.EUR.4F.KR.MRR_FR.LEV?startPeriod=2000-01&detail=dataonly&format=csvdata')
     mro=mro[['TIME_PERIOD','OBS_VALUE']]
@@ -120,7 +120,7 @@ def get_eu(_) -> None:
 
 @st.cache_resource(show_spinner=False)
 def get_uk(_) -> None:
-    c1,c2,c3=st.columns((0.4,0.6/2,0.6/2))
+    c1,c2,c3=st.columns((0.4,0.6/2,0.6/2),vertical_alignment='center')
     with c1:st.header('Inglaterra')
 
     url = 'http://www.bankofengland.co.uk/boeapps/iadb/fromshowcolumns.asp?csv.x=yes'
@@ -227,7 +227,7 @@ def get_usa(_):
     prob_df.index=prob_df.index.strftime('%d de %b %Y')
     prob_df=prob_df.transpose()
     
-    c1,c2,c3=st.columns((0.3,0.7/2,0.7/2))
+    c1,c2,c3=st.columns((0.4,0.6/2,0.6/2),vertical_alignment='center')
     with c1:st.header('EE.UU.')
     fred = Fred(api_key="6050b935d2f878f1100c6f217cbe6753")
     cpi_data = fred.get_series('CPIAUCNS').loc[f'{1999}':]
@@ -311,7 +311,7 @@ def get_usa(_):
         xaxis_title="Tasa objetivo (Basis Points)",
         yaxis_title="Probabilidad",
         showlegend=False)
-    probabilities.plotly_chart(fig,use_container_width=True)
+    probabilities.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
     probabilities.dataframe(prob_df)
 
     data=pd.read_csv('dotplot.csv')
@@ -365,11 +365,11 @@ def get_usa(_):
         xaxis=dict(tickmode='array',tickvals=vals,ticktext=texts),
         yaxis=dict(range=[0,data.index.max().max()*1.1],showline=True, linewidth=0.5, linecolor='black',gridcolor='lightslategrey',gridwidth=0.35)
     )
-    dotplot.plotly_chart(fig,use_container_width=True)
+    dotplot.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 @st.cache_resource(show_spinner=False)
 def get_jp(_):
-    c1,c2,c3=st.columns((0.4,0.6/2,0.6/2))
+    c1,c2,c3=st.columns((0.4,0.6/2,0.6/2),vertical_alignment='center')
     with c1:st.header('Japón')
     #       Tasa de Interés
     url = 'https://www.stat-search.boj.or.jp/ssi/mtshtml/fm01_d_1_en.html'
@@ -533,4 +533,4 @@ def make_internacional_web():
             c21.metric('Colombia',f"{fx['COP'][1]:.2f} USD",delta=f'Share: {(100*fx["COP"][0]):.2f}%',delta_color='off')
             c22.metric('Chile',f"{fx['CLP'][1]:.2f} USD",delta=f'Share: {(100*fx["CLP"][0]):.2f}%',delta_color='off')
             c21.metric('México',f"{fx['MXN'][1]:.2f} USD",delta=f'Share: {(100*fx["MXN"][0]):.2f}%',delta_color='off')
-        st.caption('El índice en en base Enero-2000=100 y las ponderaciones en base a la participación en el comercio mundial de cada año.')
+        st.caption('El índice en en base Enero-2000=100 y las ponderaciones en base a la participación en el comercio mundial de cada año. La idea es crear una métrica que se asemeje al Broad Dolar Index pero con respecto a Latinoamérica.')
