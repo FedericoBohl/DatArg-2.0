@@ -111,7 +111,7 @@ with c1.popover("Calendario Económico",use_container_width=True,help="Los datos
 #with st.expander(label='Calendario económico',icon=":material/settings:"):
     #create_widget(w_calendar_tv,height=350,width=int(S.page_width*0.85))
     df = pd.read_csv('Calendar/calendar_events.csv')
-    calendario=create_calendar(df)
+    #calendario=create_calendar(df)
 with c2.popover('Bot de Telegram',use_container_width=True,help='Agradecimientos a Valentín Vedda por su gran aporte con este bot.'):
     st.caption('¿Queres enterarte cuando sale un nuevo dato? Subscribite al bot de Telegram para que te avisemos cuando salgan.')
     st.page_link(page='https://t.me/calendario_economico_argentino',label='Calendario Económico Argentino',icon='🗓️')
