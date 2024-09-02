@@ -331,7 +331,7 @@ def make_map(data,geo,extras,eleccion):
     # Añadir las tres métricas como gráficos individuales (ejemplo de pie charts)
     fig.add_trace(go.Indicator(
     mode="gauge+number",  # Modo del indicador que incluye el gauge y el número
-    value=[f'% {eleccion}'][2],  # Valor para el gauge (68%)
+    value=extras[f'% {eleccion}'][2],  # Valor para el gauge (68%)
     gauge={
         'axis': {'range': [0, 100]},  # Rango del gauge de 0 a 100%
         'bar': {'color': "darkblue"},  # Color de la barra del gauge
