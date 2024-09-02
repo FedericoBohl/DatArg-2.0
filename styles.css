@@ -1,3 +1,9 @@
+.block {
+   animation: appear linear;
+   animation-timeline: view();
+   animation-range: entry 0 cover 40%;
+}
+
 /*Sacar el Margen superior de la página*/
 .st-emotion-cache-ttupiz{
    height:0cm;
@@ -10,9 +16,7 @@ div[data-testid="stAppViewBlockContainer"] div[data-testid="stHorizontalBlock"] 
    border-radius:15px;
    /*border: silver solid 2px;]*/
    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
-   animation: appear linear;
-   animation-timeline: view();
-   animation-range: entry 0;
+
 }
 div[data-testid="stAppViewBlockContainer"]{
    background-color:rgb(255, 255, 255);
@@ -94,7 +98,6 @@ div[data-testid="stToolbar"]{
    border-radius: 15px;
    background-color: #f0f7ff; /* Un azul pastel muy claro */
    border: 2px solid #b3c7e6; /* Un borde azul suave */
-   width: 80%;
 }
 
 /* Estilo del borde inferior de las tabs */
