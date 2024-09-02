@@ -149,17 +149,19 @@ with t_Merv:
 with st.container():
     st.markdown('''
                 <div style="background-color: black; width: 100%; color: white; padding: 20px; box-sizing: border-box;">
+                    <a href='https://cafecito.app/datarg' rel='noopener' target='_blank'>
+                        <img srcset='https://cdn.cafecito.app/imgs/buttons/button_6.png 1x, 
+                                        https://cdn.cafecito.app/imgs/buttons/button_6_2x.png 2x, 
+                                        https://cdn.cafecito.app/imgs/buttons/button_6_3.75x.png 3.75x' 
+                                src='https://cdn.cafecito.app/imgs/buttons/button_6.png' 
+                                alt='Invitame un café en cafecito.app' />
+                    </a>
+                </div>
                 ''',unsafe_allow_html=True)
     # Incrustar contenido en el container
     cafecito = '''
     <div style="display: flex; justify-content: center; margin-bottom: 20px;">
-        <a href='https://cafecito.app/datarg' rel='noopener' target='_blank'>
-            <img srcset='https://cdn.cafecito.app/imgs/buttons/button_6.png 1x, 
-                            https://cdn.cafecito.app/imgs/buttons/button_6_2x.png 2x, 
-                            https://cdn.cafecito.app/imgs/buttons/button_6_3.75x.png 3.75x' 
-                    src='https://cdn.cafecito.app/imgs/buttons/button_6.png' 
-                    alt='Invitame un café en cafecito.app' />
-        </a>
+
     </div>
     '''
     st.markdown(cafecito, unsafe_allow_html=True)
@@ -173,4 +175,3 @@ with st.container():
     # Lógica para manejar las sugerencias (opcional)
     if suggestion:
         st.write(f"Gracias por tus sugerencias: {suggestion}")
-    st.markdown("</div>",unsafe_allow_html=True)
