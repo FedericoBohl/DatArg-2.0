@@ -191,25 +191,32 @@ div[data-testid="stToolbar"]{
 .stExpander {
    border: 2px solid #b3c7e6; /* Un borde azul suave */
    border-radius: 15px; /* Bordes redondeados */
-   background-color: #f0f7ff; /* Azul pastel muy claro para el fondo */
+   background-color: white; /* Fondo blanco cuando está desactivado */
    padding: 10px;
    margin-bottom: 15px; /* Espacio debajo del expander */
+   transition: all 0.2s ease-in-out; /* Transición suave */
 }
 
 /* Estilo del encabezado del expander */
 .stExpander > div:first-child {
-   background-color: #accbeb; /* Azul pastel suave para el encabezado */
-   color: white !important; /* Color del texto */
+   background-color: white; /* Fondo blanco inicialmente */
+   color: #2b4f81 !important; /* Color del texto */
    border-radius: 10px; /* Bordes redondeados para el encabezado */
    padding: 8px 16px; /* Espaciado interior */
    margin: -10px -10px 10px -10px; /* Ajusta el margen para que se expanda hasta el borde */
-   transition: all 0.2s ease-in-out; /* Transición suave para la apertura/cierre */
+   transition: all 0.2s ease-in-out; /* Transición suave */
 }
 
-/* Hover en el encabezado */
-.stExpander > div:first-child:hover {
-   background-color: #dbe9f9; /* Un color más claro al pasar el mouse */
-   color: #2b4f81 !important; /* Azul más oscuro para el texto */
+/* Hover en el encabezado cuando está cerrado */
+.stExpander:not([aria-expanded="true"]) > div:first-child:hover {
+   background-color: #accbeb; /* Cambia el fondo cuando está desactivado y se pasa el mouse */
+   color: white !important; /* Cambia el color del texto al pasar el mouse */
+}
+
+/* Cambiar color cuando está expandido */
+.stExpander[aria-expanded="true"] > div:first-child {
+   background-color: #accbeb; /* Color pastel suave cuando está expandido */
+   color: white !important; /* Color del texto cuando está expandido */
 }
 
 /* Contenido dentro del expander */
