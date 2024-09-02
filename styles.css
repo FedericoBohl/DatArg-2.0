@@ -94,16 +94,16 @@ div[data-testid="stToolbar"]{
 /*Editar Tabs*/
 .stTabs [role="tablist"] {
    display: flex;
-   justify-content: center;
+   justify-content: center; /* Asegura que las tabs se centren dentro del contenedor */
    border-radius: 15px;
    background-color: #f0f7ff; /* Un azul pastel muy claro */
    border: 2px solid #b3c7e6; /* Un borde azul suave */
    padding: 5px;
-   width: fit-content;
-   margin: 0 auto;
+   width: fit-content; /* Ajusta el ancho al contenido */
+   margin-left: auto; /* Centra el contenedor dentro de su parent */
+   margin-right: auto; /* Centra el contenedor dentro de su parent */
 }
 
-/* Estilo del borde inferior de las tabs */
 .stTabs [role="tab"] {
    padding: 8px 16px;
    transition: all 0.15s ease-out;
@@ -125,7 +125,6 @@ div[data-testid="stToolbar"]{
    border-radius: 15px !important;
    padding: 10px !important;
    border: 1px solid #8baed5 !important; /* Un borde ligeramente más oscuro pero aún suave */
-   
 }
 
 .stTabs [role="tab"]:hover {
@@ -134,12 +133,15 @@ div[data-testid="stToolbar"]{
    border-radius: 15px !important;
    padding: 10px !important;
 }
+
 .stTabs [data-baseweb="tab-highlight"] {
    visibility: collapse;
 }
-.stTabs [data-baseweb="tab-border"]{
+
+.stTabs [data-baseweb="tab-border"] {
    visibility: collapse;
 }
+
 
 
 
