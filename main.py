@@ -147,6 +147,9 @@ with t_Merv:
     make_merv_web()
 
 with st.container():
+    st.markdown('''
+                <style>background-color: black</style>
+                ''',unsafe_allow_html=True)
     # Incrustar contenido en el container
     cafecito = '''
     <div style="display: flex; justify-content: center; margin-bottom: 20px;">
@@ -170,6 +173,3 @@ with st.container():
     # Lógica para manejar las sugerencias (opcional)
     if suggestion:
         st.write(f"Gracias por tus sugerencias: {suggestion}")
-    st.markdown('''
-                <style>background-color: black</style>
-                ''',unsafe_allow_html=True)
