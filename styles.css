@@ -207,7 +207,9 @@ div[data-testid="stTextInput"]{
    background-color: black;
    color: whitesmoke;
 }
-
+div[data-testid="stTextInput"]>div[data-testid="stWidgetLabel"]>div[data-testid="stMarkdownContainer"]{
+   color: white;
+}
 
 
 /*Ocultar logo streamlit*/
