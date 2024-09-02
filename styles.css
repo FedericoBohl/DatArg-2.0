@@ -39,8 +39,10 @@ label[data-testid="stMetricLabel"] p{
 h2[id="61901152"]{
    display: flex;
    justify-content: center;
-   color: #6CACE4;
    background-color: #accbeb;
+   color: #2b4f81 ;
+   border-radius: 15px;
+   border: 1px solid #8baed5 ;
 }
 
 /* Estilo de valor de métricas*/
