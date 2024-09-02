@@ -148,7 +148,7 @@ with t_Merv:
 
 with st.container():
     st.markdown('''
-                <div style="background-color: black; width: 100%; color: white; padding: 20px; box-sizing: border-box;">
+                <div style="background-color: black; width: 100%; color: white; padding: 20px; box-sizing: border-box; display: flex; justify-content: center">
                     <a href='https://cafecito.app/datarg' rel='noopener' target='_blank'>
                         <img srcset='https://cdn.cafecito.app/imgs/buttons/button_6.png 1x, 
                                         https://cdn.cafecito.app/imgs/buttons/button_6_2x.png 2x, 
@@ -157,15 +157,7 @@ with st.container():
                                 alt='Invitame un café en cafecito.app' />
                     </a>
                 </div>
-                ''',unsafe_allow_html=True)
-    # Incrustar contenido en el container
-    cafecito = '''
-    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
-
-    </div>
-    '''
-    st.markdown(cafecito, unsafe_allow_html=True)
-    
+                ''',unsafe_allow_html=True)  
     # Campo de texto para sugerencias
     suggestion = st.text_input(
         label="Déjanos tus sugerencias o comentarios:", 
