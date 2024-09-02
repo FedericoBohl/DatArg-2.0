@@ -223,6 +223,7 @@ button[data-testid="manage-app-button"]{
 
 
 div[data-baseweb="input"]{
+   display: flex;
    background-color: #f0f7ff;
 }
 div[data-testid="stNumberInputContainer"]{
