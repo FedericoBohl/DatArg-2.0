@@ -106,17 +106,6 @@ if not '__loaded__' in S:
 
 components.html(w_barra_stocks,height=80)
 st.header('Datos Argentina 🧉')
-c1,c2=st.columns((0.8,0.2))
-with c1.popover("Calendario Económico",use_container_width=True,help="Los datos muy recientes pueden tardar unos pocos dias en ser agregados a las series oficiales. Aquí puede ver los últimos datos anunciados y las fechas de proximos anuncios."):
-#with st.expander(label='Calendario económico',icon=":material/settings:"):
-    #create_widget(w_calendar_tv,height=350,width=int(S.page_width*0.85))
-    df = pd.read_csv('Calendar/calendar_events.csv')
-    #calendario=create_calendar(df)
-with c2.popover('Bot de Telegram',use_container_width=True,help='Agradecimientos a Valentín Vedda por su gran aporte con este bot.'):
-    st.caption('¿Queres enterarte cuando sale un nuevo dato? Subscribite al bot de Telegram para que te avisemos cuando salgan.')
-    st.page_link(page='https://t.me/calendario_economico_argentino',label='Calendario Económico Argentino',icon='🗓️')
-
-
 
 t_info, t_actividad, t_PI, t_precios, t_bcra, t_SecExt, t_SecPub, t_Intl, t_Merv, t_cal= st.tabs(["Info","Actividad","Pobreza y Empleo", "Precios", "BCRA", "Sector Externo","Sector Público","Internacional","Bolsa Argentina",'Calendario'])
 
@@ -160,3 +149,5 @@ with st.container():
 with t_cal:
     df = pd.read_csv('Calendar/calendar_events.csv')
     calendario=create_calendar(df)
+    st.caption('¿Queres enterarte cuando sale un nuevo dato? Subscribite al bot de Telegram para que te avisemos cuando salgan.')
+    st.page_link(page='https://t.me/calendario_economico_argentino',label='Calendario Económico Argentino',icon='🗓️')
