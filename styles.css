@@ -205,7 +205,7 @@ div[data-testid="stExpander"]{
 /*Editar st.text_input*/
 div[data-testid="stTextInput"]{
    background-color: black;
-   color: whitesmoke;
+   color: white;
 }
 div[data-testid="stTextInput"]>div[data-testid="stWidgetLabel"]>div[data-testid="stMarkdownContainer"]{
    display: flex;
