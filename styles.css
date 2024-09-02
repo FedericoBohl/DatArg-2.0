@@ -49,42 +49,13 @@ h2[id="61901152"]{
 div[data-testid="stMetricValue"]{
    font-size:2.5em;
    font-weight:bold;
-   color: #82858d;
+   color: #404040;
 }
 
 div[data-testid="StyledFullScreenButton"]{
    visibility:collapse;
 }
 
-
-/*Estilos para tablas*/
-
-.dashboardTable {
-   border-collapse: collapse;
-   margin: 25px 0;
-   font-size: 0.9em;
-   font-family: sans-serif;    
-   width:100%
-}
-.dashboardTable thead tr {
-   background-color: #f4f4f9;
-   color: #12bb94;
-   text-align: left;
-}
-.dashboardTable th,
-.dashboardTable td {
-   /* padding: 5px 5px; */
-   border:none;
-}
-
-.dashboardTable tbody tr {
-   border-bottom: 1px solid #ecedff;
-   background-color:white;
-}
-
-.dashboardTable tbody tr:nth-of-type(even) {
-   background-color: #f3f3f3;
-}
 
 #MainMenu{
    visibility: hidden;
