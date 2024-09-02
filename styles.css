@@ -145,7 +145,28 @@ div[data-testid="stToolbar"]{
    flex-direction: column;
    gap: 10px;
 }
-
+.stRadio > div:first-child {
+   margin-bottom: 10px;
+   font-size: 1.2em;
+   font-weight: bold;
+   color: #2b4f81;
+}
+.stRadio input[type="radio"]:checked + div > div:first-child {
+   background-color: #accbeb;
+   border-color: #8baed5;
+}
+.stRadio div[data-baseweb="radio"] > div:first-child {
+   width: 20px;
+   height: 20px;
+   border-radius: 4px;
+   border: 1px solid #b3c7e6;
+   background-color: #fff;
+}
+.stRadio > div:last-child {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+}
 .stRadio label {
    background-color: white;
    padding: 10px 20px;
