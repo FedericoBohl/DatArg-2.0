@@ -230,6 +230,7 @@ div[data-testid="stNumberInputContainer"]{
    background-color: #f0f7ff;
 }
 div[data-testid="stNumberInputStepUp"]{
+   display: flex;
    background-color: #f0f7ff;
 }
 
