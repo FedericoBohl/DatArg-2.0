@@ -225,13 +225,13 @@ div[data-testid="stTextInput"]>div[data-testid="stWidgetLabel"]>div[data-testid=
 }
 
 /* Estilo cuando el cursor está sobre el popover pero no está expandido */
-.stPopover:hover:not([aria-expanded="true"]) {
+.stTooltipHoverTarget:hover:not([aria-expanded="true"]) {
    background-color: #f0f7ff; /* Cambia el fondo a un azul pastel muy claro al hacer hover */
    cursor: pointer; /* Cambia el cursor para indicar interactividad */
 }
 
 /* Estilo cuando el popover está expandido */
-.stPopover[aria-expanded="true"] {
+.stTooltipHoverTarget[aria-expanded="true"] {
    background-color: #accbeb; /* Azul pastel suave cuando está expandido */
    color: white; /* Texto blanco cuando está expandido */
 }
