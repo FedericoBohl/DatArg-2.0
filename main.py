@@ -172,4 +172,4 @@ with st.container():
         st.write(f"Gracias por tus sugerencias: {suggestion}")
     st.markdown('''
                 <style>background-color: black</style>
-                ''')
+                ''',unsafe_allow_html=True)
