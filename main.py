@@ -147,7 +147,7 @@ with st.container():
         placeholder="Escribe aquí tus sugerencias o comentarios..."
     )
 with t_cal:
-    st.caption('¿Queres enterarte cuando sale un nuevo dato? Subscribite al bot de Telegram para que te avisemos cuando salgan.')
-    st.page_link(page='https://t.me/calendario_economico_argentino',label='Calendario Económico Argentino',icon='🗓️')
+    #st.caption('¿Queres enterarte cuando sale un nuevo dato? Subscribite al bot de Telegram para que te avisemos cuando salgan.')
+    #st.page_link(page='https://t.me/calendario_economico_argentino',label='Calendario Económico Argentino',icon='🗓️')
     df = pd.read_csv('Calendar/calendar_events.csv')
     calendario=create_calendar(df)
