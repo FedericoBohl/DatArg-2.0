@@ -187,23 +187,38 @@ div[data-testid="stToolbar"]{
 
 
 /* Ajustan st.Expander  */
-.st-emotion-cache-1dtefog{
-   display: flex;
-   justify-content: center;
-}
-div[data-testid="stExpander"]:hover{
-   display: flex;
-   justify-content: center;
-   color: black;
-   background-color: #accbeb;
+/* Contenedor principal del expander */
+.stExpander {
+   border: 2px solid #b3c7e6; /* Un borde azul suave */
+   border-radius: 15px; /* Bordes redondeados */
+   background-color: #f0f7ff; /* Azul pastel muy claro para el fondo */
+   padding: 10px;
+   margin-bottom: 15px; /* Espacio debajo del expander */
 }
 
-div[data-testid="stExpanderDetails"]:hover{
-   display: grid;
-   justify-content:left;
-   color: black;
-   background-color: white;
+/* Estilo del encabezado del expander */
+.stExpander > div:first-child {
+   background-color: #accbeb; /* Azul pastel suave para el encabezado */
+   color: white !important; /* Color del texto */
+   border-radius: 10px; /* Bordes redondeados para el encabezado */
+   padding: 8px 16px; /* Espaciado interior */
+   margin: -10px -10px 10px -10px; /* Ajusta el margen para que se expanda hasta el borde */
+   transition: all 0.2s ease-in-out; /* Transición suave para la apertura/cierre */
 }
+
+/* Hover en el encabezado */
+.stExpander > div:first-child:hover {
+   background-color: #dbe9f9; /* Un color más claro al pasar el mouse */
+   color: #2b4f81 !important; /* Azul más oscuro para el texto */
+}
+
+/* Contenido dentro del expander */
+.stExpander > div:nth-child(2) {
+   padding: 10px;
+   background-color: white; /* Fondo blanco para el contenido expandido */
+   border-radius: 10px; /* Bordes redondeados */
+}
+
 
 /*Ocultar logo streamlit*/
 .viewerBadge_container__r5tak{
