@@ -92,6 +92,11 @@ div[data-testid="stToolbar"]{
 }
 
 /*Editar Tabs*/
+.stTabs{
+   background-color: aliceblue;
+}
+
+
 .stTabs [role="tablist"] {
    display: flex;
    justify-content: center; /* Asegura que las tabs se centren dentro del contenedor */
