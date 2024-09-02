@@ -191,7 +191,7 @@ div[data-testid="stToolbar"]{
    display: flex;
    justify-content: center;
 }
-div[data-testid="stExpander"]:hover >div[data-testid="stExpanderDetails"]{
+div[data-testid="stExpander"] >div[data-testid="stExpanderDetails"]:hover{
    display: flex;
    justify-content: center;
    color: black;
