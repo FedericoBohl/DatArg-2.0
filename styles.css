@@ -208,3 +208,9 @@ button[data-testid="manage-app-button"]{
    display: flex;
    visibility:hidden;
 }
+
+
+
+.stLinkButton{
+   height: 100%;
+}
