@@ -291,7 +291,7 @@ def plot_deficit(escala,data:pd.DataFrame):
 
 #@st.cache_data(show_spinner=False)
 def make_map(data,geo,extras:pd.DataFrame,eleccion):
-    st.write(extras.to_dict())
+    extras=extras.to_dict()
     fig = make_subplots(
         rows=2, cols=1,
         row_heights=[0.7, 0.3], # Ajusta la altura de las filas según tu preferencia
@@ -330,28 +330,29 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
     fig.add_traces(mapa.data, rows=1, cols=1)
 
     # Añadir las tres métricas como gráficos individuales (ejemplo de pie charts)
-    fig.add_trace(go.Indicator(
-    mode="gauge+number",  # Modo del indicador que incluye el gauge y el número
-    value=extras[f'% {eleccion}'][2],  # Valor para el gauge (68%) 
-    gauge={
-        'axis': {'range': [0, 100]},  # Rango del gauge de 0 a 100%
-        'bar': {'color': "darkblue"},  # Color de la barra del gauge
-        'steps': [
-            {'range': [0, 50], 'color': "lightgray"},  # Colores opcionales por pasos
-            {'range': [50, 100], 'color': "lightgreen"}
-        ],
-        'threshold': {
-            'line': {'color': "red", 'width': 4},  # Línea de umbral opcional
-            'thickness': 0.75,
-            'value': 68  # Valor del umbral que indica la posición en el gauge
-        }
-    },
-    number={'value': extras[f'{eleccion}'][2], 'suffix': " units"},  # Valor que se muestra como número
-    domain={'x': [0, 1], 'y': [0, 1]}  # Dominios para el tamaño y posición del gauge
-    ), row=2, col=1)
+    for k in extras['Ejercicio'].keys():
+        fig.add_trace(go.Indicator(
+        mode="gauge+number",  # Modo del indicador que incluye el gauge y el número
+        value=extras[f'% {eleccion}'][k],  # Valor para el gauge (68%)
+        title={'text':k},
+        gauge={
+            'axis': {'range': [0, 100]},  # Rango del gauge de 0 a 100%
+            'bar': {'color': "darkblue"},  # Color de la barra del gauge
+            'steps': [
+                {'range': [0, 50], 'color': "lightgray"},  # Colores opcionales por pasos
+                {'range': [50, 100], 'color': "lightgreen"}
+            ],
+            'threshold': {
+                'line': {'color': "red", 'width': 4},  # Línea de umbral opcional
+                'thickness': 0.75,
+                'value': 68  # Valor del umbral que indica la posición en el gauge
+            }
+        },
+        number={'value': extras[f'{eleccion}'][k], 'suffix': " units"},  # Valor que se muestra como número
+        domain={'x': [0, 1], 'y': [0, 1]}  # Dominios para el tamaño y posición del gauge
+        ), row=2, col=1)
     #fig.add_trace(go.Pie(labels=["Métrica 2"], values=[20], name="Métrica 2"), row=2, col=1)
     #fig.add_trace(go.Pie(labels=["Métrica 3"], values=[30], name="Métrica 3"), row=2, col=1)
-    st.write(extras)
     # Actualizar el layout de la figura
     fig.update_layout(
         mapbox=dict(
