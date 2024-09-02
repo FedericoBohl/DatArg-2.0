@@ -225,3 +225,7 @@ button[data-testid="manage-app-button"]{
 div[data-baseweb="input"]{
    background-color: #f0f7ff;
 }
+
+.st-cw{
+   background-color:#f0f7ff ;
+}
