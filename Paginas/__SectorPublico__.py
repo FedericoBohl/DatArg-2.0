@@ -333,24 +333,25 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
     col=1
     for k in extras['Ejercicio'].keys():
         fig.add_trace(go.Indicator(
-    mode="gauge+number",  # Modo del indicador que incluye el gauge y el número
-    value=68,  # Valor para el gauge (68%)
-    gauge={
-        'axis': {'range': [0, 100]},  # Rango del gauge de 0 a 100%
-        'bar': {'color': "darkblue"},  # Color de la barra del gauge
-        'steps': [
-            {'range': [0, 50], 'color': "lightgray"},  # Colores opcionales por pasos
-            {'range': [50, 100], 'color': "lightgreen"}
-        ],
-        'threshold': {
-            'line': {'color': "red", 'width': 4},  # Línea de umbral opcional
-            'thickness': 0.75,
-            'value': 68  # Valor del umbral que indica la posición en el gauge
-        }
-    },
-    number={'value': 2020, 'suffix': " units"},  # Valor que se muestra como número
-    domain={'x': [0, 1], 'y': [0, 1]}  # Dominios para el tamaño y posición del gauge
-    ), row=2, col=col)
+        mode="gauge+number",  # Modo del indicador que incluye el gauge y el número
+        value=extras[f'% {eleccion}'][k],  # Valor para el gauge (68%)
+        title={'text':k},
+        gauge={
+            'axis': {'range': [0, 100]},  # Rango del gauge de 0 a 100%
+            'bar': {'color': "darkblue"},  # Color de la barra del gauge
+            'steps': [
+                {'range': [0, 50], 'color': "lightgray"},  # Colores opcionales por pasos
+                {'range': [50, 100], 'color': "lightgreen"}
+            ],
+            'threshold': {
+                'line': {'color': "red", 'width': 4},  # Línea de umbral opcional
+                'thickness': 0.75,
+                'value': 68  # Valor del umbral que indica la posición en el gauge
+            }
+        },
+        #number=extras[f'{eleccion}'][k],  # Valor que se muestra como número
+        domain={'x': [0, 1], 'y': [0, 1]}  # Dominios para el tamaño y posición del gauge
+        ), row=2, col=col)
         col+=1
     #fig.add_trace(go.Pie(labels=["Métrica 2"], values=[20], name="Métrica 2"), row=2, col=1)
     #fig.add_trace(go.Pie(labels=["Métrica 3"], values=[30], name="Métrica 3"), row=2, col=1)
