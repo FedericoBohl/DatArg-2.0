@@ -423,7 +423,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
         mapbox=dict(
             center={"lat": -38.4161, "lon": -63.6167},
             style="white-bg",
-            zoom=2.65,
+            zoom=2.0,
             layers=[dict(below='traces', type='fill', source=geo, color="lightblue")]
         ),
         showlegend=False,
