@@ -219,17 +219,6 @@ def plot_deficit(escala,data:pd.DataFrame):
     fig.add_trace(go.Bar(x=data.index,y=data["Superavit Primario"],name="Superavit Primario",marker_color=olive))
     fig.add_trace(go.Bar(x=data.index,y=-data["Intereses de Deuda"],name="Intereses de deuda",marker_color=teal))
     fig.add_hline(y=0,line_dash="dot",secondary_y=True)
-    fig.add_annotation(text="Déficit 0",
-                    xref="paper", yref="paper",
-                    x=0.9, y=0.98, showarrow=False,
-                        font=dict(size=12,color=black),
-                        align="center",
-                        bordercolor=black,
-                        borderwidth=1,
-                        borderpad=2,
-                        bgcolor=white,
-                        opacity=0.8
-                        )
     fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1),
         barmode="relative",height=450, 
         legend=dict(
@@ -256,17 +245,6 @@ def plot_deficit(escala,data:pd.DataFrame):
     fig.add_trace(go.Bar(x=data.index, y=data["Ingresos"], name="Ingresos", marker_color=green), secondary_y=False)
     fig.add_trace(go.Bar(x=data.index, y=-data["Gastos"], name="Gastos", marker_color=red), secondary_y=False)
     fig.add_hline(y=0,line_dash="dot",secondary_y=True)
-    fig.add_annotation(text="Déficit 0",
-            xref="paper", yref="paper",
-            x=0.9, y=0.98, showarrow=False,
-            font=dict(size=12,color=black),
-            align="center",
-            bordercolor=black,
-            borderwidth=1,
-            borderpad=2,
-            bgcolor=white,
-            opacity=0.8
-            )
     if escala=="***Millones de ARS***":
         fig['layout']['yaxis']['title']='Gasto/Ingresos-Millones de ARS'
         fig['layout']['yaxis2']['title']='Superávit/Déficit-Millones de ARS'
