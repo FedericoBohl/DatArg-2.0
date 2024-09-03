@@ -49,16 +49,6 @@ def make_cedears(data_now : pd.DataFrame):
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
     data.set_index('Nombre', inplace=True)
     data=data.drop(columns=['Name','Weigths'])
-    c1,c2= st.columns((0.6,0.4))
-    with c1:
-        st.subheader('Listado de CEDEARS')
-        st.dataframe(data,use_container_width=True)
-    with c2:
-        st.subheader('Buscador de Cedears')
-        st.selectbox('Buscador de cedears',label_visibility='collapsed',options=data.index.to_list(),key='cedebuscado')
-        st.dataframe(data.loc[data.index==S.cedebuscado].transpose(),use_container_width=True)
-        #Anda mal, posiblemente porque estoy usando cache
-
 
 @st.cache_data(show_spinner=False)
 def make_acciones(data_now_merv : pd.DataFrame , data_now_gen : pd.DataFrame):
@@ -110,10 +100,6 @@ def make_acciones(data_now_merv : pd.DataFrame , data_now_gen : pd.DataFrame):
     #fig_gen.update_traces(marker=dict(cornerradius=10))
     #fig_gen.update_layout(margin=dict(l=1, r=1, t=10, b=1))
     return fig_merv,None#,fig_gen
-
-@st.cache_data(show_spinner=False)
-def cede_buscado(data,choosen):
-    return st.dataframe(data.loc[data.index==choosen].transpose(),use_container_width=True)
 
 def make_merv_web():
     st.header('Mercado de Capitales')
@@ -208,7 +194,7 @@ def make_merv_web():
                 with c2:
                     st.subheader('Buscador de Cedears')
                     st.selectbox('Buscador de cedears',label_visibility='collapsed',options=S.df_cedears.index.to_list(),key='cedebuscado')
-                    cede_buscado(S.df_cedears,S.cedebuscado)
+                    st.dataframe(S.df_cedears.loc[S.df_cedears.index==S.cedebuscado].transpose(),use_container_width=True)
 
             else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     except:
