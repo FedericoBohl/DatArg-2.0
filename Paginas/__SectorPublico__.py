@@ -344,8 +344,8 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                                         'axis': {'range': [0, 100]},  # Rango del gauge de 0 a 100%
                                         'bar': {'color': "rgba(0, 0, 0, 0)"},  # Hacer la barra central completamente transparente
                                         'steps': [
-                                            {'range': [0, extras[f'% {eleccion}'][25]], 'color': 'blue'},
-                                            {'range': [extras[f'% {eleccion}'][25], 100], 'color': 'lightblue'}
+                                            {'range': [0, int(extras[f'% {eleccion}'][25])], 'color': 'blue'},
+                                            {'range': [int(extras[f'% {eleccion}'][25]), 100], 'color': 'lightblue'}
                                         ],
                                         'threshold': {
                                             #'line': {'color': "blue", 'width': 4},
