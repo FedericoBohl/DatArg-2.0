@@ -328,26 +328,34 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
 
     # Añadir la figura del mapa al subplot
     fig.add_traces(mapa.data, rows=1, cols=2)
-
+    picnic_colors = [
+                    [0.0, '#ff0000'],  # Rojo
+                    [0.25, '#ff99cc'], # Rosa
+                    [0.5, '#ffff00'],  # Amarillo
+                    [0.75, '#66ff66'], # Verde
+                    [1.0, '#00ccff']   # Azul
+                    ]
     # Añadir los indicadores (métricas) como gráficos individuales
     fig.add_trace(go.Indicator(
-        mode="number+gauge",
-        value=extras[eleccion][25]/1000,
-        number = {"prefix": "$", "suffix": "k"},
-            gauge={
-                    'axis': {'range': [0, 100]},  # Rango del gauge de 0 a 100%,
-                    'bar':None,
-                    'steps': [
-                        {'range': [0, 50], 'color': "lightgray"},  # Colores opcionales por pasos
-                        {'range': [50, 100], 'color': "lightgreen"}
-                    ],
-                    'threshold': {
-                        'thickness': 0.75,
-                        'value': extras[f'% {eleccion}'][25]  # Valor del umbral que indica la posición en el gauge
-                    }
-                },
-        title={"text": f"{extras['Ubicacion geografica'][25]}"},
-    ), row=1, col=1)
+                                mode="number+gauge",  # Modo del indicador que incluye el número y el gauge
+                                value=extras[eleccion][25] / 1000,  # Valor que se muestra en el número (dividido por 1000 para mostrar en 'k')
+                                number={"prefix": "$", "suffix": "k"},  # Prefijo y sufijo del número
+                                gauge={
+                                    'axis': {'range': [0, 100]},  # Rango del gauge de 0 a 100%
+                                    'bar': None,  # Sin barra central, solo steps
+                                    'steps': [
+                                        {'range': [0, 25], 'color': picnic_colors[0][1]},
+                                        {'range': [25, 50], 'color': picnic_colors[1][1]},
+                                        {'range': [50, 75], 'color': picnic_colors[2][1]},
+                                        {'range': [75, 100], 'color': picnic_colors[3][1]}
+                                    ],
+                                    'threshold': {
+                                        'thickness': 0.75,  # Grosor de la línea de umbral
+                                        'value': extras[f'% {eleccion}'][25]  # Valor del umbral que indica la posición en el gauge
+                                    }
+                                },
+                                title={"text": f"{extras['Ubicacion geografica'][25]}"}  # Título con el nombre de la ubicación geográfica
+                            ), row=1, col=1)
     fig.add_trace(go.Indicator(
         mode="number+delta",
         value=450,
