@@ -294,7 +294,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
     extras=extras.to_dict()
     fig = make_subplots(
         rows=7, cols=2,
-        column_widths=[0.5, 0.5],
+        column_widths=[0.65, 0.35],
         specs=[[{"type": "domain"}, {"rowspan": 7,"type": "choroplethmapbox"}],
                [None,None],
                 [{"type": "domain"}, None],
@@ -305,7 +305,6 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
         print_grid=True)
 
     # Añadir la figura del mapa al subplot
-    #fig.add_traces(mapa.data, rows=1, cols=2)
     fig.add_trace(go.Choroplethmapbox(
                     geojson=geo,  # GeoJSON con los datos geográficos
                     locations=data['Ubicacion geografica'],  # Ubicaciones geográficas para las cuales tienes datos
@@ -413,18 +412,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
         showlegend=False,
         margin=dict(t=50, b=50, l=0, r=0)
     )
-    # Añadir la figura del mapa al subplot
 
-    # Añadir las tres métricas como gráficos individuales (ejemplo de pie charts)
-    #fig.add_trace(go.Indicator(
-    #mode="gauge+number",  # Modo del indicador que incluye el gauge y el número
-    #value=extras[f'% {eleccion}'][23],  # Valor para el gauge (68%)
-    #title={'text':23},
-    #domain={'x': [0, 1], 'y': [0, 1]}  # Dominios para el tamaño y posición del gauge
-    #),row=1, col=1)
-    #fig.add_trace(go.Pie(labels=["Métrica 2"], values=[20], name="Métrica 2"), row=2, col=1)
-    #fig.add_trace(go.Pie(labels=["Métrica 3"], values=[30], name="Métrica 3"), row=2, col=1)
-    # Actualizar el layout de la figura
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 @st.cache_data(show_spinner=False)
