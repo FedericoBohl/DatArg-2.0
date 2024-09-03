@@ -619,4 +619,7 @@ def make_sect_pub_web():
             c1.subheader('Gasto Provincial')
             c2.radio('deficit_proc',label_visibility='collapsed',options=['Presupuestado','Ejecutado'],key='deficit_elegido',horizontal=False)
             #data,geo,extras=load_data_map(datetime.now().strftime("%Y%m%d"))
-            make_map(S.data_map,S.geo_map,S.extras_map,S.deficit_elegido)
+            try:
+                make_map(S.data_map,S.geo_map,S.extras_map,S.deficit_elegido)
+            except Exception as e:
+                st.write(e)
