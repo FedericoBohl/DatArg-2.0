@@ -326,7 +326,8 @@ def make_pobreza_web():
         plot_pobreza_indigencia(S.pobind)
     with c2.container(border=True):
         st.subheader('Ingresos mínimos y líneas de pobreza')
-        st.radio('Datos-Ingresos',label_visibility='collapsed',options=['Pesos Corrientes','Moneda Constante','Dólares'],horizontal=True,key='metrica_ingresos')
+        space1,c,space2=st.columns((0.3,0.4,0.3))
+        c.radio('Datos-Ingresos',label_visibility='collapsed',options=['Pesos Corrientes','Moneda Constante','Dólares'],horizontal=False,key='metrica_ingresos')
 
         if S.metrica_ingresos=='Pesos Corrientes':
             plot_ingresos(salarios[["Canasta Basica","Linea Indigencia","Linea Pobreza","SalMVM","Haber Jub"]])
