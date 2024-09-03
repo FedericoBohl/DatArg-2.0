@@ -80,7 +80,7 @@ div[data-testid="stToolbar"]{
 
 .stTabs [role="tab"] {
    padding: 8px 16px;
-   transition: all 0.15s ease-out;
+   transition: all 1.5s ease-out;
    flex-shrink: 1; /* Permite que las tabs se reduzcan si hay muchas */
    flex-grow: 1; /* Permite que las tabs se expandan si hay espacio */
    max-width: 200px; /* Establece un ancho máximo */
