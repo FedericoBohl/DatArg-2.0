@@ -58,7 +58,7 @@ def load_precios(end):
     
     return precios, rem
 
-@st.cache_resource(show_spinner=False)
+#@st.cache_resource(show_spinner=False)
 def plot_inflacion(data,rem,start,end):
     rem_IA=[]
     for i in range(len(rem.index)-1):
@@ -84,7 +84,7 @@ def plot_inflacion(data,rem,start,end):
     fig.update_layout(hovermode="x unified", margin=dict(l=1, r=1, t=75, b=1),height=450,bargap=0.2,legend=dict(
                                         orientation="h",
                                         yanchor="bottom",
-                                        y=-0.75,
+                                        y=0,
                                         xanchor="center",
                                         x=0.5,
                                         bordercolor=black,
