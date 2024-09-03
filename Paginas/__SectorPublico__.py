@@ -294,7 +294,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
     extras=extras.to_dict()
     fig = make_subplots(
         rows=3, cols=3,
-        column_widths=[0.65/2,0.65/2, 0.35],
+        column_widths=[0.5/2,0.5/2, 0.5],
         specs=[[{"type": "domain"},{"type": "domain"}, {"rowspan": 3,"type": "choroplethmapbox"}],
                [None,None,None],
                 [{"type": "domain"},{"type": "domain"}, None]],
