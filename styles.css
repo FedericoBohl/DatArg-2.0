@@ -241,7 +241,7 @@ span[class="st-fg st-bh st-cy st-fh st-ev st-er st-fi st-fj st-az st-ct st-cu st
 }
 
 /* Estilo cuando el checkbox está seleccionado */
-.stCheckbox input[type="checkbox"]:checked + div:before {
+span[class="st-fg st-bh st-cy st-fh st-ev st-er st-fi st-fj st-az st-ct st-cu st-cv st-cw st-cp st-cq st-cr st-cs st-fk st-fl st-fm st-fn st-ej st-ek st-em st-el st-fo st-dg st-eu st-f3 st-fp st-fq st-fr st-fs st-ay st-av st-ft st-fu"]:checked + div:before {
    background-color: #accbeb; /* Fondo azul pastel suave cuando está seleccionado */
    border-color: #8baed5; /* Borde más oscuro cuando está seleccionado */
    content: "✔"; /* Añadir un tick de verificación */
@@ -251,7 +251,7 @@ span[class="st-fg st-bh st-cy st-fh st-ev st-er st-fi st-fj st-az st-ct st-cu st
 }
 
 /* Estilo cuando se pasa el cursor sobre el checkbox */
-.stCheckbox:hover {
+span[class="st-fg st-bh st-cy st-fh st-ev st-er st-fi st-fj st-az st-ct st-cu st-cv st-cw st-cp st-cq st-cr st-cs st-fk st-fl st-fm st-fn st-ej st-ek st-em st-el st-fo st-dg st-eu st-f3 st-fp st-fq st-fr st-fs st-ay st-av st-ft st-fu"]:hover {
    background-color: #dbe9f9; /* Fondo ligeramente más oscuro en hover */
    border-color: #8baed5; /* Borde más oscuro en hover */
 }
