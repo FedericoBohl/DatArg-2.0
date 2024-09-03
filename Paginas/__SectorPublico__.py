@@ -312,6 +312,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                     featureidkey='properties.nombre',  # Clave que corresponde a la propiedad en geojson
                     z=data[f'% {eleccion}'],  # Datos de color
                     colorscale='Picnic',  # Escala de colores continua
+                    name='',
                     customdata=data[['properties.nombre', f'{eleccion}', f'% {eleccion}']],  # Datos adicionales para el hover
                     hovertemplate="<br>".join([
                         "<b>%{customdata[0]}</b>",
@@ -371,7 +372,6 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                                      },
                                 title={"text": f"{extras['Ubicacion geografica'][24]}"}  # Título con el nombre de la ubicación geográfica
                             ), row=3, col=1)
-
     fig.add_trace(go.Indicator(
                                 mode="number+gauge",  # Modo del indicador que incluye el número y el gauge
                                 value=extras[eleccion][26] / 1000,  # Valor que se muestra en el número (dividido por 1000 para mostrar en 'k')
@@ -391,7 +391,6 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                                      },
                                 title={"text": f"{extras['Ubicacion geografica'][26]}"}  # Título con el nombre de la ubicación geográfica
                             ), row=5, col=1)
-
     fig.add_trace(go.Indicator(
                                 mode="number+gauge",  # Modo del indicador que incluye el número y el gauge
                                 value=extras[eleccion][27] / 1000,  # Valor que se muestra en el número (dividido por 1000 para mostrar en 'k')
