@@ -308,7 +308,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
         color=f'% {eleccion}',
         hover_name='properties.nombre',
         custom_data=['properties.nombre',f'{eleccion}',f'% {eleccion}'],
-        color_continuous_scale='Picnic',
+        color_continuous_scale='RdBu',
         mapbox_style="carto-positron",
         zoom=2.6, center={"lat": -38.40, "lon": -63.60},
         opacity=1
@@ -334,15 +334,13 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
         value=extras[eleccion][25],
             gauge={
                     'axis': {'range': [0, 100]},  # Rango del gauge de 0 a 100%
-                    'bar': {'color': "darkblue"},  # Color de la barra del gauge
                     'steps': [
                         {'range': [0, 50], 'color': "lightgray"},  # Colores opcionales por pasos
                         {'range': [50, 100], 'color': "lightgreen"}
                     ],
                     'threshold': {
-                        'line': {'color': "red", 'width': 4},  # Línea de umbral opcional
                         'thickness': 0.75,
-                        'value': 68  # Valor del umbral que indica la posición en el gauge
+                        'value': extras[f'% {eleccion}'][25]  # Valor del umbral que indica la posición en el gauge
                     }
                 },
         title={"text": f"{extras['Ubicacion geografica'][25]}"},
