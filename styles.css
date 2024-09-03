@@ -208,60 +208,6 @@ div[data-testid="stTextInput"]>div[data-testid="stWidgetLabel"]>div[data-testid=
    color: white; /* Texto blanco cuando está expandido */
 }
 
-/*Editar st.checkbox*/
-/* Contenedor principal del checkbox */
-.stCheckbox {
-   display: flex;
-   align-items: center;
-   padding: 8px 12px;
-   background-color: #f0f7ff; /* Fondo azul pastel claro */
-   border: 2px solid #b3c7e6; /* Borde azul suave */
-   border-radius: 15px; /* Bordes redondeados */
-   margin-bottom: 10px; /* Espacio debajo del checkbox */
-   transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out; /* Transición suave */
-}
-
-/* Checkbox personalizado */
-.stCheckbox input[type="checkbox"] {
-   display: none; /* Ocultar el checkbox por defecto */
-}
-
-/* Estilo personalizado para el cuadrado del checkbox 
-.stCheckbox div:before {*/
-span[class="st-fg st-bh st-cy st-fh st-ev st-er st-fi st-fj st-az st-ct st-cu st-cv st-cw st-cp st-cq st-cr st-cs st-fk st-fl st-fm st-fn st-ej st-ek st-em st-el st-fo st-dg st-eu st-f3 st-fp st-fq st-fr st-fs st-ay st-av st-ft st-fu"]{
-   content: "";
-   display: inline-block;
-   width: 20px;
-   height: 20px;
-   border: 2px solid #b3c7e6; /* Borde azul suave */
-   border-radius: 5px; /* Bordes ligeramente redondeados */
-   background-color: white; /* Fondo blanco */
-   margin-right: 10px; /* Espacio a la derecha del checkbox */
-   transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out; /* Transición suave */
-}
-
-/* Estilo cuando el checkbox está seleccionado */
-.stCheckbox [aria-checked="false"] {
-   background-color: #accbeb; /* Fondo azul pastel suave cuando está seleccionado */
-   border-color: #8baed5; /* Borde más oscuro cuando está seleccionado */
-   content: "✔"; /* Añadir un tick de verificación */
-   color: white; /* Color del tick */
-   text-align: center;
-   line-height: 18px; /* Centrar el tick verticalmente */
-}
-
-/* Estilo cuando se pasa el cursor sobre el checkbox */
-span[class="st-fg st-bh st-cy st-fh st-ev st-er st-fi st-fj st-az st-ct st-cu st-cv st-cw st-cp st-cq st-cr st-cs st-fk st-fl st-fm st-fn st-ej st-ek st-em st-el st-fo st-dg st-eu st-f3 st-fp st-fq st-fr st-fs st-ay st-av st-ft st-fu"]:hover {
-   background-color: #dbe9f9; /* Fondo ligeramente más oscuro en hover */
-   border-color: #8baed5; /* Borde más oscuro en hover */
-}
-
-.stCheckbox div {
-   color: #2b4f81; /* Color del texto al lado del checkbox */
-}
-
-
-
 /* Contenido dentro del popover */
 .stPopover > div:nth-child(2) {
    padding: 10px;
@@ -302,7 +248,7 @@ div[data-testid="stNumberInputStepUp"]{
    background-color: #f0f7ff;
 }
 
-span[class="st-f3 st-en st-eo st-ep st-eq st-f4 st-bh st-cm st-f5"]>.st-et{
+div[class="st-f3 st-en st-eo st-ep st-eq st-f4 st-bh st-cm st-f5"]>.st-et{
    background-color:#f0f7ff ;
    border-bottom-left-radius: 35%;
    border-bottom-right-radius: 35%;
