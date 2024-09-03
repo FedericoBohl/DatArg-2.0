@@ -324,15 +324,6 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                     marker_line_color='black'  # Color de la línea del marcador
                 ),
     row=1,col=2)
-    fig.update_traces(
-        marker_line_width=1.5,
-        marker_line_color='black',
-        hovertemplate="<br>".join([
-            "<b>%{customdata[0]}</b>",
-            "Presupuesto Brindado: $%{customdata[1]:.2f}" if eleccion == 'Presupuesado' else "Presupuesto Ejecutado: $%{customdata[1]:.2f}",
-            "Proporción del total: %{customdata[2]:.2f}%" if eleccion == 'Presupuesado' else "Presupuesto Ejecutado: %{customdata[2]:.2f}%"
-        ])
-    )
     # Añadir los indicadores (métricas) como gráficos individuales
     fig.add_trace(go.Indicator(
                                 mode="number+gauge",  # Modo del indicador que incluye el número y el gauge
