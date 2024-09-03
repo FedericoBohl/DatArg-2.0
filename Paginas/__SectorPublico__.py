@@ -296,7 +296,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
         rows=3, cols=3,
         column_widths=[0.65/2,0.65/2, 0.35],
         specs=[[{"type": "domain"},{"type": "domain"}, {"rowspan": 3,"type": "choroplethmapbox"}],
-               [None,None],
+               [None,None,None],
                 [{"type": "domain"},{"type": "domain"}, None]],
                 #[None,None],
                 #[{"type": "domain"}, None],
