@@ -8,7 +8,7 @@ from plotly.subplots import make_subplots
 import pandas as pd
 from datetime import datetime,timedelta
 
-st.cache_resource(show_spinner=False)
+@st.cache_resource(show_spinner=False)
 def load_precios(end):
     his_data=pd.read_csv("His Data/his-precios.csv",delimiter=";")
     his_data['Unnamed: 0'] = pd.to_datetime(his_data.iloc[:, 0].values, format='%d/%m/%Y')
@@ -58,7 +58,7 @@ def load_precios(end):
     
     return precios, rem
 
-st.cache_resource(show_spinner=False)
+@st.cache_resource(show_spinner=False)
 def plot_inflacion(data,rem,start,end):
     rem_IA=[]
     for i in range(len(rem.index)-1):
@@ -95,7 +95,7 @@ def plot_inflacion(data,rem,start,end):
                                     )
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
-st.cache_resource(show_spinner=False)
+@st.cache_resource(show_spinner=False)
 def plot_categorias(data:pd.DataFrame,start,end):
     data=data.loc[f"{start}":f"{end}"]
     col=S.col_categoria
@@ -105,7 +105,7 @@ def plot_categorias(data:pd.DataFrame,start,end):
     fig.update_layout(hovermode="x unified", margin=dict(l=1, r=1, t=75, b=1),height=450,bargap=0.2,legend=dict(
                                         orientation="h",
                                         yanchor="bottom",
-                                        y=-0,
+                                        y=0,
                                         xanchor="center",
                                         x=0.5,
                                         bordercolor=black,
@@ -116,7 +116,7 @@ def plot_categorias(data:pd.DataFrame,start,end):
                                     )
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
-st.cache_resource(show_spinner=False)
+@st.cache_resource(show_spinner=False)
 def make_metrics(precios,rem):
     with st.container(border=True):
         c11,c12,c13,c14=st.columns(4,vertical_alignment='center')
