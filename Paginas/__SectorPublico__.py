@@ -376,7 +376,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                                         }
                                      },
                                 title={"text": f"{extras['Ubicacion geografica'][24]}"}  # Título con el nombre de la ubicación geográfica
-                            ), row=2, col=1)
+                            ), row=3, col=1)
 
     fig.add_trace(go.Indicator(
                                 mode="number+gauge",  # Modo del indicador que incluye el número y el gauge
@@ -396,7 +396,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                                         }
                                      },
                                 title={"text": f"{extras['Ubicacion geografica'][26]}"}  # Título con el nombre de la ubicación geográfica
-                            ), row=3, col=1)
+                            ), row=5, col=1)
 
     fig.add_trace(go.Indicator(
                                 mode="number+gauge",  # Modo del indicador que incluye el número y el gauge
@@ -416,7 +416,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                                         }
                                      },
                                 title={"text": f"{extras['Ubicacion geografica'][27]}"}  # Título con el nombre de la ubicación geográfica
-                            ), row=4, col=1)
+                            ), row=7, col=1)
 
     # Actualizar el layout de la figura
     fig.update_layout(
