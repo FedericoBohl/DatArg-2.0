@@ -81,7 +81,7 @@ def plot_inflacion(data,rem,start,end):
     if (start in range (2007,2015)) or (end in range (2007,2015)) or (2007<=end and 2015>=start):
         fig.add_vrect(x0=f"{max(2007,start)}-01", x1=f"{min(2015,end)}-12", 
             fillcolor="lightslategrey", opacity=0.25, line_width=0,label=dict(text="Intervención del INDEC",textposition="top center",font=dict(size=14, color='black')))
-    fig.update_layout(hovermode="x unified", margin=dict(l=1, r=1, t=1, b=1),height=450,bargap=0.2,legend=dict(
+    fig.update_layout(hovermode="x unified", margin=dict(l=1, r=1, t=75, b=1),height=450,bargap=0.2,legend=dict(
                                         orientation="h",
                                         yanchor="bottom",
                                         y=-0.2,
@@ -102,7 +102,7 @@ def plot_categorias(data:pd.DataFrame,start,end):
     fig=make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(go.Scatter(x=data.index,y=data[f"{col}-InfA"]*100,name="Var. Interanual",marker_color=navy,mode='lines'),secondary_y=False)
     fig.add_trace(go.Bar(x=data.index,y=data[f"{col}-InfM"]*100,name="Var. Mensual",marker_color='cornflowerblue'),secondary_y=True)
-    fig.update_layout(hovermode="x unified", margin=dict(l=1, r=1, t=1, b=1),height=450,bargap=0.2,legend=dict(
+    fig.update_layout(hovermode="x unified", margin=dict(l=1, r=1, t=75, b=1),height=450,bargap=0.2,legend=dict(
                                         orientation="h",
                                         yanchor="bottom",
                                         y=-0.2,
