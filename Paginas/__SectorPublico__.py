@@ -333,7 +333,6 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
     mode="gauge+number",  # Modo del indicador que incluye el gauge y el número
     value=extras[f'% {eleccion}'][23],  # Valor para el gauge (68%)
     title={'text':23},
-
     domain={'x': [0, 1], 'y': [0, 1]}  # Dominios para el tamaño y posición del gauge
     ),row=2, col=1)
     #fig.add_trace(go.Pie(labels=["Métrica 2"], values=[20], name="Métrica 2"), row=2, col=1)
