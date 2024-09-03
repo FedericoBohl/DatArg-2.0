@@ -391,16 +391,6 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
     #fig.add_trace(go.Pie(labels=["Métrica 2"], values=[20], name="Métrica 2"), row=2, col=1)
     #fig.add_trace(go.Pie(labels=["Métrica 3"], values=[30], name="Métrica 3"), row=2, col=1)
     # Actualizar el layout de la figura
-    fig.update_layout(
-        mapbox=dict(
-            center={"lat": -38.4161, "lon": -63.6167},
-            style="white-bg",
-            zoom=2.65,
-            layers=[dict(below='traces', type='fill', source=geo, color="lightblue")]
-        ),
-        showlegend=False,
-        margin=dict(t=0, b=0, l=0, r=0)
-    )
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 @st.cache_data(show_spinner=False)
