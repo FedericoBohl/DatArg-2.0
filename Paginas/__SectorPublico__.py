@@ -303,7 +303,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                 #[None,None],
                 #[{"type": "domain"}, None]],
         print_grid=True,
-        vertical_spacing=0.1)
+        horizontal_spacing=0.05)
 
     # Añadir la figura del mapa al subplot
     fig.add_trace(go.Choroplethmapbox(
