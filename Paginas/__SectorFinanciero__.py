@@ -186,16 +186,15 @@ def make_merv_web():
         with cedears:
             if S.df_cedears is not None:
                 make_cedears(S.df_cedears)
-
+                cede=S.df_cedears.copy().set_index('Nombre')
                 c1,c2= st.columns((0.6,0.4))
                 with c1:
                     st.subheader('Listado de CEDEARS')
-                    st.dataframe(S.df_cedears,use_container_width=True)
+                    st.dataframe(cede,use_container_width=True)
                 with c2:
                     st.subheader('Buscador de Cedears')
-                    cede=S.df_cedears.copy().set_index('Nombre')
-                    st.selectbox('Buscador de cedears',label_visibility='collapsed',options=S.df_cedears.index.to_list(),key='cedebuscado')
-                    st.dataframe(S.df_cedears.loc[S.df_cedears.index==S.cedebuscado].transpose(),use_container_width=True)
+                    st.selectbox('Buscador de cedears',label_visibility='collapsed',options=cede.index.to_list(),key='cedebuscado')
+                    st.dataframe(cede.loc[cede.index==S.cedebuscado].transpose(),use_container_width=True)
 
             else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     except:
