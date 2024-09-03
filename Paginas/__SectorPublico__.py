@@ -341,19 +341,16 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                                 value=extras[eleccion][25] / 1000,  # Valor que se muestra en el número (dividido por 1000 para mostrar en 'k')
                                 number={"prefix": "$", "suffix": "k"},  # Prefijo y sufijo del número
                                 gauge={
-                                    'axis': {'range': [0, 100]},  # Rango del gauge de 0 a 100%
-                                    'bar': None,  # Sin barra central, solo steps
-                                    'steps': [
-                                        {'range': [0, 25], 'color': picnic_colors[0][1]},
-                                        {'range': [25, 50], 'color': picnic_colors[1][1]},
-                                        {'range': [50, 75], 'color': picnic_colors[2][1]},
-                                        {'range': [75, 100], 'color': picnic_colors[3][1]}
-                                    ],
-                                    'threshold': {
-                                        'thickness': 0.75,  # Grosor de la línea de umbral
-                                        'value': extras[f'% {eleccion}'][25]  # Valor del umbral que indica la posición en el gauge
-                                    }
-                                },
+                                        'axis': {'range': [0, 100]},  # Rango del gauge de 0 a 100%
+                                        'bar': {'color': "rgba(0, 0, 0, 0)"},  # Hacer la barra central completamente transparente
+                                        'steps': [
+                                            {'range': [0, 100], 'color': 'lightblue'}  # Color celeste uniforme en todo el rango
+                                        ],
+                                        'threshold': {
+                                            'thickness': 0.75,  # Grosor de la línea de umbral
+                                            'value': extras[f'% {eleccion}'][25]  # Valor del umbral que indica la posición en el gauge
+                                        }
+                                     },
                                 title={"text": f"{extras['Ubicacion geografica'][25]}"}  # Título con el nombre de la ubicación geográfica
                             ), row=1, col=1)
     fig.add_trace(go.Indicator(
@@ -386,7 +383,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
             layers=[dict(below='traces', type='fill', source=geo, color="lightblue")]
         ),
         showlegend=False,
-        margin=dict(t=0, b=0, l=0, r=0)
+        margin=dict(t=50, b=0, l=0, r=0)
     )
     # Añadir la figura del mapa al subplot
 
