@@ -81,10 +81,10 @@ def plot_inflacion(data,rem,start,end):
     if (start in range (2007,2015)) or (end in range (2007,2015)) or (2007<=end and 2015>=start):
         fig.add_vrect(x0=f"{max(2007,start)}-01", x1=f"{min(2015,end)}-12", 
             fillcolor="lightslategrey", opacity=0.25, line_width=0,label=dict(text="Intervención del INDEC",textposition="top center",font=dict(size=14, color='black')))
-    fig.update_layout(hovermode="x unified", margin=dict(l=1, r=1, t=75, b=1),height=450,bargap=0.2,legend=dict(
+    fig.update_layout(hovermode="x unified", margin=dict(l=1, r=1, t=1, b=1),height=450,bargap=0.2,legend=dict(
                                         orientation="h",
                                         yanchor="bottom",
-                                        y=0,
+                                        y=-0.75,
                                         xanchor="center",
                                         x=0.5,
                                         bordercolor=black,
@@ -105,7 +105,7 @@ def plot_categorias(data:pd.DataFrame,start,end):
     fig.update_layout(hovermode="x unified", margin=dict(l=1, r=1, t=1, b=1),height=450,bargap=0.2,legend=dict(
                                         orientation="h",
                                         yanchor="bottom",
-                                        y=0,
+                                        y=-0.75,
                                         xanchor="center",
                                         x=0.5,
                                         bordercolor=black,
