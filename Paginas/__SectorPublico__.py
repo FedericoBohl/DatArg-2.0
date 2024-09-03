@@ -294,7 +294,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
     extras=extras.to_dict()
     fig = make_subplots(
         rows=4, cols=2,
-        specs=[[{}, {"colspan": 4}],
+        specs=[[{}, {"rowspan": 4}],
             [{}, None],
             [{}, None],
             [{}, None]],
