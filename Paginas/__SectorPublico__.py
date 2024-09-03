@@ -325,9 +325,15 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
     )
 
     # Añadir la figura del mapa al subplot
-    #fig.add_traces(mapa.data, rows=1, cols=2)
+    fig.add_traces(mapa.data, rows=1, cols=2)
 
     # Añadir los indicadores (métricas) como gráficos individuales
+    fig.add_trace(go.Indicator(
+        mode="number+delta",
+        value=450,
+        delta={'reference': 400},
+        title={"text": "Métrica 1"},
+    ), row=1, col=1)
     fig.add_trace(go.Indicator(
         mode="number+delta",
         value=450,
