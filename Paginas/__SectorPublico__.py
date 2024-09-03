@@ -411,7 +411,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
             layers=[dict(below='traces', type='fill', source=geo, color="lightblue")]
         ),
         showlegend=False,
-        margin=dict(t=50, b=50, l=50, r=0)
+        margin=dict(t=50, b=50, l=20, r=0)
     )
 
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
