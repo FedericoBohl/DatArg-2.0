@@ -427,7 +427,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
             layers=[dict(below='traces', type='fill', source=geo, color="lightblue")]
         ),
         showlegend=False,
-        margin=dict(t=50, b=0, l=0, r=0)
+        margin=dict(t=50, b=50, l=0, r=0)
     )
     # Añadir la figura del mapa al subplot
 
