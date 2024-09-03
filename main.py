@@ -84,6 +84,7 @@ def load_ALL(today):
     S.pbi_men=get_pbi()
     S.actividad_,S.pbi_=load_actividad(today)
     S.precios,S.rem=load_precios(today)
+    S.IPC=S.precios.loc['2004':,'IPC']
     S.reservas_,S.bcra_,S.bcragdp_,S.bcratco_,S.tasas_,S.TCR,S.TC=load_bcra(today)
     S.salarios,S.empleo,S.pobind=load_pobreza(today)
     S.bop_,S.bopgdp_,S.ica_,S.icagdp_,S.tot=load_sect_ext(today)
