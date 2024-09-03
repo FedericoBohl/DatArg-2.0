@@ -327,7 +327,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
     )
 
     # Añadir la figura del mapa al subplot
-    fig.add_traces(mapa.data, row=1, col=1)
+    fig.add_traces(mapa.data, rows=1, cols=1)
 
     # Añadir las tres métricas como gráficos individuales (ejemplo de pie charts)
     fig.add_trace(go.Indicator(
