@@ -641,16 +641,15 @@ def make_sect_pub_web():
     c1,c2=st.columns(2)
     with c1:
         with st.container(border=True):
-            st.subheader('Deuda Pública')
-            #deuda,deuda_mon=load_datos_deuda(2)
-            st.radio('Deuda Pública',options=['Endeudamiento Anual Acumulado','Composición de la Deuda Bruta','Pagos de Deuda por Moneda'],label_visibility='collapsed',horizontal=False,key='plot_deuda')
+            c11,c12=st.columns((0.4,0.6))
+            c11.subheader('Deuda Pública')
+            c12.radio('Deuda Pública',options=['Endeudamiento Anual Acumulado','Composición de la Deuda Bruta','Pagos de Deuda por Moneda'],label_visibility='collapsed',horizontal=False,key='plot_deuda')
             plot_deuda(S.deuda,S.plot_deuda) if S.plot_deuda=='Composición de la Deuda Bruta' else (plot_deuda(S.deuda_mon,S.plot_deuda) if S.plot_deuda=='Pagos de Deuda por Moneda' else plot_endeudamiento(S.endeudamiento,S.escala_sectpub))
     with c2:
         with st.container(border=True):
-            c1,c2=st.columns((0.4,0.6))
-            c1.subheader('Gasto Provincial')
-            c2.radio('deficit_proc',label_visibility='collapsed',options=['Ejecutado','Presupuestado'],key='deficit_elegido',horizontal=False)
-            #data,geo,extras=load_data_map(datetime.now().strftime("%Y%m%d"))
+            c21,c22=st.columns((0.4,0.6))
+            c21.subheader('Gasto Provincial')
+            c22.radio('deficit_proc',label_visibility='collapsed',options=['Ejecutado','Presupuestado'],key='deficit_elegido',horizontal=False)
             try:
                 make_map(S.data_map,S.geo_map,S.extras_map,S.deficit_elegido)
             except Exception as e:
