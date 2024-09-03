@@ -344,9 +344,11 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                                         'axis': {'range': [0, 100]},  # Rango del gauge de 0 a 100%
                                         'bar': {'color': "rgba(0, 0, 0, 0)"},  # Hacer la barra central completamente transparente
                                         'steps': [
-                                            {'range': [0, 100], 'color': 'lightblue'}  # Color celeste uniforme en todo el rango
+                                            {'range': [0, int(extras[f'% {eleccion}'][25])], 'color': 'blue'},
+                                            {'range': [int(extras[f'% {eleccion}'][25]), 100], 'color': 'lightblue'}
                                         ],
                                         'threshold': {
+                                            'line': {'color': "blue", 'width': 4},
                                             'thickness': 0.75,  # Grosor de la línea de umbral
                                             'value': extras[f'% {eleccion}'][25]  # Valor del umbral que indica la posición en el gauge
                                         }
