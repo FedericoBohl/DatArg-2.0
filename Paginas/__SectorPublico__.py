@@ -293,9 +293,10 @@ def plot_deficit(escala,data:pd.DataFrame):
 def make_map(data,geo,extras:pd.DataFrame,eleccion):
     extras=extras.to_dict()
     fig = make_subplots(
-        rows=2, cols=1,
-        row_heights=[0.7, 0.3], # Ajusta la altura de las filas según tu preferencia
-        specs=[[{},{}]],
+    rows=2, cols=1,
+    row_heights=[0.7, 0.3], # Ajusta la altura de las filas según tu preferencia
+    specs=[[{"type": "choroplethmapbox"}],
+           [{"type": "domain"}, {"type": "domain"}, {"type": "domain"}]],
         vertical_spacing=0.05  # Ajusta el espacio vertical entre el mapa y las métricas
     )
 
