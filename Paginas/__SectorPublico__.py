@@ -311,7 +311,8 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
         color_continuous_scale='RdBu',
         mapbox_style="carto-positron",
         zoom=2.6, center={"lat": -38.40, "lon": -63.60},
-        opacity=1
+        opacity=1,
+        color_discrete_sequence=["blue"],
     )
 
     # Actualizar las trazas del mapa
