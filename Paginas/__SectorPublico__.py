@@ -293,9 +293,15 @@ def plot_deficit(escala,data:pd.DataFrame):
 def make_map(data,geo,extras:pd.DataFrame,eleccion):
     extras=extras.to_dict()
     fig = make_subplots(
-    rows=2, cols=4,
-    row_heights=[0.7, 0.3], # Ajusta la altura de las filas según tu preferencia
-    vertical_spacing=0.05  # Ajusta el espacio vertical entre el mapa y las métricas
+        rows=4, cols=2,
+        specs=[
+            [{"type": "xy"}, {"type": "xy"}],  # Fila 1, Columna 1 y 2
+            [{"type": "xy"}, {"type": "xy"}],  # Fila 2, Columna 1 y 2
+            [{"type": "xy"}, {"type": "xy"}],  # Fila 3, Columna 1 y 2
+            [{"type": "xy"}, {"type": "xy"}]   # Fila 4, Columna 1 y 2
+        ],
+        vertical_spacing=0.1,  # Ajusta el espacio vertical entre filas
+        horizontal_spacing=0.05  # Ajusta el espacio horizontal entre columnas
     )
 
     # Añadir el mapa al subplot
@@ -325,7 +331,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
     )
 
     # Añadir la figura del mapa al subplot
-    fig.add_traces(mapa.data, rows=1, cols=1)
+    fig.add_traces(mapa.data, rows=1, cols=2)
 
     # Añadir las tres métricas como gráficos individuales (ejemplo de pie charts)
     fig.add_trace(go.Indicator(
@@ -333,7 +339,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
     value=extras[f'% {eleccion}'][23],  # Valor para el gauge (68%)
     title={'text':23},
     domain={'x': [0, 1], 'y': [0, 1]}  # Dominios para el tamaño y posición del gauge
-    ),row=2, col=1)
+    ),row=1, col=1)
     #fig.add_trace(go.Pie(labels=["Métrica 2"], values=[20], name="Métrica 2"), row=2, col=1)
     #fig.add_trace(go.Pie(labels=["Métrica 3"], values=[30], name="Métrica 3"), row=2, col=1)
     # Actualizar el layout de la figura
