@@ -193,6 +193,7 @@ def make_merv_web():
                     st.dataframe(S.df_cedears,use_container_width=True)
                 with c2:
                     st.subheader('Buscador de Cedears')
+                    cede=S.df_cedears.copy().set_index('Nombre')
                     st.selectbox('Buscador de cedears',label_visibility='collapsed',options=S.df_cedears.index.to_list(),key='cedebuscado')
                     st.dataframe(S.df_cedears.loc[S.df_cedears.index==S.cedebuscado].transpose(),use_container_width=True)
 
