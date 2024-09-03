@@ -241,7 +241,7 @@ span[class="st-fg st-bh st-cy st-fh st-ev st-er st-fi st-fj st-az st-ct st-cu st
 }
 
 /* Estilo cuando el checkbox está seleccionado */
-input[type="checkbox"]:checked {
+.stCheckbox [aria-checked="false"] {
    background-color: #accbeb; /* Fondo azul pastel suave cuando está seleccionado */
    border-color: #8baed5; /* Borde más oscuro cuando está seleccionado */
    content: "✔"; /* Añadir un tick de verificación */
