@@ -414,7 +414,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
     # Actualizar el layout de la figura
     fig.update_layout(
         mapbox=dict(
-            center={"lat": -41.4161, "lon": -63.6167},
+            center={"lat": -40.4161, "lon": -63.6167},
             style="white-bg",
             zoom=2.45,
             layers=[dict(below='traces', type='fill', source=geo, color="lightblue")]
