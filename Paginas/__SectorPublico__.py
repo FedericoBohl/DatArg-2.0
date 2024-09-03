@@ -434,7 +434,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
     #fig.add_trace(go.Pie(labels=["Métrica 2"], values=[20], name="Métrica 2"), row=2, col=1)
     #fig.add_trace(go.Pie(labels=["Métrica 3"], values=[30], name="Métrica 3"), row=2, col=1)
     # Actualizar el layout de la figura
-    st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
+    st.plotly_chart(mapa,config={'displayModeBar': False},use_container_width=True)
 
 @st.cache_data(show_spinner=False)
 def plot_deuda(data,type_plot):
