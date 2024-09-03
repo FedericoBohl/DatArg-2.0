@@ -293,15 +293,15 @@ def plot_deficit(escala,data:pd.DataFrame):
 def make_map(data,geo,extras:pd.DataFrame,eleccion):
     extras=extras.to_dict()
     fig = make_subplots(
-        rows=7, cols=2,
-        column_widths=[0.65, 0.35],
-        specs=[[{"type": "domain"}, {"rowspan": 7,"type": "choroplethmapbox"}],
+        rows=3, cols=3,
+        column_widths=[0.65/2,0.65/2, 0.35],
+        specs=[[{"type": "domain"},{"type": "domain"}, {"rowspan": 3,"type": "choroplethmapbox"}],
                [None,None],
-                [{"type": "domain"}, None],
-                [None,None],
-                [{"type": "domain"}, None],
-                [None,None],
-                [{"type": "domain"}, None]],
+                [{"type": "domain"},{"type": "domain"}, None]],
+                #[None,None],
+                #[{"type": "domain"}, None],
+                #[None,None],
+                #[{"type": "domain"}, None]],
         print_grid=True)
 
     # Añadir la figura del mapa al subplot
@@ -322,7 +322,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                     marker_line_width=1.5,  # Grosor de la línea del marcador
                     marker_line_color='black'  # Color de la línea del marcador
                 ),
-    row=1,col=2)
+    row=1,col=3)
     # Añadir los indicadores (métricas) como gráficos individuales
     fig.add_trace(go.Indicator(
                                 mode="number+gauge",  # Modo del indicador que incluye el número y el gauge
@@ -361,7 +361,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                                         }
                                      },
                                 title={"text": f"{extras['Ubicacion geografica'][24]}"}  # Título con el nombre de la ubicación geográfica
-                            ), row=3, col=1)
+                            ), row=1, col=2)
     fig.add_trace(go.Indicator(
                                 mode="number+gauge",  # Modo del indicador que incluye el número y el gauge
                                 value=extras[eleccion][26] / 1000,  # Valor que se muestra en el número (dividido por 1000 para mostrar en 'k')
@@ -380,7 +380,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                                         }
                                      },
                                 title={"text": f"{extras['Ubicacion geografica'][26]}"}  # Título con el nombre de la ubicación geográfica
-                            ), row=5, col=1)
+                            ), row=3, col=1)
     fig.add_trace(go.Indicator(
                                 mode="number+gauge",  # Modo del indicador que incluye el número y el gauge
                                 value=extras[eleccion][27] / 1000,  # Valor que se muestra en el número (dividido por 1000 para mostrar en 'k')
@@ -399,7 +399,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                                         }
                                      },
                                 title={"text": f"{extras['Ubicacion geografica'][27]}"}  # Título con el nombre de la ubicación geográfica
-                            ), row=7, col=1)
+                            ), row=3, col=2)
 
     # Actualizar el layout de la figura
     fig.update_layout(
