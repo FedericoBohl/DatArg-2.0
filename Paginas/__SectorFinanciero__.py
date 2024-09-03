@@ -190,7 +190,7 @@ def make_merv_web():
                 c1,c2= st.columns((0.6,0.4))
                 with c1:
                     st.subheader('Listado de CEDEARS')
-                    st.dataframe(S.df_cedears,use_container_width=True)
+                    st.dataframe(cede,use_container_width=True)
                 with c2:
                     st.subheader('Buscador de Cedears')
                     st.selectbox('Buscador de cedears',label_visibility='collapsed',options=cede.index.to_list(),key='cedebuscado')
