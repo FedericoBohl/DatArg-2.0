@@ -349,7 +349,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                                         ],
                                         'threshold': {
                                             #'line': {'color': "blue", 'width': 4},
-                                            'thickness': 0.75,  # Grosor de la línea de umbral
+                                            'thickness': 1,  # Grosor de la línea de umbral
                                             'value': extras[f'% {eleccion}'][25]  # Valor del umbral que indica la posición en el gauge
                                         }
                                      },
