@@ -187,20 +187,17 @@ div[data-testid="stTextInput"]>div[data-testid="stWidgetLabel"]>div[data-testid=
 }
 
 /*Editar st.popover*/
-/* Contenedor principal del popover */
 .stPopover {
    background-color: white; /* Fondo blanco por defecto */
    padding: 10px;
    transition: all 0.2s ease-in-out; /* Transición suave */
 }
 
-/* Estilo cuando el cursor está sobre el popover pero no está expandido */
 .stTooltipHoverTarget:hover:not([aria-expanded="true"]) {
    background-color: #f0f7ff; /* Cambia el fondo a un azul pastel muy claro al hacer hover */
    cursor: pointer; /* Cambia el cursor para indicar interactividad */
 }
 
-/* Estilo cuando el popover está expandido */
 .stTooltipHoverTarget[aria-expanded="true"] {
    border: 2px solid #b3c7e6; /* Un borde azul suave */
    border-radius: 15px; /* Bordes redondeados */
@@ -210,6 +207,59 @@ div[data-testid="stTextInput"]>div[data-testid="stWidgetLabel"]>div[data-testid=
    background-color: #accbeb; /* Azul pastel suave cuando está expandido */
    color: white; /* Texto blanco cuando está expandido */
 }
+
+/*Editar st.checkbox*/
+/* Contenedor principal del checkbox */
+.stCheckbox {
+   display: flex;
+   align-items: center;
+   padding: 8px 12px;
+   background-color: #f0f7ff; /* Fondo azul pastel claro */
+   border: 2px solid #b3c7e6; /* Borde azul suave */
+   border-radius: 15px; /* Bordes redondeados */
+   margin-bottom: 10px; /* Espacio debajo del checkbox */
+   transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out; /* Transición suave */
+}
+
+/* Checkbox personalizado */
+.stCheckbox input[type="checkbox"] {
+   display: none; /* Ocultar el checkbox por defecto */
+}
+
+/* Estilo personalizado para el cuadrado del checkbox */
+.stCheckbox div:before {
+   content: "";
+   display: inline-block;
+   width: 20px;
+   height: 20px;
+   border: 2px solid #b3c7e6; /* Borde azul suave */
+   border-radius: 5px; /* Bordes ligeramente redondeados */
+   background-color: white; /* Fondo blanco */
+   margin-right: 10px; /* Espacio a la derecha del checkbox */
+   transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out; /* Transición suave */
+}
+
+/* Estilo cuando el checkbox está seleccionado */
+.stCheckbox input[type="checkbox"]:checked + div:before {
+   background-color: #accbeb; /* Fondo azul pastel suave cuando está seleccionado */
+   border-color: #8baed5; /* Borde más oscuro cuando está seleccionado */
+   content: "✔"; /* Añadir un tick de verificación */
+   color: white; /* Color del tick */
+   text-align: center;
+   line-height: 18px; /* Centrar el tick verticalmente */
+}
+
+/* Estilo cuando se pasa el cursor sobre el checkbox */
+.stCheckbox:hover {
+   background-color: #dbe9f9; /* Fondo ligeramente más oscuro en hover */
+   border-color: #8baed5; /* Borde más oscuro en hover */
+}
+
+.stCheckbox div {
+   color: #2b4f81; /* Color del texto al lado del checkbox */
+}
+
+
 
 /* Contenido dentro del popover */
 .stPopover > div:nth-child(2) {
