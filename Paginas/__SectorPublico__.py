@@ -330,10 +330,22 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
 
     # Añadir los indicadores (métricas) como gráficos individuales
     fig.add_trace(go.Indicator(
-        mode="number+delta",
-        value=450,
-        delta={'reference': 400},
-        title={"text": "Métrica 1"},
+        mode="number+gauge",
+        value=extras[eleccion][25],
+            gauge={
+                    'axis': {'range': [0, 100]},  # Rango del gauge de 0 a 100%
+                    'bar': {'color': "darkblue"},  # Color de la barra del gauge
+                    'steps': [
+                        {'range': [0, 50], 'color': "lightgray"},  # Colores opcionales por pasos
+                        {'range': [50, 100], 'color': "lightgreen"}
+                    ],
+                    'threshold': {
+                        'line': {'color': "red", 'width': 4},  # Línea de umbral opcional
+                        'thickness': 0.75,
+                        'value': 68  # Valor del umbral que indica la posición en el gauge
+                    }
+                },
+        title={"text": f"{extras['Ubicacion geografica'][25]}"},
     ), row=1, col=1)
     fig.add_trace(go.Indicator(
         mode="number+delta",
