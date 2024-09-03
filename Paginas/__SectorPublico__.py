@@ -303,31 +303,6 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                 [None,None],
                 [{"type": "domain"}, None]],
         print_grid=True)
-    mapa = px.choropleth_mapbox(
-        data,
-        geojson=geo,
-        locations='Ubicacion geografica',
-        featureidkey='properties.nombre',
-        color=f'% {eleccion}',
-        hover_name='properties.nombre',
-        custom_data=['properties.nombre',f'{eleccion}',f'% {eleccion}'],
-        color_continuous_scale='Picnic',
-        mapbox_style="carto-positron",
-        zoom=2.6, center={"lat": -38.40, "lon": -63.60},
-        opacity=1,
-        color_discrete_sequence=["blue"],
-    )
-
-    # Actualizar las trazas del mapa
-    mapa.update_traces(
-        marker_line_width=1.5,
-        marker_line_color='black',
-        hovertemplate="<br>".join([
-            "<b>%{customdata[0]}</b>",
-            "Presupuesto Brindado: $%{customdata[1]:.2f}" if eleccion == 'Presupuesado' else "Presupuesto Ejecutado: $%{customdata[1]:.2f}",
-            "Proporción del total: %{customdata[2]:.2f}%" if eleccion == 'Presupuesado' else "Presupuesto Ejecutado: %{customdata[2]:.2f}%"
-        ])
-    )
 
     # Añadir la figura del mapa al subplot
     #fig.add_traces(mapa.data, rows=1, cols=2)
@@ -348,6 +323,15 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                     marker_line_color='black'  # Color de la línea del marcador
                 ),
     row=1,col=2)
+    fig.update_traces(
+        marker_line_width=1.5,
+        marker_line_color='black',
+        hovertemplate="<br>".join([
+            "<b>%{customdata[0]}</b>",
+            "Presupuesto Brindado: $%{customdata[1]:.2f}" if eleccion == 'Presupuesado' else "Presupuesto Ejecutado: $%{customdata[1]:.2f}",
+            "Proporción del total: %{customdata[2]:.2f}%" if eleccion == 'Presupuesado' else "Presupuesto Ejecutado: %{customdata[2]:.2f}%"
+        ])
+    )
     # Añadir los indicadores (métricas) como gráficos individuales
     fig.add_trace(go.Indicator(
                                 mode="number+gauge",  # Modo del indicador que incluye el número y el gauge
