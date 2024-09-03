@@ -331,8 +331,8 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
     # Añadir los indicadores (métricas) como gráficos individuales
     fig.add_trace(go.Indicator(
         mode="number+gauge",
-        value=extras[eleccion][25],
-            gauge={
+        value=f'{extras[eleccion][25]/1000:.2f}k',
+            gauge={'shape':'bullet',
                     'axis': {'range': [0, 100]},  # Rango del gauge de 0 a 100%
                     'steps': [
                         {'range': [0, 50], 'color': "lightgray"},  # Colores opcionales por pasos
