@@ -332,7 +332,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
     fig.add_trace(go.Indicator(
         mode="number+gauge",
         value=f'{extras[eleccion][25]/1000:.2f}k',
-            gauge={'shape':'bullet',
+            gauge={
                     'axis': {'range': [0, 100]},  # Rango del gauge de 0 a 100%
                     'steps': [
                         {'range': [0, 50], 'color': "lightgray"},  # Colores opcionales por pasos
@@ -344,6 +344,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                     }
                 },
         title={"text": f"{extras['Ubicacion geografica'][25]}"},
+    
     ), row=1, col=1)
     fig.add_trace(go.Indicator(
         mode="number+delta",
