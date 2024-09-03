@@ -80,7 +80,7 @@ div[data-testid="stToolbar"]{
 
 .stTabs [role="tab"] {
    padding: 8px 16px;
-   transition: all 1.5s ease-out;
+   transition: all 0.5s ease-out;
    flex-shrink: 1; /* Permite que las tabs se reduzcan si hay muchas */
    flex-grow: 1; /* Permite que las tabs se expandan si hay espacio */
    max-width: 200px; /* Establece un ancho máximo */
@@ -99,6 +99,7 @@ div[data-testid="stToolbar"]{
    border-radius: 15px !important;
    padding: 10px !important;
    border: 1px solid #8baed5 !important; /* Un borde ligeramente más oscuro pero aún suave */
+   transition: all 1s ease-out;
 }
 
 .stTabs [role="tab"]:hover {
