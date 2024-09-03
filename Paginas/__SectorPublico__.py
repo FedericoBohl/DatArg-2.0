@@ -294,10 +294,10 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
     extras=extras.to_dict()
     fig = make_subplots(
         rows=4, cols=2,
-        specs=[[{}, {"rowspan": 4}],
-            [{}, None],
-            [{}, None],
-            [{}, None]],
+        specs=[[{"type": "domain"}, {"rowspan": 4,"type": "choroplethmapbox"}],
+            [{"type": "domain"}, None],
+            [{"type": "domain"}, None],
+            [{"type": "domain"}, None]],
         print_grid=True)
     mapa = px.choropleth_mapbox(
         data,
