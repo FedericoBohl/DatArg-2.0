@@ -334,7 +334,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
         mode="number+gauge",
         value=extras[eleccion][25]/1000,
         number = {"prefix": "$", "suffix": "k"},
-            gauge={'shape':'bullet',
+            gauge={
                     'axis': {'range': [0, 100]},  # Rango del gauge de 0 a 100%
                     'steps': [
                         {'range': [0, 50], 'color': "lightgray"},  # Colores opcionales por pasos
