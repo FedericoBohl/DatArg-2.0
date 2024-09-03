@@ -121,7 +121,6 @@ div[data-testid="stToolbar"]{
 
  /*Editar Radio*/
  .stRadio {
-   display: flexbox;
    background-color: #f0f7ff; /* Fondo del contenedor principal */
    padding: 20px;
    border-radius: 15px;
