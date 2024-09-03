@@ -58,7 +58,7 @@ def load_precios(end):
     
     return precios, rem
 
-#@st.cache_resource(show_spinner=False)
+@st.cache_resource(show_spinner=False)
 def plot_inflacion(data,rem,start,end):
     rem_IA=[]
     for i in range(len(rem.index)-1):
