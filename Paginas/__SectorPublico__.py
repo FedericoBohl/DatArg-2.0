@@ -294,7 +294,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
     extras=extras.to_dict()
     fig = make_subplots(
         rows=7, cols=2,
-        column_widths=[0.35, 0.65],
+        column_widths=[0.5, 0.5],
         specs=[[{"type": "domain"}, {"rowspan": 7,"type": "choroplethmapbox"}],
                [None,None],
                 [{"type": "domain"}, None],
@@ -331,13 +331,6 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
 
     # Añadir la figura del mapa al subplot
     fig.add_traces(mapa.data, rows=1, cols=2)
-    picnic_colors = [
-                    [0.0, '#ff0000'],  # Rojo
-                    [0.25, '#ff99cc'], # Rosa
-                    [0.5, '#ffff00'],  # Amarillo
-                    [0.75, '#66ff66'], # Verde
-                    [1.0, '#00ccff']   # Azul
-                    ]
     # Añadir los indicadores (métricas) como gráficos individuales
     fig.add_trace(go.Indicator(
                                 mode="number+gauge",  # Modo del indicador que incluye el número y el gauge
@@ -423,7 +416,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
         mapbox=dict(
             center={"lat": -38.4161, "lon": -63.6167},
             style="white-bg",
-            zoom=2.0,
+            zoom=2.65,
             layers=[dict(below='traces', type='fill', source=geo, color="lightblue")]
         ),
         showlegend=False,
