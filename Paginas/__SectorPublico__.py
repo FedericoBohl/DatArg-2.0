@@ -292,7 +292,6 @@ def plot_deficit(escala,data:pd.DataFrame):
 #@st.cache_data(show_spinner=False)
 def make_map(data,geo,extras:pd.DataFrame,eleccion):
     extras=extras.to_dict()
-    st.write(extras)
     fig = make_subplots(
         rows=4, cols=2,
         specs=[[{"type": "domain"}, {"rowspan": 4,"type": "choroplethmapbox"}],
@@ -356,25 +355,64 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                                 title={"text": f"{extras['Ubicacion geografica'][25]}"}  # Título con el nombre de la ubicación geográfica
                             ), row=1, col=1)
     fig.add_trace(go.Indicator(
-        mode="number+delta",
-        value=450,
-        delta={'reference': 400},
-        title={"text": "Métrica 1"},
-    ), row=2, col=1)
+                                mode="number+gauge",  # Modo del indicador que incluye el número y el gauge
+                                value=extras[eleccion][24] / 1000,  # Valor que se muestra en el número (dividido por 1000 para mostrar en 'k')
+                                number={"prefix": "$", "suffix": "k"},  # Prefijo y sufijo del número
+                                gauge={
+                                        'axis': {'range': [0, 100]},  # Rango del gauge de 0 a 100%
+                                        'bar': {'color': "rgba(0, 0, 0, 0)"},  # Hacer la barra central completamente transparente
+                                        'steps': [
+                                            {'range': [0, extras[f'% {eleccion}'][24]], 'color': '#2b4f81'},
+                                            {'range': [extras[f'% {eleccion}'][24], 100], 'color': '#b3c7e6'}
+                                        ],
+                                        'threshold': {
+                                            #'line': {'color': "blue", 'width': 4},
+                                            'thickness': 1,  # Grosor de la línea de umbral
+                                            'value': extras[f'% {eleccion}'][24]  # Valor del umbral que indica la posición en el gauge
+                                        }
+                                     },
+                                title={"text": f"{extras['Ubicacion geografica'][24]}"}  # Título con el nombre de la ubicación geográfica
+                            ), row=2, col=1)
 
     fig.add_trace(go.Indicator(
-        mode="number+delta",
-        value=300,
-        delta={'reference': 250},
-        title={"text": "Métrica 2"},
-    ), row=3, col=1)
+                                mode="number+gauge",  # Modo del indicador que incluye el número y el gauge
+                                value=extras[eleccion][26] / 1000,  # Valor que se muestra en el número (dividido por 1000 para mostrar en 'k')
+                                number={"prefix": "$", "suffix": "k"},  # Prefijo y sufijo del número
+                                gauge={
+                                        'axis': {'range': [0, 100]},  # Rango del gauge de 0 a 100%
+                                        'bar': {'color': "rgba(0, 0, 0, 0)"},  # Hacer la barra central completamente transparente
+                                        'steps': [
+                                            {'range': [0, extras[f'% {eleccion}'][26]], 'color': '#2b4f81'},
+                                            {'range': [extras[f'% {eleccion}'][26], 100], 'color': '#b3c7e6'}
+                                        ],
+                                        'threshold': {
+                                            #'line': {'color': "blue", 'width': 4},
+                                            'thickness': 1,  # Grosor de la línea de umbral
+                                            'value': extras[f'% {eleccion}'][26]  # Valor del umbral que indica la posición en el gauge
+                                        }
+                                     },
+                                title={"text": f"{extras['Ubicacion geografica'][26]}"}  # Título con el nombre de la ubicación geográfica
+                            ), row=3, col=1)
 
     fig.add_trace(go.Indicator(
-        mode="number+delta",
-        value=200,
-        delta={'reference': 180},
-        title={"text": "Métrica 3"},
-    ), row=4, col=1)
+                                mode="number+gauge",  # Modo del indicador que incluye el número y el gauge
+                                value=extras[eleccion][27] / 1000,  # Valor que se muestra en el número (dividido por 1000 para mostrar en 'k')
+                                number={"prefix": "$", "suffix": "k"},  # Prefijo y sufijo del número
+                                gauge={
+                                        'axis': {'range': [0, 100]},  # Rango del gauge de 0 a 100%
+                                        'bar': {'color': "rgba(0, 0, 0, 0)"},  # Hacer la barra central completamente transparente
+                                        'steps': [
+                                            {'range': [0, extras[f'% {eleccion}'][27]], 'color': '#2b4f81'},
+                                            {'range': [extras[f'% {eleccion}'][27], 100], 'color': '#b3c7e6'}
+                                        ],
+                                        'threshold': {
+                                            #'line': {'color': "blue", 'width': 4},
+                                            'thickness': 1,  # Grosor de la línea de umbral
+                                            'value': extras[f'% {eleccion}'][27]  # Valor del umbral que indica la posición en el gauge
+                                        }
+                                     },
+                                title={"text": f"{extras['Ubicacion geografica'][27]}"}  # Título con el nombre de la ubicación geográfica
+                            ), row=4, col=1)
 
     # Actualizar el layout de la figura
     fig.update_layout(
