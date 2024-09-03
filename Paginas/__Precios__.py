@@ -84,7 +84,7 @@ def plot_inflacion(data,rem,start,end):
     fig.update_layout(hovermode="x unified", margin=dict(l=1, r=1, t=1, b=1),height=450,bargap=0.2,legend=dict(
                                         orientation="h",
                                         yanchor="bottom",
-                                        y=-0.5,
+                                        y=-0.15,
                                         xanchor="center",
                                         x=0.5,
                                         bordercolor=black,
@@ -105,7 +105,7 @@ def plot_categorias(data:pd.DataFrame,start,end):
     fig.update_layout(hovermode="x unified", margin=dict(l=1, r=1, t=1, b=1),height=450,bargap=0.2,legend=dict(
                                         orientation="h",
                                         yanchor="bottom",
-                                        y=-0.25,
+                                        y=-0.15,
                                         xanchor="center",
                                         x=0.5,
                                         bordercolor=black,
