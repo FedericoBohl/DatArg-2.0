@@ -330,7 +330,24 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
     )
 
     # Añadir la figura del mapa al subplot
-    fig.add_traces(mapa.data, rows=1, cols=2)
+    #fig.add_traces(mapa.data, rows=1, cols=2)
+    fig.add_trace(go.Choroplethmapbox(
+                    geojson=geo,  # GeoJSON con los datos geográficos
+                    locations=data['Ubicacion geografica'],  # Ubicaciones geográficas para las cuales tienes datos
+                    featureidkey='properties.nombre',  # Clave que corresponde a la propiedad en geojson
+                    z=data[f'% {eleccion}'],  # Datos de color
+                    colorscale='Picnic',  # Escala de colores continua
+                    customdata=data[['properties.nombre', f'{eleccion}', f'% {eleccion}']],  # Datos adicionales para el hover
+                    hovertemplate="<br>".join([
+                        "<b>%{customdata[0]}</b>",
+                        "Presupuesto Brindado: $%{customdata[1]:.2f}" if eleccion == 'Presupuesado' else "Presupuesto Ejecutado: $%{customdata[1]:.2f}",
+                        "Proporción del total: %{customdata[2]:.2f}%"
+                    ]),
+                    marker_opacity=1,  # Opacidad del marcador
+                    marker_line_width=1.5,  # Grosor de la línea del marcador
+                    marker_line_color='black'  # Color de la línea del marcador
+                ),
+    row=1,col=2)
     # Añadir los indicadores (métricas) como gráficos individuales
     fig.add_trace(go.Indicator(
                                 mode="number+gauge",  # Modo del indicador que incluye el número y el gauge
@@ -434,7 +451,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
     #fig.add_trace(go.Pie(labels=["Métrica 2"], values=[20], name="Métrica 2"), row=2, col=1)
     #fig.add_trace(go.Pie(labels=["Métrica 3"], values=[30], name="Métrica 3"), row=2, col=1)
     # Actualizar el layout de la figura
-    st.plotly_chart(mapa,config={'displayModeBar': False},use_container_width=True)
+    st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 @st.cache_data(show_spinner=False)
 def plot_deuda(data,type_plot):
