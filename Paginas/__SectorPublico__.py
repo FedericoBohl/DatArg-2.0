@@ -295,8 +295,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
     fig = make_subplots(
         rows=2, cols=1,
         row_heights=[0.7, 0.3], # Ajusta la altura de las filas según tu preferencia
-        specs=[[{"type": "choroplethmapbox"}],
-            [{"type": "domain"}]],
+        specs=[[{},{}]],
         vertical_spacing=0.05  # Ajusta el espacio vertical entre el mapa y las métricas
     )
 
