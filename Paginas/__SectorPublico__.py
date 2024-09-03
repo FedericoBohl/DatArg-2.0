@@ -300,7 +300,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
             [{"type": "domain"}, None],
             [{"type": "domain"}, None]],
         print_grid=True,
-        vertical_spacing=0.5)
+        vertical_spacing=1/3)
     mapa = px.choropleth_mapbox(
         data,
         geojson=geo,
