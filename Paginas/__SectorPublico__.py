@@ -649,7 +649,7 @@ def make_sect_pub_web():
         with st.container(border=True):
             c1,c2=st.columns((0.4,0.6))
             c1.subheader('Gasto Provincial')
-            c2.radio('deficit_proc',label_visibility='collapsed',options=['Presupuestado','Ejecutado'],key='deficit_elegido',horizontal=False)
+            c2.radio('deficit_proc',label_visibility='collapsed',options=['Ejecutado','Presupuestado'],key='deficit_elegido',horizontal=False)
             #data,geo,extras=load_data_map(datetime.now().strftime("%Y%m%d"))
             try:
                 make_map(S.data_map,S.geo_map,S.extras_map,S.deficit_elegido)
