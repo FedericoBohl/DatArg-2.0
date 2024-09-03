@@ -292,54 +292,62 @@ def plot_deficit(escala,data:pd.DataFrame):
 #@st.cache_data(show_spinner=False)
 def make_map(data,geo,extras:pd.DataFrame,eleccion):
     extras=extras.to_dict()
-    fig = make_subplots(
-        rows=4, cols=2,
-        specs=[
-            [{"type": "xy"}, {"type": "xy"}],  # Fila 1, Columna 1 y 2
-            [{"type": "xy"}, {"type": "xy"}],  # Fila 2, Columna 1 y 2
-            [{"type": "xy"}, {"type": "xy"}],  # Fila 3, Columna 1 y 2
-            [{"type": "xy"}, {"type": "xy"}]   # Fila 4, Columna 1 y 2
-        ],
-        vertical_spacing=0.1,  # Ajusta el espacio vertical entre filas
-        horizontal_spacing=0.05  # Ajusta el espacio horizontal entre columnas
-    )
-
-    # Añadir el mapa al subplot
-    mapa = px.choropleth_mapbox(
+    fig = px.choropleth_mapbox(
         data,
         geojson=geo,
         locations='Ubicacion geografica',
         featureidkey='properties.nombre',
-        color=f'% {eleccion}',
+        color=f'% {eleccion}', # Asegúrate de que esta columna contiene el gasto fiscal
         hover_name='properties.nombre',
         custom_data=['properties.nombre',f'{eleccion}',f'% {eleccion}'],
-        color_continuous_scale='RdBu',
-        mapbox_style="carto-positron",
-        zoom=2.6, center={"lat": -38.40, "lon": -63.60},
-        opacity=1
-    )
-
-    # Actualizar las trazas del mapa
-    mapa.update_traces(
+        color_continuous_scale='Picnic',#[[0, '#5F7161'],[0.25, '#A5DD9B'],[0.5, '#FFFFFF'],[0.75,'#FF8080'],[1, '#632626']],
+                            mapbox_style= "carto-positron" , # formatos de diseño del mapa : "carto-positron", "carto-positron",   "white-bg",
+                            zoom=2.6, center = {"lat": -38.40, "lon": -63.60},
+                            opacity=1,
+                            color_discrete_sequence=["blue"],
+                            )
+    fig.update_traces(
         marker_line_width=1.5,
         marker_line_color='black',
         hovertemplate="<br>".join([
-            "<b>%{customdata[0]}</b>",
-            "Presupuesto Brindado: $%{customdata[1]:.2f}" if eleccion == 'Presupuesado' else "Presupuesto Ejecutado: $%{customdata[1]:.2f}",
-            "Proporción del total: %{customdata[2]:.2f}%" if eleccion == 'Presupuesado' else "Presupuesto Ejecutado: %{customdata[2]:.2f}%"
+            "<b>%{customdata[0]}</b>",  # Asegúrate de cerrar la etiqueta <b> correctamente aquí
+            "Presupuesto Brindado: $%{customdata[1]:.2f}" if eleccion=='Presupuesado' else "Presupuesto Ejecutado: $%{customdata[1]:.2f}",
+            "Proporción del total: %{customdata[2]:.2f}%" if eleccion=='Presupuesado' else "Presupuesto Ejecutado: %{customdata[2]:.2f}%"
         ])
     )
-
+    # Actualizar el layout del mapa
+    #fig.update_geos(fitbounds="locations", visible=False)
+    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    fig.update_layout(
+        mapbox=dict(
+            center={"lat": -38.4161, "lon": -63.6167},
+            style="white-bg",
+            zoom=2.65,
+            layers=[
+                dict(
+                    below='traces',
+                    type='fill',
+                    source=geo,
+                    color="lightblue"
+                )
+            ]
+        ),
+        showlegend=False,
+        margin=dict(t=0, b=0, l=0, r=0),
+        geo=dict(
+            showland=False,  # No mostrar etiquetas de países
+            showcountries=False,  # No mostrar bordes de países
+        )
+    )
     # Añadir la figura del mapa al subplot
-    fig.add_traces(mapa.data, rows=1, cols=2)
 
     # Añadir las tres métricas como gráficos individuales (ejemplo de pie charts)
-    fig.add_trace(go.Indicator(
-    mode="gauge+number",  # Modo del indicador que incluye el gauge y el número
-    value=extras[f'% {eleccion}'][23],  # Valor para el gauge (68%)
-    title={'text':23},
-    domain={'x': [0, 1], 'y': [0, 1]}  # Dominios para el tamaño y posición del gauge
-    ),row=1, col=1)
+    #fig.add_trace(go.Indicator(
+    #mode="gauge+number",  # Modo del indicador que incluye el gauge y el número
+    #value=extras[f'% {eleccion}'][23],  # Valor para el gauge (68%)
+    #title={'text':23},
+    #domain={'x': [0, 1], 'y': [0, 1]}  # Dominios para el tamaño y posición del gauge
+    #),row=1, col=1)
     #fig.add_trace(go.Pie(labels=["Métrica 2"], values=[20], name="Métrica 2"), row=2, col=1)
     #fig.add_trace(go.Pie(labels=["Métrica 3"], values=[30], name="Métrica 3"), row=2, col=1)
     # Actualizar el layout de la figura
