@@ -93,7 +93,7 @@ def make_BCRA_web():
     with c1:
         with st.expander(label='Ajustar Gráficas',icon=":material/settings:"):
             c11,c12=st.columns((0.3,0.7))
-            with c11: st.radio("Escala de los datos",options=["***Millones de ARS***","***Millones de USD-Oficial***","***Millones de USD-Blue***","***% del PBI***"],key="escala_bcra")
+            with c11: st.radio("Escala de los datos",options=["***Millones de ARS***","***Millones de USD-Oficial***","***% del PBI***"],key="escala_bcra")
             with c12: st.number_input(value=2016,label='Datos desde',min_value=2004,max_value=2024,key="start_bcra")
     with c2:
         st.link_button(":blue[**Descargar datos:\nBCRA**]",url="https://1drv.ms/x/c/56f917c917f2e2f5/EfXi8hfJF_kggFZ9FQAAAAABTxlMFKgDUN6_w9BtQ4q1xA?e=PeQb0M",use_container_width=True)
