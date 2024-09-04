@@ -283,14 +283,14 @@ div[class="st-f3 st-en st-eo st-ep st-eq st-f4 st-bh st-cm st-f5"]>.st-et{
 .button-container {
    display: flex;
    justify-content: center;
-   align-items: center; /* Esto ya asegura el centrado vertical */
+   align-items: center;  /* Centrar verticalmente */
    margin-top: 20px;
    background-color: black;
 }
 
 .custom-button {
-   display: flex;
-   align-items: center; /* Asegura que el contenido del botón (imagen y texto) esté centrado verticalmente */
+   display: inline-flex;  /* inline-flex para mantener el botón como un botón normal */
+   align-items: center;  /* Centrar imagen y texto verticalmente */
    background-color: #f0f7ff;
    color: black;
    border: 2px solid #b3c7e6;
@@ -298,14 +298,15 @@ div[class="st-f3 st-en st-eo st-ep st-eq st-f4 st-bh st-cm st-f5"]>.st-et{
    border-radius: 20px;
    cursor: pointer;
    transition: background-color 0.3s ease;
+   height: 50px;  /* Ajustar la altura del botón */
+   line-height: 1.5;  /* Ajustar la altura de línea para el texto */
 }
 
 .custom-button img {
-   width: 40px;
+   width: 30px;  /* Ajustar tamaño de imagen */
    height: auto;
    object-fit: contain;
    margin-right: 10px;
-   display: block; /* Asegura que la imagen se comporte como un bloque dentro del flexbox */
 }
 
 .custom-button:hover {
