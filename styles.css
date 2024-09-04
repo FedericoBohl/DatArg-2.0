@@ -290,7 +290,7 @@ div[class="st-f3 st-en st-eo st-ep st-eq st-f4 st-bh st-cm st-f5"]>.st-et{
 .custom-button {
    display: flex;
    align-items: center;
-   background-color: #accbeb;
+   background-color: #f0f7ff;
    color: white;
    border: 2px solid #b3c7e6;
    padding: 10px 20px;
@@ -307,7 +307,8 @@ div[class="st-f3 st-en st-eo st-ep st-eq st-f4 st-bh st-cm st-f5"]>.st-et{
 }
 
 .custom-button:hover {
-   background-color: #2b4f81;
+   background-color: #accbeb;
+   border-color: #2b4f81;
 }
 
 .custom-button:active {
