@@ -80,7 +80,7 @@ def make_info():
                         ]
                 SocialMediaIcons(social_media_links).render(sidebar=False, justify_content="left")
 
-image_path = "cafe.jpg"
+image_path = "cafe.png"
 with open(image_path, "rb") as img_file:
     image_data = base64.b64encode(img_file.read()).decode()
 
