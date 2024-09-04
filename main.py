@@ -20,6 +20,8 @@ from Paginas.__Precios__ import make_precios_web,load_precios
 from Paginas.librerias import get_pbi
 from Calendar.calendar import create_calendar
 
+import base64
+
 st.set_page_config(
     page_title="DatArg",
     page_icon="🧉",
@@ -78,6 +80,24 @@ def make_info():
                         ]
                 SocialMediaIcons(social_media_links).render(sidebar=False, justify_content="left")
 
+image_path = "/mnt/data/cafe.jpg"
+with open(image_path, "rb") as img_file:
+    image_data = base64.b64encode(img_file.read()).decode()
+
+# HTML para el botón
+html_code = f"""
+<div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+    <a href="https://cafecito.app/datarg" target="_blank" style="text-decoration: none;">
+        <button style="display: flex; align-items: center; background-color: #007BFF; color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer;">
+            <img src="data:image/jpeg;base64,{image_data}" alt="Café" style="width: 30px; height: 30px; margin-right: 10px;"/>
+            Invitame un cafecito
+        </button>
+    </a>
+</div>
+"""
+
+# Mostrar HTML en la app de Streamlit
+st.markdown(html_code, unsafe_allow_html=True)
 
 
 def load_ALL(today):
