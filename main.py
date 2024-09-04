@@ -89,7 +89,7 @@ html_code = f"""
 <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
     <a href="https://cafecito.app/datarg" target="_blank" style="text-decoration: none;">
         <button style="display: flex; align-items: center; background-color: #007BFF; color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer;">
-            <img src="data:image/jpeg;base64,{image_data}" alt="Café" style="width: 30px; height: 30px; margin-right: 10px;"/>
+            <img src="data:image/jpeg;base64,{image_data}" alt="Café" style="width: 40px; height: 100%; object-fit: contain; margin-right: 10px;"/>
             Invitame un cafecito
         </button>
     </a>
