@@ -283,15 +283,14 @@ div[class="st-f3 st-en st-eo st-ep st-eq st-f4 st-bh st-cm st-f5"]>.st-et{
 .button-container {
    display: flex;
    justify-content: center;
-   vertical-align:middle;
-   align-items: center;
+   align-items: center; /* Esto ya asegura el centrado vertical */
    margin-top: 20px;
    background-color: black;
 }
 
 .custom-button {
    display: flex;
-   align-items: center;
+   align-items: center; /* Asegura que el contenido del botón (imagen y texto) esté centrado verticalmente */
    background-color: #f0f7ff;
    color: black;
    border: 2px solid #b3c7e6;
@@ -306,6 +305,7 @@ div[class="st-f3 st-en st-eo st-ep st-eq st-f4 st-bh st-cm st-f5"]>.st-et{
    height: auto;
    object-fit: contain;
    margin-right: 10px;
+   display: block; /* Asegura que la imagen se comporte como un bloque dentro del flexbox */
 }
 
 .custom-button:hover {
