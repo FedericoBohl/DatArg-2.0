@@ -278,3 +278,38 @@ div[class="st-f3 st-en st-eo st-ep st-eq st-f4 st-bh st-cm st-f5"]>.st-et{
    animation-range: entry 25% cover 30%; /* Define cuándo comienza y termina la animación */
    animation-fill-mode: both; /* Mantén el estado final de la animación */
 }
+
+/*Boton de cafecito*/
+.button-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-top: 20px;
+}
+
+.custom-button {
+   display: flex;
+   align-items: center;
+   background-color: #007BFF;
+   color: white;
+   border: none;
+   padding: 10px 20px;
+   border-radius: 20px;
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+}
+
+.custom-button img {
+   width: 40px;
+   height: auto;
+   object-fit: contain;
+   margin-right: 10px;
+}
+
+.custom-button:hover {
+   background-color: #0056b3;
+}
+
+.custom-button:active {
+   background-color: #003d80;
+}

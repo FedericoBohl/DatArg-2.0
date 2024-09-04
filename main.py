@@ -80,26 +80,6 @@ def make_info():
                         ]
                 SocialMediaIcons(social_media_links).render(sidebar=False, justify_content="left")
 
-image_path = "cafe.png"
-with open(image_path, "rb") as img_file:
-    image_data = base64.b64encode(img_file.read()).decode()
-
-# HTML para el botón
-html_code = f"""
-<div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
-    <a href="https://cafecito.app/datarg" target="_blank" style="text-decoration: none;">
-        <button style="display: flex; align-items: center; background-color: #007BFF; color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer;">
-            <img src="data:image/jpeg;base64,{image_data}" alt="Café" style="width: 40px; height: 100%; object-fit: contain; margin-right: 10px;"/>
-            Invitame un cafecito
-        </button>
-    </a>
-</div>
-"""
-
-# Mostrar HTML en la app de Streamlit
-st.markdown(html_code, unsafe_allow_html=True)
-
-
 def load_ALL(today):
     S.pbi_men=get_pbi()
     S.actividad_,S.pbi_=load_actividad(today)
@@ -161,17 +141,24 @@ with t_Merv:
     make_merv_web()
 
 with st.container():
-    st.markdown('''
-                <div style="background-color: black; width: 100%; color: white; padding: 20px; box-sizing: border-box; display: flex; justify-content: center">
-                    <a href='https://cafecito.app/datarg' rel='noopener' target='_blank'>
-                        <img srcset='https://cdn.cafecito.app/imgs/buttons/button_6.png 1x, 
-                                        https://cdn.cafecito.app/imgs/buttons/button_6_2x.png 2x, 
-                                        https://cdn.cafecito.app/imgs/buttons/button_6_3.75x.png 3.75x' 
-                                src='https://cdn.cafecito.app/imgs/buttons/button_6.png' 
-                                alt='Invitame un café en cafecito.app' />
-                    </a>
-                </div>
-                ''',unsafe_allow_html=True)  
+    image_path = "cafe.png"
+    with open(image_path, "rb") as img_file:
+        image_data = base64.b64encode(img_file.read()).decode()
+
+    # HTML para el botón
+    html_code = f"""
+    <div class="button-container">
+        <a href="https://cafecito.app/datarg" target="_blank" style="text-decoration: none;">
+            <button class="custom-button">
+                <img src="data:image/jpeg;base64,{image_data}" alt="Café" />
+                Invitame un cafecito
+            </button>
+        </a>
+    </div>
+    """
+
+    # Mostrar HTML en la app de Streamlit
+    st.markdown(html_code, unsafe_allow_html=True) 
     # Campo de texto para sugerencias
     suggestion = st.text_input(
         label="Déjanos tus sugerencias o comentarios:", 
