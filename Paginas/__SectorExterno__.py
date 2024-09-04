@@ -87,7 +87,7 @@ def plot_bop(data,escala,errores):
                                     borderwidth=2),
                                     yaxis=dict(showgrid=False, zeroline=True, showline=True)
                                 )
-    if escala=="***Millones de USD***":
+    if escala=="**Millones de USD**":
         fig['layout']['yaxis']['title']='Millones de USD'
         #fig['layout']['yaxis']['type']='log'   #Dado a que hay valores negativos no sirve
     else:
@@ -120,7 +120,7 @@ def plot_balcom(data,escala):
                                 yaxis=dict(showgrid=True, zeroline=True, showline=True),
                                 yaxis2=dict(title="ToT - TCR (Ene-2004=100)",showgrid=True, zeroline=True, showline=True)
                                 )
-    if escala=="***Millones de USD***":
+    if escala=="**Millones de USD**":
         fig['layout']['yaxis']['title']='Millones de USD'
         #fig['layout']['yaxis']['type']='log'   #Dado a que hay valores negativos no sirve
     else:
@@ -241,7 +241,7 @@ def plot_ica(data,escala):
         ),
         yaxis=dict(showgrid=False, zeroline=True, showline=True)
     )
-    if escala=="***Millones de USD***":
+    if escala=="**Millones de USD**":
         figX['layout']['yaxis']['title']='Millones de USD'
         figX['layout']['yaxis']['type']='log'
         figM['layout']['yaxis']['title']='Millones de USD'
@@ -261,7 +261,7 @@ def make_sect_ext_web():
     with c1:
         with st.expander(label='Ajustar Gráficas',icon=":material/settings:"):
             c11,c12=st.columns((0.3,0.7))
-            with c11: st.radio("Escala de los datos",options=["***Millones de USD***","***% del PBI***"],key="escala_sectext")
+            with c11: st.radio("Escala de los datos",options=["**Millones de USD**","**% del PBI**"],key="escala_sectext")
             with c12: st.number_input(value=2016,label='Datos desde',min_value=2006,max_value=2024,key="start_sectext")
     with c2:
         st.link_button(":blue[**Descargar datos:\nSector Externo**]",url="https://1drv.ms/x/c/56f917c917f2e2f5/QfXi8hfJF_kggFaKFQAAAAAA7qhKZI81Oq7vDg",use_container_width=True)
@@ -273,7 +273,7 @@ def make_sect_ext_web():
     ica.index=ica.index.strftime('%b-%Y')
     icagdp=icagdp.loc[f"{S.start_sectext}":]
     icagdp.index=icagdp.index.strftime('%b-%Y')
-    if S.escala_sectext=='***Millones de USD***':
+    if S.escala_sectext=='**Millones de USD**':
         S.bop=bop
         S.ica=ica
     else:
