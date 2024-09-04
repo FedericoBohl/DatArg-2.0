@@ -30,10 +30,10 @@ def plot_agregados(escala,bcra: pd.DataFrame, tasas: pd.DataFrame):
                                     yaxis=dict(showgrid=False, zeroline=True, showline=True),
                                     yaxis2=dict(title='%-Tasas', side='right',showgrid=False, zeroline=True, showline=True)
                                 )
-    if escala=="***Millones de ARS***":
+    if escala=="**Millones de ARS**":
         fig['layout']['yaxis']['title']='Millones de ARS'
         fig['layout']['yaxis']['type']='log'
-    elif escala=="***Millones de USD-Oficial***":
+    elif escala=="**Millones de USD**":
         fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
@@ -57,10 +57,10 @@ def plot_BM(escala, bcra: pd.DataFrame):
                                     bordercolor=black,
                                     borderwidth=2
                                 ),yaxis=dict(showgrid=False, zeroline=True, showline=True))
-    if escala=="***Millones de ARS***":
+    if escala=="**Millones de ARS**":
         fig['layout']['yaxis']['title']='Millones de ARS'
         fig['layout']['yaxis']['type']='log'
-    elif escala=="***Millones de USD-Oficial***":
+    elif escala=="**Millones de USD**":
         fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
@@ -94,12 +94,12 @@ def plot_pasivos_rem(escala,bcra: pd.DataFrame,tasas: pd.DataFrame): # El botón
         row=1,
         col=1
     )
-    if escala=="***Millones de ARS***":
+    if escala=="**Millones de ARS**":
         fig['layout']['yaxis']['title']='Millones de ARS'
         fig['layout']['yaxis']['type']='log'
         fig['layout']['yaxis3']['title']='Millones de ARS'
         fig['layout']['yaxis3']['type']='log'
-    elif escala=="***Millones de USD-Oficial***":
+    elif escala=="**Millones de USD**":
         fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
         fig['layout']['yaxis3']['title']='Millones de USD-TC Oficial'
     else:
@@ -158,10 +158,10 @@ def plot_fin_mon(escala,bcra: pd.DataFrame):
                                 ),
                                 yaxis=dict(showgrid=False, zeroline=True, showline=True),
                                 )
-    if escala=="***Millones de ARS***":
+    if escala=="**Millones de ARS**":
         fig['layout']['yaxis']['title']='Millones de ARS'
         fig['layout']['yaxis']['type']='log'
-    elif escala=="***Millones de USD-Oficial***":
+    elif escala=="**Millones de USD**":
         fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
@@ -188,9 +188,9 @@ def plot_varBM(escala,bcra:pd.DataFrame,roll:int):
                                     borderwidth=2
                                 ),yaxis=dict(showgrid=False, zeroline=True, showline=True))
     fig.update_xaxes(rangeslider_visible=True)
-    if escala=="***Millones de ARS***":
+    if escala=="**Millones de ARS**":
         fig['layout']['yaxis']['title']='Millones de ARS'
-    elif escala=="***Millones de USD-Oficial***":
+    elif escala=="**Millones de USD**":
         pass
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
@@ -216,10 +216,10 @@ def plot_depositos(escala, bcra:pd.DataFrame, tasas: pd.DataFrame)->None:
                                 yaxis=dict(showgrid=False, zeroline=True, showline=True),
                                 yaxis2=dict(showgrid=False, zeroline=True, showline=True,title="%-Tasa")
                                 )
-    if escala=="***Millones de ARS***":
+    if escala=="**Millones de ARS**":
         fig['layout']['yaxis']['title']='Millones de ARS'
         fig['layout']['yaxis']['type']='log'
-    elif escala=="***Millones de USD-Oficial***":
+    elif escala=="**Millones de USD**":
         fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
@@ -246,7 +246,7 @@ def plot_reservas(reservas): # Está andando medio mal, no reacciona bien con el
             bordercolor="Black",
             borderwidth=2
         ),
-        yaxis=dict(showgrid=False, zeroline=True, showline=True, title="Millones de USD-Oficial"),
+        yaxis=dict(showgrid=False, zeroline=True, showline=True, title="Millones de USD"),
         yaxis2=dict(showgrid=False, zeroline=True, showline=True, title="ITCRM"),
         xaxis=dict(
                     rangeselector=dict(

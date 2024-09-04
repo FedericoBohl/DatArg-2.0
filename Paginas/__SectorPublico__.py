@@ -232,9 +232,9 @@ def plot_deficit(escala,data:pd.DataFrame):
         ),
         yaxis=dict(showgrid=False, zeroline=True, showline=True)
     )
-    if escala=="***Millones de ARS***":
+    if escala=="**Millones de ARS**":
         fig['layout']['yaxis']['title']='Millones de ARS'
-    elif escala=="***Millones de USD-Oficial***":
+    elif escala=="**Millones de USD**":
         fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
@@ -245,10 +245,10 @@ def plot_deficit(escala,data:pd.DataFrame):
     fig.add_trace(go.Bar(x=data.index, y=data["Ingresos"], name="Ingresos", marker_color=green), secondary_y=False)
     fig.add_trace(go.Bar(x=data.index, y=-data["Gastos"], name="Gastos", marker_color=red), secondary_y=False)
     fig.add_hline(y=0,line_dash="dot",secondary_y=True)
-    if escala=="***Millones de ARS***":
+    if escala=="**Millones de ARS**":
         fig['layout']['yaxis']['title']='Gasto/Ingresos-Millones de ARS'
         fig['layout']['yaxis2']['title']='Superávit/Déficit-Millones de ARS'
-    elif escala=="***Millones de USD-Oficial***":
+    elif escala=="**Millones de USD**":
         fig['layout']['yaxis']['title']='Gasto/Ingresos-Millones de USD-TC Oficial'
         fig['layout']['yaxis2']['title']='Superávit/Déficit-Millones de USD-TC Oficial'
     else:
@@ -493,9 +493,9 @@ def plot_endeudamiento(data,escala):
                                     bordercolor=black,
                                     borderwidth=2
                                 ),yaxis=dict(showgrid=False, zeroline=True, showline=True))
-    if escala=="***Millones de ARS***":
+    if escala=="**Millones de ARS**":
         fig['layout']['yaxis']['title']='Millones de ARS'
-    elif escala=="***Millones de USD-Oficial***":
+    elif escala=="**Millones de USD**":
         fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
@@ -525,10 +525,10 @@ def plot_ingresos_gastos(data,escala):
                                     bordercolor=black,
                                     borderwidth=2
                                 ),yaxis=dict(showgrid=False, zeroline=True, showline=True))
-    if escala=="***Millones de ARS***":
+    if escala=="**Millones de ARS**":
         fig['layout']['yaxis']['title']='Millones de ARS'
         fig['layout']['yaxis']['type']='log'
-    elif escala=="***Millones de USD-Oficial***":
+    elif escala=="**Millones de USD**":
         fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
@@ -549,10 +549,10 @@ def plot_ingresos_gastos(data,escala):
                                     bordercolor=black,
                                     borderwidth=2
                                 ),yaxis=dict(showgrid=False, zeroline=True, showline=True))
-    if escala=="***Millones de ARS***":
+    if escala=="**Millones de ARS**":
         fig['layout']['yaxis']['title']='Millones de ARS'
         fig['layout']['yaxis']['type']='log'
-    elif escala=="***Millones de USD-Oficial***":
+    elif escala=="**Millones de USD**":
         fig['layout']['yaxis']['title']='Millones de USD-TC Oficial'
     else:
         fig['layout']['yaxis']['title']='PP del PBI'
@@ -572,7 +572,7 @@ def make_sect_pub_web():
     with c1:
         with st.expander(label='Ajustar Gráficas',icon=":material/settings:"):
             c11,c12=st.columns((0.3,0.7))
-            with c11: st.radio("Escala de los datos",options=["***Millones de ARS***","***Millones de USD-Oficial***","***Millones de USD-Blue***","***% del PBI***"],key="escala_sectpub")
+            with c11: st.radio("Escala de los datos",options=["**Millones de ARS**","**Millones de USD**","**% del PBI**"],key="escala_sectpub")
             with c12: st.number_input(value=2016,label='Datos desde',min_value=2000,max_value=2024,key="start_sectpub")
     with c2:
         st.link_button(":blue[**Descargar datos:\nSector Público**]",url="https://1drv.ms/x/c/56f917c917f2e2f5/QfXi8hfJF_kggFaNFQAAAAAAHinUdp-mVHJoLA",use_container_width=True)
@@ -595,11 +595,11 @@ def make_sect_pub_web():
     corrtco=corrtco.loc[f"{S.start_sectpub}":]
     corrtco.index=corrtco.index.strftime('%b-%Y')
 
-    if S.escala_sectpub=="***Millones de ARS***":
+    if S.escala_sectpub=="**Millones de ARS**":
         S.data_sectpub=deficit
         S.endeudamiento=endeudamiento
         S.corr=corr
-    elif S.escala_sectpub=="***Millones de USD-Oficial***":
+    elif S.escala_sectpub=="**Millones de USD**":
         S.data_sectpub=datatco
         S.endeudamiento=endeudamientotco
         S.corr=corrtco
