@@ -172,10 +172,5 @@ with st.container():
         st.toast('Muchas gracias por tu comentiario y por ayudarnos a mejorar la página!')
         st.rerun()
         
-form_url = 'https://docs.google.com/forms/d/11ePhY_ruI2j3-QHg5xfyL1UXxMI5GkaFc7w1kn7ImRs/edit'
-
-# Mostrar el enlace al formulario
-st.markdown(f"[Abrir formulario de Google](<{form_url}>)")
-
-# También podrías incluir el formulario directamente en tu aplicación usando un iframe
+form_url = 'https://docs.google.com/forms/d/e/1FAIpQLScKpdd5kSwqtJeAzy3_SfMUoeCQWAjljf6SgpnshLfFySMiLw/viewform'
 st.markdown(f'<iframe src="{form_url}" width="100%" height="600px"></iframe>', unsafe_allow_html=True)
