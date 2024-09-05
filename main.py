@@ -171,3 +171,4 @@ with st.container():
             writer.writerow([suggestion])
         st.toast('Muchas gracias por tu comentiario y por ayudarnos a mejorar la página!')
         S.suggestion=None
+        st.rerun()
