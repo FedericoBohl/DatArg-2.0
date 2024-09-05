@@ -163,11 +163,11 @@ with st.container():
     suggestion = st.text_input(
         label="Déjanos tus sugerencias o comentarios:", 
         placeholder="Escribe aquí tus sugerencias o comentarios...",
-        label_visibility='collapsed'
+        label_visibility='collapsed',key='suggestion'
     )
-    st.write(suggestion)
     if suggestion:
         with open('sugerencias.csv', mode='a',newline='',encoding='utf-8') as file:
             writer=csv.writer(file)
             writer.writerow([suggestion])
         st.toast('Muchas gracias por tu comentiario y por ayudarnos a mejorar la página!')
+        S.suggestion=None
