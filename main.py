@@ -19,7 +19,7 @@ from Paginas.__Pobreza__ import make_pobreza_web,load_pobreza
 from Paginas.__Precios__ import make_precios_web,load_precios
 from Paginas.librerias import get_pbi
 from Calendar.calendar import create_calendar
-
+import csv
 import base64
 
 st.set_page_config(
@@ -165,3 +165,9 @@ with st.container():
         placeholder="Escribe aquí tus sugerencias o comentarios...",
         label_visibility='collapsed'
     )
+    st.write(suggestion)
+    if suggestion:
+        with open('sugerencias.csv', mode='a',newline='',encoding='utf-8') as file:
+            writer=csv.writer(file)
+            writer.writerow([suggestion])
+        st.toast('Muchas gracias por tu comentiario y por ayudarnos a mejorar la página!')
