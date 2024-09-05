@@ -162,5 +162,6 @@ with st.container():
     # Campo de texto para sugerencias
     suggestion = st.text_input(
         label="Déjanos tus sugerencias o comentarios:", 
-        placeholder="Escribe aquí tus sugerencias o comentarios..."
+        placeholder="Escribe aquí tus sugerencias o comentarios...",
+        label_visibility='collapsed'
     )
