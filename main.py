@@ -50,13 +50,8 @@ def make_info():
     st.caption("Esta aplicación surge como una iniciativa para democratizar el acceso a datos económicos en tiempo real sobre Argentina. Nuestro objetivo es ofrecer una herramienta gratuita que permita a cualquier persona, sin importar su nivel de conocimientos en economía, acceder a información clara y transparente.La creación de esta plataforma responde a nuestra convicción de que el acceso a la información es un derecho fundamental. Al ofrecer esta aplicación de manera gratuita, buscamos contribuir al desarrollo de una sociedad más informada y, en última instancia, más justa.")
     st.caption("Somos un equipo pequeño, pero estamos comprometidos con la idea de que el conocimiento es poder, y el acceso al conocimiento debe ser universal. Esperamos que esta herramienta te sea útil y te invitamos a explorarla todo con libertad.")
     col1,col2=st.columns((1,1))
+    st.header("Nuestro Equipo")
     with col1:
-        with st.container(height=500,border=False):
-            st.header('¿Cómo utilizar la aplicación?')
-            st.video("https://www.youtube.com/watch?v=hn2WqRX75DI")
-            st.caption("Este video es puramente demostración, cuando se finalize la aplicación mostrara como esta se usa")
-    with col2:
-        st.header("Nuestro Equipo")
         with st.container(border=True):
             c1,c2=st.columns((0.2,0.8)) 
             with c1:st.image("fede.jpeg")
@@ -68,6 +63,7 @@ def make_info():
                         "https://x.com/BohlFede"
                         ]
                 SocialMediaIcons(social_media_links).render(sidebar=False, justify_content="left")
+    with col2:
         with st.container(border=True):
             c1,c2=st.columns((0.2,0.8)) 
             with c1:st.image("valen.jpeg")
