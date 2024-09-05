@@ -185,7 +185,9 @@ div[data-testid="stExpander"]{
    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
    color: white;
 }
-
+.stTextInput>div[class="st-emotion-cache-ue6h4q e1y5xkzn3"]{
+   color: white;
+}
 /* Campo de texto (input) */
 .stTextInput input[type="text"] {
    background-color: #333333; /* Fondo del campo de texto */
