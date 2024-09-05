@@ -49,8 +49,8 @@ def make_info():
     st.caption(":blue[:blue-background[DatArg]] es una aplicación sin fines de lucro que busca promover la transparencia de los datos económicos oficiales mediante un entorno que presente en **tiempo real** las principales variables de los distintos sectores económicos que involucran la coyuntura económica de un país, permitiendo su analisis y fácil comprensión, **todo en un solo lugar**. Su uso es tan extenso que preferimos que lo compruebes por vos mismo/a: analistas, consultores, profesores, periodistas y mucho más.")
     st.caption("Esta aplicación surge como una iniciativa para democratizar el acceso a datos económicos en tiempo real sobre Argentina. Nuestro objetivo es ofrecer una herramienta gratuita que permita a cualquier persona, sin importar su nivel de conocimientos en economía, acceder a información clara y transparente.La creación de esta plataforma responde a nuestra convicción de que el acceso a la información es un derecho fundamental. Al ofrecer esta aplicación de manera gratuita, buscamos contribuir al desarrollo de una sociedad más informada y, en última instancia, más justa.")
     st.caption("Somos un equipo pequeño, pero estamos comprometidos con la idea de que el conocimiento es poder, y el acceso al conocimiento debe ser universal. Esperamos que esta herramienta te sea útil y te invitamos a explorarla todo con libertad.")
-    col1,col2=st.columns((1,1))
     st.header("Nuestro Equipo")
+    col1,col2=st.columns((1,1))
     with col1:
         with st.container(border=True):
             c1,c2=st.columns((0.2,0.8)) 
