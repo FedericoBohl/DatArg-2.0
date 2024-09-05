@@ -177,14 +177,46 @@ div[data-testid="stExpander"]{
 }
 
 /*Editar st.text_input*/
-div[data-testid="stTextInput"]{
-   background-color: black;
-   color: white;
+/* Contenedor del text input */
+.stTextInput {
+   background-color: black; /* Fondo negro */
+   padding: 12px; /* Espacio interior */
+   border-radius: 12px; /* Bordes redondeados */
+   margin-bottom: 10px; /* Espacio inferior */
+   transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+   border: 2px solid #4a4a4a; /* Borde gris oscuro */
 }
-div[data-testid="stTextInput"]>div[data-testid="stWidgetLabel"]>div[data-testid="stMarkdownContainer"]{
-   display: flex;
-   color: white;
+
+/* Campo de texto (input) */
+.stTextInput input[type="text"] {
+   background-color: #333333; /* Fondo del campo de texto */
+   color: white; /* Texto en blanco */
+   border: none; /* Sin borde para el input */
+   padding: 8px 12px; /* Espaciado interno */
+   border-radius: 8px; /* Bordes redondeados */
+   width: 100%; /* Ocupa el 100% del contenedor */
+   box-shadow: none; /* Sin sombras */
+   outline: none; /* Sin borde al enfocar */
+   transition: background-color 0.2s ease-in-out;
 }
+
+/* Efecto hover y foco sobre el campo de texto */
+.stTextInput input[type="text"]:hover,
+.stTextInput input[type="text"]:focus {
+   background-color: #444444; /* Cambiar el fondo en hover y foco */
+}
+
+/* Texto del placeholder */
+.stTextInput input[type="text"]::placeholder {
+   color: #aaaaaa; /* Color del texto de placeholder */
+   opacity: 0.7; /* Transparencia para suavizar el placeholder */
+}
+
+/* Efecto hover en todo el contenedor */
+.stTextInput:hover {
+   border-color: #6cace4; /* Cambiar el borde en hover */
+}
+
 
 /*Editar st.popover*/
 .stPopover {
@@ -248,7 +280,7 @@ div[data-testid="stNumberInputStepUp"]{
    background-color: #f0f7ff;
 }
 
-div[class="st-f3 st-en st-eo st-ep st-eq st-f4 st-bh st-cm st-f5"]>.st-et{
+span[class="st-f3 st-en st-eo st-ep st-eq st-f4 st-bh st-cm st-f5"]>.st-et{
    background-color:#f0f7ff ;
    border-bottom-left-radius: 35%;
    border-bottom-right-radius: 35%;
@@ -286,6 +318,7 @@ div[class="st-f3 st-en st-eo st-ep st-eq st-f4 st-bh st-cm st-f5"]>.st-et{
    align-items: center;  /* Centrar verticalmente */
    margin-top: 20px;
    background-color: black;
+   
 }
 
 .custom-button {
