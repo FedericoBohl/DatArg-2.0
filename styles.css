@@ -181,10 +181,9 @@ div[data-testid="stExpander"]{
 .stTextInput {
    background-color: black; /* Fondo negro */
    padding: 12px; /* Espacio interior */
-   border-radius: 12px; /* Bordes redondeados */
    margin-bottom: 10px; /* Espacio inferior */
    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
-   border: 2px solid #4a4a4a; /* Borde gris oscuro */
+   color: white;
 }
 
 /* Campo de texto (input) */
@@ -212,10 +211,6 @@ div[data-testid="stExpander"]{
    opacity: 0.7; /* Transparencia para suavizar el placeholder */
 }
 
-/* Efecto hover en todo el contenedor */
-.stTextInput:hover {
-   border-color: #6cace4; /* Cambiar el borde en hover */
-}
 
 
 /*Editar st.popover*/
