@@ -156,21 +156,16 @@ with st.container():
         </a>
     </div>
     """
-
-    # Mostrar HTML en la app de Streamlit
     st.markdown(html_code, unsafe_allow_html=True) 
-    # Campo de texto para sugerencias
-    suggestion = st.text_input(
-        label="Déjanos tus sugerencias o comentarios:", 
-        placeholder="Escribe aquí tus sugerencias o comentarios...",
-        label_visibility='collapsed'
-    )
-    if suggestion:
-        with open('sugerencias.csv', mode='a',newline='',encoding='utf-8') as file:
-            writer=csv.writer(file)
-            writer.writerow([suggestion])
-        st.toast('Muchas gracias por tu comentiario y por ayudarnos a mejorar la página!')
-        st.rerun()
-        
-form_url = 'https://docs.google.com/forms/d/e/1FAIpQLScKpdd5kSwqtJeAzy3_SfMUoeCQWAjljf6SgpnshLfFySMiLw/viewform'
-st.markdown(f'<iframe src="{form_url}" width="100%" height="600px"></iframe>', unsafe_allow_html=True)
+    if 0==1:    #Desactivado hasta que encuentre la manera de que la sugerencia sea recibida
+        suggestion = st.text_input(
+            label="Déjanos tus sugerencias o comentarios:", 
+            placeholder="Escribe aquí tus sugerencias o comentarios...",
+            label_visibility='collapsed'
+        )
+        if suggestion:
+            with open('sugerencias.csv', mode='a',newline='',encoding='utf-8') as file:
+                writer=csv.writer(file)
+                writer.writerow([suggestion])
+            st.toast('Muchas gracias por tu comentiario y por ayudarnos a mejorar la página!')
+            st.rerun()
