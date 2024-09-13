@@ -41,6 +41,7 @@ def get_eu(_) -> None:
     c1,c2,c3=st.columns((0.4,0.6/2,0.6/2),vertical_alignment='center')
     c1.header('Europa')
     mro=pd.read_csv('https://data-api.ecb.europa.eu/service/data/FM/B.U2.EUR.4F.KR.DFR.LEV?startPeriod=2000-01&detail=dataonly&format=csvdata')#https://data-api.ecb.europa.eu/service/data/FM/D.U2.EUR.4F.KR.MRR_FR.LEV?startPeriod=2000-01&detail=dataonly&format=csvdata
+    st.write(mro)
     mro=mro[['TIME_PERIOD','OBS_VALUE']]
     mro.TIME_PERIOD=pd.to_datetime(mro.TIME_PERIOD, format='%Y-%m-%d')
     mro.set_index('TIME_PERIOD',inplace=True)
