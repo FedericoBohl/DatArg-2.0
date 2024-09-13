@@ -40,15 +40,15 @@ def load_canasta(end):
 def get_eu(_) -> None:
     c1,c2,c3=st.columns((0.4,0.6/2,0.6/2),vertical_alignment='center')
     c1.header('Europa')
-    mro=pd.read_csv('https://data-api.ecb.europa.eu/service/data/FM/D.U2.EUR.4F.KR.MRR_FR.LEV?startPeriod=2000-01&detail=dataonly&format=csvdata')
+    mro=pd.read_csv('https://data-api.ecb.europa.eu/service/data/FM/B.U2.EUR.4F.KR.DFR.LEV?startPeriod=2000-01&detail=dataonly&format=csvdata')#https://data-api.ecb.europa.eu/service/data/FM/D.U2.EUR.4F.KR.MRR_FR.LEV?startPeriod=2000-01&detail=dataonly&format=csvdata
     mro=mro[['TIME_PERIOD','OBS_VALUE']]
     mro.TIME_PERIOD=pd.to_datetime(mro.TIME_PERIOD, format='%Y-%m-%d')
     mro.set_index('TIME_PERIOD',inplace=True)
-    mro=mro.rename(columns={'OBS_VALUE':'MRO'})
-    mro_last=mro.iloc[-1]['MRO']
+    mro=mro.rename(columns={'OBS_VALUE':'Dep. Facility'})
+    mro_last=mro.iloc[-1]['Dep. Facility']
     index_last=mro.index[-1]
     mro=mro.resample('M').last()
-    c2.metric(f"MRO ({index_last.strftime('%d-%b')})",f"{mro_last}%",f"{round(mro_last-mro.iloc[-2]['MRO'],2)}PP",delta_color="inverse")
+    c2.metric(f"Dep. Facility ({index_last.strftime('%d-%b')})",f"{mro_last}%",f"{round(mro_last-mro.iloc[-2]['Dep. Facility'],2)}PP",delta_color="inverse")
 
 
     #mro.index=mro.index.strftime('%b-%Y') 
@@ -71,7 +71,7 @@ def get_eu(_) -> None:
 
     graph_eu,table_eu=st.tabs(['Gráfico','Tabla'])
     fig=make_subplots(specs=[[{"secondary_y": True}]])
-    fig.add_trace(go.Scatter(x=mro.index,y=mro['MRO'],name='MRO',line=dict(width=3,dash="dashdot"),marker_color="#FFDD00"),secondary_y=False)
+    fig.add_trace(go.Scatter(x=mro.index,y=mro['Dep. Facility'],name='Dep. Facility',line=dict(width=3,dash="dashdot"),marker_color="#FFDD00"),secondary_y=False)
     fig.add_trace(go.Bar(x=mro.index,y=inf['Inflación'],name="Inflación",marker_color="#001489"),secondary_y=False)
     fig.add_trace(go.Scatter(x=mro.index,y=une['Desempleo'],name='Desempleo',line=dict(width=2),marker_color='lime'),secondary_y=True)
 
