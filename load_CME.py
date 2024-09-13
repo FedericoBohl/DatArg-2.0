@@ -21,6 +21,7 @@ def extract_data():
     driver = webdriver.Chrome(options=chrome_options)
     # Navega al sitio web
     url = "https://cmegroup-tools.quikstrike.net/User/QuikStrikeView.aspx?viewitemid=IntegratedFedWatchTool&userId=lwolf&jobRole=&company=&companyType=&userId=lwolf&jobRole=&company=&companyType=&insid=134758201&qsid=1cb76c43-7e1c-453d-a81f-8305cb77294e"
+    url = "https://cmegroup-tools.quikstrike.net/User/QuikStrikeView.aspx?viewitemid=IntegratedFedWatchTool&userId=lwolf&jobRole=&company=&companyType=&userId=lwolf&jobRole=&company=&companyType=&insid=136996613&qsid=51e38ecf-9c47-4e24-ba42-5750dba40826"
     driver.get(url)
     time.sleep(5)
     # Haz clic en la pestaña "Probabilities"
