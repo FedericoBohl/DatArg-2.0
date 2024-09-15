@@ -323,8 +323,6 @@ def get_usa(_):
     data=pd.concat([data,df_unemployment],axis=1)
     table_usa.dataframe(data,use_container_width=True)
     ##############################
-    with probabilities:
-        test(focm)
             
     ##############################
 
@@ -402,7 +400,7 @@ def get_usa(_):
         yaxis=dict(range=[0,data.index.max().max()*1.1],showline=True, linewidth=0.5, linecolor='black',gridcolor='lightslategrey',gridwidth=0.35)
     )
     dotplot.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
-
+    return probabilities,focm
 @st.cache_resource(show_spinner=False)
 def get_jp(_):
     c1,c2,c3=st.columns((0.4,0.6/2,0.6/2),vertical_alignment='center')
@@ -507,7 +505,10 @@ def get_jp(_):
 def make_internacional_web():
     c1,c2=st.columns(2)
     with c1:
-        with st.container(border=True):get_usa(datetime.now().strftime("%Y%m%d"))
+        with st.container(border=True):
+            prob,focm=get_usa(datetime.now().strftime("%Y%m%d"))
+            with prob:
+                test(focm)
     with c2:
         with st.container(border=True):get_eu(datetime.now().strftime("%Y%m%d"))
 
