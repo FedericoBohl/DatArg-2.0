@@ -240,7 +240,7 @@ def make_usa(today):
     def plot_policy(data):
         fig=make_subplots(specs=[[{"secondary_y": True}]])
         fig.add_trace(go.Scatter(x=data.index,y=data['Tasa'],name='FED',line=dict(width=3,dash="dashdot"),marker_color="#B31942"),secondary_y=False)
-        fig.add_trace(go.Bar(x=data.index,y=df_cpi['Inflacion'],name="Inflación",marker_color="#0A3161"),secondary_y=False)
+        fig.add_trace(go.Bar(x=data.index,y=data['Inflacion'],name="Inflación",marker_color="#0A3161"),secondary_y=False)
         fig.add_trace(go.Scatter(x=data.index,y=data['Desempleo'],name='Desempleo',line=dict(width=2),marker_color=lavender),secondary_y=True)
 
         fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1), legend=dict( 
