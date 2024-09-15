@@ -34,6 +34,9 @@ def get_focm_rates():
         data[date]=focm
     return data
 
+def test(focm):
+    st.selectbox('Reunion del FOCM',options=list(focm.keys()),key='focm_meeting')
+    st.write(focm[S.focm_meeting])
 @st.cache_resource(show_spinner=False)
 def load_canasta(end):
     data={
@@ -321,8 +324,7 @@ def get_usa(_):
     table_usa.dataframe(data,use_container_width=True)
     ##############################
     with probabilities:
-        st.selectbox('Reunion del FOCM',options=list(focm.keys()),key='focm_meeting')
-        st.write(focm[S.focm_meeting])
+        test(focm)
             
     ##############################
 
