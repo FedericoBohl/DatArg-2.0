@@ -322,7 +322,7 @@ def get_usa(_):
     ##############################
     with probabilities:
         for key,col in zip(focm.keys(),st.columns(len(focm.keys()))):
-            col.checkbox(f'{key}')
+            col.button(f'{key}')
             
     ##############################
 
