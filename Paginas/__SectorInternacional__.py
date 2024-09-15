@@ -321,9 +321,8 @@ def get_usa(_):
     table_usa.dataframe(data,use_container_width=True)
     ##############################
     with probabilities:
-        keys=list(focm.keys())
-        for key,col in zip(keys[:len(keys)//2],st.columns(len(keys//2))):
-            col.button(f'{key}')
+        st.selectbox('Reunion del FOCM',options=list(focm.keys()),key='focm_meeting')
+        st.write(focm[S.focm_meeting])
             
     ##############################
 
