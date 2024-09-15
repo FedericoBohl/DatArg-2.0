@@ -377,7 +377,7 @@ def make_usa(today):
     focm=get_focm_rates(today)
     make_metrics(fed)
     graph_usa,table_usa,probabilities,dotplot=st.tabs(['Gráfico','Tabla','Probabilidades de Tasa','Dot-Plot'])
-    with graph_usa:plot_policy(fed)
+    #with graph_usa:plot_policy(fed)
     with table_usa: st.dataframe(fed)
     with probabilities: make_probabilities(focm)
     with dotplot: dot_plot(today)
