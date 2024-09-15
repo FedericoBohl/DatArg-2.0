@@ -281,7 +281,7 @@ def make_usa(today):
 
     @st.cache_resource(show_spinner=False)
     def make_metrics(data):
-        c1,c2,c3=st.columns((0.4,0.6),vertical_alignment='center')
+        c1,c2,c3=st.columns((0.4,0.6/2,0.6/2),vertical_alignment='center')
         c1.header('EE.UU.')
         fed_t=data.dropna(subset = ['Tasa']).iloc[-1]['Tasa']
         fed_t1=data.dropna(subset = ['Tasa'])['Tasa']
