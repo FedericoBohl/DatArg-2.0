@@ -285,10 +285,10 @@ def make_usa(today):
         c1.header('EE.UU.')
         fed_t=data.dropna(subset = ['Tasa']).iloc[-1]['Tasa']
         fed_t1=data.dropna(subset = ['Tasa'])['Tasa']
-        c2.metric(f"Fed Funds Rate ({data.dropna(subset = ['Tasa']).index[-1].strftime('%b')})",f"{fed_t:.2f}%",f"{round(fed_t-fed_t1,2)}PP",delta_color="inverse")
+        c2.metric(f"Fed Funds Rate ({data.dropna(subset = ['Tasa']).index[-1].split('-')[0]})",f"{fed_t:.2f}%",f"{round(fed_t-fed_t1,2)}PP",delta_color="inverse")
         inf_t=data.dropna(subset = ['Inflacion']).iloc[-1]['Inflacion']
         inf_t1=data.dropna(subset = ['Inflacion']).iloc[-2]['Inflacion']
-        c3.metric(f"Inflación ({data.dropna(subset = ['Inflacion']).index[-1].strftime('%b')})",f"{inf_t:.2f}%",f"{round(inf_t-inf_t1,2)}PP",delta_color="inverse")
+        c3.metric(f"Inflación ({data.dropna(subset = ['Inflacion']).index[-1].split('-')[0]})",f"{inf_t:.2f}%",f"{round(inf_t-inf_t1,2)}PP",delta_color="inverse")
 
     @st.cache_resource(show_spinner=False)
     def get_focm_rates(_):
