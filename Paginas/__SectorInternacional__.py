@@ -280,8 +280,8 @@ def make_usa(today):
         st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
     @st.cache_resource(show_spinner=False)
-    def make_metrics(data):
-        c21,c22=st.columns(2,vertical_alignment='center')
+    def make_metrics(data,c21,c22):
+        #c21,c22=st.columns(2,vertical_alignment='center')
         fed_t=data.dropna(subset = ['Tasa']).iloc[-1]['Tasa']
         fed_t1=data.dropna(subset = ['Tasa'])['Tasa']
         c21.metric(f"Fed Funds Rate ({data.dropna(subset = ['Tasa']).index[-1].strftime('%b')})",f"{fed_t:.2f}%",f"{round(fed_t-fed_t1,2)}PP",delta_color="inverse")
@@ -372,11 +372,11 @@ def make_usa(today):
         )
         dotplot.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
     
-    c1,c2=st.columns((0.4,0.6),vertical_alignment='center')
+    c1,c2,c3=st.columns((0.4,0.6/2,0.6/2),vertical_alignment='center')
     c1.header('EE.UU.')
     fed=load_policy(today)
     focm=get_focm_rates(today)
-    with c2:make_metrics(fed)
+    with c2:make_metrics(fed,c2,c3)
     graph_usa,table_usa,probabilities,dotplot=st.tabs(['Gráfico','Tabla','Probabilidades de Tasa','Dot-Plot'])
     with graph_usa:plot_policy(fed)
     with table_usa: st.dataframe(fed)
