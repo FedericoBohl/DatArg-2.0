@@ -11,11 +11,6 @@ from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from bs4 import BeautifulSoup
 
-
-
-def test(focm):
-    st.selectbox('Reunion del FOCM',options=list(focm.keys()),key='focm_meeting')
-    st.write(focm[S.focm_meeting])
 @st.cache_resource(show_spinner=False)
 def load_canasta(end):
     data={
