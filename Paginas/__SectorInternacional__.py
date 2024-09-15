@@ -321,7 +321,8 @@ def get_usa(_):
     table_usa.dataframe(data,use_container_width=True)
     ##############################
     with probabilities:
-        for key,col in zip(focm.keys(),st.columns(len(focm.keys()))):
+        keys=focm.keys()
+        for key,col in zip(keys[:len(keys)//2],st.columns(len(keys//2))):
             col.button(f'{key}')
             
     ##############################
