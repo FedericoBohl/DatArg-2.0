@@ -1,7 +1,7 @@
 #from librerias import *
 from _globals_ import *
 import streamlit as st
-from streamlit import session_state as S       #Not Used
+from streamlit import session_state as S
 import pandas as pd
 from plotly import graph_objects as go
 from plotly.subplots import make_subplots
@@ -11,28 +11,7 @@ from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from bs4 import BeautifulSoup
 
-def get_focm_rates():
-    url='https://www.investing.com/central-banks/fed-rate-monitor'
-    response = requests.get(url=url)
-    soup = BeautifulSoup(response.text,'html.parser')
 
-    data={}
-    tables = soup.find_all('div',class_="cardWrapper")
-    for table in tables:
-        date = table.find('div', class_='fedRateDate').get_text(strip=True)
-
-        focm={}
-        for tr in table.find_all('tr')[1:]:
-            tds = tr.find_all('td')
-            focm["-".join([str(num) for num in [int(float(i)*100) for i in tds[0].get_text(strip=True).split(' - ')]])]=[float(td.get_text(strip=True)[:-1]) for td in tds[1:]]
-        
-        _today_=datetime.strptime(" ".join(table.find('div', class_='fedUpdate').get_text(strip=True).split()[1:4]), '%b %d, %Y')
-        _yest_=_today_-timedelta(days=1)
-        _lastweek_=_today_-timedelta(days=7)
-        focm=pd.DataFrame(focm).transpose()
-        focm.columns=[_today_.strftime('%b %d, %Y'),_yest_.strftime('%b %d, %Y'),_lastweek_.strftime('%b %d, %Y')]
-        data[date]=focm
-    return data
 
 def test(focm):
     st.selectbox('Reunion del FOCM',options=list(focm.keys()),key='focm_meeting')
@@ -243,10 +222,176 @@ def get_uk(_) -> None:
     data=pd.concat([data,une.iloc[1:]],axis=1)
     with table_uk:st.dataframe(data,use_container_width=True)
 
+def make_usa(today):
+    @st.cache_resource(show_spinner=False)
+    def load_policy(_):
+        fred = Fred(api_key="6050b935d2f878f1100c6f217cbe6753")
+        cpi_data = fred.get_series('CPIAUCNS').loc[f'{1999}':]
+        df_cpi = pd.DataFrame(cpi_data, columns=['Inflacion'])
+        df_cpi['Inflacion']=round(df_cpi['Inflacion']/df_cpi['Inflacion'].shift(12) -1,4)*100
+        df_cpi=df_cpi.dropna()
+        unemployment_data = fred.get_series('UNRATE').loc[f'{2000}':]
+        df_unemployment = pd.DataFrame(unemployment_data, columns=['Desempleo'])
+        fed_funds_data = fred.get_series('FEDFUNDS').loc[f'{2000}':]
+        df_fed_funds = pd.DataFrame(fed_funds_data, columns=['Tasa'])
+        df_fed_funds.index=df_fed_funds.index.strftime('%b-%Y')
+        df_cpi.index=df_cpi.index.strftime('%b-%Y')
+        df_unemployment.index=df_unemployment.index.strftime('%b-%Y')
+        data=pd.concat([df_fed_funds,df_cpi],axis=1)
+        data=pd.concat([data,df_unemployment],axis=1)
+        return data
+
+    @st.cache_resource(show_spinner=False)
+    def plot_policy(data):
+        fig=make_subplots(specs=[[{"secondary_y": True}]])
+        fig.add_trace(go.Scatter(x=data.index,y=data['Tasa'],name='FED',line=dict(width=3,dash="dashdot"),marker_color="#B31942"),secondary_y=False)
+        fig.add_trace(go.Bar(x=data.index,y=df_cpi['Inflacion'],name="Inflación",marker_color="#0A3161"),secondary_y=False)
+        fig.add_trace(go.Scatter(x=data.index,y=data['Desempleo'],name='Desempleo',line=dict(width=2),marker_color=lavender),secondary_y=True)
+
+        fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1), legend=dict( 
+                                orientation="h",
+                                yanchor="bottom",
+                                y=1.02,
+                                xanchor="right",
+                                x=1,
+                                bordercolor=black,
+                                borderwidth=2
+                            ),
+                    yaxis=dict(showgrid=False, zeroline=True, showline=True,title="% - Inflación/Tasa de la FED"),
+                    yaxis2=dict(showgrid=False, zeroline=True, showline=True,title="% - Desempleo"),
+                    xaxis=dict(
+                                rangeselector=dict(
+                                    buttons=list([
+                                        dict(count=6,
+                                            label="6m",
+                                            step="month",
+                                            stepmode="backward"),
+                                        dict(count=1,
+                                            label="1y",
+                                            step="year",
+                                            stepmode="backward"),
+                                        dict(count=5,
+                                            label="5y",
+                                            step="year",
+                                            stepmode="backward"),
+                                        dict(step="all")
+                                    ])
+                                ),
+                                rangeslider=dict(
+                                    visible=True
+                                )
+                            )
+                        )    
+        st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
+
+    @st.cache_resource(show_spinner=False)
+    def make_metrics(data):
+        c21,c22=st.columns(2,vertical_alignment='center')
+        fed_t=data.dropna(subset = ['Tasa']).iloc[-1]['Tasa']
+        fed_t1=data.dropna(subset = ['Tasa'])['Tasa']
+        c21.metric(f"Fed Funds Rate ({data.dropna(subset = ['Tasa']).index[-1].strftime('%b')})",f"{fed_t:.2f}%",f"{round(fed_t-fed_t1,2)}PP",delta_color="inverse")
+        inf_t=data.dropna(subset = ['Inflacion']).iloc[-1]['Inflacion']
+        inf_t1=data.dropna(subset = ['Inflacion']).iloc[-2]['Inflacion']
+        c22.metric(f"Inflación ({data.dropna(subset = ['Inflacion']).index[-1].strftime('%b')})",f"{inf_t:.2f}%",f"{round(inf_t-inf_t1,2)}PP",delta_color="inverse")
+
+    @st.cache_resource(show_spinner=False)
+    def get_focm_rates(_):
+        url='https://www.investing.com/central-banks/fed-rate-monitor'
+        response = requests.get(url=url)
+        soup = BeautifulSoup(response.text,'html.parser')
+
+        data={}
+        tables = soup.find_all('div',class_="cardWrapper")
+        for table in tables:
+            date = table.find('div', class_='fedRateDate').get_text(strip=True)
+
+            focm={}
+            for tr in table.find_all('tr')[1:]:
+                tds = tr.find_all('td')
+                focm["-".join([str(num) for num in [int(float(i)*100) for i in tds[0].get_text(strip=True).split(' - ')]])]=[float(td.get_text(strip=True)[:-1]) for td in tds[1:]]
+            
+            _today_=datetime.strptime(" ".join(table.find('div', class_='fedUpdate').get_text(strip=True).split()[1:4]), '%b %d, %Y')
+            _yest_=_today_-timedelta(days=1)
+            _lastweek_=_today_-timedelta(days=7)
+            focm=pd.DataFrame(focm).transpose()
+            focm.columns=[_today_.strftime('%b %d, %Y'),_yest_.strftime('%b %d, %Y'),_lastweek_.strftime('%b %d, %Y')]
+            data[date]=focm
+        return data
+    
+    def make_probabilities(data:dict):
+        st.selectbox('Reunión del FOCM',options=list(data.keys()),key='focm_selected')
+        st.write(data[S.focm_selected])
+    
+    @st.cache_resource(show_spinner=False)
+    def dot_plot(_):
+        data=pd.read_csv('dotplot.csv')
+        data.set_index('TARGET RATE',inplace=True)
+        def generar_numeros(base, numero):
+            mitad = numero // 2
+            if numero % 2 != 0:  # Si es impar
+                numeros=[]
+                for i in range(1,1+mitad):
+                    numeros.append(base+0.1*i)
+                    numeros.append(base-0.1*i)
+                numeros.append(base)
+                numeros.sort()
+            else:  # Si es par
+                numeros=[]
+                for i in range(1,1+mitad):
+                    numeros.append(base+0.1*i-0.05)
+                    numeros.append(base-0.1*i+0.05)
+                numeros.sort()
+            return numeros
+        plot_dict={}
+        for col in data.columns:
+            plot_data={}
+            if col=='Largo Plazo':
+                year=int(data.columns[-2])+1
+            else:
+                year=int(col)
+            year_data=data.dropna(subset=[col])[col]
+            for val in year_data.index:
+                plot_data[val]=generar_numeros(int(year),int(year_data[val]))
+            plot_dict[col]=plot_data
+
+        fig = go.Figure()
+        for year, rates in plot_dict.items():
+            for rate, votes in rates.items():
+                fig.add_trace(go.Scatter(
+                    x=votes,
+                    y=[rate] * len(votes),
+                    mode='markers',
+                    marker=dict(size=10,color='navy'),
+                    name=str(year)
+                ))
+        texts=[k for k in plot_dict.keys()]
+        vals=[(int(k) if k!="Largo Plazo" else (int(texts[-2])+1)) for k in texts]
+        fig.update_layout(
+            title="Dot Plot del FOMC",
+            plot_bgcolor='white',
+            xaxis_title="Año",
+            yaxis_title="Tasa de Interés (%)",
+            showlegend=False,
+            xaxis=dict(tickmode='array',tickvals=vals,ticktext=texts),
+            yaxis=dict(range=[0,data.index.max().max()*1.1],showline=True, linewidth=0.5, linecolor='black',gridcolor='lightslategrey',gridwidth=0.35)
+        )
+        dotplot.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
+    
+    c1,c2=st.columns((0.4,0.6),vertical_alignment='center')
+    c1.header('EE.UU.')
+    fed=load_policy(today)
+    focm=get_focm_rates(today)
+    with c2:make_metrics(fed)
+    graph_usa,table_usa,probabilities,dotplot=st.tabs(['Gráfico','Tabla','Probabilidades de Tasa','Dot-Plot'])
+    with graph_usa:plot_policy(fed)
+    with table_usa: st.dataframe(fed)
+    with probabilities: make_probabilities(focm)
+    with dotplot: dot_plot(today)
+    
+    
 @st.cache_resource(show_spinner=False)
 def get_usa(_):
     focm=get_focm_rates()
-    st.write(focm['Sep 18, 2024'])
     #prob_df=pd.read_csv('fed_rate_data.csv')
     #for i in prob_df.columns[1:]:
     #    prob_df[i] = prob_df[i].str.rstrip('%').astype(float)
@@ -322,9 +467,7 @@ def get_usa(_):
     data=pd.concat([df_fed_funds,df_cpi],axis=1)
     data=pd.concat([data,df_unemployment],axis=1)
     table_usa.dataframe(data,use_container_width=True)
-    ##############################
-            
-    ##############################
+
 
     
     if 1==0:
@@ -400,7 +543,7 @@ def get_usa(_):
         yaxis=dict(range=[0,data.index.max().max()*1.1],showline=True, linewidth=0.5, linecolor='black',gridcolor='lightslategrey',gridwidth=0.35)
     )
     dotplot.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
-    return probabilities,focm
+
 @st.cache_resource(show_spinner=False)
 def get_jp(_):
     c1,c2,c3=st.columns((0.4,0.6/2,0.6/2),vertical_alignment='center')
@@ -506,9 +649,8 @@ def make_internacional_web():
     c1,c2=st.columns(2)
     with c1:
         with st.container(border=True):
-            prob,focm=get_usa(datetime.now().strftime("%Y%m%d"))
-            with prob:
-                test(focm)
+            make_usa(datetime.now().strftime("%Y%m%d"))
+            #get_usa(datetime.now().strftime("%Y%m%d"))
     with c2:
         with st.container(border=True):get_eu(datetime.now().strftime("%Y%m%d"))
 
