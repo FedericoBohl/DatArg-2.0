@@ -367,7 +367,7 @@ def make_usa(today):
             xaxis=dict(tickmode='array',tickvals=vals,ticktext=texts),
             yaxis=dict(range=[0,data.index.max().max()*1.1],showline=True, linewidth=0.5, linecolor='black',gridcolor='lightslategrey',gridwidth=0.35)
         )
-        dotplot.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
+        st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
     
     def make_probabilities(data:dict):
         st.selectbox('Reunión del FOCM',options=list(data.keys()),key='focm_selected')
@@ -379,7 +379,7 @@ def make_usa(today):
     make_metrics(fed)
     graph_usa,table_usa,probabilities,dotplot=st.tabs(['Gráfico','Tabla','Probabilidades de Tasa','Dot-Plot'])
     with graph_usa:plot_policy(fed)
-    with table_usa: st.dataframe(fed)
+    with table_usa: st.dataframe(fed,use_container_width=True)
     with dotplot: dot_plot(today)
     with probabilities: make_probabilities(focm)
     
