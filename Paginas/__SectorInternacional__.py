@@ -319,6 +319,14 @@ def get_usa(_):
     data=pd.concat([df_fed_funds,df_cpi],axis=1)
     data=pd.concat([data,df_unemployment],axis=1)
     table_usa.dataframe(data,use_container_width=True)
+    ##############################
+    with probabilities:
+        for key,col in zip(focm.keys(),st.columns(len(focm.keys()))):
+            col.checkbox(f'{key}')
+            
+    ##############################
+
+    
     if 1==0:
         df=prob_df[prob_df[prob_df.columns[0]]>0][prob_df.columns[0]]
         fig = go.Figure()
