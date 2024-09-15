@@ -11,6 +11,28 @@ from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from bs4 import BeautifulSoup
 
+def get_focm_rates():
+    url='https://www.investing.com/central-banks/fed-rate-monitor'
+    response = requests.get(url=url)
+    soup = BeautifulSoup(response.text,'html.parser')
+
+    data={}
+    tables = soup.find_all('div',class_="cardWrapper")
+    for table in tables:
+        date = table.find('div', class_='fedRateDate').get_text(strip=True)
+
+        focm={}
+        for tr in table.find_all('tr')[1:]:
+            tds = tr.find_all('td')
+            focm["-".join([str(num) for num in [int(float(i)*100) for i in tds[0].get_text(strip=True).split(' - ')]])]=[float(td.get_text(strip=True)[:-1]) for td in tds[1:]]
+        
+        _today_=datetime.strptime(" ".join(table.find('div', class_='fedUpdate').get_text(strip=True).split()[1:4]), '%b %d, %Y')
+        _yest_=_today_-timedelta(days=1)
+        _lastweek_=_today_-timedelta(days=7)
+        focm=pd.DataFrame(focm).transpose()
+        focm.columns=[_today_.strftime('%b %d, %Y'),_yest_.strftime('%b %d, %Y'),_lastweek_.strftime('%b %d, %Y')]
+        data[date]=focm
+    return data
 
 @st.cache_resource(show_spinner=False)
 def load_canasta(end):
@@ -220,13 +242,14 @@ def get_uk(_) -> None:
 
 @st.cache_resource(show_spinner=False)
 def get_usa(_):
-    prob_df=pd.read_csv('fed_rate_data.csv')
-    for i in prob_df.columns[1:]:
-        prob_df[i] = prob_df[i].str.rstrip('%').astype(float)
-    prob_df['MEETING DATE']=pd.to_datetime(prob_df['MEETING DATE'],format='%m/%d/%Y')
-    prob_df.set_index('MEETING DATE',inplace=True)
-    prob_df.index=prob_df.index.strftime('%d de %b %Y')
-    prob_df=prob_df.transpose()
+    
+    #prob_df=pd.read_csv('fed_rate_data.csv')
+    #for i in prob_df.columns[1:]:
+    #    prob_df[i] = prob_df[i].str.rstrip('%').astype(float)
+    #prob_df['MEETING DATE']=pd.to_datetime(prob_df['MEETING DATE'],format='%m/%d/%Y')
+    #prob_df.set_index('MEETING DATE',inplace=True)
+    #prob_df.index=prob_df.index.strftime('%d de %b %Y')
+    #prob_df=prob_df.transpose()
     
     c1,c2,c3=st.columns((0.4,0.6/2,0.6/2),vertical_alignment='center')
     with c1:st.header('EE.UU.')
@@ -295,25 +318,26 @@ def get_usa(_):
     data=pd.concat([df_fed_funds,df_cpi],axis=1)
     data=pd.concat([data,df_unemployment],axis=1)
     table_usa.dataframe(data,use_container_width=True)
-    df=prob_df[prob_df[prob_df.columns[0]]>0][prob_df.columns[0]]
-    fig = go.Figure()
-    fig.add_trace(go.Bar(
-        x=df.index,
-        y=df.values,
-        marker_color='crimson',  # Color bordo
-        text=[f'{value}%' for value in df.values],  # Mostrar valores en porcentaje
-        textposition='outside',
-        marker=dict(cornerradius="15%",line=dict(color='darkred',width=2))
-    ))
-    fig.update_layout(
-        plot_bgcolor='white',
-        yaxis=dict(range=[0, 100],showline=True, linewidth=2, linecolor='black',gridcolor='lightslategrey',gridwidth=0.35),
-        title="Policy Rate esperada para la siguiente meeting de decisión de tasa",
-        xaxis_title="Tasa objetivo (Basis Points)",
-        yaxis_title="Probabilidad",
-        showlegend=False)
-    probabilities.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
-    probabilities.dataframe(prob_df)
+    if 1==0:
+        df=prob_df[prob_df[prob_df.columns[0]]>0][prob_df.columns[0]]
+        fig = go.Figure()
+        fig.add_trace(go.Bar(
+            x=df.index,
+            y=df.values,
+            marker_color='crimson',  # Color bordo
+            text=[f'{value}%' for value in df.values],  # Mostrar valores en porcentaje
+            textposition='outside',
+            marker=dict(cornerradius="15%",line=dict(color='darkred',width=2))
+        ))
+        fig.update_layout(
+            plot_bgcolor='white',
+            yaxis=dict(range=[0, 100],showline=True, linewidth=2, linecolor='black',gridcolor='lightslategrey',gridwidth=0.35),
+            title="Policy Rate esperada para la siguiente meeting de decisión de tasa",
+            xaxis_title="Tasa objetivo (Basis Points)",
+            yaxis_title="Probabilidad",
+            showlegend=False)
+        probabilities.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
+        probabilities.dataframe(prob_df)
 
     data=pd.read_csv('dotplot.csv')
     data.set_index('TARGET RATE',inplace=True)
