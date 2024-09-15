@@ -243,7 +243,7 @@ def get_uk(_) -> None:
 @st.cache_resource(show_spinner=False)
 def get_usa(_):
     focm=get_focm_rates()
-    st.write(focm['18 Sep, 2024'])
+    st.write(focm['Sep 18, 2024'])
     #prob_df=pd.read_csv('fed_rate_data.csv')
     #for i in prob_df.columns[1:]:
     #    prob_df[i] = prob_df[i].str.rstrip('%').astype(float)
