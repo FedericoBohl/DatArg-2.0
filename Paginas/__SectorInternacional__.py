@@ -290,7 +290,7 @@ def make_usa(today):
         inf_t1=data.dropna(subset = ['Inflacion']).iloc[-2]['Inflacion']
         c3.metric(f"Inflación ({data.dropna(subset = ['Inflacion']).index[-1].split('-')[0]})",f"{inf_t:.2f}%",f"{round(inf_t-inf_t1,2)}PP",delta_color="inverse")
 
-    @st.cache_data(show_spinner=False)
+    #@st.cache_data(show_spinner=False)
     def get_focm_rates(_):
         url='https://www.investing.com/central-banks/fed-rate-monitor'
         response = requests.get(url=url)
@@ -369,6 +369,7 @@ def make_usa(today):
         )
         st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
     
+    @st.cache_data(show_spinner=False)
     def make_probabilities(data:dict):
         st.selectbox('Reunión del FOCM',options=list(data.keys()),key='focm_selected')
         prob_df=data[S.focm_selected]
@@ -471,13 +472,14 @@ def make_usa(today):
 
 
     fed=load_policy(today)
-    focm=get_focm_rates(today)
+    if 'focm' not in S:
+        S.focm=get_focm_rates(today)
     make_metrics(fed)
     graph_usa,table_usa,probabilities,dotplot=st.tabs(['Gráfico','Tabla','Probabilidades de Tasa','Dot-Plot'])
     with graph_usa:plot_policy(fed)
     with table_usa: st.dataframe(fed,use_container_width=True)
     with dotplot: dot_plot(today)
-    with probabilities: make_probabilities(focm)
+    with probabilities: make_probabilities(S.focm)
 
 @st.cache_resource(show_spinner=False)
 def get_jp(_):
