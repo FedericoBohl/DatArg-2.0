@@ -465,9 +465,9 @@ def make_usa(today):
         ])
         fig.update_layout(margin=dict(l=1, r=1, t=1, b=1))
         # Renderizar la tabla en Streamlit
-        #st.plotly_chart(fig,config={'displayModeBar': False})
+        st.plotly_chart(fig,config={'displayModeBar': False})
         
-        st.table(prob_df.applymap(lambda x: f"{x:.2f}%"))
+        #st.table(prob_df.applymap(lambda x: f"{x:.2f}%"))
 
 
     fed=load_policy(today)
