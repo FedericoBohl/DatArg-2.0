@@ -385,10 +385,34 @@ def make_usa(today):
         fig.update_layout(
             plot_bgcolor='white',
             yaxis=dict(range=[0, 100],showline=True, linewidth=2, linecolor='black',gridcolor='lightslategrey',gridwidth=0.35),
-            title="Policy Rate esperada para la siguiente meeting de decisión de tasa",
+            title="Policy Rate esperada",
             xaxis_title="Tasa objetivo (Basis Points)",
             yaxis_title="Probabilidad",
             showlegend=False)
+        fig.update_layout(
+                updatemenus=[
+                    dict(
+                        type="buttons",
+                        direction="right",
+                        active=0,
+                        x=0.57,
+                        y=1.2,
+                        buttons=list([
+                            dict(label="None",
+                                method="update",
+                                args=[{"visible": [True]}]),
+                            dict(label="High",
+                                method="update",
+                                args=[{"visible": [True,]}]),
+                            dict(label="Low",
+                                method="update",
+                                args=[{"visible": [False]}]),
+                            dict(label="Both",
+                                method="update",
+                                args=[{"visible": [True]}]),
+                        ]),
+                    )
+                ])
         st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
         st.dataframe(prob_df,use_container_width=True)
 
