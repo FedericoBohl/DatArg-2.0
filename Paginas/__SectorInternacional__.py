@@ -460,7 +460,6 @@ def make_usa(today):
                 align='center',
                 height=30,  # Altura de las celdas para centrar verticalmente
                 font=dict(color='black', size=14),  # Tamaño del texto de las celdas aumentado a 14
-                line_height=1.5  # Altura de la línea para centrar el contenido verticalmente
             ))
         ])
         fig.update_layout(margin=dict(l=1, r=1, t=1, b=1))
