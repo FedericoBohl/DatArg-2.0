@@ -463,7 +463,7 @@ def make_usa(today):
                 font=dict(color='black', size=14),  # Tamaño del texto de las celdas aumentado a 14
             ))
         ])
-        fig.update_layout(margin=dict(l=1, r=1, t=1, b=1))
+        fig.update_layout(margin=dict(l=1, r=1, t=1, b=1),height=600)
         # Renderizar la tabla en Streamlit
         st.plotly_chart(fig,config={'displayModeBar': False}, use_container_width=True)
 
