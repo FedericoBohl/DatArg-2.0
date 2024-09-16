@@ -378,7 +378,7 @@ def make_usa(today):
             x=prob_df.index,
             y=prob_df[prob_df.columns[0]].values,
             marker_color='crimson',  # Color bordo
-            text=[f'{value}%' for value in df.values],  # Mostrar valores en porcentaje
+            text=[f'{value}%' for value in prob_df[prob_df.columns[0]].values],  # Mostrar valores en porcentaje
             textposition='outside',
             marker=dict(cornerradius="15%", line=dict(color='darkred', width=2)),
             visible=True  # Esta traza será visible inicialmente
@@ -388,7 +388,7 @@ def make_usa(today):
             x=prob_df.index,
             y=prob_df[prob_df.columns[1]].values,
             marker_color='crimson',  # Color bordo
-            text=[f'{value}%' for value in df.values],  # Mostrar valores en porcentaje
+            text=[f'{value}%' for value in prob_df[prob_df.columns[1]].values],  # Mostrar valores en porcentaje
             textposition='outside',
             marker=dict(cornerradius="15%", line=dict(color='darkred', width=2)),
             visible=False  # Esta traza estará oculta inicialmente
@@ -398,7 +398,7 @@ def make_usa(today):
             x=prob_df.index,
             y=prob_df[prob_df.columns[2]].values,
             marker_color='crimson',  # Color bordo
-            text=[f'{value}%' for value in df.values],  # Mostrar valores en porcentaje
+            text=[f'{value}%' for value in prob_df[prob_df.columns[2]].values],  # Mostrar valores en porcentaje
             textposition='outside',
             marker=dict(cornerradius="15%", line=dict(color='darkred', width=2)),
             visible=False  # Esta traza estará oculta inicialmente
