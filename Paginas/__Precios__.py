@@ -124,6 +124,7 @@ def make_metrics(precios,rem):
         c13.metric('Inflación Núcleo',value=f'{precios['Nucleo-InfM'][-1]*100:.2f}%',delta=f'{(precios['Nucleo-InfM'][-1]-precios['Nucleo-InfM'][-2])*100:.2f} PP',delta_color='inverse')
         t1=pd.Timestamp(precios.index[-1].year,precios.index[-1].month+1,1)
         c14.metric(f'REM para {meses_espanol[t1.month]}',f'{rem['REM'].loc[t1]*100:.2f}%',delta=f'{(rem['REM'].loc[t1]-precios['IPC-InfM'][-1])*100:.2f} PP',delta_color='inverse')
+        st.write(precios)
 @st.cache_data(show_spinner=False)
 def data_selected(categoria_IPC):
     data:pd.DataFrame=S.precios.copy()

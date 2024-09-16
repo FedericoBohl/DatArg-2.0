@@ -290,7 +290,7 @@ def make_usa(today):
         inf_t1=data.dropna(subset = ['Inflacion']).iloc[-2]['Inflacion']
         c3.metric(f"Inflación ({data.dropna(subset = ['Inflacion']).index[-1].split('-')[0]})",f"{inf_t:.2f}%",f"{round(inf_t-inf_t1,2)}PP",delta_color="inverse")
 
-    @st.cache_resource(show_spinner=False)
+    @st.cache_data(show_spinner=False)
     def get_focm_rates(_):
         url='https://www.investing.com/central-banks/fed-rate-monitor'
         response = requests.get(url=url)
