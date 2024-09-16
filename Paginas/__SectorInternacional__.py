@@ -371,8 +371,26 @@ def make_usa(today):
     
     def make_probabilities(data:dict):
         st.selectbox('Reunión del FOCM',options=list(data.keys()),key='focm_selected')
-        st.write(data[S.focm_selected])
-    
+        prob_df=data[S.focm_selected]
+        df=prob_df[prob_df.columns[0]]
+        fig = go.Figure()
+        fig.add_trace(go.Bar(
+            x=df.index,
+            y=df.values,
+            marker_color='crimson',  # Color bordo
+            text=[f'{value}%' for value in df.values],  # Mostrar valores en porcentaje
+            textposition='outside',
+            marker=dict(cornerradius="15%",line=dict(color='darkred',width=2))
+        ))
+        fig.update_layout(
+            plot_bgcolor='white',
+            yaxis=dict(range=[0, 100],showline=True, linewidth=2, linecolor='black',gridcolor='lightslategrey',gridwidth=0.35),
+            title="Policy Rate esperada para la siguiente meeting de decisión de tasa",
+            xaxis_title="Tasa objetivo (Basis Points)",
+            yaxis_title="Probabilidad",
+            showlegend=False)
+        st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
+        st.dataframe(prob_df,use_container_width=True)
 
     fed=load_policy(today)
     focm=get_focm_rates(today)
