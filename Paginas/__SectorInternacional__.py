@@ -465,7 +465,7 @@ def make_usa(today):
         ])
         fig.update_layout(margin=dict(l=1, r=1, t=1, b=1))
         # Renderizar la tabla en Streamlit
-        st.plotly_chart(fig,config={'displayModeBar': False}, use_container_width=True)
+        st.plotly_chart(fig,config={'displayModeBar': False})
 
 
     fed=load_policy(today)
