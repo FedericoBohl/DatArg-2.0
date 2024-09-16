@@ -381,7 +381,8 @@ def make_usa(today):
             text=[f'{value}%' for value in prob_df[prob_df.columns[0]].values],  # Mostrar valores en porcentaje
             textposition='outside',
             marker=dict(cornerradius="15%", line=dict(color='darkred', width=2)),
-            visible=True  # Esta traza será visible inicialmente
+            visible=True,  # Esta traza será visible inicialmente
+            hoverinfo='none'
         ))
 
         fig.add_trace(go.Bar(
@@ -391,7 +392,8 @@ def make_usa(today):
             text=[f'{value}%' for value in prob_df[prob_df.columns[1]].values],  # Mostrar valores en porcentaje
             textposition='outside',
             marker=dict(cornerradius="15%", line=dict(color='darkred', width=2)),
-            visible=False  # Esta traza estará oculta inicialmente
+            visible=False,  # Esta traza estará oculta inicialmente
+            hoverinfo='none'
         ))
 
         fig.add_trace(go.Bar(
@@ -401,7 +403,8 @@ def make_usa(today):
             text=[f'{value}%' for value in prob_df[prob_df.columns[2]].values],  # Mostrar valores en porcentaje
             textposition='outside',
             marker=dict(cornerradius="15%", line=dict(color='darkred', width=2)),
-            visible=False  # Esta traza estará oculta inicialmente
+            visible=False,  # Esta traza estará oculta inicialmente
+            hoverinfo='none'
         ))
         
         fig.update_layout(
