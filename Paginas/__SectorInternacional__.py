@@ -374,22 +374,38 @@ def make_usa(today):
         prob_df=data[S.focm_selected]
         df=prob_df[prob_df.columns[0]]
         fig = go.Figure()
-        for col in prob_df.columns:
-            fig.add_trace(go.Bar(
-                x=prob_df.index,
-                y=prob_df[col].values,
-                marker_color='crimson',  # Color bordo
-                text=[f'{value}%' for value in df.values],  # Mostrar valores en porcentaje
-                textposition='outside',
-                marker=dict(cornerradius="15%",line=dict(color='darkred',width=2))
-            ))
+        fig.add_trace(go.Bar(
+            x=prob_df.index,
+            y=prob_df[prob_df.columns[0]].values,
+            marker_color='crimson',  # Color bordo
+            text=[f'{value}%' for value in df.values],  # Mostrar valores en porcentaje
+            textposition='outside',
+            marker=dict(cornerradius="15%",line=dict(color='darkred',width=2))
+        ))
+        fig.add_trace(go.Bar(
+            x=prob_df.index,
+            y=prob_df[prob_df.columns[1]].values,
+            marker_color='crimson',  # Color bordo
+            text=[f'{value}%' for value in df.values],  # Mostrar valores en porcentaje
+            textposition='outside',
+            marker=dict(cornerradius="15%",line=dict(color='darkred',width=2),visible=False)
+        ))
+        fig.add_trace(go.Bar(
+            x=prob_df.index,
+            y=prob_df[prob_df.columns[2]].values,
+            marker_color='crimson',  # Color bordo
+            text=[f'{value}%' for value in df.values],  # Mostrar valores en porcentaje
+            textposition='outside',
+            marker=dict(cornerradius="15%",line=dict(color='darkred',width=2),visible=False)
+        ))
         fig.update_layout(
             plot_bgcolor='white',
             yaxis=dict(range=[0, 100],showline=True, linewidth=2, linecolor='black',gridcolor='lightslategrey',gridwidth=0.35),
             title="Policy Rate esperada",
             xaxis_title="Tasa objetivo (Basis Points)",
             yaxis_title="Probabilidad",
-            showlegend=False)
+            showlegend=False,
+            )
         fig.update_layout(
                 updatemenus=[
                     dict(
