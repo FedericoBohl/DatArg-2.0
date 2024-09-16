@@ -388,7 +388,7 @@ def make_usa(today):
             marker_color='crimson',  # Color bordo
             text=[f'{value}%' for value in df.values],  # Mostrar valores en porcentaje
             textposition='outside',
-            marker=dict(cornerradius="15%",line=dict(color='darkred',width=2),visible=False)
+            marker=dict(cornerradius="15%",line=dict(color='darkred',width=2))
         ))
         fig.add_trace(go.Bar(
             x=prob_df.index,
@@ -396,7 +396,7 @@ def make_usa(today):
             marker_color='crimson',  # Color bordo
             text=[f'{value}%' for value in df.values],  # Mostrar valores en porcentaje
             textposition='outside',
-            marker=dict(cornerradius="15%",line=dict(color='darkred',width=2),visible=False)
+            marker=dict(cornerradius="15%",line=dict(color='darkred',width=2))
         ))
         fig.update_layout(
             plot_bgcolor='white',
