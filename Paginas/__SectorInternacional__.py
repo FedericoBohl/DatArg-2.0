@@ -374,14 +374,15 @@ def make_usa(today):
         prob_df=data[S.focm_selected]
         df=prob_df[prob_df.columns[0]]
         fig = go.Figure()
-        fig.add_trace(go.Bar(
-            x=df.index,
-            y=df.values,
-            marker_color='crimson',  # Color bordo
-            text=[f'{value}%' for value in df.values],  # Mostrar valores en porcentaje
-            textposition='outside',
-            marker=dict(cornerradius="15%",line=dict(color='darkred',width=2))
-        ))
+        for col in prob_df.columns:
+            fig.add_trace(go.Bar(
+                x=prob_df.index,
+                y=prob_df[col].values,
+                marker_color='crimson',  # Color bordo
+                text=[f'{value}%' for value in df.values],  # Mostrar valores en porcentaje
+                textposition='outside',
+                marker=dict(cornerradius="15%",line=dict(color='darkred',width=2))
+            ))
         fig.update_layout(
             plot_bgcolor='white',
             yaxis=dict(range=[0, 100],showline=True, linewidth=2, linecolor='black',gridcolor='lightslategrey',gridwidth=0.35),
@@ -395,21 +396,18 @@ def make_usa(today):
                         type="buttons",
                         direction="right",
                         active=0,
-                        x=0.57,
-                        y=1.2,
+                        x=0.5,
+                        y=1.3,
                         buttons=list([
-                            dict(label="None",
+                            dict(label="Hoy",
                                 method="update",
-                                args=[{"visible": [True]}]),
-                            dict(label="High",
+                                args=[{"visible": [True,False,False]}]),
+                            dict(label="Ayer",
                                 method="update",
-                                args=[{"visible": [True,]}]),
-                            dict(label="Low",
+                                args=[{"visible": [False,True,False]}]),
+                            dict(label="Hace una semana",
                                 method="update",
-                                args=[{"visible": [False]}]),
-                            dict(label="Both",
-                                method="update",
-                                args=[{"visible": [True]}]),
+                                args=[{"visible": [False,False,True]}])
                         ]),
                     )
                 ])
