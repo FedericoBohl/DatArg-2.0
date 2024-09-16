@@ -247,8 +247,8 @@ def make_actividad_web():
                 st.metric(label=f"Último Dato ({data.index[-1]})",value=round(data.iloc[-1][_[S.emae_elegido]],2),delta=f"{round(var_data.iloc[-1][_[S.emae_elegido]],2)}%")
         else:
             with c1.container(border=True):
-                data=actividad.dropna(subset=[_[S.indicador_actividad]])
-                var_data=var_men_act.dropna(subset=[_[S.indicador_actividad]])
+                data=actividad.dropna(subset=[S.indicador_actividad])
+                var_data=var_men_act.dropna(subset=[S.indicador_actividad])
                 st.metric(label=f"Último Dato ({data.index[-1]})",value=round(data.iloc[-1][S.indicador_actividad],2),delta=f"{round(var_data.iloc[-1][S.indicador_actividad],2)}%")
     c1,c2=st.columns(2)
     with c1.container(border=True):
