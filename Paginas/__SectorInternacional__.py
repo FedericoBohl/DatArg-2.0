@@ -451,14 +451,16 @@ def make_usa(today):
                 line_color='darkslategray',
                 fill_color='lightblue',  # Color de fondo de los encabezados
                 align='center',
-                font=dict(color='darkblue', size=16)  # Color de fuente y tamaño
+                font=dict(color='darkblue', size=16)  # Color de fuente y tamaño aumentado a 16
             ),
             cells=dict(
                 values=[prob_df.index] + [formatted_data[col] for col in prob_df.columns],  # Datos del DataFrame formateados
                 line_color='darkslategray',
                 fill_color='white',
                 align='center',
-                font=dict(color='black', size=14)
+                height=30,  # Altura de las celdas para centrar verticalmente
+                font=dict(color='black', size=14),  # Tamaño del texto de las celdas aumentado a 14
+                line_height=1.5  # Altura de la línea para centrar el contenido verticalmente
             ))
         ])
         fig.update_layout(margin=dict(l=1, r=1, t=1, b=1))
