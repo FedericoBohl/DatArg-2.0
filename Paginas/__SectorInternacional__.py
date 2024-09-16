@@ -414,6 +414,7 @@ def make_usa(today):
             xaxis_title="Tasa objetivo (Basis Points)",
             yaxis_title="Probabilidad",
             showlegend=False,
+            margin=dict(l=1, r=1, t=75, b=1)
             )
         fig.update_layout(
                 updatemenus=[
@@ -460,7 +461,7 @@ def make_usa(today):
                 font=dict(color='black', size=14)
             ))
         ])
-        fig.update_layout(margin=dict(l=1, r=1, t=75, b=1))
+        fig.update_layout(margin=dict(l=1, r=1, t=1, b=1))
         # Renderizar la tabla en Streamlit
         st.plotly_chart(fig,config={'displayModeBar': False}, use_container_width=True)
 
