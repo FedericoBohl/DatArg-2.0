@@ -448,15 +448,15 @@ def make_usa(today):
         fig = go.Figure(data=[go.Table(
             header=dict(
                 values=[''] + list(prob_df.columns),  # Encabezados de la tabla
-                line_color='darkslategray',
-                fill_color='lightblue',  # Color de fondo de los encabezados
+                line_color='crimson',
+                fill_color='#dbe9f9',  # Color de fondo de los encabezados
                 align='center',
-                font=dict(color='darkblue', size=16)  # Color de fuente y tamaño aumentado a 16
+                font=dict(color='#2b4f81', size=16)  # Color de fuente y tamaño aumentado a 16
             ),
             cells=dict(
                 values=[prob_df.index] + [formatted_data[col] for col in prob_df.columns],  # Datos del DataFrame formateados
-                line_color='darkslategray',
-                fill_color='white',
+                line_color='#b3c7e6',
+                fill_color='#f0f7ff',
                 align='center',
                 height=30,  # Altura de las celdas para centrar verticalmente
                 font=dict(color='black', size=14),  # Tamaño del texto de las celdas aumentado a 14
