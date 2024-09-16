@@ -466,41 +466,8 @@ def make_usa(today):
         fig.update_layout(margin=dict(l=1, r=1, t=1, b=1))
         # Renderizar la tabla en Streamlit
         #st.plotly_chart(fig,config={'displayModeBar': False})
-        prob_df = prob_df.applymap(lambda x: f"{x:.2f}%")
-
-        # Estilos CSS para la tabla
-        st.markdown(
-            """
-            <style>
-            /* Estilo para los encabezados */
-            .styled-table thead tr th {
-                background-color: lightblue;
-                color: darkblue;
-                text-align: center;
-                font-size: 16px;
-            }
-            /* Estilo para las celdas */
-            .styled-table tbody tr td {
-                text-align: center;
-                vertical-align: middle;
-                font-size: 14px;
-            }
-            /* Estilo general de la tabla */
-            .styled-table {
-                border-collapse: collapse;
-                width: 100%;
-            }
-            .styled-table th, .styled-table td {
-                border: 1px solid darkslategray;
-                padding: 10px;
-            }
-            </style>
-            """,
-            unsafe_allow_html=True
-        )
-
-        # Mostrar la tabla usando st.table con los estilos personalizados
-        st.table(prob_df.style.set_table_attributes('class="styled-table"'))
+        
+        st.table(prob_df.applymap(lambda x: f"{x:.2f}%"))
 
 
     fed=load_policy(today)
