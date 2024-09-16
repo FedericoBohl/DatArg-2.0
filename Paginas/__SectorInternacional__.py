@@ -440,6 +440,28 @@ def make_usa(today):
                     )
                 ])
         st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
+        
+        fig = go.Figure(data=[go.Table(
+            header=dict(
+                values=[''] + list(prob_df.columns),  # Encabezados de la tabla
+                line_color='darkslategray',
+                fill_color='lightblue',  # Color de fondo de los encabezados
+                align='center',
+                font=dict(color='darkblue', size=12)  # Color de fuente y tamaño
+            ),
+            cells=dict(
+                values=[prob_df.index] + [prob_df[col] for col in prob_df.columns],  # Datos del DataFrame
+                line_color='darkslategray',
+                fill_color='white',
+                align='center',
+                font=dict(color='black', size=12)
+            ))
+        ])
+
+        # Renderizar la tabla en Streamlit
+        st.plotly_chart(fig, use_container_width=True)
+        
+        
         st.table(prob_df)
 
     fed=load_policy(today)
