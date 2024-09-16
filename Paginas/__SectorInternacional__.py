@@ -420,7 +420,7 @@ def make_usa(today):
                         active=1,
                         x=0.75,
                         xanchor='right',
-                        y=1.3,
+                        y=1,
                         bgcolor='#f0f7ff',
                         bordercolor='#b3c7e6',
                         buttons=list([
@@ -437,7 +437,7 @@ def make_usa(today):
                     )
                 ])
         st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
-        st.dataframe(prob_df,use_container_width=True)
+        st.table(prob_df)
 
     fed=load_policy(today)
     focm=get_focm_rates(today)
