@@ -380,23 +380,30 @@ def make_usa(today):
             marker_color='crimson',  # Color bordo
             text=[f'{value}%' for value in df.values],  # Mostrar valores en porcentaje
             textposition='outside',
-            marker=dict(cornerradius="15%",line=dict(color='darkred',width=2))
+            marker=dict(cornerradius="15%", line=dict(color='darkred', width=2)),
+            visible=True  # Esta traza será visible inicialmente
         ))
+
+        # Segunda traza, inicialmente no visible
         fig.add_trace(go.Bar(
             x=prob_df.index,
             y=prob_df[prob_df.columns[1]].values,
             marker_color='crimson',  # Color bordo
             text=[f'{value}%' for value in df.values],  # Mostrar valores en porcentaje
             textposition='outside',
-            marker=dict(cornerradius="15%",line=dict(color='darkred',width=2))
+            marker=dict(cornerradius="15%", line=dict(color='darkred', width=2)),
+            visible=False  # Esta traza estará oculta inicialmente
         ))
+
+        # Tercera traza, inicialmente no visible
         fig.add_trace(go.Bar(
             x=prob_df.index,
             y=prob_df[prob_df.columns[2]].values,
             marker_color='crimson',  # Color bordo
             text=[f'{value}%' for value in df.values],  # Mostrar valores en porcentaje
             textposition='outside',
-            marker=dict(cornerradius="15%",line=dict(color='darkred',width=2))
+            marker=dict(cornerradius="15%", line=dict(color='darkred', width=2)),
+            visible=False  # Esta traza estará oculta inicialmente
         ))
         fig.update_layout(
             plot_bgcolor='white',
