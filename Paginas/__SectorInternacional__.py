@@ -448,7 +448,7 @@ def make_usa(today):
         fig = go.Figure(data=[go.Table(
             header=dict(
                 values=[''] + list(prob_df.columns),  # Encabezados de la tabla
-                line_color='crimson',
+                line_color='#2b4f81',
                 fill_color='#dbe9f9',  # Color de fondo de los encabezados
                 align='center',
                 font=dict(color='#2b4f81', size=16)  # Color de fuente y tamaño aumentado a 16
