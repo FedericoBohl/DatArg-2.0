@@ -411,13 +411,12 @@ def make_usa(today):
                     dict(
                         type="buttons",
                         direction="right",
-                        active=0,
-                        x=0.5,
+                        active=1,
+                        x=0.75,
                         xanchor='right',
                         y=1.3,
                         bgcolor='#f0f7ff',
                         bordercolor='#b3c7e6',
-                        
                         buttons=list([
                             dict(label="Hoy",
                                 method="update",
