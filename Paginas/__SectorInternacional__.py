@@ -443,6 +443,7 @@ def make_usa(today):
         st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
         
         formatted_data = {col: prob_df[col].map('{:.2f}%'.format) for col in prob_df.columns}
+         
 
         # Crear la tabla con Plotly
         fig = go.Figure(data=[go.Table(
