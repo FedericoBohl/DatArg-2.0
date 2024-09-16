@@ -436,7 +436,7 @@ def make_usa(today):
                         ]),
                     )
                 ])
-        st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
+        st.plotly_chart(fig,config={'displayModeBar': False,'visible':[True,False,False]},use_container_width=True)
         st.dataframe(prob_df,use_container_width=True)
 
     fed=load_policy(today)
