@@ -241,9 +241,15 @@ def make_actividad_web():
              'Explotación de minas y canteras':'Minas',
              'Comercio mayorista, minorista y reparaciones':'Comercio',
              'Actividades inmobiliarias, empresariales y de alquiler':'Inmobiliaria'}
-            with c1.container(border=True):st.metric(label=f"Último Dato ({actividad.index[-1]})",value=round(actividad.iloc[-1][_[S.emae_elegido]],2),delta=f"{round(var_men_act.iloc[-1][_[S.emae_elegido]],2)}%")
+            with c1.container(border=True):
+                data=actividad.dropna(subset=[_[S.emae_elegido]])
+                var_data=var_men_act.dropna(subset=[_[S.emae_elegido]])
+                st.metric(label=f"Último Dato ({data.index[-1]})",value=round(data.iloc[-1][_[S.emae_elegido]],2),delta=f"{round(var_data.iloc[-1][_[S.emae_elegido]],2)}%")
         else:
-            with c1.container(border=True):st.metric(label=f"Último Dato ({actividad.index[-1]})",value=round(actividad.iloc[-1][S.indicador_actividad],2),delta=f"{round(var_men_act.iloc[-1][S.indicador_actividad],2)}%")
+            with c1.container(border=True):
+                data=actividad.dropna(subset=[_[S.indicador_actividad]])
+                var_data=var_men_act.dropna(subset=[_[S.indicador_actividad]])
+                st.metric(label=f"Último Dato ({data.index[-1]})",value=round(data.iloc[-1][S.indicador_actividad],2),delta=f"{round(var_data.iloc[-1][S.indicador_actividad],2)}%")
     c1,c2=st.columns(2)
     with c1.container(border=True):
         st.subheader('PBI Real')
