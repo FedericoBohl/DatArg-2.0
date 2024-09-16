@@ -397,7 +397,11 @@ def make_usa(today):
                         direction="right",
                         active=0,
                         x=0.5,
+                        xanchor='right',
                         y=1.3,
+                        bgcolor='#f0f7ff',
+                        bordercolor='#b3c7e6',
+                        
                         buttons=list([
                             dict(label="Hoy",
                                 method="update",
