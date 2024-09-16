@@ -384,7 +384,6 @@ def make_usa(today):
             visible=True  # Esta traza será visible inicialmente
         ))
 
-        # Segunda traza, inicialmente no visible
         fig.add_trace(go.Bar(
             x=prob_df.index,
             y=prob_df[prob_df.columns[1]].values,
@@ -395,7 +394,6 @@ def make_usa(today):
             visible=False  # Esta traza estará oculta inicialmente
         ))
 
-        # Tercera traza, inicialmente no visible
         fig.add_trace(go.Bar(
             x=prob_df.index,
             y=prob_df[prob_df.columns[2]].values,
@@ -405,6 +403,7 @@ def make_usa(today):
             marker=dict(cornerradius="15%", line=dict(color='darkred', width=2)),
             visible=False  # Esta traza estará oculta inicialmente
         ))
+        
         fig.update_layout(
             plot_bgcolor='white',
             yaxis=dict(range=[0, 100],showline=True, linewidth=2, linecolor='black',gridcolor='lightslategrey',gridwidth=0.35),
@@ -418,7 +417,7 @@ def make_usa(today):
                     dict(
                         type="buttons",
                         direction="right",
-                        active=1,
+                        active=0,
                         x=0.75,
                         xanchor='right',
                         y=1.3,
@@ -448,162 +447,6 @@ def make_usa(today):
     with table_usa: st.dataframe(fed,use_container_width=True)
     with dotplot: dot_plot(today)
     with probabilities: make_probabilities(focm)
-    
-    
-@st.cache_resource(show_spinner=False)
-def get_usa(_):
-    focm=get_focm_rates()
-    #prob_df=pd.read_csv('fed_rate_data.csv')
-    #for i in prob_df.columns[1:]:
-    #    prob_df[i] = prob_df[i].str.rstrip('%').astype(float)
-    #prob_df['MEETING DATE']=pd.to_datetime(prob_df['MEETING DATE'],format='%m/%d/%Y')
-    #prob_df.set_index('MEETING DATE',inplace=True)
-    #prob_df.index=prob_df.index.strftime('%d de %b %Y')
-    #prob_df=prob_df.transpose()
-    
-    c1,c2,c3=st.columns((0.4,0.6/2,0.6/2),vertical_alignment='center')
-    with c1:st.header('EE.UU.')
-    fred = Fred(api_key="6050b935d2f878f1100c6f217cbe6753")
-    cpi_data = fred.get_series('CPIAUCNS').loc[f'{1999}':]
-    df_cpi = pd.DataFrame(cpi_data, columns=['Inflacion'])
-    df_cpi['Inflacion']=round(df_cpi['Inflacion']/df_cpi['Inflacion'].shift(12) -1,4)*100
-    df_cpi=df_cpi.dropna()
-    inf_t=df_cpi.iloc[-1]['Inflacion']
-    inf_t1=df_cpi.iloc[-2]['Inflacion']
-    with c3:st.metric(f"Inflación ({df_cpi.index[-1].strftime('%b')})",f"{inf_t:.2f}%",f"{round(inf_t-inf_t1,2)}PP",delta_color="inverse")
-
-    unemployment_data = fred.get_series('UNRATE').loc[f'{2000}':]
-    df_unemployment = pd.DataFrame(unemployment_data, columns=['Desempleo'])
-    fed_funds_data = fred.get_series('FEDFUNDS').loc[f'{2000}':]
-    df_fed_funds = pd.DataFrame(fed_funds_data, columns=['Tasa'])
-    fed_t=df_fed_funds.iloc[-1]['Tasa']
-    fed_t1=df_fed_funds.iloc[-2]['Tasa']
-    with c2:st.metric(f"Fed Funds Rate ({df_fed_funds.index[-1].strftime('%b')})",f"{fed_t:.2f}%",f"{round(fed_t-fed_t1,2)}PP",delta_color="inverse")
-
-
-    graph_usa,table_usa,probabilities,dotplot=st.tabs(['Gráfico','Tabla','Probabilidades de Tasa','Dot-Plot'])
-    fig=make_subplots(specs=[[{"secondary_y": True}]])
-    fig.add_trace(go.Scatter(x=df_fed_funds.index,y=df_fed_funds['Tasa'],name='FED',line=dict(width=3,dash="dashdot"),marker_color="#B31942"),secondary_y=False)
-    fig.add_trace(go.Bar(x=df_fed_funds.index,y=df_cpi['Inflacion'],name="Inflación",marker_color="#0A3161"),secondary_y=False)
-    fig.add_trace(go.Scatter(x=df_fed_funds.index,y=df_unemployment['Desempleo'],name='Desempleo',line=dict(width=2),marker_color=lavender),secondary_y=True)
-
-    fig.update_layout(hovermode="x unified",margin=dict(l=1, r=1, t=75, b=1), legend=dict( 
-                            orientation="h",
-                            yanchor="bottom",
-                            y=1.02,
-                            xanchor="right",
-                            x=1,
-                            bordercolor=black,
-                            borderwidth=2
-                        ),
-                yaxis=dict(showgrid=False, zeroline=True, showline=True,title="% - Inflación/Tasa de la FED"),
-                yaxis2=dict(showgrid=False, zeroline=True, showline=True,title="% - Desempleo"),
-                xaxis=dict(
-                            rangeselector=dict(
-                                buttons=list([
-                                    dict(count=6,
-                                        label="6m",
-                                        step="month",
-                                        stepmode="backward"),
-                                    dict(count=1,
-                                        label="1y",
-                                        step="year",
-                                        stepmode="backward"),
-                                    dict(count=5,
-                                        label="5y",
-                                        step="year",
-                                        stepmode="backward"),
-                                    dict(step="all")
-                                ])
-                            ),
-                            rangeslider=dict(
-                                visible=True
-                            )
-                        )
-                    )    
-    graph_usa.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
-    df_fed_funds.index=df_fed_funds.index.strftime('%b-%Y')
-    df_cpi.index=df_cpi.index.strftime('%b-%Y')
-    df_unemployment.index=df_unemployment.index.strftime('%b-%Y')
-    data=pd.concat([df_fed_funds,df_cpi],axis=1)
-    data=pd.concat([data,df_unemployment],axis=1)
-    table_usa.dataframe(data,use_container_width=True)
-
-
-    
-    if 1==0:
-        df=prob_df[prob_df[prob_df.columns[0]]>0][prob_df.columns[0]]
-        fig = go.Figure()
-        fig.add_trace(go.Bar(
-            x=df.index,
-            y=df.values,
-            marker_color='crimson',  # Color bordo
-            text=[f'{value}%' for value in df.values],  # Mostrar valores en porcentaje
-            textposition='outside',
-            marker=dict(cornerradius="15%",line=dict(color='darkred',width=2))
-        ))
-        fig.update_layout(
-            plot_bgcolor='white',
-            yaxis=dict(range=[0, 100],showline=True, linewidth=2, linecolor='black',gridcolor='lightslategrey',gridwidth=0.35),
-            title="Policy Rate esperada para la siguiente meeting de decisión de tasa",
-            xaxis_title="Tasa objetivo (Basis Points)",
-            yaxis_title="Probabilidad",
-            showlegend=False)
-        probabilities.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
-        probabilities.dataframe(prob_df)
-
-    data=pd.read_csv('dotplot.csv')
-    data.set_index('TARGET RATE',inplace=True)
-    def generar_numeros(base, numero):
-        mitad = numero // 2
-        if numero % 2 != 0:  # Si es impar
-            numeros=[]
-            for i in range(1,1+mitad):
-                numeros.append(base+0.1*i)
-                numeros.append(base-0.1*i)
-            numeros.append(base)
-            numeros.sort()
-        else:  # Si es par
-            numeros=[]
-            for i in range(1,1+mitad):
-                numeros.append(base+0.1*i-0.05)
-                numeros.append(base-0.1*i+0.05)
-            numeros.sort()
-        return numeros
-    plot_dict={}
-    for col in data.columns:
-        plot_data={}
-        if col=='Largo Plazo':
-            year=int(data.columns[-2])+1
-        else:
-            year=int(col)
-        year_data=data.dropna(subset=[col])[col]
-        for val in year_data.index:
-            plot_data[val]=generar_numeros(int(year),int(year_data[val]))
-        plot_dict[col]=plot_data
-
-    fig = go.Figure()
-    for year, rates in plot_dict.items():
-        for rate, votes in rates.items():
-            fig.add_trace(go.Scatter(
-                x=votes,
-                y=[rate] * len(votes),
-                mode='markers',
-                marker=dict(size=10,color='navy'),
-                name=str(year)
-            ))
-    texts=[k for k in plot_dict.keys()]
-    vals=[(int(k) if k!="Largo Plazo" else (int(texts[-2])+1)) for k in texts]
-    fig.update_layout(
-        title="Dot Plot del FOMC",
-        plot_bgcolor='white',
-        xaxis_title="Año",
-        yaxis_title="Tasa de Interés (%)",
-        showlegend=False,
-        xaxis=dict(tickmode='array',tickvals=vals,ticktext=texts),
-        yaxis=dict(range=[0,data.index.max().max()*1.1],showline=True, linewidth=0.5, linecolor='black',gridcolor='lightslategrey',gridwidth=0.35)
-    )
-    dotplot.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 @st.cache_resource(show_spinner=False)
 def get_jp(_):
