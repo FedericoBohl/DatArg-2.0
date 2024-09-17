@@ -2,12 +2,16 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
+
 import pandas as pd
 import time
 
 class DoctaCap:
     def __init__(self):
-        self.driver = webdriver.Chrome()
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")  # Ejecutar en modo headless
+        self.driver = webdriver.Chrome(options=chrome_options)
         self.token_info = None
         self.urls={'CER':'https://www.doctacapital.com.ar/dashboard/bonos/general/cer',
                    'DL':'https://www.doctacapital.com.ar/dashboard/bonos/general/dollar-linked',

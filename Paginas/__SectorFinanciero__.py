@@ -167,7 +167,6 @@ def make_bonds():
 
 def make_merv_web():
     st.header('Mercado de Capitales')
-    st.button('🔄️Recargar Datos',key='Reload')
     try:
         try:
             if (not 'docta' in S):
