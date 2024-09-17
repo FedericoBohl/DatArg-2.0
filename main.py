@@ -133,8 +133,8 @@ with t_SecPub:
     make_sect_pub_web()
 with t_Intl:
     make_internacional_web()
-with t_Merv:
-    make_merv_web()
+#with t_Merv:
+#    make_merv_web()
 
 with st.container():
     image_path = "cafe.png"
