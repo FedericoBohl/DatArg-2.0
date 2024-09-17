@@ -8,6 +8,7 @@ from Paginas.librerias import get_data
 from plotly import graph_objects as go
 from plotly.subplots import make_subplots
 import plotly.express as px
+import streamlit.components.v1 as components
 
 @st.cache_data(show_spinner=False)
 def make_cedears(data_now : pd.DataFrame):
@@ -164,14 +165,57 @@ def make_bonds():
         st.dataframe(_)
     except:pass
 
+def make_forex():
+    #@st.cache_resource(show_spinner=False)
+    def iframes():
+        tradingview_widget = """
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container" style="width: 100%; height: 100%;">
+        <div class="tradingview-widget-container__widget"></div>
+        <div class="tradingview-widget-copyright">
+            <a href="https://es.tradingview.com/" rel="noopener nofollow" target="_blank">
+            <span class="blue-text">Siga los mercados en TradingView</span>
+            </a>
+        </div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-heat-map.js" async>
+        {
+        "width": "100%",
+        "height": 500,
+        "currencies": [
+            "EUR",
+            "USD",
+            "JPY",
+            "GBP",
+            "HKD",
+            "MXN",
+            "ARS",
+            "CLP",
+            "COP",
+            "PEN",
+            "UYU",
+            "BRL"
+        ],
+        "isTransparent": true,
+        "colorTheme": "white",
+        "locale": "es",
+        "backgroundColor": "#E8EBF3"
+        }
+        </script>
+        </div>
+        <!-- TradingView Widget END -->
+        """
 
+        # Usar components.html para renderizar el widget
+        components.html(tradingview_widget)    
+    iframes()
 def make_merv_web():
     st.header('Mercado de Capitales')
     try:
         try:
             if (not 'docta' in S):
                 S.docta=DoctaCap()
-        except Exception as e:st.write(e)
+        except Exception as e:
+            pass#st.write(e)
         bonos, acciones, cedears, forex= st.tabs(["Bonos", "Acciones",'Cedears','Forex'])
         with bonos:
             make_bonds()
