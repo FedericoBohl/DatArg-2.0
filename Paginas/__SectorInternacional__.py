@@ -585,6 +585,7 @@ def get_jp(_):
     
     
 def make_internacional_web():
+    st.write(S)
     c1,c2=st.columns(2)
     with c1:
         with st.container(border=True):
