@@ -166,7 +166,7 @@ def make_bonds():
     except:pass
 
 def make_forex():
-    #@st.cache_resource(show_spinner=False)
+    @st.cache_resource(show_spinner=False)
     def iframes():
         tradingview_widget = """
         <!-- TradingView Widget BEGIN -->
@@ -201,9 +201,38 @@ def make_forex():
         </div>
         <!-- TradingView Widget END -->
         """
-
-        # Usar components.html para renderizar el widget
         components.html(tradingview_widget, height=550, scrolling=True)
+        w_panel_forex_val="""<!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>
+        {
+        "width": "100%",
+        "height": 500,
+        "currencies": [
+            "EUR",
+            "USD",
+            "JPY",
+            "GBP",
+            "HKD",
+            "MXN",
+            "ARS",
+            "CLP",
+            "COP",
+            "PEN",
+            "UYU",
+            "BRL"
+        ],
+        "isTransparent": true,
+        "colorTheme": "light",
+        "locale": "es",
+        "backgroundColor": "white"
+        }
+        </script>
+        </div>
+        <!-- TradingView Widget END -->"""
+        components.html(w_panel_forex_val, height=550, scrolling=True)
     iframes()
 def make_merv_web():
     st.header('Mercado de Capitales')
