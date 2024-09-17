@@ -11,6 +11,8 @@ class DoctaCap:
     def __init__(self):
         chrome_options = Options()
         chrome_options.add_argument("--headless")  # Ejecutar en modo headless
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
         self.driver = webdriver.Chrome(options=chrome_options)
         self.token_info = None
         self.urls={'CER':'https://www.doctacapital.com.ar/dashboard/bonos/general/cer',
