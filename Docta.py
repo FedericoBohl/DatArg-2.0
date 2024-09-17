@@ -4,23 +4,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.core.os_manager import ChromeType
 import pandas as pd
 import time
 import streamlit as st
 
-@st.cache_resource
-def get_driver():
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")  # Ejecutar en modo headless
-    chrome_options.add_argument("--disable-gpu")
-    return webdriver.Chrome(
-        service=Service(
-            ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
-        ),
-        options=chrome_options,
-    )
 class DoctaCap:
     def __init__(self):
 
