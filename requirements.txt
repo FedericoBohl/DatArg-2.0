@@ -6,7 +6,8 @@ numpy==1.26.2
 urllib3==2.1.0
 pytz==2023.3.post1
 plotly>=5.22.0
-selenium
+seleniumbase
+webdriver-manager
 fredapi
 numpy
 bs4
