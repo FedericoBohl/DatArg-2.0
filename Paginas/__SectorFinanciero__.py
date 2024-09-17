@@ -244,5 +244,7 @@ def make_merv_web():
                     st.dataframe(cede.iloc[cede.index==S.cedebuscado].transpose(),use_container_width=True)
 
             else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
+        with forex:
+            make_forex()
     except:
         st.exception(Exception('🤯 Ups... Algo está andando mal. Disculpe las molestias, estamos trabajando para solucionarlo.'))
