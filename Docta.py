@@ -11,19 +11,20 @@ import time
 import streamlit as st
 
 @st.cache_resource
-def get_driver(options):
+def get_driver():
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Ejecutar en modo headless
+    chrome_options.add_argument("--disable-gpu")
     return webdriver.Chrome(
         service=Service(
             ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
         ),
-        options=options,
+        options=chrome_options,
     )
 class DoctaCap:
     def __init__(self):
-        chrome_options = Options()
-        chrome_options.add_argument("--headless")  # Ejecutar en modo headless
-        chrome_options.add_argument("--disable-gpu")
-        self.driver = get_driver(chrome_options)
+
+        self.driver = get_driver()
         self.token_info = None
         self.urls={'CER':'https://www.doctacapital.com.ar/dashboard/bonos/general/cer',
                    'DL':'https://www.doctacapital.com.ar/dashboard/bonos/general/dollar-linked',
