@@ -304,8 +304,7 @@ def make_usa(today):
             focm={}
             for tr in table.find_all('tr')[1:]:
                 tds = tr.find_all('td')
-                st.write([td.get_text(strip=True)[:-1] for td in tds[1:]])
-                focm["-".join([str(num) for num in [int(float(i)*100) for i in tds[0].get_text(strip=True).split(' - ')]])]=[float(td.get_text(strip=True)[:-1]) for td in tds[1:]]
+                focm["-".join([str(num) for num in [int(float(i)*100) for i in tds[0].get_text(strip=True).split(' - ')]])]=[float(td.get_text(strip=True)[:-1] if td.get_text(strip=True)[:-1]!='' else '0.0') for td in tds[1:]]
             
             _today_=datetime.strptime(" ".join(table.find('div', class_='fedUpdate').get_text(strip=True).split()[1:4]), '%b %d, %Y')
             _yest_=_today_-timedelta(days=1)
@@ -475,7 +474,6 @@ def make_usa(today):
     fed=load_policy(today)
     if 'focm' not in S:
         S.focm=get_focm_rates(today)
-        st.write(S.focm)
     make_metrics(fed)
     graph_usa,table_usa,probabilities,dotplot=st.tabs(['Gráfico','Tabla','Probabilidades de Tasa','Dot-Plot'])
     with graph_usa:plot_policy(fed)
