@@ -290,7 +290,7 @@ def make_usa(today):
         inf_t1=data.dropna(subset = ['Inflacion']).iloc[-2]['Inflacion']
         c3.metric(f"Inflación ({data.dropna(subset = ['Inflacion']).index[-1].split('-')[0]})",f"{inf_t:.2f}%",f"{round(inf_t-inf_t1,2)}PP",delta_color="inverse")
 
-    #@st.cache_data(show_spinner=False)
+    @st.cache_data(show_spinner=False)
     def get_focm_rates(_):
         url='https://www.investing.com/central-banks/fed-rate-monitor'
         response = requests.get(url=url)
@@ -304,6 +304,7 @@ def make_usa(today):
             focm={}
             for tr in table.find_all('tr')[1:]:
                 tds = tr.find_all('td')
+                st.write([td.get_text(strip=True)[:-1] for td in tds[1:]])
                 focm["-".join([str(num) for num in [int(float(i)*100) for i in tds[0].get_text(strip=True).split(' - ')]])]=[float(td.get_text(strip=True)[:-1]) for td in tds[1:]]
             
             _today_=datetime.strptime(" ".join(table.find('div', class_='fedUpdate').get_text(strip=True).split()[1:4]), '%b %d, %Y')
@@ -473,7 +474,6 @@ def make_usa(today):
 
     fed=load_policy(today)
     if 'focm' not in S:
-        st.write(True)
         S.focm=get_focm_rates(today)
         st.write(S.focm)
     make_metrics(fed)
@@ -585,7 +585,6 @@ def get_jp(_):
     
     
 def make_internacional_web():
-    st.write(S)
     c1,c2=st.columns(2)
     with c1:
         with st.container(border=True):
