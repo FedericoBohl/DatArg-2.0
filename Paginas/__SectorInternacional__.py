@@ -473,7 +473,9 @@ def make_usa(today):
 
     fed=load_policy(today)
     if 'focm' not in S:
+        st.write(True)
         S.focm=get_focm_rates(today)
+        st.write(S.focm)
     make_metrics(fed)
     graph_usa,table_usa,probabilities,dotplot=st.tabs(['Gráfico','Tabla','Probabilidades de Tasa','Dot-Plot'])
     with graph_usa:plot_policy(fed)

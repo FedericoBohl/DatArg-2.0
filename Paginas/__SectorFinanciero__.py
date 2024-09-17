@@ -115,7 +115,7 @@ def make_merv_web():
             #Los dataframes deberían tener de index el ticker del bono para hacer el filtrado más simple
             with c1_1:
                 if S.df_bonos_gob is not None:
-                    st.subheader('Bonos Ley Nacional')
+                    st.subheader('Bonos Soberanos')
                     t_1_nac,t_2_nac,t_3_nac=st.tabs(['Panel','Curva','Buscador'])
                     with t_1_nac: st.subheader('Panel')
                     with t_2_nac: st.subheader('Curva')
@@ -164,7 +164,7 @@ def make_merv_web():
                 with c2_3:
                     st.subheader('Filtado de bono')
                     st.selectbox('Buscador de Bonos',options=S.df_iamc.index.to_list(),key='bonobuscado')
-                    st.write(S.df_iamc.loc[S.df_iamc.index==S.bonobuscado].transpose())
+                    st.dataframe(S.df_iamc.loc[S.df_iamc.index==S.bonobuscado].transpose(),use_container_width=True)
             else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
             st.divider()
             #TEST
