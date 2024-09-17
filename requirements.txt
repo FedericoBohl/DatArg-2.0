@@ -19,6 +19,7 @@ user_agents
 python-certifi-win32
 certifi
 streamlit_extras
+streamlit_calendar
 streamlit-lottie>=0.0.5
 statsmodels
 st_social_media_links
