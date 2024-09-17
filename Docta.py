@@ -24,12 +24,12 @@ def get_driver():
 class DoctaCap:
     def __init__(self):
 
-        #self.driver = get_driver()
+        #driver = get_driver()
         options = Options() 
         options.add_argument("--headless=new")
         options.add_argument('--disable-gpu')
 
-        self.driver = webdriver.Chrome(options=options)
+        driver = webdriver.Chrome(options=options)
         self.token_info = None
         self.urls={'CER':'https://www.doctacapital.com.ar/dashboard/bonos/general/cer',
                    'DL':'https://www.doctacapital.com.ar/dashboard/bonos/general/dollar-linked',
@@ -51,27 +51,27 @@ class DoctaCap:
                     }
         for key in self.df:
             try:
-                self.df[key]=self.extract_table(self.urls[key])
+                self.df[key]=self.extract_table(self.urls[key],driver)
             except:continue
         try:
             self.df['Soberanos']=self.df['Soberanos'][~self.df['Soberanos'].index.str.endswith('C')]
             self.df['Soberanos']=pd.concat([self.df['Soberanos'],self.df['BOP']])
         except:pass
-    def extract_table(self,url)->pd.DataFrame:
+    def extract_table(self,url,driver)->pd.DataFrame:
         data=[['Sin resultados.']]
         while data[0][0]=='Sin resultados.':
             try:
-                self.driver.get(url=url)
-                wait = WebDriverWait(self.driver, 5)
+                driver.get(url=url)
+                wait = WebDriverWait(driver, 5)
                 button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[normalize-space(text())='Limpiar filtros']")))
                 button.click()
                 time.sleep(2.5)
 
-                wait = WebDriverWait(self.driver, 5)  # Esperar hasta 30 segundos
+                wait = WebDriverWait(driver, 5)  # Esperar hasta 30 segundos
                 wait.until(EC.presence_of_element_located((By.TAG_NAME, 'table')))
 
                 # Encuentra la última ngx-datatable
-                element=self.driver.find_element(By.TAG_NAME, 'table')
+                element=driver.find_element(By.TAG_NAME, 'table')
                 head=element.find_element(By.TAG_NAME,'thead')
                 body=element.find_element(By.TAG_NAME,'tbody')
                 cols= [i.text for i in head.find_elements(By.TAG_NAME,'th')]
