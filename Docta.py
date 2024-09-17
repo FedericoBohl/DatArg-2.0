@@ -24,7 +24,12 @@ def get_driver():
 class DoctaCap:
     def __init__(self):
 
-        self.driver = get_driver()
+        #self.driver = get_driver()
+        options = Options() 
+        options.add_argument("--headless=new")
+        options.add_argument('--disable-gpu')
+
+        self.driver = webdriver.Chrome(options=options)
         self.token_info = None
         self.urls={'CER':'https://www.doctacapital.com.ar/dashboard/bonos/general/cer',
                    'DL':'https://www.doctacapital.com.ar/dashboard/bonos/general/dollar-linked',
