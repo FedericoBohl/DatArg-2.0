@@ -169,8 +169,10 @@ def make_merv_web():
     st.header('Mercado de Capitales')
     st.button('🔄️Recargar Datos',key='Reload')
     try:
-        if (not 'docta' in S):
-            S.docta=DoctaCap()
+        try:
+            if (not 'docta' in S):
+                S.docta=DoctaCap()
+        except Exception as e:st.write(e)
         bonos, acciones, cedears, forex= st.tabs(["Bonos", "Acciones",'Cedears','Forex'])
         with bonos:
             make_bonds()
