@@ -173,9 +173,6 @@ def make_forex():
         <div class="tradingview-widget-container" style="width: 100%; height: 100%;">
         <div class="tradingview-widget-container__widget"></div>
         <div class="tradingview-widget-copyright">
-            <a href="https://es.tradingview.com/" rel="noopener nofollow" target="_blank">
-            <span class="blue-text">Siga los mercados en TradingView</span>
-            </a>
         </div>
         <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-heat-map.js" async>
         {
@@ -196,9 +193,9 @@ def make_forex():
             "BRL"
         ],
         "isTransparent": true,
-        "colorTheme": "white",
+        "colorTheme": "light",
         "locale": "es",
-        "backgroundColor": "#E8EBF3"
+        "backgroundColor": "#ffffff"
         }
         </script>
         </div>
