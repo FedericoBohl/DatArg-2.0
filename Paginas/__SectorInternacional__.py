@@ -370,10 +370,8 @@ def make_usa(today):
         st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
     
     @st.cache_data(show_spinner=False)
-    def make_probabilities(data:dict):
-        st.selectbox('Reunión del FOCM',options=list(data.keys()),key='focm_selected')
-        prob_df=data[S.focm_selected]
-        df=prob_df[prob_df.columns[0]]
+    def make_probabilities(data:dict,focm_selected):
+        prob_df=data[focm_selected]
         fig = go.Figure()
         fig.add_trace(go.Bar(
             x=prob_df.index,
@@ -479,7 +477,9 @@ def make_usa(today):
     with graph_usa:plot_policy(fed)
     with table_usa: st.dataframe(fed,use_container_width=True)
     with dotplot: dot_plot(today)
-    with probabilities: make_probabilities(S.focm)
+    with probabilities:
+        st.selectbox('Reunión del FOCM',options=list(S.focm.keys()),key='focm_selected')
+        make_probabilities(S.focm,S.focm_selected)
 
 @st.cache_resource(show_spinner=False)
 def get_jp(_):
