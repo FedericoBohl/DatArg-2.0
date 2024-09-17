@@ -206,7 +206,7 @@ def make_forex():
         """
 
         # Usar components.html para renderizar el widget
-        components.html(tradingview_widget)    
+        components.html(tradingview_widget, height=550, scrolling=True)
     iframes()
 def make_merv_web():
     st.header('Mercado de Capitales')
