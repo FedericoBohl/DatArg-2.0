@@ -122,7 +122,7 @@ def get_ecovalores():
                 data=[[td.text for td in tr.find_all('td')] for tr in table.find_all('tr')]
                 data=pd.DataFrame(data,columns=header_texts).dropna()
                 data.set_index('Título',inplace=True)
-                #data['TIR']=[float(i.replace('.','').replace('%','').replace(',','.')) for i in data['TIR']]
+                data['TIR']=[float(i.replace('.','').replace('%','').replace(',','.')) for i in data['TIR']]
                 data['Duration']=[float(i.replace(',','.')) for i in data['Duration']]
                 data['Var %']=[i.replace('+','') for i in data['Var %']]#[float(i.replace('.','').replace('%','').replace(',','.').replace('+','')) for i in data['Var %']]
                 data['Int. Corrido']=[float(i.replace('.','').replace(',','.')) for i in data['Int. Corrido']]
