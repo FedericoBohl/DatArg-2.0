@@ -164,8 +164,6 @@ def curva_soberanos(data):
     fig.add_trace(go.Scatter(x=BP['Duration'], y=BP['TIR'],name="BOPREALES",legendgroup="Bopreales",mode="markers",marker=dict(color="black"),text=BP.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>'))
     fig.update_traces(marker=dict(size=15,line=dict(width=2,color=black)),selector=dict(mode='markers'))
 
-
-
     fig.update_layout(margin=dict(l=1, r=1, t=75, b=1),
             height=450, 
             legend=dict(
@@ -190,7 +188,10 @@ def make_bonds():
             st.subheader('Títulos Públicos')
             t_1_nac,t_2_nac=st.tabs(['Panel','Curva'])
             with t_1_nac: st.dataframe(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])])
-            with t_2_nac: curva_soberanos(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])])
+            with t_2_nac:
+                try:
+                    curva_soberanos(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])])
+                except Exception as e: st.exception(e)
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     with c2_1:
         if isinstance(S.bonos,pd.DataFrame):
