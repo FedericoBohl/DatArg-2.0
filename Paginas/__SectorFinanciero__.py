@@ -9,6 +9,8 @@ from plotly import graph_objects as go
 from plotly.subplots import make_subplots
 import plotly.express as px
 import streamlit.components.v1 as components
+from bs4 import BeautifulSoup
+import requests
 
 @st.cache_data(show_spinner=False)
 def make_cedears(data_now : pd.DataFrame):
@@ -103,61 +105,73 @@ def make_acciones(data_now_merv : pd.DataFrame , data_now_gen : pd.DataFrame):
     #fig_gen.update_layout(margin=dict(l=1, r=1, t=10, b=1))
     return fig_merv,None#,fig_gen
 
+def get_ecovalores():
+    url='https://bonos.ecovalores.com.ar/eco/listado.php'
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
+    response = requests.get(url, headers=headers)
+    soup=BeautifulSoup(response.text,'html.parser')
+    tables=soup.find_all('table')
+    data=None
+    for i in range(len(tables)):
+        try:
+            table=tables[i]
+            headers = table.find_all('th')
+            header_texts = [header.get_text(strip=True) for header in headers]
+            if 'TIR' in header_texts:
+                data=[[td.text for td in tr.find_all('td')] for tr in table.find_all('tr')]
+                data=pd.DataFrame(data,columns=header_texts).dropna()
+                data.set_index('Título',inplace=True)
+                #data['TIR']=[float(i.replace('.','').replace('%','').replace(',','.')) for i in data['TIR']]
+                data['Duration']=[float(i.replace(',','.')) for i in data['Duration']]
+                data['Var %']=[i.replace('+','') for i in data['Var %']]#[float(i.replace('.','').replace('%','').replace(',','.').replace('+','')) for i in data['Var %']]
+                data['Int. Corrido']=[float(i.replace('.','').replace(',','.')) for i in data['Int. Corrido']]
+                data['VT']=[float(i.replace('.','').replace(',','.')) for i in data['VT']]
+                data['Precio']=[float(i.replace('.','').replace(',','.')) for i in data['Precio']]
+                break
+        except:continue
+    return data
+
 def make_bonds():
     c1_1,c2_1,c3_1=st.columns(3)
     #Los dataframes deberían tener de index el ticker del bono para hacer el filtrado más simple
     with c1_1:
-        if isinstance(S.docta.df['Soberanos'],pd.DataFrame):
+        if isinstance(S.bonos,pd.DataFrame):
             st.subheader('Títulos Públicos')
             t_1_nac,t_2_nac=st.tabs(['Panel','Curva'])
             with t_1_nac: st.subheader('Panel');st.dataframe(S.docta.df['Soberanos'])
             with t_2_nac: st.subheader('Curva')
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     with c2_1:
-        if S.df_bonos_gob is not None:
+        if isinstance(S.bonos,pd.DataFrame):
             st.subheader('Bonos Dollar Linked')
-            t_1_ex,t_2_ex,t_3_ex=st.tabs(['Panel','Curva','Buscador'])
+            t_1_ex,t_2_ex=st.tabs(['Panel','Curva'])
             with t_1_ex: st.subheader('Panel')
             with t_2_ex: st.subheader('Curva')
-            with t_3_ex: st.dataframe(S.df_bonos_gob[['last','change','volume','expiration']])#Idem
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     with c3_1:
-        if S.df_bonos_gob is not None:
+        if isinstance(S.bonos,pd.DataFrame):
             st.subheader('Bonos ajustados por CER')
-            t_1_c,t_2_c,t_3_c=st.tabs(['Panel','Curva','Buscador'])
+            t_1_c,t_2_c=st.tabs(['Panel','Curva'])
             with t_1_c: st.subheader('Panel')
             with t_2_c: st.subheader('Curva')
-            with t_3_c: st.dataframe(S.df_bonos_gob[['last','change','volume','expiration']])#Idem
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     c1_2,c2_2=st.columns(2)
     with c1_2:
-        if S.df_letras is not None:
+        if isinstance(S.bonos,pd.DataFrame):
             st.subheader('Lecaps')
-            t_1_l,t_2_l,t_3_l=st.tabs(['Panel','Curva','Buscador'])
+            t_1_l,t_2_l=st.tabs(['Panel','Curva'])
             with t_1_l: st.subheader('Panel')
             with t_2_l: st.subheader('Curva')
-            with t_3_l: st.dataframe(S.df_letras[['last','change','volume','expiration']])
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     with c2_2:    
-        if S.df_bonos_cor.all() is not None:
+        if isinstance(S.bonos,pd.DataFrame):
             st.subheader('Obligaciones Negociables')
-            t_1_cor,t_2_cor,t_3_cor=st.tabs(['Panel','Curva','Buscador'])
+            t_1_cor,t_2_cor=st.tabs(['Panel','Curva'])
             with t_1_cor: st.dataframe(S.df_bonos_cor,use_container_width=True)
             with t_2_cor: st.subheader('Curva')
-            with t_3_cor: 
-                st.selectbox('Buscador de corpo',label_visibility='collapsed',options=S.df_bonos_cor.index.to_list(),key='corpobuscado')
-                st.dataframe(S.df_bonos_cor.loc[S.df_bonos_cor.index==S.corpobuscado].transpose(),use_container_width=True)
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     if S.df_iamc is not None:
-        c1_3,c2_3=st.columns((0.7,0.3))
-        with c1_3:
-            st.subheader('Información de los bonos')
-            st.dataframe(S.df_iamc)
-        with c2_3:
-            st.subheader('Filtado de bono')
-            st.selectbox('Buscador de Bonos',options=S.df_iamc.index.to_list(),key='bonobuscado')
-            st.dataframe(S.df_iamc.loc[S.df_iamc.index==S.bonobuscado].transpose(),use_container_width=True)
-    else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
+        st.subheader('Buscador de Bonos')
     st.divider()
     #TEST
     try:
@@ -237,8 +251,9 @@ def make_merv_web():
     st.header('Mercado de Capitales')
     try:
         try:
-            if (not 'docta' in S):
-                S.docta=DoctaCap()
+            if (not 'bonos' in S):
+                S.bonos=get_ecovalores()
+                #S.docta=DoctaCap()
         except Exception as e:
             pass#st.write(e)
         bonos, acciones, cedears, forex= st.tabs(["Bonos", "Acciones",'Cedears','Forex'])
