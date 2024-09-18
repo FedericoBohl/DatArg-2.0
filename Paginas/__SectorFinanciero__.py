@@ -11,6 +11,7 @@ import plotly.express as px
 import streamlit.components.v1 as components
 from bs4 import BeautifulSoup
 import requests
+import numpy as np
 
 @st.cache_data(show_spinner=False)
 def make_cedears(data_now : pd.DataFrame):
@@ -131,6 +132,56 @@ def get_ecovalores():
         except:continue
     return data
 
+def curva_soberanos(data):
+    fig=go.Figure()
+    #Curva Ley Extrangera
+    GD=data[data.index.str.startswith('GD')]
+    coefficients = np.polyfit(GD['Duration'], GD['TIR'], 2)
+    polynomial = np.poly1d(coefficients)
+    vencimiento_linea = np.linspace(GD['Duration'].min(), GD['Duration'].max(), 100)
+    tir_linea = polynomial(vencimiento_linea)
+    fig.add_trace(go.Scatter(x=vencimiento_linea, y=tir_linea, marker_color='#EBD9B4',line=dict(dash="dash",width=4),name="Ley ny",showlegend=False,legendgroup="ley extranjera",hovertemplate="<extra></extra>"))
+    fig.add_trace(go.Scatter(x=GD['Duration'], y=GD['TIR'],name="Ley N.Y.",legendgroup="Ley ny",mode="markers",marker=dict(color="#EBD9B4"),text=GD.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>'))
+    fig.update_traces(marker=dict(size=15,line=dict(width=2,color=black)),selector=dict(mode='markers'))
+
+    #Curva Ley Local
+    AL = data[data.index.str.startswith('AL') | data.index.str.startswith('AE')]
+    coefficients = np.polyfit(AL['Duration'], AL['TIR'], 2)
+    polynomial = np.poly1d(coefficients)
+    vencimiento_linea = np.linspace(AL['Duration'].min(), AL['Duration'].max(), 100)
+    tir_linea = polynomial(vencimiento_linea)
+    fig.add_trace(go.Scatter(x=vencimiento_linea, y=tir_linea, marker_color='#9E9FA5',line=dict(dash="dash",width=4),name="Ley arg",showlegend=False,legendgroup="ley arg",hovertemplate="<extra></extra>"))
+    fig.add_trace(go.Scatter(x=AL['Duration'], y=AL['TIR'],name="Ley Arg.",legendgroup="Ley arg",mode="markers",marker=dict(color="#9E9FA5"),text=AL.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>'))
+    fig.update_traces(marker=dict(size=15,line=dict(width=2,color=black)),selector=dict(mode='markers'))
+
+    #Curva Bopreales
+    BP=data[data.index.str.startswith('BP')]
+    coefficients = np.polyfit(BP['Duration'], BP['TIR'], 2)
+    polynomial = np.poly1d(coefficients)
+    vencimiento_linea = np.linspace(BP['Duration'].min(), BP['Duration'].max(), 100)
+    tir_linea = polynomial(vencimiento_linea)
+    fig.add_trace(go.Scatter(x=vencimiento_linea, y=tir_linea, marker_color='black',line=dict(dash="dash",width=4),name="Bopreales",showlegend=False,legendgroup="Bopreales",hovertemplate="<extra></extra>"))
+    fig.add_trace(go.Scatter(x=BP['Duration'], y=BP['TIR'],name="BOPREALES",legendgroup="Bopreales",mode="markers",marker=dict(color="black"),text=BP.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>'))
+    fig.update_traces(marker=dict(size=15,line=dict(width=2,color=black)),selector=dict(mode='markers'))
+
+
+
+    fig.update_layout(margin=dict(l=1, r=1, t=75, b=1),
+            height=450, 
+            legend=dict(
+                orientation="h",
+                yanchor="bottom",
+                y=1.02,
+                xanchor="right",
+                x=1,
+                bordercolor="Black",
+                borderwidth=2
+            ))
+    fig.update_xaxes(showline=True, linewidth=2, linecolor=black,title="Mod. Duration")
+    fig.update_yaxes(showline=True, linewidth=2, linecolor=black,title="TIR")
+
+    st.plotly_chart(fig,use_container_width=True)
+
 def make_bonds():
     c1_1,c2_1,c3_1=st.columns(3)
     #Los dataframes deberían tener de index el ticker del bono para hacer el filtrado más simple
@@ -138,21 +189,21 @@ def make_bonds():
         if isinstance(S.bonos,pd.DataFrame):
             st.subheader('Títulos Públicos')
             t_1_nac,t_2_nac=st.tabs(['Panel','Curva'])
-            with t_1_nac: st.subheader('Panel');st.dataframe(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])])
-            with t_2_nac: st.subheader('Curva')
+            with t_1_nac: st.dataframe(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])])
+            with t_2_nac: curva_soberanos(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])])
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     with c2_1:
         if isinstance(S.bonos,pd.DataFrame):
             st.subheader('Bonos Dollar Linked')
             t_1_ex,t_2_ex=st.tabs(['Panel','Curva'])
-            with t_1_ex: st.subheader('Panel');st.dataframe(S.bonos[S.bonos['Tipo'].isin(['Dollar Linked'])])
+            with t_1_ex: st.dataframe(S.bonos[S.bonos['Tipo'].isin(['Dollar Linked'])])
             with t_2_ex: st.subheader('Curva')
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     with c3_1:
         if isinstance(S.bonos,pd.DataFrame):
             st.subheader('Bonos ajustados por CER')
             t_1_c,t_2_c=st.tabs(['Panel','Curva'])
-            with t_1_c: st.subheader('Panel');st.dataframe(S.bonos[S.bonos['Tipo'].isin(['Ajustable por CER'])])
+            with t_1_c: st.dataframe(S.bonos[S.bonos['Tipo'].isin(['Ajustable por CER'])])
             with t_2_c: st.subheader('Curva')
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     c1_2,c2_2=st.columns(2)
@@ -160,7 +211,7 @@ def make_bonds():
         if isinstance(S.bonos,pd.DataFrame):
             st.subheader('Lecaps')
             t_1_l,t_2_l=st.tabs(['Panel','Curva'])
-            with t_1_l: st.subheader('Panel');st.dataframe(S.bonos[S.bonos['Tipo'].isin(['Lecap'])])
+            with t_1_l: st.dataframe(S.bonos[S.bonos['Tipo'].isin(['Lecap'])])
             with t_2_l: st.subheader('Curva')
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     with c2_2:    
