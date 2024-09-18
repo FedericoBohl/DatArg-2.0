@@ -138,21 +138,21 @@ def make_bonds():
         if isinstance(S.bonos,pd.DataFrame):
             st.subheader('Títulos Públicos')
             t_1_nac,t_2_nac=st.tabs(['Panel','Curva'])
-            with t_1_nac: st.subheader('Panel');st.dataframe(S.docta.df['Soberanos'])
+            with t_1_nac: st.subheader('Panel');st.dataframe(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])])
             with t_2_nac: st.subheader('Curva')
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     with c2_1:
         if isinstance(S.bonos,pd.DataFrame):
             st.subheader('Bonos Dollar Linked')
             t_1_ex,t_2_ex=st.tabs(['Panel','Curva'])
-            with t_1_ex: st.subheader('Panel')
+            with t_1_ex: st.subheader('Panel');st.dataframe(S.bonos[S.bonos['Tipo'].isin(['Dollar Linked'])])
             with t_2_ex: st.subheader('Curva')
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     with c3_1:
         if isinstance(S.bonos,pd.DataFrame):
             st.subheader('Bonos ajustados por CER')
             t_1_c,t_2_c=st.tabs(['Panel','Curva'])
-            with t_1_c: st.subheader('Panel')
+            with t_1_c: st.subheader('Panel');st.dataframe(S.bonos[S.bonos['Tipo'].isin(['Ajustable por CER'])])
             with t_2_c: st.subheader('Curva')
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     c1_2,c2_2=st.columns(2)
@@ -160,14 +160,14 @@ def make_bonds():
         if isinstance(S.bonos,pd.DataFrame):
             st.subheader('Lecaps')
             t_1_l,t_2_l=st.tabs(['Panel','Curva'])
-            with t_1_l: st.subheader('Panel')
+            with t_1_l: st.subheader('Panel');st.dataframe(S.bonos[S.bonos['Tipo'].isin(['Lecap'])])
             with t_2_l: st.subheader('Curva')
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     with c2_2:    
         if isinstance(S.bonos,pd.DataFrame):
             st.subheader('Obligaciones Negociables')
             t_1_cor,t_2_cor=st.tabs(['Panel','Curva'])
-            with t_1_cor: st.dataframe(S.df_bonos_cor,use_container_width=True)
+            with t_1_cor: st.dataframe(S.bonos)
             with t_2_cor: st.subheader('Curva')
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     if S.df_iamc is not None:
