@@ -185,7 +185,7 @@ def curva_soberanos(data):
                     active=1,
                     x=0.25,
                     xanchor='right',
-                    y=1,
+                    y=1.2,
                     bgcolor='#f0f7ff',
                     bordercolor='#b3c7e6',
                     buttons=list([
@@ -199,9 +199,6 @@ def curva_soberanos(data):
                 )
             ])
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
-
-
-    st.plotly_chart(fig,use_container_width=True)
 
 def make_bonds():
     c1_1,c2_1,c3_1=st.columns(3)
