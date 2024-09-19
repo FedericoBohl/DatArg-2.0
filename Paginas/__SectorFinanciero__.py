@@ -256,8 +256,8 @@ def curva_LECAPS(data):
     polynomial = np.poly1d(coefficients)
     vencimiento_linea = np.linspace(data['Duration'].min(), data['Duration'].max(), 100)
     tir_linea = polynomial(vencimiento_linea)
-    fig.add_trace(go.Scatter(x=vencimiento_linea, y=tir_linea, marker_color='darkgreen',line=dict(dash="dash",width=4),name="LECAPS",showlegend=False,legendgroup="LECAPS",hoverinfo='none'))
-    fig.add_trace(go.Scatter(x=data['Duration'], y=data['TIR'],name="LECAPS",legendgroup="LECAPS",mode="markers",marker=dict(color="darkgreen"),text=data.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>'))
+    fig.add_trace(go.Scatter(x=vencimiento_linea, y=tir_linea, marker_color='#A04747',line=dict(dash="dash",width=4),name="LECAPS",showlegend=False,legendgroup="LECAPS",hoverinfo='none'))
+    fig.add_trace(go.Scatter(x=data['Duration'], y=data['TIR'],name="LECAPS",legendgroup="LECAPS",mode="markers",marker=dict(color="#A04747"),text=data.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>'))
     fig.update_traces(marker=dict(size=15,line=dict(width=2,color=black)),selector=dict(mode='markers'))
 
     fig.update_layout(margin=dict(l=1, r=1, t=75, b=1),
