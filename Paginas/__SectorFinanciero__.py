@@ -180,6 +180,34 @@ def curva_soberanos(data,tipo):
     fig.update_yaxes(showline=True, linewidth=2, linecolor=black,title="TIR")
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
+def curva_DL(data):
+    fig=go.Figure()
+    #Curva Bopreales
+    coefficients = np.polyfit(data['Duration'], data['TIR'], 2)
+    polynomial = np.poly1d(coefficients)
+    vencimiento_linea = np.linspace(data['Duration'].min(), data['Duration'].max(), 100)
+    tir_linea = polynomial(vencimiento_linea)
+    fig.add_trace(go.Scatter(x=vencimiento_linea, y=tir_linea, marker_color='royalblue',line=dict(dash="dash",width=4),name="Dollar Linked",showlegend=False,legendgroup="Dollar Linked",hoverinfo='none',visible=False,))
+    fig.add_trace(go.Scatter(x=data['Duration'], y=data['TIR'],name="Dollar Linked",legendgroup="Dollar Linked",mode="markers",marker=dict(color="purple"),text=data.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>',visible=False,))
+    fig.update_traces(marker=dict(size=15,line=dict(width=2,color=black)),selector=dict(mode='markers'))
+
+    fig.update_layout(margin=dict(l=1, r=1, t=75, b=1),
+            height=450, 
+            legend=dict(
+                orientation="h",
+                yanchor="bottom",
+                y=1.02,
+                xanchor="right",
+                x=1,
+                bordercolor="Black",
+                borderwidth=2
+            ))
+    fig.update_xaxes(showline=True, linewidth=2, linecolor=black,title="Mod. Duration")
+    fig.update_yaxes(showline=True, linewidth=2, linecolor=black,title="TIR")
+    st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
+
+   
+
 def make_bonds():
     c1_1,c2_1,c3_1=st.columns(3)
     #Los dataframes deberían tener de index el ticker del bono para hacer el filtrado más simple
@@ -199,7 +227,7 @@ def make_bonds():
             st.subheader('Bonos Dollar Linked')
             t_1_ex,t_2_ex=st.tabs(['Panel','Curva'])
             with t_1_ex: st.dataframe(S.bonos[S.bonos['Tipo'].isin(['Dollar Linked'])].drop(columns=['Tipo']))
-            with t_2_ex: st.subheader('Curva')
+            with t_2_ex: curva_DL(S.bonos[S.bonos['Tipo'].isin(['Dollar Linked'])])
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     with c3_1:
         if isinstance(S.bonos,pd.DataFrame):
