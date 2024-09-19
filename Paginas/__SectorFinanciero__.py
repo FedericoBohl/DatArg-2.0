@@ -161,8 +161,8 @@ def curva_soberanos(data,tipo):
         polynomial = np.poly1d(coefficients)
         vencimiento_linea = np.linspace(BP['Duration'].min(), BP['Duration'].max(), 100)
         tir_linea = polynomial(vencimiento_linea)
-        fig.add_trace(go.Scatter(x=vencimiento_linea, y=tir_linea, marker_color='purple',line=dict(dash="dash",width=4),name="Bopreales",showlegend=False,legendgroup="Bopreales",hoverinfo='none',visible=False,))
-        fig.add_trace(go.Scatter(x=BP['Duration'], y=BP['TIR'],name="BOPREALES",legendgroup="Bopreales",mode="markers",marker=dict(color="purple"),text=BP.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>',visible=False,))
+        fig.add_trace(go.Scatter(x=vencimiento_linea, y=tir_linea, marker_color='purple',line=dict(dash="dash",width=4),name="Bopreales",showlegend=False,legendgroup="Bopreales",hoverinfo='none'))
+        fig.add_trace(go.Scatter(x=BP['Duration'], y=BP['TIR'],name="BOPREALES",legendgroup="Bopreales",mode="markers",marker=dict(color="purple"),text=BP.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>'))
         fig.update_traces(marker=dict(size=15,line=dict(width=2,color=black)),selector=dict(mode='markers'))
 
     fig.update_layout(margin=dict(l=1, r=1, t=75, b=1),
@@ -187,8 +187,8 @@ def curva_DL(data):
     polynomial = np.poly1d(coefficients)
     vencimiento_linea = np.linspace(data['Duration'].min(), data['Duration'].max(), 100)
     tir_linea = polynomial(vencimiento_linea)
-    fig.add_trace(go.Scatter(x=vencimiento_linea, y=tir_linea, marker_color='royalblue',line=dict(dash="dash",width=4),name="Dollar Linked",showlegend=False,legendgroup="Dollar Linked",hoverinfo='none',visible=False,))
-    fig.add_trace(go.Scatter(x=data['Duration'], y=data['TIR'],name="Dollar Linked",legendgroup="Dollar Linked",mode="markers",marker=dict(color="royalblue"),text=data.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>',visible=False,))
+    fig.add_trace(go.Scatter(x=vencimiento_linea, y=tir_linea, marker_color='royalblue',line=dict(dash="dash",width=4),name="Dollar Linked",showlegend=False,legendgroup="Dollar Linked",hoverinfo='none'))
+    fig.add_trace(go.Scatter(x=data['Duration'], y=data['TIR'],name="Dollar Linked",legendgroup="Dollar Linked",mode="markers",marker=dict(color="royalblue"),text=data.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>'))
     fig.update_traces(marker=dict(size=15,line=dict(width=2,color=black)),selector=dict(mode='markers'))
 
     fig.update_layout(margin=dict(l=1, r=1, t=75, b=1),
@@ -213,8 +213,8 @@ def curva_CER(data):
     polynomial = np.poly1d(coefficients)
     vencimiento_linea = np.linspace(data['Duration'].min(), data['Duration'].max(), 100)
     tir_linea = polynomial(vencimiento_linea)
-    fig.add_trace(go.Scatter(x=vencimiento_linea, y=tir_linea, marker_color='darkgreen',line=dict(dash="dash",width=4),name="Ajustados por CER",showlegend=False,legendgroup="Ajustados por CER",hoverinfo='none',visible=False,))
-    fig.add_trace(go.Scatter(x=data['Duration'], y=data['TIR'],name="Ajustados por CER",legendgroup="Ajustados por CER",mode="markers",marker=dict(color="darkgreen"),text=data.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>',visible=False,))
+    fig.add_trace(go.Scatter(x=vencimiento_linea, y=tir_linea, marker_color='darkgreen',line=dict(dash="dash",width=4),name="Ajustados por CER",showlegend=False,legendgroup="Ajustados por CER",hoverinfo='none'))
+    fig.add_trace(go.Scatter(x=data['Duration'], y=data['TIR'],name="Ajustados por CER",legendgroup="Ajustados por CER",mode="markers",marker=dict(color="darkgreen"),text=data.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>'))
     fig.update_traces(marker=dict(size=15,line=dict(width=2,color=black)),selector=dict(mode='markers'))
 
     fig.update_layout(margin=dict(l=1, r=1, t=75, b=1),
@@ -239,8 +239,8 @@ def curva_LECAPS(data):
     polynomial = np.poly1d(coefficients)
     vencimiento_linea = np.linspace(data['Duration'].min(), data['Duration'].max(), 100)
     tir_linea = polynomial(vencimiento_linea)
-    fig.add_trace(go.Scatter(x=vencimiento_linea, y=tir_linea, marker_color='darkgreen',line=dict(dash="dash",width=4),name="LECAPS",showlegend=False,legendgroup="LECAPS",hoverinfo='none',visible=False,))
-    fig.add_trace(go.Scatter(x=data['Duration'], y=data['TIR'],name="LECAPS",legendgroup="LECAPS",mode="markers",marker=dict(color="darkgreen"),text=data.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>',visible=False,))
+    fig.add_trace(go.Scatter(x=vencimiento_linea, y=tir_linea, marker_color='darkgreen',line=dict(dash="dash",width=4),name="LECAPS",showlegend=False,legendgroup="LECAPS",hoverinfo='none'))
+    fig.add_trace(go.Scatter(x=data['Duration'], y=data['TIR'],name="LECAPS",legendgroup="LECAPS",mode="markers",marker=dict(color="darkgreen"),text=data.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>'))
     fig.update_traces(marker=dict(size=15,line=dict(width=2,color=black)),selector=dict(mode='markers'))
 
     fig.update_layout(margin=dict(l=1, r=1, t=75, b=1),
