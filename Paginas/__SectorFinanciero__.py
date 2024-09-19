@@ -188,7 +188,7 @@ def curva_DL(data):
     vencimiento_linea = np.linspace(data['Duration'].min(), data['Duration'].max(), 100)
     tir_linea = polynomial(vencimiento_linea)
     fig.add_trace(go.Scatter(x=vencimiento_linea, y=tir_linea, marker_color='royalblue',line=dict(dash="dash",width=4),name="Dollar Linked",showlegend=False,legendgroup="Dollar Linked",hoverinfo='none',visible=False,))
-    fig.add_trace(go.Scatter(x=data['Duration'], y=data['TIR'],name="Dollar Linked",legendgroup="Dollar Linked",mode="markers",marker=dict(color="purple"),text=data.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>',visible=False,))
+    fig.add_trace(go.Scatter(x=data['Duration'], y=data['TIR'],name="Dollar Linked",legendgroup="Dollar Linked",mode="markers",marker=dict(color="royalblue"),text=data.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>',visible=False,))
     fig.update_traces(marker=dict(size=15,line=dict(width=2,color=black)),selector=dict(mode='markers'))
 
     fig.update_layout(margin=dict(l=1, r=1, t=75, b=1),
@@ -206,6 +206,57 @@ def curva_DL(data):
     fig.update_yaxes(showline=True, linewidth=2, linecolor=black,title="TIR")
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
+def curva_CER(data):
+    fig=go.Figure()
+    #Curva Bopreales
+    coefficients = np.polyfit(data['Duration'], data['TIR'], 2)
+    polynomial = np.poly1d(coefficients)
+    vencimiento_linea = np.linspace(data['Duration'].min(), data['Duration'].max(), 100)
+    tir_linea = polynomial(vencimiento_linea)
+    fig.add_trace(go.Scatter(x=vencimiento_linea, y=tir_linea, marker_color='darkgreen',line=dict(dash="dash",width=4),name="Ajustados por CER",showlegend=False,legendgroup="Ajustados por CER",hoverinfo='none',visible=False,))
+    fig.add_trace(go.Scatter(x=data['Duration'], y=data['TIR'],name="Ajustados por CER",legendgroup="Ajustados por CER",mode="markers",marker=dict(color="darkgreen"),text=data.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>',visible=False,))
+    fig.update_traces(marker=dict(size=15,line=dict(width=2,color=black)),selector=dict(mode='markers'))
+
+    fig.update_layout(margin=dict(l=1, r=1, t=75, b=1),
+            height=450, 
+            legend=dict(
+                orientation="h",
+                yanchor="bottom",
+                y=1.02,
+                xanchor="right",
+                x=1,
+                bordercolor="Black",
+                borderwidth=2
+            ))
+    fig.update_xaxes(showline=True, linewidth=2, linecolor=black,title="Mod. Duration")
+    fig.update_yaxes(showline=True, linewidth=2, linecolor=black,title="TIR")
+    st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
+
+def curva_LECAPS(data):
+    fig=go.Figure()
+    #Curva Bopreales
+    coefficients = np.polyfit(data['Duration'], data['TIR'], 2)
+    polynomial = np.poly1d(coefficients)
+    vencimiento_linea = np.linspace(data['Duration'].min(), data['Duration'].max(), 100)
+    tir_linea = polynomial(vencimiento_linea)
+    fig.add_trace(go.Scatter(x=vencimiento_linea, y=tir_linea, marker_color='darkgreen',line=dict(dash="dash",width=4),name="LECAPS",showlegend=False,legendgroup="LECAPS",hoverinfo='none',visible=False,))
+    fig.add_trace(go.Scatter(x=data['Duration'], y=data['TIR'],name="LECAPS",legendgroup="LECAPS",mode="markers",marker=dict(color="darkgreen"),text=data.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>',visible=False,))
+    fig.update_traces(marker=dict(size=15,line=dict(width=2,color=black)),selector=dict(mode='markers'))
+
+    fig.update_layout(margin=dict(l=1, r=1, t=75, b=1),
+            height=450, 
+            legend=dict(
+                orientation="h",
+                yanchor="bottom",
+                y=1.02,
+                xanchor="right",
+                x=1,
+                bordercolor="Black",
+                borderwidth=2
+            ))
+    fig.update_xaxes(showline=True, linewidth=2, linecolor=black,title="Mod. Duration")
+    fig.update_yaxes(showline=True, linewidth=2, linecolor=black,title="TIR")
+    st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
    
 
 def make_bonds():
@@ -234,7 +285,7 @@ def make_bonds():
             st.subheader('Bonos ajustados por CER')
             t_1_c,t_2_c=st.tabs(['Panel','Curva'])
             with t_1_c: st.dataframe(S.bonos[S.bonos['Tipo'].isin(['Ajustable por CER'])].drop(columns=['Tipo']))
-            with t_2_c: st.subheader('Curva')
+            with t_2_c: curva_CER(S.bonos[S.bonos['Tipo'].isin(['Ajustable por CER'])])
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     c1_2,c2_2=st.columns(2)
     with c1_2:
@@ -242,7 +293,7 @@ def make_bonds():
             st.subheader('Lecaps')
             t_1_l,t_2_l=st.tabs(['Panel','Curva'])
             with t_1_l: st.dataframe(S.bonos[S.bonos['Tipo'].isin(['Lecap'])].drop(columns=['Tipo']))
-            with t_2_l: st.subheader('Curva')
+            with t_2_l: curva_LECAPS(S.bonos[S.bonos['Tipo'].isin(['Lecap'])])
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     with c2_2:    
         if isinstance(S.bonos,pd.DataFrame):
@@ -370,6 +421,5 @@ def make_merv_web():
                     st.dataframe(cede.iloc[cede.index==S.cedebuscado].transpose(),use_container_width=True)
 
             else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
-
     except:
         st.exception(Exception('🤯 Ups... Algo está andando mal. Disculpe las molestias, estamos trabajando para solucionarlo.'))
