@@ -400,10 +400,10 @@ def make_forex():
         components.html(w_panel_forex_val, height=550, scrolling=True)
     iframes()
 def make_merv_web():
-    st.header('Mercado de Capitales')
     try:
         try:
-            if (not 'bonos' in S):
+            st.button('Recargar Datos',key='Recarga_datos',type='primary',use_container_width=True)
+            if (not 'bonos' in S) or S.Recarga_datos:
                 S.bonos=get_ecovalores()
                 #S.docta=DoctaCap()
         except Exception as e:
