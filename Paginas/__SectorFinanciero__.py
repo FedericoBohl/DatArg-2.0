@@ -132,37 +132,38 @@ def get_ecovalores():
         except:continue
     return data
 
-def curva_soberanos(data):
+def curva_soberanos(data,tipo):
     fig=go.Figure()
-    #Curva Ley Extrangera
-    GD=data[data.index.str.startswith('GD')]
-    coefficients = np.polyfit(GD['Duration'], GD['TIR'], 2)
-    polynomial = np.poly1d(coefficients)
-    vencimiento_linea = np.linspace(GD['Duration'].min(), GD['Duration'].max(), 100)
-    tir_linea = polynomial(vencimiento_linea)
-    fig.add_trace(go.Scatter(x=vencimiento_linea, y=tir_linea, marker_color='#EBD9B4',line=dict(dash="dash",width=4),name="Ley ny",showlegend=False,legendgroup="Ley ny",hoverinfo='none',visible=True))
-    fig.add_trace(go.Scatter(x=GD['Duration'], y=GD['TIR'],name="Ley N.Y.",legendgroup="Ley ny",mode="markers",marker=dict(color="#EBD9B4"),text=GD.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>',visible=True))
-    fig.update_traces(marker=dict(size=15,line=dict(width=2,color=black)),selector=dict(mode='markers'))
+    if tipo=='Soberanos':
+        #Curva Ley Extrangera
+        GD=data[data.index.str.startswith('GD')]
+        coefficients = np.polyfit(GD['Duration'], GD['TIR'], 2)
+        polynomial = np.poly1d(coefficients)
+        vencimiento_linea = np.linspace(GD['Duration'].min(), GD['Duration'].max(), 100)
+        tir_linea = polynomial(vencimiento_linea)
+        fig.add_trace(go.Scatter(x=vencimiento_linea, y=tir_linea, marker_color='#EBD9B4',line=dict(dash="dash",width=4),name="Ley ny",showlegend=False,legendgroup="Ley ny",hoverinfo='none',visible=True))
+        fig.add_trace(go.Scatter(x=GD['Duration'], y=GD['TIR'],name="Ley N.Y.",legendgroup="Ley ny",mode="markers",marker=dict(color="#EBD9B4"),text=GD.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>',visible=True))
+        fig.update_traces(marker=dict(size=15,line=dict(width=2,color=black)),selector=dict(mode='markers'))
 
-    #Curva Ley Local
-    AL = data[data.index.str.startswith('AL') | data.index.str.startswith('AE')]
-    coefficients = np.polyfit(AL['Duration'], AL['TIR'], 2)
-    polynomial = np.poly1d(coefficients)
-    vencimiento_linea = np.linspace(AL['Duration'].min(), AL['Duration'].max(), 100)
-    tir_linea = polynomial(vencimiento_linea)
-    fig.add_trace(go.Scatter(x=vencimiento_linea, y=tir_linea, marker_color='#9E9FA5',line=dict(dash="dash",width=4),name="Ley arg",showlegend=False,legendgroup="Ley arg",hoverinfo='none',visible=True))
-    fig.add_trace(go.Scatter(x=AL['Duration'], y=AL['TIR'],name="Ley Arg.",legendgroup="Ley arg",mode="markers",marker=dict(color="#9E9FA5"),text=AL.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>',visible=True))
-    fig.update_traces(marker=dict(size=15,line=dict(width=2,color=black)),selector=dict(mode='markers'))
-
-    #Curva Bopreales
-    BP=data[data.index.str.startswith('BP')]
-    coefficients = np.polyfit(BP['Duration'], BP['TIR'], 2)
-    polynomial = np.poly1d(coefficients)
-    vencimiento_linea = np.linspace(BP['Duration'].min(), BP['Duration'].max(), 100)
-    tir_linea = polynomial(vencimiento_linea)
-    fig.add_trace(go.Scatter(x=vencimiento_linea, y=tir_linea, marker_color='purple',line=dict(dash="dash",width=4),name="Bopreales",showlegend=False,legendgroup="Bopreales",hoverinfo='none',visible=False,))
-    fig.add_trace(go.Scatter(x=BP['Duration'], y=BP['TIR'],name="BOPREALES",legendgroup="Bopreales",mode="markers",marker=dict(color="purple"),text=BP.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>',visible=False,))
-    fig.update_traces(marker=dict(size=15,line=dict(width=2,color=black)),selector=dict(mode='markers'))
+        #Curva Ley Local
+        AL = data[data.index.str.startswith('AL') | data.index.str.startswith('AE')]
+        coefficients = np.polyfit(AL['Duration'], AL['TIR'], 2)
+        polynomial = np.poly1d(coefficients)
+        vencimiento_linea = np.linspace(AL['Duration'].min(), AL['Duration'].max(), 100)
+        tir_linea = polynomial(vencimiento_linea)
+        fig.add_trace(go.Scatter(x=vencimiento_linea, y=tir_linea, marker_color='#9E9FA5',line=dict(dash="dash",width=4),name="Ley arg",showlegend=False,legendgroup="Ley arg",hoverinfo='none',visible=True))
+        fig.add_trace(go.Scatter(x=AL['Duration'], y=AL['TIR'],name="Ley Arg.",legendgroup="Ley arg",mode="markers",marker=dict(color="#9E9FA5"),text=AL.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>',visible=True))
+        fig.update_traces(marker=dict(size=15,line=dict(width=2,color=black)),selector=dict(mode='markers'))
+    else:
+        #Curva Bopreales
+        BP=data[data.index.str.startswith('BP')]
+        coefficients = np.polyfit(BP['Duration'], BP['TIR'], 2)
+        polynomial = np.poly1d(coefficients)
+        vencimiento_linea = np.linspace(BP['Duration'].min(), BP['Duration'].max(), 100)
+        tir_linea = polynomial(vencimiento_linea)
+        fig.add_trace(go.Scatter(x=vencimiento_linea, y=tir_linea, marker_color='purple',line=dict(dash="dash",width=4),name="Bopreales",showlegend=False,legendgroup="Bopreales",hoverinfo='none',visible=False,))
+        fig.add_trace(go.Scatter(x=BP['Duration'], y=BP['TIR'],name="BOPREALES",legendgroup="Bopreales",mode="markers",marker=dict(color="purple"),text=BP.index.values,hovertemplate = '%{text}: %{y:.2f}%<extra></extra>',visible=False,))
+        fig.update_traces(marker=dict(size=15,line=dict(width=2,color=black)),selector=dict(mode='markers'))
 
     fig.update_layout(margin=dict(l=1, r=1, t=75, b=1),
             height=450, 
@@ -177,27 +178,6 @@ def curva_soberanos(data):
             ))
     fig.update_xaxes(showline=True, linewidth=2, linecolor=black,title="Mod. Duration")
     fig.update_yaxes(showline=True, linewidth=2, linecolor=black,title="TIR")
-
-    fig.update_layout(
-            updatemenus=[
-                dict(
-                    type="buttons",
-                    active=1,
-                    x=0.25,
-                    xanchor='right',
-                    y=1.2,
-                    bgcolor='#f0f7ff',
-                    bordercolor='#b3c7e6',
-                    buttons=list([
-                        dict(label="Soberanos",
-                            method="update",
-                            args=[{"visible": [True,True,True,True,False,False]}]),
-                        dict(label="BOPREALES",
-                            method="update",
-                            args=[{"visible": [False,False,False,False,True,True]}])
-                    ]),
-                )
-            ])
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
 def make_bonds():
@@ -210,7 +190,8 @@ def make_bonds():
             with t_1_nac: st.dataframe(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])].drop(columns=['Tipo']))
             with t_2_nac:
                 try:
-                    curva_soberanos(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])].drop(columns=['Tipo']))
+                    st.radio('Tipo titulo pub',label_visibility='collapsed',options=['Soberanos','Bopreales'],key='tipo_tit_pub')
+                    curva_soberanos(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])].drop(columns=['Tipo']),S.tipo_tit_pub)
                 except Exception as e: st.exception(e)
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     with c2_1:
