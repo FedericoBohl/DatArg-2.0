@@ -230,6 +230,7 @@ def make_usa(today):
         fed_funds_data = fred.get_series('FEDFUNDS').loc[f'{2000}':]
         df_fed_funds = pd.DataFrame(fed_funds_data, columns=['Tasa'])
         df_fed_funds.index=df_fed_funds.index.strftime('%b-%Y')
+        df_fed_funds.iloc[-1]=fred.get_series('EFFR').iloc[-1]
         df_cpi.index=df_cpi.index.strftime('%b-%Y')
         df_unemployment.index=df_unemployment.index.strftime('%b-%Y')
         data=pd.concat([df_fed_funds,df_cpi],axis=1)
