@@ -315,7 +315,7 @@ def make_usa(today):
             data[date]=focm
         return data
     
-    #@st.cache_resource(show_spinner=False)
+    @st.cache_resource(show_spinner=False)
     def dot_plot(_):
         data=pd.read_csv('dotplot.csv')
         data.set_index('TARGET RATE',inplace=True)
@@ -346,7 +346,6 @@ def make_usa(today):
             for val in year_data.index:
                 plot_data[val]=generar_numeros(int(year),int(year_data[val]))
             plot_dict[col]=plot_data
-        st.write(plot_dict)
         fig = go.Figure()
         for year, rates in plot_dict.items():
             for rate, votes in rates.items():
