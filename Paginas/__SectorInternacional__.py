@@ -315,7 +315,7 @@ def make_usa(today):
             data[date]=focm
         return data
     
-    @st.cache_resource(show_spinner=False)
+    #@st.cache_resource(show_spinner=False)
     def dot_plot(_):
         data=pd.read_csv('dotplot.csv')
         data.set_index('TARGET RATE',inplace=True)
