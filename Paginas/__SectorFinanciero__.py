@@ -429,7 +429,7 @@ def make_acciones():
         </div>
         <!-- TradingView Widget END -->
         """
-        components.html(tradingview_widget, scrolling=True)
+        components.html(tradingview_widget, scrolling=False)
         tradingview_widget = """
             <!-- TradingView Widget BEGIN -->
             <div class="tradingview-widget-container">
@@ -482,7 +482,7 @@ def make_acciones():
             </div>
             <!-- TradingView Widget END -->
         """
-        components.html(tradingview_widget, scrolling=True)
+        components.html(tradingview_widget, scrolling=False)
     iframe_acciones()
     st.caption('done')
 
