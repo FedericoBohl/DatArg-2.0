@@ -87,14 +87,14 @@ def plot_acciones(data_now_merv : pd.DataFrame):
 def plot_galpones(data_now_gen : pd.DataFrame):
     data=pd.read_csv('data_bolsa/bolsa_arg.csv',delimiter=';')
     data_merv=pd.merge(data_now_gen,data,on='Nombre').dropna()
-    data_merv['Var']=[float(i.replace(',','.')[:-1]) for i in data_merv["Var"]]
+    data_merv['Var%']=[float(i.replace(',','.')[:-1]) for i in data_merv["Var%"]]
     #-------------- Fig del General  --------------
-    df_grouped = data_merv.groupby(["Sector","Nombre"])[["CAP (MM)","Var","Nombre Completo","Precio"]].min().reset_index()
+    df_grouped = data_merv.groupby(["Sector","Nombre"])[["CAP (MM)","Var%","Nombre Completo","Precio"]].min().reset_index()
     fig_merv = px.treemap(df_grouped, 
                     path=[px.Constant("Bolsa Argentina"), 'Sector',  'Nombre'], #Quite 'Industria', en 3
                     values='CAP (MM)',
-                    hover_name="Var",
-                    custom_data=["Nombre Completo",'Precio',"Var"],
+                    hover_name="Var%",
+                    custom_data=["Nombre Completo",'Precio',"Var%"],
                     color='Var', 
                     range_color =[-6,6],
                     labels={'Value': 'Number of Items'},
@@ -108,7 +108,7 @@ def plot_galpones(data_now_gen : pd.DataFrame):
     fig_merv.data[0].texttemplate = "<b>%{label}</b><br>%{customdata[2]}%"
     fig_merv.update_traces(marker=dict(cornerradius=10))
     fig_merv.update_layout(margin=dict(l=1, r=1, t=10, b=1))
-    st.plotly_chart(fig_merv,config={'displayModeBar': False},use_container_width=True)
+    st.plotly_chart(fig_merv,config={'modeBarButtonsToRemove': ['zoom', 'pan','box select', 'lasso select','zoom in','zoom out']},use_container_width=True)
     
 def get_ecovalores():
     url='https://bonos.ecovalores.com.ar/eco/listado.php'
