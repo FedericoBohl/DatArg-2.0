@@ -480,7 +480,7 @@ def make_acciones():
         """
         components.html(tradingview_widget, height=550, scrolling=True)
     iframe_acciones()
-    
+    st.caption('done')
 
 def make_bonds():
     st.button('Recargar Datos',key='Recarga_datos_bonos',type='primary',use_container_width=True)
