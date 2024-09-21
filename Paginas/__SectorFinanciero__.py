@@ -330,7 +330,7 @@ def make_acciones():
             plot_galpones(S.galpones)
         except Exception as e: st.exception(e)
     st.header('Acciones en USD')
-    #@st.cache_resource(show_spinner=False)
+    @st.cache_resource(show_spinner=False)
     def iframe_acciones():
         tradingview_widget = """
             <!-- TradingView Widget BEGIN -->
@@ -391,7 +391,7 @@ def make_acciones():
         <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
         {
         "width": "100%",
-        "height": "600",
+        "height": "800",
         "symbolsGroups": [
             {
             "name": "Indices",
@@ -481,7 +481,7 @@ def make_acciones():
         </div>
         <!-- TradingView Widget END -->
         """
-        components.html(tradingview_widget,height=600, scrolling=False)
+        components.html(tradingview_widget,height=800, scrolling=False)
     iframe_acciones()
 
 def make_bonds():
