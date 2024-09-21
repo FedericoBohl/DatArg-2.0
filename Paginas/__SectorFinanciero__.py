@@ -128,6 +128,8 @@ def get_ecovalores():
                 data['Int. Corrido']=[float(i.replace('.','').replace(',','.')) for i in data['Int. Corrido']]
                 data['VT']=[float(i.replace('.','').replace(',','.')) for i in data['VT']]
                 data['Precio']=[float(i.replace('.','').replace(',','.')) for i in data['Precio']]
+                data['Vencimiento']=pd.to_datetime(data['Vencimiento'],format='%d/%m/%Y')
+                data['Próx. Vto.']=pd.to_datetime(data['Próx. Vto.'],format='%d/%m/%Y')
                 break
         except:continue
     return data
@@ -284,7 +286,7 @@ def make_bonds():
             st.subheader('Títulos Públicos')
             t_1_nac,sob,bop=st.tabs(['Panel','Curva-Soberanos','Curva-Bopreales'])
             plot_sob,plot_bop=curva_soberanos(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])].drop(columns=['Tipo']))
-            with t_1_nac: st.dataframe(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])].drop(columns=['Tipo']))
+            with t_1_nac: st.table(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])].drop(columns=['Tipo']))
             with sob:
                 st.plotly_chart(plot_sob,config={'displayModeBar': False},use_container_width=True)
             with bop:
