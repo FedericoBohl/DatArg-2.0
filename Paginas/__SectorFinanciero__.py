@@ -95,7 +95,7 @@ def plot_galpones(data_now_gen : pd.DataFrame):
                     values='CAP (MM)',
                     hover_name="Var%",
                     custom_data=["Nombre Completo",'Precio',"Var%"],
-                    color='Var', 
+                    color='Var%', 
                     range_color =[-6,6],
                     labels={'Value': 'Number of Items'},
                     color_continuous_midpoint=0)
