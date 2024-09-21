@@ -286,7 +286,7 @@ def make_bonds():
             st.subheader('Títulos Públicos')
             t_1_nac,sob,bop=st.tabs(['Panel','Curva-Soberanos','Curva-Bopreales'])
             plot_sob,plot_bop=curva_soberanos(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])].drop(columns=['Tipo']))
-            with t_1_nac: st.table(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])].drop(columns=['Tipo']))
+            with t_1_nac: st.dataframe(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])].drop(columns=['Tipo']))
             with sob:
                 st.plotly_chart(plot_sob,config={'displayModeBar': False},use_container_width=True)
             with bop:
