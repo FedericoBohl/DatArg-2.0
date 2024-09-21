@@ -344,7 +344,6 @@ def make_acciones():
             "height": "600px",
             "locale": "es",
             "colorTheme": "light",
-            "autosize": true,
             "showVolume": false,
             "showMA": false,
             "hideDateRanges": false,
