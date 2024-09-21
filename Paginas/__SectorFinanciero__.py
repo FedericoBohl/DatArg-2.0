@@ -340,6 +340,8 @@ def make_acciones():
             {
             "symbols": [["NYSE:YPF|1D|USD"],["NYSE:PAM|1D|USD"],["NYSE:BBAR|1D|USD"],["NYSE:TEO|1D|USD"],["NYSE:TGS|1D|USD"],["NASDAQ:GGAL|1D|USD"],["NYSE:BMA|1D|USD"],["NYSE:SUPV|1D|USD"],["NYSE:CEPU|1D|USD"],["NYSE:EDN|1D|USD"],["NASDAQ:CRESY|1D|USD"],["NYSE:VIST|1D|USD"],["NASDAQ:MELI|1D|USD"],["NYSE:GLOB|1D|USD"],["NYSE:DESP|1D|USD"],["NYSE:LOMA|1D|USD"],["NYSE:TS|1D|USD"],["NYSE:TX|1D|USD"]],
             "chartOnly": false,
+            "width": "100%",
+            "height": "600",
             "locale": "es",
             "colorTheme": "light",
             "autosize": true,
@@ -381,7 +383,7 @@ def make_acciones():
             </div>
             <!-- TradingView Widget END -->
         """
-        components.iframe(tradingview_widget,height=600, scrolling=True)
+        components.iframe(tradingview_widget,height=100, scrolling=True)
         tradingview_widget = """
         <!-- TradingView Widget BEGIN -->
         <div class="tradingview-widget-container">
