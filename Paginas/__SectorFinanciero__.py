@@ -340,10 +340,11 @@ def make_acciones():
             <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>            {
             "symbols": [["NYSE:YPF|1D|USD"],["NYSE:PAM|1D|USD"],["NYSE:BBAR|1D|USD"],["NYSE:TEO|1D|USD"],["NYSE:TGS|1D|USD"],["NASDAQ:GGAL|1D|USD"],["NYSE:BMA|1D|USD"],["NYSE:SUPV|1D|USD"],["NYSE:CEPU|1D|USD"],["NYSE:EDN|1D|USD"],["NASDAQ:CRESY|1D|USD"],["NYSE:VIST|1D|USD"],["NASDAQ:MELI|1D|USD"],["NYSE:GLOB|1D|USD"],["NYSE:DESP|1D|USD"],["NYSE:LOMA|1D|USD"],["NYSE:TS|1D|USD"],["NYSE:TX|1D|USD"]],
             "chartOnly": false,
-            "width": "100%",
+            "width": "200",
             "height": "600px",
             "locale": "es",
             "colorTheme": "light",
+            "autosize": true,
             "showVolume": false,
             "showMA": false,
             "hideDateRanges": false,
