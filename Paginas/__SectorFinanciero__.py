@@ -59,6 +59,7 @@ def make_cedears(data_now : pd.DataFrame):
 @st.cache_data(show_spinner=False)
 def plot_acciones(data_now_merv : pd.DataFrame):
     data=pd.read_csv('data_bolsa/bolsa_arg.csv',delimiter=';')
+    data=data[data['Lider']=='Si']
     data_merv=pd.merge(data_now_merv,data,on='Nombre').dropna()
     data_merv['Var%']=[float(i.replace(',','.')[:-1]) for i in data_merv["Var%"]]
     #-------------- Fig del Merval  --------------
@@ -86,6 +87,7 @@ def plot_acciones(data_now_merv : pd.DataFrame):
 @st.cache_data(show_spinner=False)
 def plot_galpones(data_now_gen : pd.DataFrame):
     data=pd.read_csv('data_bolsa/bolsa_arg.csv',delimiter=';')
+    data=data[data['Lider']=='No']
     data_merv=pd.merge(data_now_gen,data,on='Nombre').dropna()
     data_merv['Var%']=[float(i.replace(',','.')[:-1]) for i in data_merv["Var%"]]
     #-------------- Fig del General  --------------
