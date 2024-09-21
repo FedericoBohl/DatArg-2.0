@@ -56,7 +56,7 @@ def make_cedears(data_now : pd.DataFrame):
     data.set_index('Nombre', inplace=True)
     data=data.drop(columns=['Name','Weigths'])
 
-@st.cache_data(show_spinner=False)
+#@st.cache_data(show_spinner=False)
 def plot_acciones(data_now_merv : pd.DataFrame):
     data=pd.read_csv('data_bolsa/bolsa_arg.csv',delimiter=';')
     data=data[data['Lider']=='Si']
@@ -84,7 +84,7 @@ def plot_acciones(data_now_merv : pd.DataFrame):
     fig_merv.update_layout(margin=dict(l=1, r=1, t=100, b=100))
     st.plotly_chart(fig_merv,config={'modeBarButtonsToRemove': ['zoom', 'pan','box select', 'lasso select','zoom in','zoom out']},use_container_width=True)
 
-@st.cache_data(show_spinner=False)
+#@st.cache_data(show_spinner=False)
 def plot_galpones(data_now_gen : pd.DataFrame):
     data=pd.read_csv('data_bolsa/bolsa_arg.csv',delimiter=';')
     data=data[data['Lider']=='No']
