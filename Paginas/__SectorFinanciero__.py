@@ -81,7 +81,7 @@ def plot_acciones(data_now_merv : pd.DataFrame):
         )
     fig_merv.data[0].texttemplate = "<b>%{label}</b><br>%{customdata[2]}%"
     fig_merv.update_traces(marker=dict(cornerradius=10))
-    fig_merv.update_layout(margin=dict(l=1, r=1, t=100, b=100))
+    fig_merv.update_layout(margin=dict(l=1, r=1, t=25, b=25))
     st.plotly_chart(fig_merv,config={'modeBarButtonsToRemove': ['zoom', 'pan','box select', 'lasso select','zoom in','zoom out']},use_container_width=True)
 
 #@st.cache_data(show_spinner=False)
@@ -109,7 +109,7 @@ def plot_galpones(data_now_gen : pd.DataFrame):
         )
     fig_merv.data[0].texttemplate = "<b>%{label}</b><br>%{customdata[2]}%"
     fig_merv.update_traces(marker=dict(cornerradius=10))
-    fig_merv.update_layout(margin=dict(l=1, r=1, t=50, b=50))
+    fig_merv.update_layout(margin=dict(l=1, r=1, t=25, b=25))
     st.plotly_chart(fig_merv,config={'modeBarButtonsToRemove': ['zoom', 'pan','box select', 'lasso select','zoom in','zoom out']},use_container_width=True)
     
 def get_ecovalores():
