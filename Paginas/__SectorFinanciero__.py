@@ -12,6 +12,7 @@ import streamlit.components.v1 as components
 from bs4 import BeautifulSoup
 import requests
 import numpy as np
+import re
 
 @st.cache_data(show_spinner=False)
 def make_cedears(data_now : pd.DataFrame):
@@ -56,13 +57,10 @@ def make_cedears(data_now : pd.DataFrame):
     data=data.drop(columns=['Name','Weigths'])
 
 @st.cache_data(show_spinner=False)
-def make_acciones(data_now_merv : pd.DataFrame , data_now_gen : pd.DataFrame):
+def plot_acciones(data_now_merv : pd.DataFrame):
     data=pd.read_csv('data_bolsa/bolsa_arg.csv',delimiter=';')
     data_merv=pd.merge(data_now_merv,data,on='Nombre').dropna()
-    data_merv['Var%']=data_merv["Var%"]*100
-    #data_gen=pd.merge(data_now_gen,data,on='symbol').dropna()
-    #data_gen['change']=data_gen["change"]*100
-
+    data_merv['Var%']=[float(i.replace(',','.')[:-1]) for i in data_merv["Var%"]]
     #-------------- Fig del Merval  --------------
     df_grouped = data_merv.groupby(["Sector","Nombre"])[["CAP (MM)","Var%","Nombre Completo","Precio"]].min().reset_index()
     fig_merv = px.treemap(df_grouped, 
@@ -83,29 +81,35 @@ def make_acciones(data_now_merv : pd.DataFrame , data_now_gen : pd.DataFrame):
     fig_merv.data[0].texttemplate = "<b>%{label}</b><br>%{customdata[2]}%"
     fig_merv.update_traces(marker=dict(cornerradius=10))
     fig_merv.update_layout(margin=dict(l=1, r=1, t=10, b=1))
+    st.plotly_chart(fig_merv,config={'displayModeBar': False},use_container_width=True)
 
+@st.cache_data(show_spinner=False)
+def plot_galpones(data_now_gen : pd.DataFrame):
+    data=pd.read_csv('data_bolsa/bolsa_arg.csv',delimiter=';')
+    data_merv=pd.merge(data_now_gen,data,on='Nombre').dropna()
+    data_merv['Var']=[float(i.replace(',','.')[:-1]) for i in data_merv["Var"]]
     #-------------- Fig del General  --------------
-    #df_grouped = data_gen.groupby(["Sector","symbol"])[["CAP (MM)","change","Nombre","last"]].min().reset_index()
-    #fig_gen = px.treemap(df_grouped, 
-    #                path=[px.Constant("Bolsa Argentina"), 'Sector',  'symbol'], #Quite 'Industria', en 3
-    #                values='CAP (MM)',
-    #                hover_name="change",
-    #                custom_data=["Nombre",'last',"change"],
-    #                color='change', 
-    #                range_color =[-6,6],color_continuous_scale=colorscale,
-    #                labels={'Value': 'Number of Items'},
-    #                color_continuous_midpoint=0)
-    #fig_gen.update_traces(marker_line_width = 1.5,marker_line_color=black,
-    #    hovertemplate="<br>".join([
-    #    "<b>Empresa<b>: %{customdata[0]}",
-    #    "<b>Precio (ARS)<b>: %{customdata[1]}"
-    #    ])
-    #    )
-    #fig_gen.data[0].texttemplate = "<b>%{label}</b><br>%{customdata[2]}%"
-    #fig_gen.update_traces(marker=dict(cornerradius=10))
-    #fig_gen.update_layout(margin=dict(l=1, r=1, t=10, b=1))
-    return fig_merv,None#,fig_gen
-
+    df_grouped = data_merv.groupby(["Sector","Nombre"])[["CAP (MM)","Var","Nombre Completo","Precio"]].min().reset_index()
+    fig_merv = px.treemap(df_grouped, 
+                    path=[px.Constant("Bolsa Argentina"), 'Sector',  'Nombre'], #Quite 'Industria', en 3
+                    values='CAP (MM)',
+                    hover_name="Var",
+                    custom_data=["Nombre Completo",'Precio',"Var"],
+                    color='Var', 
+                    range_color =[-6,6],
+                    labels={'Value': 'Number of Items'},
+                    color_continuous_midpoint=0)
+    fig_merv.update_traces(marker_line_width = 1.5,marker_line_color='black',
+        hovertemplate="<br>".join([
+        "<b>Empresa<b>: %{customdata[0]}",
+        "<b>Precio (ARS)<b>: %{customdata[1]}"
+        ])
+        )
+    fig_merv.data[0].texttemplate = "<b>%{label}</b><br>%{customdata[2]}%"
+    fig_merv.update_traces(marker=dict(cornerradius=10))
+    fig_merv.update_layout(margin=dict(l=1, r=1, t=10, b=1))
+    st.plotly_chart(fig_merv,config={'displayModeBar': False},use_container_width=True)
+    
 def get_ecovalores():
     url='https://bonos.ecovalores.com.ar/eco/listado.php'
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
@@ -276,9 +280,212 @@ def curva_LECAPS(data):
     fig.update_xaxes(showline=True, linewidth=2, linecolor=black,title="Mod. Duration")
     fig.update_yaxes(showline=True, linewidth=2, linecolor=black,title="TIR")
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
-   
+
+def get_galpones():
+    url='https://iol.invertironline.com/mercado/cotizaciones/argentina/acciones/panel-general'
+    response=requests.get(url)
+    soup=BeautifulSoup(response.text,'html.parser')
+    table=soup.find('table')
+    cols=[td.text for td in table.find('thead').find_all('td')]
+    data=[]
+    for tr in table.find('tbody').find_all('tr'):
+        row=[]
+        first_column = tr.find_all('td')[0].find('b').get_text(strip=True)
+        row.append(first_column)
+        for td in tr.find_all('td')[1:]:
+            row.append(re.sub(r'\s+', ' ', td.get_text(strip=True)))
+        data.append(row)
+    return pd.DataFrame(data,columns=cols)[cols[:3]].set_index(cols[0]).rename(columns={cols[1]:'Precio',cols[2]:'Var%'})
+
+def get_lideres():
+    url='https://iol.invertironline.com/mercado/cotizaciones/argentina/acciones/panel-l%C3%ADderes'
+    response=requests.get(url)
+    soup=BeautifulSoup(response.text,'html.parser')
+    table=soup.find('table')
+    cols=[td.text for td in table.find('thead').find_all('td')]
+    data=[]
+    for tr in table.find('tbody').find_all('tr'):
+        row=[]
+        first_column = tr.find_all('td')[0].find('b').get_text(strip=True)
+        row.append(first_column)
+        for td in tr.find_all('td')[1:]:
+            row.append(re.sub(r'\s+', ' ', td.get_text(strip=True)))
+        data.append(row)
+    return pd.DataFrame(data,columns=cols)[cols[:3]].set_index(cols[0]).rename(columns={cols[1]:'Precio',cols[2]:'Var%'})
+
+def make_acciones():
+    st.button('Recargar Datos',key='Recarga_datos_acciones',type='primary',use_container_width=True)
+    if (not 'lideres' in S) or S.Recarga_datos_acciones:
+        S.lideres=get_lideres()
+        S.galpones=get_galpones()
+    c1,c2=st.columns(2)
+    with c1:
+        st.subheader('Panel Líderes')
+        plot_acciones()
+    with c2:
+        st.subheader('Panel Galpones')
+        plot_galpones()
+    st.header('Acciones en USD')
+    @st.cache_resource(show_spinner=False)
+    def iframe_acciones():
+        tradingview_widget = """
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
+        {
+        "width": "100%",
+        "height": "100%",
+        "symbolsGroups": [
+            {
+            "name": "Indices",
+            "originalName": "Indices",
+            "symbols": [
+                {
+                "name": "NYSE:YPF",
+                "displayName": "YPF"
+                },
+                {
+                "name": "NYSE:PAM",
+                "displayName": "PAM"
+                },
+                {
+                "name": "NYSE:BBAR",
+                "displayName": "BBAR"
+                },
+                {
+                "name": "NYSE:TEO",
+                "displayName": "TEO"
+                },
+                {
+                "name": "NYSE:TGS",
+                "displayName": "TGS"
+                },
+                {
+                "name": "NASDAQ:GGAL",
+                "displayName": "GGAL"
+                },
+                {
+                "name": "NYSE:BMA",
+                "displayName": "BMA"
+                },
+                {
+                "name": "NYSE:SUPV",
+                "displayName": "SUPV"
+                },
+                {
+                "name": "NYSE:CEPU",
+                "displayName": "CEPU"
+                },
+                {
+                "name": "NYSE:EDN",
+                "displayName": "EDN"
+                },
+                {
+                "name": "NASDAQ:CRESY",
+                "displayName": "CRESY"
+                },
+                {
+                "name": "NYSE:VIST",
+                "displayName": "VIST"
+                },
+                {
+                "name": "NASDAQ:MELI",
+                "displayName": "MELI"
+                },
+                {
+                "name": "NYSE:GLOB",
+                "displayName": "GLOB"
+                },
+                {
+                "name": "NYSE:DESP",
+                "displayName": "DESP"
+                },
+                {
+                "name": "NYSE:LOMA",
+                "displayName": "LOMA"
+                },
+                {
+                "name": "NYSE:TS",
+                "displayName": "TS"
+                },
+                {
+                "name": "NYSE:TX",
+                "displayName": "TX"
+                }
+            ]
+            }
+        ],
+        "showSymbolLogo": true,
+        "isTransparent": true,
+        "colorTheme": "light",
+        "locale": "es"
+        }
+        </script>
+        </div>
+        <!-- TradingView Widget END -->
+        """
+        components.html(tradingview_widget, height=550, scrolling=True)
+        tradingview_widget = """
+            <!-- TradingView Widget BEGIN -->
+            <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <div class="tradingview-widget-copyright"><a href="https://es.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Siga los mercados en TradingView</span></a></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+            {
+            "symbols": [["NYSE:YPF|1D|USD"],["NYSE:PAM|1D|USD"],["NYSE:BBAR|1D|USD"],["NYSE:TEO|1D|USD"],["NYSE:TGS|1D|USD"],["NASDAQ:GGAL|1D|USD"],["NYSE:BMA|1D|USD"],["NYSE:SUPV|1D|USD"],["NYSE:CEPU|1D|USD"],["NYSE:EDN|1D|USD"],["NASDAQ:CRESY|1D|USD"],["NYSE:VIST|1D|USD"],["NASDAQ:MELI|1D|USD"],["NYSE:GLOB|1D|USD"],["NYSE:DESP|1D|USD"],["NYSE:LOMA|1D|USD"],["NYSE:TS|1D|USD"],["NYSE:TX|1D|USD"]],
+            "chartOnly": false,
+            "width": "100%",
+            "height": "100%",
+            "locale": "es",
+            "colorTheme": "light",
+            "autosize": true,
+            "showVolume": false,
+            "showMA": false,
+            "hideDateRanges": false,
+            "hideMarketStatus": false,
+            "hideSymbolLogo": false,
+            "scalePosition": "right",
+            "scaleMode": "Normal",
+            "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
+            "fontSize": "14",
+            "noTimeScale": false,
+            "valuesTracking": "1",
+            "changeMode": "price-and-percent",
+            "chartType": "area",
+            "headerFontSize": "medium",
+            "gridLineColor": "rgba(93, 96, 107, 1)",
+            "backgroundColor": "rgba(187, 217, 251, 0)",
+            "widgetFontColor": "rgba(0, 0, 0, 1)",
+            "lineWidth": 2,
+            "lineType": 2,
+            "dateRanges": [
+                "1d|1",
+                "1m|30",
+                "3m|60",
+                "12m|1D",
+                "60m|1W",
+                "all|1M"
+            ],
+            "upColor": "#22ab94",
+            "downColor": "#f7525f",
+            "borderUpColor": "#22ab94",
+            "borderDownColor": "#f7525f",
+            "wickUpColor": "#22ab94",
+            "wickDownColor": "#f7525f"
+            }
+            </script>
+            </div>
+            <!-- TradingView Widget END -->
+        """
+        components.html(tradingview_widget, height=550, scrolling=True)
+    iframe_acciones()
+    
 
 def make_bonds():
+    st.button('Recargar Datos',key='Recarga_datos_bonos',type='primary',use_container_width=True)
+    if (not 'bonos' in S) or S.Recarga_datos_bonos:
+        S.bonos=get_ecovalores()
     c1_1,c2_1,c3_1=st.columns(3)
     #Los dataframes deberían tener de index el ticker del bono para hacer el filtrado más simple
     with c1_1:
@@ -401,15 +608,10 @@ def make_forex():
         <!-- TradingView Widget END -->"""
         components.html(w_panel_forex_val, height=550, scrolling=True)
     iframes()
+
+
 def make_merv_web():
     try:
-        try:
-            st.button('Recargar Datos',key='Recarga_datos',type='primary',use_container_width=True)
-            if (not 'bonos' in S) or S.Recarga_datos:
-                S.bonos=get_ecovalores()
-                #S.docta=DoctaCap()
-        except Exception as e:
-            pass#st.write(e)
         bonos, acciones, cedears, forex= st.tabs(["Bonos", "Acciones",'Cedears','Forex'])
         with forex:
             make_forex()
