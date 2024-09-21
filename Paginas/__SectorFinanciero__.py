@@ -295,7 +295,7 @@ def get_galpones():
         for td in tr.find_all('td')[1:]:
             row.append(re.sub(r'\s+', ' ', td.get_text(strip=True)))
         data.append(row)
-    return pd.DataFrame(data,columns=cols)[cols[:3]].set_index(cols[0]).rename(columns={cols[1]:'Precio',cols[2]:'Var%'})
+    return pd.DataFrame(data,columns=cols)[cols[:3]].rename(columns={cols[0]:'Nombre',cols[1]:'Precio',cols[2]:'Var%'})
 
 def get_lideres():
     url='https://iol.invertironline.com/mercado/cotizaciones/argentina/acciones/panel-l%C3%ADderes'
@@ -311,7 +311,7 @@ def get_lideres():
         for td in tr.find_all('td')[1:]:
             row.append(re.sub(r'\s+', ' ', td.get_text(strip=True)))
         data.append(row)
-    return pd.DataFrame(data,columns=cols)[cols[:3]].set_index(cols[0]).rename(columns={cols[1]:'Precio',cols[2]:'Var%'})
+    return pd.DataFrame(data,columns=cols)[cols[:3]].rename(columns={cols[0]:'Nombre',cols[1]:'Precio',cols[2]:'Var%'})
 
 def make_acciones():
     st.button('Recargar Datos',key='Recarga_datos_acciones',type='primary',use_container_width=True)
