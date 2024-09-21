@@ -50,7 +50,7 @@ def make_cedears(data_now : pd.DataFrame):
         )
     fig.data[0].texttemplate = "<b>%{label}</b><br>%{customdata[2]}%"
     fig.update_traces(marker=dict(cornerradius=10))
-    fig.update_layout(margin=dict(l=1, r=1, t=10, b=1))
+    fig.update_layout(margin=dict(l=1, r=1, t=50, b=50))
     st.markdown("""<h2 style='text-align: center; color: #404040; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>S&P 500 en Cedears</h2>""", unsafe_allow_html=True)
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
     data.set_index('Nombre', inplace=True)
@@ -107,7 +107,7 @@ def plot_galpones(data_now_gen : pd.DataFrame):
         )
     fig_merv.data[0].texttemplate = "<b>%{label}</b><br>%{customdata[2]}%"
     fig_merv.update_traces(marker=dict(cornerradius=10))
-    fig_merv.update_layout(margin=dict(l=1, r=1, t=10, b=1))
+    fig_merv.update_layout(margin=dict(l=1, r=1, t=50, b=50))
     st.plotly_chart(fig_merv,config={'modeBarButtonsToRemove': ['zoom', 'pan','box select', 'lasso select','zoom in','zoom out']},use_container_width=True)
     
 def get_ecovalores():
