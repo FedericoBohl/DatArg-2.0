@@ -336,11 +336,11 @@ def make_acciones():
             <!-- TradingView Widget BEGIN -->
             <div class="tradingview-widget-container">
             <div class="tradingview-widget-container__widget"></div>
-            <div class="tradingview-widget-copyright"><a href="https://es.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Siga los mercados en TradingView</span></a></div>
-            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>            {
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+            {
             "symbols": [["NYSE:YPF|1D|USD"],["NYSE:PAM|1D|USD"],["NYSE:BBAR|1D|USD"],["NYSE:TEO|1D|USD"],["NYSE:TGS|1D|USD"],["NASDAQ:GGAL|1D|USD"],["NYSE:BMA|1D|USD"],["NYSE:SUPV|1D|USD"],["NYSE:CEPU|1D|USD"],["NYSE:EDN|1D|USD"],["NASDAQ:CRESY|1D|USD"],["NYSE:VIST|1D|USD"],["NASDAQ:MELI|1D|USD"],["NYSE:GLOB|1D|USD"],["NYSE:DESP|1D|USD"],["NYSE:LOMA|1D|USD"],["NYSE:TS|1D|USD"],["NYSE:TX|1D|USD"]],
             "chartOnly": false,
-            "width": "200",
+            "width": "100%",
             "height": "600px",
             "locale": "es",
             "colorTheme": "light",
@@ -353,12 +353,12 @@ def make_acciones():
             "scalePosition": "right",
             "scaleMode": "Normal",
             "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
-            "fontSize": "10",
+            "fontSize": "14",
             "noTimeScale": false,
             "valuesTracking": "1",
             "changeMode": "price-and-percent",
             "chartType": "area",
-            "headerFontSize": "small",
+            "headerFontSize": "medium",
             "gridLineColor": "rgba(93, 96, 107, 1)",
             "backgroundColor": "rgba(187, 217, 251, 0)",
             "widgetFontColor": "rgba(0, 0, 0, 1)",
@@ -383,7 +383,7 @@ def make_acciones():
             </div>
             <!-- TradingView Widget END -->
         """
-        components.iframe(tradingview_widget,height=600, scrolling=True)
+        components.iframe(tradingview_widget,height=600,width=500, scrolling=True)
         tradingview_widget = """
         <!-- TradingView Widget BEGIN -->
         <div class="tradingview-widget-container">
