@@ -316,14 +316,14 @@ def get_lideres():
 def make_acciones():
     st.button('Recargar Datos',key='Recarga_datos_acciones',type='primary',use_container_width=True)
     if (not 'lideres' in S) or S.Recarga_datos_acciones:
-        try:
-            S.lideres=get_lideres()
-            S.galpones=get_galpones()
-        except Exception as e: st.exception(e)
+        S.lideres=get_lideres()
+        S.galpones=get_galpones()
     c1,c2=st.columns(2)
     with c1:
         st.subheader('Panel Líderes')
-        plot_acciones()
+        try:
+            plot_acciones()
+        except Exception as e: st.exception(e)
     with c2:
         st.subheader('Panel Galpones')
         plot_galpones()
