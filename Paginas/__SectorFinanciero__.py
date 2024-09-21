@@ -140,7 +140,7 @@ def get_ecovalores():
         except:continue
     return data
 
-@st.cache_resource(show_spinner=False)
+@st.cache_data(show_spinner=False)
 def curva_soberanos(data):
     sob=go.Figure()
     #Curva Ley Extrangera
@@ -202,7 +202,7 @@ def curva_soberanos(data):
     bop.update_yaxes(showline=True, linewidth=2, linecolor=black,title="TIR")
     return sob,bop
 
-@st.cache_resource(show_spinner=False)
+@st.cache_data(show_spinner=False)
 def curva_DL(data):
     fig=go.Figure()
     #Curva Bopreales
@@ -229,7 +229,7 @@ def curva_DL(data):
     fig.update_yaxes(showline=True, linewidth=2, linecolor=black,title="TIR")
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
-@st.cache_resource(show_spinner=False)
+@st.cache_data(show_spinner=False)
 def curva_CER(data):
     fig=go.Figure()
     #Curva Bopreales
@@ -256,7 +256,7 @@ def curva_CER(data):
     fig.update_yaxes(showline=True, linewidth=2, linecolor=black,title="TIR")
     st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
 
-@st.cache_resource(show_spinner=False)
+@st.cache_data(show_spinner=False)
 def curva_LECAPS(data):
     fig=go.Figure()
     #Curva Bopreales
@@ -614,6 +614,39 @@ def make_forex():
     iframes()
 
 
+def make_cedears2():
+    @st.cache_resource(show_spinner=False)
+    def plot_spy():
+        widget="""
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <div class="tradingview-widget-copyright"><a href="https://es.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Siga los mercados en TradingView</span></a></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js" async>
+                {
+                "exchanges": [],
+                "dataSource": "SPX500",
+                "grouping": "sector",
+                "blockSize": "market_cap_basic",
+                "blockColor": "change",
+                "locale": "es",
+                "symbolUrl": "",
+                "colorTheme": "light",
+                "hasTopBar": false,
+                "isDataSetEnabled": false,
+                "isZoomEnabled": false,
+                "hasSymbolTooltip": false,
+                "isMonoSize": false,
+                "width": "100%",
+                "height": "100%"
+                }
+                </script>
+                </div>
+                <!-- TradingView Widget END -->
+        """
+        components.html(widget, height=550, scrolling=True)
+    plot_spy()
+
 def make_merv_web():
     try:
         bonos, acciones, cedears, forex= st.tabs(["Bonos", "Acciones",'Cedears','Forex'])
@@ -624,6 +657,7 @@ def make_merv_web():
         with acciones:
             make_acciones()
         with cedears:
+            make_cedears2()
             if S.df_cedears is not None:
                 make_cedears(S.df_cedears)
                 cede=S.df_cedears.copy().set_index('Nombre')
