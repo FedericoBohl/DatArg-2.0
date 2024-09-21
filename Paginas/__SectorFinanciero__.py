@@ -320,12 +320,12 @@ def make_acciones():
         S.galpones=get_galpones()
     c1,c2=st.columns(2)
     with c1:
-        st.subheader('Panel Líderes')
+        st.subheader('Panel Líderes-ARS')
         try:
             plot_acciones(S.lideres)
         except Exception as e: st.exception(e)
     with c2:
-        st.subheader('Panel Galpones')
+        st.subheader('Panel Galpones-ARS')
         try:
             plot_galpones(S.galpones)
         except Exception as e: st.exception(e)

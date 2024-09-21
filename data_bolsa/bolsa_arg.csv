@@ -1,61 +1,66 @@
-﻿Nombre;CAP (MM);Sector;Nombre Completo
-BBAR;1320;Financiero;BBVA Banco Frances
-BMA;2380;Financiero;Banco Macro
-BYMA;773.94;Financiero;Bolsas y Mercados Argentinos
-CEPU;1400;Suministros;Central Puerto
-COME;346.21;Energía;Comercial del Plata
-CRES;537.68;Consumo no cíclico;Cresud
-CVH;762.31;Tecnología;Cablevisión
-EDN;933.39;Suministros;Edenor
-GGAL;3390;Financiero;Grupo Financiero Galicia
-HARG;449.5;Materiales básicos;Holcim Argentina
-LOMA;167.11;Materiales básicos;Loma Negra
-MIRG;2300;Tecnología;Mirgor
-PAMP;2560;Suministros;Pampa Energía
-SUPV;435.33;Financiero;Grupo Supervielle S.A.
-TGNO4;798.78;Energía;Trans. Gas Norte
-TGSU2;2180;Energía;Trans. Gas Sur
-TRAN;598.09;Suministros;Transener
-TXAR;3620;Materiales básicos;Ternium Argentina
-VALO;215.25;Financiero;Banco de Valores
-YPFD;7390;Energía;YPF
-ALUA;2330;Materiales básicos;Aluar
-AGRO;62.64;Industriales;Agrometal
-AUSO;215.66;Industriales;Autopistas del Sol
-BHIP;247.27;Financiero;Banco Hipotecario
-BOLT;171.72;Industriales;Boldt
-BPAT;529.29;Financiero;Banco Patagonia
-CADO;67.76;Consumo no cíclico;Carlos Casado
-CAPX;928.68;Energía;Capex
-CARC;32.2;Materiales básicos;Carboclor
-CELU;6840;Materiales básicos;Celulosa Argentina
-CTIO;633.31;Inmobiliaria;Consultatio
-DOME;9.35;Consumo cíclico;Artefactos Domesticos
-DYCA;19.83;Industriales;Dycasa
-EDLH;1.68;Suministros;EDESAL
-FERR;907.23;Consumo cíclico;Ferrum
-FIPL;37.28;Materiales básicos;Fiplasto SA
-GBAN;315.77;Suministros;Naturgy BAN
-GCDI;28.19;Inmobiliaria;GCDI
-GCLA;166.57;Consumo cíclico;Grupo clarin
-GRIM;42.09;Consumo cíclico;Grimoldi
-INAG;5.94;Materiales básicos;Insumos Agroquimicos
-INTR;30.27;Consumo no cíclico;Compania Introductora de BA
-INVJ;290.2;Consumo no cíclico;Inversora Juramento
-IRSA;680.91;Inmobiliaria;IRSA
-LEDE;369.8;Consumo no cíclico;Ledesma
-LONG;15.51;Consumo cíclico;Longvie
-METR;457.61;Suministros;Metrogas SA
-MOLA;1030;Consumo no cíclico;Molinos Agro
-MOLI;600.42;Consumo no cíclico;Molinos
-MORI;38.06;Consumo no cíclico;Morixe Hermanos
-MTR;161.54;Financiero;Matba Rofex
-OEST;153.12;Industriales;GCO
-PATA;460;Consumo no cíclico;SAIEP
-PGR;29.6;Energía;Phoenix Resources
-POLL;3.66;Industriales;Polledo
-RICH;73.16;Salud;Laboratorios Richmond
-RIGO;142.16;Materiales básicos;Rigolleau
-SAMI;727.16;Consumo no cíclico;San Miguel
-SEMI;57.07;Consumo no cíclico;Molinos Juan Semino
-TECO2;3630;Tecnología;Telecom Argentina S.A.
+﻿Nombre;CAP (MM);Sector;Nombre Completo;;;;
+BBAR;2034595723831350.00;Financiero;BBVA Banco Frances;;;;
+BMA;3498390608520000.00;Financiero;Banco Macro;;;;
+BYMA;1114393750000000.00;Financiero;Bolsas y Mercados Argentinos;;;;
+CEPU;1628103832989600.00;Suministros;Central Puerto;;;;
+COME;334981966128000.00;Energía;Comercial del Plata;;;;
+CRES;592409445030400.00;Consumo no cíclico;Cresud;;;;
+CVH;556406071333000.00;Tecnología;Cablevisión;;;;
+EDN;798496297590000.00;Suministros;Edenor;;;;
+GGAL;3832114239006900.00;Financiero;Grupo Financiero Galicia;;;;
+HARG;434319705625000.00;Materiales básicos;Holcim Argentina;;;;
+LOMA;889509933676000.00;Materiales básicos;Loma Negra;;;;
+MIRG;249930000000000.00;Tecnología;Mirgor;;;;
+PAMP;2646220307062500.00;Suministros;Pampa Energía;;;;
+SUPV;509608529686800.00;Financiero;Grupo Supervielle S.A.;;;;
+TGNO4;966622665800000.00;Energía;Trans. Gas Norte;;;;
+TGSU2;2770285877528550.00;Energía;Trans. Gas Sur;;;;
+TRAN;261359231326500.00;Suministros;Transener;;;;
+TXAR;3688207269779500.00;Materiales básicos;Ternium Argentina;;;;
+VALO;225588972252000.00;Financiero;Banco de Valores;;;;
+YPFD;86813966234925.00;Energía;YPF;;;;
+ALUA;2381400000000000.00;Materiales básicos;Aluar;;;;
+AGRO;4875000000000.00;Industriales;Agrometal;;;;
+AUSO;88238325360000.00;Industriales;Autopistas del Sol;;;;
+BHIP;501000000000000.00;Financiero;Banco Hipotecario;;;;
+BOLT;156907568821200.00;Industriales;Boldt;;;;
+BPAT;949271712840000.00;Financiero;Banco Patagonia;;;;
+CADO;63448000000000.00;Consumo no cíclico;Carlos Casado;;;;
+CAPX;843902010567000.00;Energía;Capex;;;;
+CARC;32530406345200.00;Materiales básicos;Carboclor;;;;
+CELU;70909074260000.00;Materiales básicos;Celulosa Argentina;;;;
+CTIO;709958454628000.00;Inmobiliaria;Consultatio;;;;
+DOME;5650000000000.00;Consumo cíclico;Artefactos Domesticos;;;;
+DYCA;12705000000000.00;Industriales;Dycasa;;;;
+EDLH;1029492323680.00;Suministros;EDESAL;;;;
+FERR;96120500000000.00;Consumo cíclico;Ferrum;;;;
+FIPL;38246560567500.00;Materiales básicos;Fiplasto SA;;;;
+GBAN;171797204814000.00;Suministros;Naturgy BAN;;;;
+GCDI;28073464922450.00;Inmobiliaria;GCDI;;;;
+GCLA;142174271010000.00;Consumo cíclico;Grupo clarin;;;;
+GRIM;37439849330000.00;Consumo cíclico;Grimoldi;;;;
+INAG;;Materiales básicos;Insumos Agroquimicos;;;;
+INTR;32874796600500.00;Consumo no cíclico;Compania Introductora de BA;;;;
+INVJ;281447151957000.00;Consumo no cíclico;Inversora Juramento;;;;
+IRSA;848764204713000.00;Inmobiliaria;IRSA;;;;
+LEDE;392225114568000.00;Consumo no cíclico;Ledesma;;;;
+LONG;7697439801300.00;Consumo cíclico;Longvie;;;;
+METR;213632721272000.00;Suministros;Metrogas SA;;;;
+MOLA;876433161556000.00;Consumo no cíclico;Molinos Agro;;;;
+MOLI;621567081922000.00;Consumo no cíclico;Molinos;;;;
+MORI;38127247934500.00;Consumo no cíclico;Morixe Hermanos;;;;
+MTR;159857460000000.00;Financiero;Matba Rofex;;;;
+OEST;167680000000000.00;Industriales;GCO;;;;
+PATA;485000000000000.00;Consumo no cíclico;SAIEP;;;;
+PGR;;Energía;Phoenix Resources;;;;
+POLL;2953381240000.00;Industriales;Polledo;;;;
+RICH;12573358050000.00;Salud;Laboratorios Richmond;;;;
+RIGO;143613678780000.00;Materiales básicos;Rigolleau;;;;
+SAMI;51620041794000.00;Consumo no cíclico;San Miguel;;;;
+SEMI;18336120000000.00;Consumo no cíclico;Molinos Juan Semino;;;;
+TECO2;3508788507521200.00;Tecnología;Telecom Argentina S.A.;;;;
+HAVA;75114838799000.00;Consumo cíclico;Havanna Holding SA;;;;
+CECO2;261490670805000.00;Suministros;Central Costanera SA;;;;
+CGPA2;577242776868000.00;Suministros;Camuzzi Gas Pampeana SA;;;;
+DGCU2;213682960128000.00;Suministros;Distribuidora de Gas Cuyana SA;;;;
+GAMI;72505000000000.00;Tecnología;BGaming SA;;;;
