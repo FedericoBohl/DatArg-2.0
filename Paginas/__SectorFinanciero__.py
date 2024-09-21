@@ -358,7 +358,7 @@ def make_acciones():
             "valuesTracking": "1",
             "changeMode": "price-and-percent",
             "chartType": "area",
-            "headerFontSize": "medium",
+            "headerFontSize": "small",
             "gridLineColor": "rgba(93, 96, 107, 1)",
             "backgroundColor": "rgba(187, 217, 251, 0)",
             "widgetFontColor": "rgba(0, 0, 0, 1)",
