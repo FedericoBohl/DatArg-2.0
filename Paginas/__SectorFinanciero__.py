@@ -391,7 +391,7 @@ def make_acciones():
         <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
         {
         "width": "100%",
-        "height": "600",
+        "height": "600px",
         "symbolsGroups": [
             {
             "name": "Indices",
