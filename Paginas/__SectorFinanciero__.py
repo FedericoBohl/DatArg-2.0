@@ -330,7 +330,7 @@ def make_acciones():
             plot_galpones(S.galpones)
         except Exception as e: st.exception(e)
     st.header('Acciones en USD')
-    @st.cache_resource(show_spinner=False)
+    #@st.cache_resource(show_spinner=False)
     def iframe_acciones():
         tradingview_widget = """
             <!-- TradingView Widget BEGIN -->
