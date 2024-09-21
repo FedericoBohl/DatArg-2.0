@@ -326,7 +326,9 @@ def make_acciones():
         except Exception as e: st.exception(e)
     with c2:
         st.subheader('Panel Galpones')
-        plot_galpones(S.galpones)
+        try:
+            plot_galpones(S.galpones)
+        except Exception as e: st.exception(e)
     st.header('Acciones en USD')
     @st.cache_resource(show_spinner=False)
     def iframe_acciones():
