@@ -353,7 +353,7 @@ def make_acciones():
             "scalePosition": "right",
             "scaleMode": "Normal",
             "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
-            "fontSize": "14",
+            "fontSize": "10",
             "noTimeScale": false,
             "valuesTracking": "1",
             "changeMode": "price-and-percent",
