@@ -618,16 +618,7 @@ def make_merv_web():
         with bonos:
             make_bonds()
         with acciones:
-            if (S.df_merval is not None):# and (S.df_general is not None):
-                fig_merv,fig_gen=make_acciones(S.df_merval,S.df_general)
-                container=st.container(border=True)
-                if container.radio('¿Que panel desea ver?' , options=['Merval','Panel General'] , horizontal=True, index=0 , key='which_merv') == 'Merval':
-                    st.markdown("""<h2 style='text-align: center; color: #404040; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>Merval</h2>""", unsafe_allow_html=True)
-                    st.plotly_chart(fig_merv,config={'displayModeBar': False},use_container_width=True)
-                else:
-                    st.markdown("""<h2 style='text-align: center; color: #404040; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>Panel General</h2>""", unsafe_allow_html=True)
-                    #st.plotly_chart(fig_gen, use_container_width=True)
-            else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
+            make_acciones()
         with cedears:
             if S.df_cedears is not None:
                 make_cedears(S.df_cedears)
