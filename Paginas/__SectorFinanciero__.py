@@ -81,7 +81,7 @@ def plot_acciones(data_now_merv : pd.DataFrame):
     fig_merv.data[0].texttemplate = "<b>%{label}</b><br>%{customdata[2]}%"
     fig_merv.update_traces(marker=dict(cornerradius=10))
     fig_merv.update_layout(margin=dict(l=1, r=1, t=10, b=1))
-    st.plotly_chart(fig_merv,config={'displayModeBar': False},use_container_width=True)
+    st.plotly_chart(fig_merv,config={'modeBarButtonsToRemove': ['zoom', 'pan','box select', 'lasso select','zoom in','zoom out']},use_container_width=True)
 
 @st.cache_data(show_spinner=False)
 def plot_galpones(data_now_gen : pd.DataFrame):
@@ -96,10 +96,10 @@ def plot_galpones(data_now_gen : pd.DataFrame):
                     hover_name="Var%",
                     custom_data=["Nombre Completo",'Precio',"Var%"],
                     color='Var%', 
-                    range_color =[-6,6],
+                    range_color =[-6,6],color_continuous_scale=colorscale,
                     labels={'Value': 'Number of Items'},
                     color_continuous_midpoint=0)
-    fig_merv.update_traces(marker_line_width = 1.5,marker_line_color='black',
+    fig_merv.update_traces(marker_line_width = 1.5,marker_line_color=black,
         hovertemplate="<br>".join([
         "<b>Empresa<b>: %{customdata[0]}",
         "<b>Precio (ARS)<b>: %{customdata[1]}"
@@ -429,7 +429,7 @@ def make_acciones():
         </div>
         <!-- TradingView Widget END -->
         """
-        components.html(tradingview_widget, height=550, scrolling=True)
+        components.html(tradingview_widget, scrolling=True)
         tradingview_widget = """
             <!-- TradingView Widget BEGIN -->
             <div class="tradingview-widget-container">
@@ -482,7 +482,7 @@ def make_acciones():
             </div>
             <!-- TradingView Widget END -->
         """
-        components.html(tradingview_widget, height=550, scrolling=True)
+        components.html(tradingview_widget, scrolling=True)
     iframe_acciones()
     st.caption('done')
 
