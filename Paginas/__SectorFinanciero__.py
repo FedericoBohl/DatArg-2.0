@@ -383,7 +383,7 @@ def make_acciones():
             </div>
             <!-- TradingView Widget END -->
         """
-        components.iframe(tradingview_widget,height=600, scrolling=False)
+        components.iframe(tradingview_widget,height=600, scrolling=True)
         tradingview_widget = """
         <!-- TradingView Widget BEGIN -->
         <div class="tradingview-widget-container">
