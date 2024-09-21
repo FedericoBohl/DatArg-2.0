@@ -383,7 +383,7 @@ def make_acciones():
             </div>
             <!-- TradingView Widget END -->
         """
-        components.html(tradingview_widget,height=600, scrolling=True)
+        components.html(tradingview_widget,height=600, scrolling=False)
         tradingview_widget = """
         <!-- TradingView Widget BEGIN -->
         <div class="tradingview-widget-container">
@@ -391,7 +391,7 @@ def make_acciones():
         <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
         {
         "width": "100%",
-        "height": "600px",
+        "height": "600",
         "symbolsGroups": [
             {
             "name": "Indices",
