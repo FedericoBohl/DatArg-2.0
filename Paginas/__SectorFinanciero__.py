@@ -653,67 +653,67 @@ def make_cedears():
                 """
         components.html(widget, height=400, scrolling=False)
         c1,c2=st.columns(0.4,0.6)
-        with c1:
-            widget="""
-                    <!-- TradingView Widget BEGIN -->
-                    <div class="tradingview-widget-container">
-                    <div class="tradingview-widget-container__widget"></div>
-                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
-                    {
-                    "interval": "1m",
-                    "width": 100%,
-                    "isTransparent": true,
-                    "height": 590,
-                    "symbol": "NASDAQ:MSFT",
-                    "showIntervalTabs": true,
-                    "displayMode": "multiple",
-                    "locale": "es",
-                    "colorTheme": "light"
-                    }
-                    </script>
-                    </div>
-                    <!-- TradingView Widget END -->
-                    """
-            components.html(widget, height=600, scrolling=False)
-        with c2:
-            widget="""
-                    <!-- TradingView Widget BEGIN -->
-                    <div class="tradingview-widget-container">
-                    <div class="tradingview-widget-container__widget"></div>
-                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-financials.js" async>
-                    {
-                    "isTransparent": false,
-                    "largeChartUrl": "",
-                    "displayMode": "adaptive",
-                    "width": 100%,
-                    "height": 290,
-                    "colorTheme": "light",
-                    "symbol": "NASDAQ:MSFT",
-                    "locale": "es"
-                    }
-                    </script>
-                    </div>
-                    <!-- TradingView Widget END -->
-                    """
-            components.html(widget, height=300, scrolling=False)
-            widget="""
-                    <!-- TradingView Widget BEGIN -->
-                    <div class="tradingview-widget-container">
-                    <div class="tradingview-widget-container__widget"></div>
-                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-profile.js" async>
-                    {
-                    "width": 100%,
-                    "height": 290,
-                    "isTransparent": true,
-                    "colorTheme": "light",
-                    "symbol": "NASDAQ:MSFT",
-                    "locale": "es"
-                    }
-                    </script>
-                    </div>
-                    <!-- TradingView Widget END -->
-                    """
-            components.html(widget, height=300, scrolling=True)
+        #with c1:
+        widget="""
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
+                {
+                "interval": "1m",
+                "width": 100%,
+                "isTransparent": true,
+                "height": 590,
+                "symbol": "NASDAQ:MSFT",
+                "showIntervalTabs": true,
+                "displayMode": "multiple",
+                "locale": "es",
+                "colorTheme": "light"
+                }
+                </script>
+                </div>
+                <!-- TradingView Widget END -->
+                """
+        components.html(widget, height=600, scrolling=False)
+        #with c2:
+        widget="""
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-financials.js" async>
+                {
+                "isTransparent": false,
+                "largeChartUrl": "",
+                "displayMode": "adaptive",
+                "width": 100%,
+                "height": 290,
+                "colorTheme": "light",
+                "symbol": "NASDAQ:MSFT",
+                "locale": "es"
+                }
+                </script>
+                </div>
+                <!-- TradingView Widget END -->
+                """
+        components.html(widget, height=300, scrolling=False)
+        widget="""
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-profile.js" async>
+                {
+                "width": 100%,
+                "height": 290,
+                "isTransparent": true,
+                "colorTheme": "light",
+                "symbol": "NASDAQ:MSFT",
+                "locale": "es"
+                }
+                </script>
+                </div>
+                <!-- TradingView Widget END -->
+                """
+        components.html(widget, height=300, scrolling=True)
     #st.text_input
     analisis_spy('MSFT')
 
