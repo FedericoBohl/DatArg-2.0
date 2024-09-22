@@ -291,7 +291,7 @@ def make_acciones():
             plot_galpones(S.galpones)
         except Exception as e: st.exception(e)
     st.header('Acciones en USD')
-    @st.cache_resource(show_spinner=False)
+    #@st.cache_resource(show_spinner=False)
     def iframe_acciones():
         tradingview_widget = """
             <!-- TradingView Widget BEGIN -->
@@ -504,7 +504,7 @@ def make_bonds():
     except:pass
 
 def make_forex():
-    @st.cache_resource(show_spinner=False)
+    #@st.cache_resource(show_spinner=False)
     def iframes():
         tradingview_widget = """
         <!-- TradingView Widget BEGIN -->
@@ -574,7 +574,7 @@ def make_forex():
 
 
 def make_cedears():
-    @st.cache_resource(show_spinner=False)
+    #@st.cache_resource(show_spinner=False)
     def plot_spy():
         widget="""
                 <!-- TradingView Widget BEGIN -->
