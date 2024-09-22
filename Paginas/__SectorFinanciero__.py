@@ -449,7 +449,7 @@ def make_bonds():
     st.button('Recargar Datos',key='Recarga_datos_bonos',type='primary',use_container_width=True)
     if (not 'bonos' in S) or S.Recarga_datos_bonos:
         S.bonos=get_ecovalores()
-    c1_1,c2_1,c3_1=st.columns(3)
+    c1_1,c2_1=st.columns(2)
     #Los dataframes deberían tener de index el ticker del bono para hacer el filtrado más simple
     with c1_1:
         if isinstance(S.bonos,pd.DataFrame):
@@ -469,39 +469,33 @@ def make_bonds():
             with t_1_ex: st.dataframe(S.bonos[S.bonos['Tipo'].isin(['Dollar Linked'])].drop(columns=['Tipo']))
             with t_2_ex: curva_DL(S.bonos[S.bonos['Tipo'].isin(['Dollar Linked'])])
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
-    with c3_1:
+    c1_2,c2_2=st.columns(2)
+    with c1_2:
         if isinstance(S.bonos,pd.DataFrame):
             st.subheader('Bonos ajustados por CER')
             t_1_c,t_2_c=st.tabs(['Panel','Curva'])
             with t_1_c: st.dataframe(S.bonos[S.bonos['Tipo'].isin(['Ajustable por CER'])].drop(columns=['Tipo']))
             with t_2_c: curva_CER(S.bonos[S.bonos['Tipo'].isin(['Ajustable por CER'])])
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
-    c1_2,c2_2=st.columns(2)
-    with c1_2:
+    with c2_2:
         if isinstance(S.bonos,pd.DataFrame):
             st.subheader('Lecaps')
             t_1_l,t_2_l=st.tabs(['Panel','Curva'])
             with t_1_l: st.dataframe(S.bonos[S.bonos['Tipo'].isin(['Lecap'])].drop(columns=['Tipo']))
             with t_2_l: curva_LECAPS(S.bonos[S.bonos['Tipo'].isin(['Lecap'])])
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
-    with c2_2:    
-        if isinstance(S.bonos,pd.DataFrame):
-            st.subheader('Obligaciones Negociables')
-            t_1_cor,t_2_cor=st.tabs(['Panel','Curva'])
-            with t_1_cor: st.dataframe(S.bonos)
-            with t_2_cor: st.subheader('Curva')
-        else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
-    if isinstance(S.bonos,pd.DataFrame):
-        c1,c2=st.columns(2,vertical_alignment='bottom')
-        c1.subheader('Buscador de Bonos')
-        c2.selectbox('Bono a buscar:',options=S.bonos.index.values,key='bono_seleccionado')
-        st.write(S.bono_seleccionado)
-    st.divider()
-    #TEST
-    try:
-        _=pd.merge(S.df_bonos_gob[['last','change','volume','expiration']],S.df_iamc[['Duración Modificada','Tir Anual']], left_index=True,right_index=True)
-        st.dataframe(_)
-    except:pass
+    #with c2_2:    
+    #    if isinstance(S.bonos,pd.DataFrame):
+    #        st.subheader('Obligaciones Negociables')
+    #        t_1_cor,t_2_cor=st.tabs(['Panel','Curva'])
+    #        with t_1_cor: st.dataframe(S.bonos)
+    #        with t_2_cor: st.subheader('Curva')
+    #    else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
+    #if isinstance(S.bonos,pd.DataFrame):
+    #    c1,c2=st.columns(2,vertical_alignment='bottom')
+    #    c1.subheader('Buscador de Bonos')
+    #    c2.selectbox('Bono a buscar:',options=S.bonos.index.values,key='bono_seleccionado')
+    #    st.write(S.bono_seleccionado)
 
 def make_forex():
     #@st.cache_resource(show_spinner=False)
