@@ -669,11 +669,12 @@ def make_cedears2():
         widget="""
                     <!-- TradingView Widget BEGIN -->
                     <div class="tradingview-widget-container" style="height:100%;width:100%">
-                    <div class="tradingview-widget-container__widget" style="height:calc(400px - 32px);width:100%"></div>
+                    <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+                    <div class="tradingview-widget-copyright"><a href="https://es.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Siga los mercados en TradingView</span></a></div>
                     <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
                     {
                     "autosize": true,
-                    "symbol": "NASDAQ:"""+ticker+"""",
+                    "symbol": "NASDAQ:MSFT",
                     "timezone": "America/Argentina/Buenos_Aires",
                     "theme": "light",
                     "style": "3",
@@ -685,7 +686,7 @@ def make_cedears2():
                     "allow_symbol_change": true,
                     "details": true,
                     "calendar": false,
-                    "support_host": "https://www.tradingview.com",
+                    "support_host": "https://www.tradingview.com"
                     }
                     </script>
                     </div>
