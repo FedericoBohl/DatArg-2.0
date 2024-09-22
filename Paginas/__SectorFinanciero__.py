@@ -567,6 +567,27 @@ def make_forex():
         components.html(w_panel_forex_val, height=550, scrolling=True)
     iframes()
 
+@st.cache_data(show_spinner=False)
+def make_metrics():
+    def get_dolar():
+        url='https://dolarhoy.com/'
+        response=requests.get(url)
+        soup=BeautifulSoup(response.text,'html.parser')
+        data=[]
+        for i in soup.find('div', class_='tile is-parent is-9 cotizacion is-vertical').find_all('div',class_='tile is-child'):
+            try:
+                ind=i.find('a',class_='title').text
+                precio=i.find('div',class_='venta').find('div',class_='val').text.replace('$','').replace('','').replace(',','.')
+                var=i.find('div',class_='venta').find('div',class_='var-porcentaje').text.replace('%','').replace('','').replace(',','.')
+                data.append([ind,precio,var])
+            except: continue
+        return data[:4]
+    data=get_dolar()
+    
+    if isinstance(data,list):
+        cols=st.columns(len(data),vertical_alignment='bottom')
+        for i in range(len(data)):
+            cols[i].metric(data[i][0],f'${data[i][[1]]}',f'{data[i][2]}%')
 
 def make_cedears():
     #@st.cache_resource(show_spinner=False)
@@ -716,6 +737,7 @@ def make_cedears():
 
 def make_merv_web():
     try:
+        make_metrics()
         bonos, acciones, cedears, forex= st.tabs(["Bonos", "Acciones",'Cedears','Forex'])
         with bonos:
             make_bonds()

@@ -82,6 +82,10 @@ w_barra_stocks="""<!-- TradingView Widget BEGIN -->
                     "proName": "NYSE:YPF"
                     },
                     {
+                    "description": "Trans. Gas Sur",
+                    "proName": "NYSE:TGS"
+                    },
+                    {
                     "description": "Galicia",
                     "proName": "NASDAQ:GGAL"
                     },
@@ -98,8 +102,52 @@ w_barra_stocks="""<!-- TradingView Widget BEGIN -->
                     "proName": "NYSE:SUPV"
                     },
                     {
+                    "description": "Pampa Energía",
+                    "proName": "NYSE:PAM"
+                    },
+                    {
                     "description": "Edenor",
                     "proName": "NYSE:EDN"
+                    },
+                    {
+                    "description": "Central Puerto",
+                    "proName": "NYSE:CEPU"
+                    },
+                    {
+                    "description": "Telecom",
+                    "proName": "NYSE:TEO"
+                    },
+                    {
+                    "description": "Cresud",
+                    "proName": "NASDAQ:CRESY"
+                    },
+                    {
+                    "description": "Loma Negra",
+                    "proName": "NYSE:LOMA"
+                    },
+                    {
+                    "description": "Tenaris",
+                    "proName": "NYSE:TS"
+                    },
+                    {
+                    "description": "Ternium",
+                    "proName": "NYSE:TX"
+                    },
+                    {
+                    "description": "Vista Energía",
+                    "proName": "NYSE:VIST"
+                    },
+                    {
+                    "description": "Mercado Libre",
+                    "proName": "NASDAQ:MELI"
+                    },
+                    {
+                    "description": "Globant",
+                    "proName": "NYSE:GLOB"
+                    },
+                    {
+                    "description": "Despegar",
+                    "proName": "NYSE:DESP"
                     },
                     {
                     "description": "Oro",
