@@ -668,7 +668,7 @@ def make_cedears2():
         components.html(widget, height=200, scrolling=False)
         widget="""
                     <!-- TradingView Widget BEGIN -->
-                    <div class="tradingview-widget-container" style="height:100%;width:100%">
+                    <div class="tradingview-widget-container" style="height:600;width:100%">
                     <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
                     <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
                     {
@@ -685,8 +685,6 @@ def make_cedears2():
                     "details": true,
                     "calendar": false,
                     "support_host": "https://www.tradingview.com",
-                    "width":400,
-                    "height":100%
                     }
                     </script>
                     </div>
