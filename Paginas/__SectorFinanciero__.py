@@ -722,14 +722,14 @@ def make_cedears():
 def make_merv_web():
     try:
         bonos, acciones, cedears, forex= st.tabs(["Bonos", "Acciones",'Cedears','Forex'])
-        with forex:
-            make_forex()
         with bonos:
             make_bonds()
         with acciones:
             make_acciones()
         with cedears:
             make_cedears()
+        with forex:
+            make_forex()
     except:
         st.exception(Exception('🤯 Ups... Algo está andando mal. Disculpe las molestias, estamos trabajando para solucionarlo.'))
  
