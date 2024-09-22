@@ -652,7 +652,7 @@ def make_cedears():
                     <!-- TradingView Widget END -->
                 """
         components.html(widget, height=400, scrolling=False)
-        c1,c2=st.columns(0.4,0.6)
+        c1,c2=st.columns((0.4,0.6))
         with c1:
             st.write('Here')
             widget="""
