@@ -628,22 +628,25 @@ def make_cedears():
                     <!-- TradingView Widget BEGIN -->
                     <div class="tradingview-widget-container">
                     <div class="tradingview-widget-container__widget"></div>
+                    <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
                     <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
                     {
                     "width": "100%",
                     "height": "390",
                     "symbol": "NASDAQ:MSFT",
+                    "interval": "D",
                     "timezone": "America/Argentina/Buenos_Aires",
                     "theme": "light",
                     "style": "3",
-                    "locale": "es",
+                    "locale": "en",
+                    "backgroundColor": "rgba(255, 255, 255, 1)",
+                    "gridColor": "rgba(42, 46, 57, 0)",
                     "hide_top_toolbar": true,
                     "hide_legend": true,
                     "withdateranges": true,
-                    "range": "3M",
-                    "allow_symbol_change": true,
-                    "details": true,
+                    "allow_symbol_change": false,
                     "calendar": false,
+                    "hide_volume": true,
                     "support_host": "https://www.tradingview.com"
                     }
                     </script>
@@ -651,7 +654,7 @@ def make_cedears():
                     <!-- TradingView Widget END -->
                 """
         components.html(widget, height=400, scrolling=False)
-
+    st.text_input
     analisis_spy('MSFT')
 
 def make_merv_web():
