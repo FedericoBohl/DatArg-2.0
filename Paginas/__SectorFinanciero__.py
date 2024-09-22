@@ -574,13 +574,12 @@ def make_forex():
 
 
 def make_cedears():
-    #@st.cache_resource(show_spinner=False)
+    @st.cache_resource(show_spinner=False)
     def plot_spy():
         widget="""
                 <!-- TradingView Widget BEGIN -->
                 <div class="tradingview-widget-container">
                 <div class="tradingview-widget-container__widget"></div>
-                <div class="tradingview-widget-copyright"><a href="https://es.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Siga los mercados en TradingView</span></a></div>
                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js" async>
                 {
                 "exchanges": [],
@@ -597,13 +596,13 @@ def make_cedears():
                 "hasSymbolTooltip": false,
                 "isMonoSize": false,
                 "width": "100%",
-                "height": "600"
+                "height": "400"
                 }
                 </script>
                 </div>
                 <!-- TradingView Widget END -->
         """
-        components.html(widget, height=600, scrolling=False)
+        components.html(widget, height=400, scrolling=False)
     plot_spy()
 
     #@st.cache_data(show_spinner=False)
