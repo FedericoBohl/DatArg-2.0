@@ -629,7 +629,6 @@ def make_cedears2():
                 "blockSize": "market_cap_basic",
                 "blockColor": "change",
                 "locale": "es",
-                "autosize": true,
                 "symbolUrl": "",
                 "colorTheme": "light",
                 "hasTopBar": false,
