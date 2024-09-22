@@ -654,6 +654,7 @@ def make_cedears():
         components.html(widget, height=400, scrolling=False)
         c1,c2=st.columns(0.4,0.6)
         with c1:
+            st.write('Here')
             widget="""
                     <!-- TradingView Widget BEGIN -->
                     <div class="tradingview-widget-container">
@@ -675,6 +676,7 @@ def make_cedears():
                     <!-- TradingView Widget END -->
                     """
             components.html(widget, height=600, scrolling=False)
+            st.write('Here')
         with c2:
             widget="""
                     <!-- TradingView Widget BEGIN -->
