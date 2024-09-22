@@ -685,7 +685,8 @@ def make_cedears2():
                     "details": true,
                     "calendar": false,
                     "support_host": "https://www.tradingview.com",
-                    "width":400
+                    "width":400,
+                    "height":100%
                     }
                     </script>
                     </div>
