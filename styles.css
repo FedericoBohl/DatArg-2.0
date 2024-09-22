@@ -204,7 +204,7 @@ div[data-testid="stExpander"]{
 /* Efecto hover y foco sobre el campo de texto */
 .stTextInput input[type="text"]:hover,
 .stTextInput input[type="text"]:focus {
-   background-color: #dbe9f9; /* Cambiar el fondo en hover y foco */
+   background-color: #2b4f81; /* Cambiar el fondo en hover y foco */
 }
 
 /* Texto del placeholder */
