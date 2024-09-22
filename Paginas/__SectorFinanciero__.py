@@ -596,13 +596,13 @@ def make_cedears():
                 "hasSymbolTooltip": false,
                 "isMonoSize": false,
                 "width": "100%",
-                "height": "400"
+                "height": "490"
                 }
                 </script>
                 </div>
                 <!-- TradingView Widget END -->
         """
-        components.html(widget, height=400, scrolling=False)
+        components.html(widget, height=500, scrolling=False)
     plot_spy()
 
     #@st.cache_data(show_spinner=False)
