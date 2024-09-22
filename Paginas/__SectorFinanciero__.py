@@ -663,7 +663,7 @@ def make_cedears():
                     "interval": "1m",
                     "width": "100%",
                     "isTransparent": true,
-                    "height": "100%",
+                    "height": "600",
                     "symbol": "NASDAQ:"""+ticker+"""",
                     "showIntervalTabs": true,
                     "displayMode": "multiple",
