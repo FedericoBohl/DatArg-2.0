@@ -14,47 +14,6 @@ import requests
 import numpy as np
 import re
 
-@st.cache_data(show_spinner=False)
-def make_cedears(data_now : pd.DataFrame):
-    with st.container(border=True):
-        c1,c2,c3,c4,c5=st.columns(5)
-        with c1:
-            st.metric('SPY (ARS)',data_now.loc[data_now['Nombre']=='SPY','Precio'].values[0],f"{data_now.loc[data_now['Nombre']=='SPY','Var%'].values[0]*100:.2f}%")
-        with c2:
-            st.metric('NASDAQ (ARS)',data_now.loc[data_now['Nombre']=='QQQ','Precio'].values[0],f"{data_now.loc[data_now['Nombre']=='QQQ','Var%'].values[0]*100:.2f}%")
-        with c3:
-            st.metric('Down Jones (ARS)',data_now.loc[data_now['Nombre']=='DIA','Precio'].values[0],f"{data_now.loc[data_now['Nombre']=='DIA','Var%'].values[0]*100:.2f}%")
-        with c4:
-            st.metric('Dólar Oficial','-')
-        with c5:
-            st.metric('Dolar Blue/MEP/CCL','-')
-    data=pd.read_csv('data_bolsa/bolsa_cedears.csv',delimiter=';')
-    data_now=data_now.drop_duplicates(subset='Nombre', keep='first')
-    data=pd.merge(data_now,data,on='Nombre').dropna()
-    data['Var%']=data["Var%"]*100
-    df_grouped = data.groupby(["Sector","Nombre"])[["Weigths","Var%","Nombre Completo","Precio"]].min().reset_index()
-    fig = px.treemap(df_grouped, 
-                    path=[px.Constant("CEDEARS"), 'Sector',  'Nombre'],
-                    values='Weigths',
-                    hover_name="Var%",
-                    custom_data=["Nombre Completo",'Precio',"Var%"],
-                    color='Var%', 
-                    range_color =[-6,6],color_continuous_scale=colorscale,
-                    labels={'Value': 'Number of Items'},
-                    color_continuous_midpoint=0)
-    fig.update_traces(marker_line_width = 1.5,marker_line_color=black,
-        hovertemplate="<br>".join([
-        "<b>Empresa<b>: %{customdata[0]}",
-        "<b>Precio (ARS)<b>: %{customdata[1]}"
-        ])
-        )
-    fig.data[0].texttemplate = "<b>%{label}</b><br>%{customdata[2]}%"
-    fig.update_traces(marker=dict(cornerradius=10))
-    fig.update_layout(margin=dict(l=1, r=1, t=10, b=1))
-    st.markdown("""<h2 style='text-align: center; color: #404040; font-family: "Source Serif Pro", serif; font-weight: 600; letter-spacing: -0.005em; padding: 1rem 0px; margin: 0px; line-height: 1.2;'>S&P 500 en Cedears</h2>""", unsafe_allow_html=True)
-    st.plotly_chart(fig,config={'displayModeBar': False},use_container_width=True)
-    data.set_index('Nombre', inplace=True)
-    data=data.drop(columns=['Name','Weigths'])
 
 @st.cache_data(show_spinner=False)
 def plot_acciones(data_now_merv : pd.DataFrame):
@@ -614,37 +573,37 @@ def make_forex():
     iframes()
 
 
-def make_cedears2():
+def make_cedears():
     #@st.cache_resource(show_spinner=False)
     def plot_spy():
         widget="""
-                <!-- TradingView Widget BEGIN -->
-                <div class="tradingview-widget-container">
-                <div class="tradingview-widget-container__widget"></div>
-                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js" async>
-                {
-                "exchanges": [],
-                "dataSource": "SPX500",
-                "grouping": "sector",
-                "blockSize": "market_cap_basic",
-                "blockColor": "change",
-                "locale": "es",
-                "symbolUrl": "",
-                "colorTheme": "light",
-                "hasTopBar": false,
-                "isDataSetEnabled": false,
-                "isZoomEnabled": false,
-                "hasSymbolTooltip": false,
-                "isMonoSize": false,
-                "width": "100%",
-                "height": "600",
-                }
-                </script>
-                </div>
-                <!-- TradingView Widget END -->
+            <!-- TradingView Widget BEGIN -->
+            <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <div class="tradingview-widget-copyright"><a href="https://es.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Siga los mercados en TradingView</span></a></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js" async>
+            {
+            "exchanges": [],
+            "dataSource": "SPX500",
+            "grouping": "sector",
+            "blockSize": "market_cap_basic",
+            "blockColor": "change",
+            "locale": "es",
+            "symbolUrl": "",
+            "colorTheme": "light",
+            "hasTopBar": false,
+            "isDataSetEnabled": false,
+            "isZoomEnabled": false,
+            "hasSymbolTooltip": false,
+            "isMonoSize": false,
+            "width": "100%",
+            "height": "100%"
+            }
+            </script>
+            </div>
+            <!-- TradingView Widget END -->
         """
         components.html(widget, height=600, scrolling=False)
-        st.markdown(widget,unsafe_allow_html=True)
     plot_spy()
 
     #@st.cache_data(show_spinner=False)
@@ -670,7 +629,6 @@ def make_cedears2():
                     <!-- TradingView Widget BEGIN -->
                     <div class="tradingview-widget-container">
                     <div class="tradingview-widget-container__widget"></div>
-                    <div class="tradingview-widget-copyright"><a href="https://es.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Siga los mercados en TradingView</span></a></div>
                     <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
                     {
                     "width": "100%",
@@ -707,20 +665,7 @@ def make_merv_web():
         with acciones:
             make_acciones()
         with cedears:
-            make_cedears2()
-            if S.df_cedears is not None:
-                make_cedears(S.df_cedears)
-                cede=S.df_cedears.copy().set_index('Nombre')
-                c1,c2= st.columns((0.6,0.4))
-                with c1:
-                    st.subheader('Listado de CEDEARS')
-                    st.dataframe(cede,use_container_width=True)
-                with c2:
-                    st.subheader('Buscador de Cedears')
-                    st.selectbox('Buscador de cedears',label_visibility='collapsed',options=cede.index.to_list(),key='cedebuscado')
-                    st.dataframe(cede.iloc[cede.index==S.cedebuscado].transpose(),use_container_width=True)
-
-            else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
+            make_cedears()
     except:
         st.exception(Exception('🤯 Ups... Algo está andando mal. Disculpe las molestias, estamos trabajando para solucionarlo.'))
  
