@@ -512,17 +512,17 @@ def make_forex():
         "height": 500,
         "currencies": [
             "EUR",
-            "USD",
-            "JPY",
             "GBP",
+            "JPY",
             "HKD",
             "MXN",
+            "USD",
             "ARS",
+            "BRL",
             "CLP",
             "COP",
             "PEN",
-            "UYU",
-            "BRL"
+            "UYU"
         ],
         "isTransparent": true,
         "colorTheme": "light",
@@ -543,17 +543,17 @@ def make_forex():
         "height": 500,
         "currencies": [
             "EUR",
-            "USD",
-            "JPY",
             "GBP",
+            "JPY",
             "HKD",
             "MXN",
+            "USD",
             "ARS",
+            "BRL",
             "CLP",
             "COP",
             "PEN",
-            "UYU",
-            "BRL"
+            "UYU"
         ],
         "isTransparent": true,
         "colorTheme": "light",
@@ -607,7 +607,7 @@ def make_cedears():
                 <div class="tradingview-widget-container__widget"></div>
                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js" async>
                 {
-                "symbol": "NASDAQ:"""+ticker+"""",
+                "symbol": '"""+ticker+"""',
                 "width": "100%",
                 "locale": "es",
                 "colorTheme": "light",
@@ -626,12 +626,12 @@ def make_cedears():
                     {
                     "width": "100%",
                     "height": "390",
-                    "symbol": "NASDAQ:"""+ticker+"""",
+                    "symbol": '"""+ticker+"""',
                     "interval": "D",
                     "timezone": "America/Argentina/Buenos_Aires",
                     "theme": "light",
                     "style": "3",
-                    "locale": "en",
+                    "locale": "es",
                     "backgroundColor": "rgba(255, 255, 255, 1)",
                     "gridColor": "rgba(42, 46, 57, 0)",
                     "hide_legend": true,
@@ -658,7 +658,7 @@ def make_cedears():
                     "width": "100%",
                     "isTransparent": true,
                     "height": "900",
-                    "symbol": "NASDAQ:"""+ticker+"""",
+                    "symbol": '"""+ticker+"""',
                     "showIntervalTabs": true,
                     "displayMode": "multiple",
                     "locale": "es",
@@ -682,7 +682,7 @@ def make_cedears():
                     "width": "100%",
                     "height": "450",
                     "colorTheme": "light",
-                    "symbol": "NASDAQ:"""+ticker+"""",
+                    "symbol": '"""+ticker+"""',
                     "locale": "es"
                     }
                     </script>
@@ -700,16 +700,16 @@ def make_cedears():
                     "height": "450",
                     "isTransparent": true,
                     "colorTheme": "light",
-                    "symbol": "NASDAQ:"""+ticker+"""",
+                    "symbol": '"""+ticker+"""',
                     "locale": "es"
                     }
                     </script>
                     </div>
                     <!-- TradingView Widget END -->
                     """
-            components.html(widget, height=450, scrolling=True)
+            components.html(widget, height=450, scrolling=False)
             
-    st.text_input('Buscador de NASDAQ', value="AAPL", key='cedear', placeholder='Ticker')
+    st.text_input('Buscador de equity -- Pruebe "NYSE:VIST" o "NASDAQ:GOOG"', value="NASDAQ:AAPL", key='cedear',help='Debe poner primero el exchange (ej. NYSE o NASDAQ), luego de dos puntos (":") y finalmente el activo a buscar.', placeholder='Ticker')
     if isinstance(S.cedear,str):
         analisis_spy(S.cedear.capitalize())
 
