@@ -628,7 +628,6 @@ def make_cedears():
                     <!-- TradingView Widget BEGIN -->
                     <div class="tradingview-widget-container">
                     <div class="tradingview-widget-container__widget"></div>
-                    <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
                     <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
                     {
                     "width": "100%",
@@ -641,7 +640,6 @@ def make_cedears():
                     "locale": "en",
                     "backgroundColor": "rgba(255, 255, 255, 1)",
                     "gridColor": "rgba(42, 46, 57, 0)",
-                    "hide_top_toolbar": true,
                     "hide_legend": true,
                     "withdateranges": true,
                     "allow_symbol_change": false,
@@ -654,7 +652,69 @@ def make_cedears():
                     <!-- TradingView Widget END -->
                 """
         components.html(widget, height=400, scrolling=False)
-    st.text_input
+        c1,c2=st.columns(0.4,0.6)
+        with c1:
+            widget="""
+                    <!-- TradingView Widget BEGIN -->
+                    <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
+                    {
+                    "interval": "1m",
+                    "width": 100%,
+                    "isTransparent": true,
+                    "height": 590,
+                    "symbol": "NASDAQ:MSFT",
+                    "showIntervalTabs": true,
+                    "displayMode": "multiple",
+                    "locale": "es",
+                    "colorTheme": "light"
+                    }
+                    </script>
+                    </div>
+                    <!-- TradingView Widget END -->
+                    """
+            components.html(widget, height=600, scrolling=False)
+        with c2:
+            widget="""
+                    <!-- TradingView Widget BEGIN -->
+                    <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-financials.js" async>
+                    {
+                    "isTransparent": false,
+                    "largeChartUrl": "",
+                    "displayMode": "adaptive",
+                    "width": 100%,
+                    "height": 290,
+                    "colorTheme": "light",
+                    "symbol": "NASDAQ:MSFT",
+                    "locale": "es"
+                    }
+                    </script>
+                    </div>
+                    <!-- TradingView Widget END -->
+                    """
+            components.html(widget, height=300, scrolling=False)
+            widget="""
+                    <!-- TradingView Widget BEGIN -->
+                    <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-profile.js" async>
+                    {
+                    "width": 100%,
+                    "height": 290,
+                    "isTransparent": true,
+                    "colorTheme": "light",
+                    "symbol": "NASDAQ:MSFT",
+                    "locale": "es"
+                    }
+                    </script>
+                    </div>
+                    <!-- TradingView Widget END -->
+                    """
+            components.html(widget, height=300, scrolling=True)
+    #st.text_input
     analisis_spy('MSFT')
 
 def make_merv_web():
