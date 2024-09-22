@@ -714,8 +714,8 @@ def make_cedears():
                     <!-- TradingView Widget END -->
                     """
             components.html(widget, height=300, scrolling=True)
-    #st.text_input
-    analisis_spy('MSFT')
+    st.text_input('Ticker', value="AAPL", key='cedear', placeholder='Ticker', label_visibility='collapsed')
+    analisis_spy(S.cedear)
 
 def make_merv_web():
     try:
