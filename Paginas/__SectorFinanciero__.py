@@ -730,6 +730,6 @@ def make_merv_web():
             make_cedears()
         with forex:
             make_forex()
-    except:
-        st.exception(Exception('🤯 Ups... Algo está andando mal. Disculpe las molestias, estamos trabajando para solucionarlo.'))
+    except Exception as e:
+        st.exception(e)#Exception('🤯 Ups... Algo está andando mal. Disculpe las molestias, estamos trabajando para solucionarlo.'))
  
