@@ -179,7 +179,7 @@ div[data-testid="stExpander"]{
 /*Editar st.text_input*/
 /* Contenedor del text input */
 .stTextInput {
-   background-color: #2b4f81; /* Fondo negro */
+   background-color: #b3c7e6; /* Fondo negro */
    padding: 12px; /* Espacio interior */
    margin-bottom: 10px; /* Espacio inferior */
    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
@@ -190,7 +190,7 @@ div[data-testid="stExpander"]{
 }
 /* Campo de texto (input) */
 .stTextInput input[type="text"] {
-   background-color: #b3c7e6; /* Fondo del campo de texto */
+   background-color: #2b4f81; /* Fondo del campo de texto */
    color: white; /* Texto en blanco */
    border: none; /* Sin borde para el input */
    padding: 8px 12px; /* Espaciado interno */
