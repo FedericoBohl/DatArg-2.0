@@ -644,6 +644,7 @@ def make_cedears2():
                 <!-- TradingView Widget END -->
         """
         components.html(widget, height=600, scrolling=False)
+        st.markdown(widget,unsafe_allow_html=True)
     plot_spy()
 
     #@st.cache_data(show_spinner=False)
