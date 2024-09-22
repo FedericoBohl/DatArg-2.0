@@ -692,7 +692,7 @@ def make_cedears2():
                 """
         components.html(widget, height=400, scrolling=False)
 
-    analisis_spy('AAPL')
+    analisis_spy('MSFT')
 
 def make_merv_web():
     try:
