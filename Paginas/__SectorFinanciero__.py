@@ -95,9 +95,10 @@ def get_ecovalores():
                 data['Precio']=[float(i.replace('.','').replace(',','.')) for i in data['Precio']]
                 data['Vencimiento']=pd.to_datetime(data['Vencimiento'],format='%d/%m/%Y')
                 data['Próx. Vto.']=pd.to_datetime(data['Próx. Vto.'],format='%d/%m/%Y')
+                data=data.rename(columns={'VT':'Valor Técnico'})
                 break
         except:continue
-    return data
+    return data[['Nombre','Precio','Var %','Valor Técnico','Int. Corrido','TIR','Duration','Paridad','Vol %','Próx. Vto.','Vencimiento','Tipo']]
 
 @st.cache_data(show_spinner=False)
 def curva_soberanos(data):
