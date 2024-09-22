@@ -632,7 +632,7 @@ def make_cedears():
                     {
                     "width": "100%",
                     "height": "390",
-                    "symbol": "NASDAQ:MSFT",
+                    "symbol": "NASDAQ:"""+ticker+"""",
                     "interval": "D",
                     "timezone": "America/Argentina/Buenos_Aires",
                     "theme": "light",
@@ -654,7 +654,6 @@ def make_cedears():
         components.html(widget, height=400, scrolling=False)
         c1,c2=st.columns((0.4,0.6))
         with c1:
-            st.write('Here')
             widget="""
                     <!-- TradingView Widget BEGIN -->
                     <div class="tradingview-widget-container">
@@ -665,7 +664,7 @@ def make_cedears():
                     "width": 100%,
                     "isTransparent": true,
                     "height": 590,
-                    "symbol": "NASDAQ:MSFT",
+                    "symbol": "NASDAQ:"""+ticker+"""",
                     "showIntervalTabs": true,
                     "displayMode": "multiple",
                     "locale": "es",
@@ -676,7 +675,6 @@ def make_cedears():
                     <!-- TradingView Widget END -->
                     """
             components.html(widget, height=600, scrolling=False)
-            st.write('Here')
         with c2:
             widget="""
                     <!-- TradingView Widget BEGIN -->
@@ -690,7 +688,7 @@ def make_cedears():
                     "width": 100%,
                     "height": 290,
                     "colorTheme": "light",
-                    "symbol": "NASDAQ:MSFT",
+                    "symbol": "NASDAQ:"""+ticker+"""",
                     "locale": "es"
                     }
                     </script>
@@ -708,7 +706,7 @@ def make_cedears():
                     "height": 290,
                     "isTransparent": true,
                     "colorTheme": "light",
-                    "symbol": "NASDAQ:MSFT",
+                    "symbol": "NASDAQ:"""+ticker+"""",
                     "locale": "es"
                     }
                     </script>
