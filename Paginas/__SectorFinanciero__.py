@@ -663,7 +663,7 @@ def make_cedears():
                     "interval": "1m",
                     "width": "100%",
                     "isTransparent": true,
-                    "height": "600",
+                    "height": "900",
                     "symbol": "NASDAQ:"""+ticker+"""",
                     "showIntervalTabs": true,
                     "displayMode": "multiple",
@@ -674,7 +674,7 @@ def make_cedears():
                     </div>
                     <!-- TradingView Widget END -->
                     """
-            components.html(widget, height=600, scrolling=False)
+            components.html(widget, height=900, scrolling=False)
         with c2:
             widget="""
                     <!-- TradingView Widget BEGIN -->
@@ -686,7 +686,7 @@ def make_cedears():
                     "largeChartUrl": "",
                     "displayMode": "adaptive",
                     "width": "100%",
-                    "height": "290",
+                    "height": "450",
                     "colorTheme": "light",
                     "symbol": "NASDAQ:"""+ticker+"""",
                     "locale": "es"
@@ -695,7 +695,7 @@ def make_cedears():
                     </div>
                     <!-- TradingView Widget END -->
                     """
-            components.html(widget, height=300, scrolling=False)
+            components.html(widget, height=450, scrolling=False)
             widget="""
                     <!-- TradingView Widget BEGIN -->
                     <div class="tradingview-widget-container">
@@ -703,7 +703,7 @@ def make_cedears():
                     <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-profile.js" async>
                     {
                     "width": "100%",
-                    "height": "290",
+                    "height": "450",
                     "isTransparent": true,
                     "colorTheme": "light",
                     "symbol": "NASDAQ:"""+ticker+"""",
@@ -713,7 +713,7 @@ def make_cedears():
                     </div>
                     <!-- TradingView Widget END -->
                     """
-            components.html(widget, height=300, scrolling=True)
+            components.html(widget, height=450, scrolling=True)
     st.text_input('Ticker', value="AAPL", key='cedear', placeholder='Ticker', label_visibility='collapsed')
     analisis_spy(S.cedear)
 
