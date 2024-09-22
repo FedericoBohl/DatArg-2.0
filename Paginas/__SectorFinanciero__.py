@@ -717,8 +717,7 @@ def make_cedears():
             
     st.text_input('Buscador de NASDAQ', value="AAPL", key='cedear', placeholder='Ticker')
     if isinstance(S.cedear,str):
-        st.write(S.cedear)
-        analisis_spy(S.cedear)
+        analisis_spy(S.cedear.capitalize())
 
 def make_merv_web():
     try:
