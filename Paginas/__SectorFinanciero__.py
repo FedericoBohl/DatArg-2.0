@@ -615,7 +615,7 @@ def make_forex():
 
 
 def make_cedears2():
-    @st.cache_resource(show_spinner=False)
+    #@st.cache_resource(show_spinner=False)
     def plot_spy():
         widget="""
                 <!-- TradingView Widget BEGIN -->
@@ -638,7 +638,7 @@ def make_cedears2():
                 "hasSymbolTooltip": false,
                 "isMonoSize": false,
                 "width": "100%",
-                "height": "590",
+                "height": "600",
                 }
                 </script>
                 </div>
@@ -647,13 +647,12 @@ def make_cedears2():
         components.html(widget, height=600, scrolling=False)
     plot_spy()
 
-    @st.cache_data(show_spinner=False)
+    #@st.cache_data(show_spinner=False)
     def analisis_spy(ticker):
         widget="""
                 <!-- TradingView Widget BEGIN -->
                 <div class="tradingview-widget-container">
                 <div class="tradingview-widget-container__widget"></div>
-                <div class="tradingview-widget-copyright"><a href="https://es.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Siga los mercados en TradingView</span></a></div>
                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js" async>
                 {
                 "symbol": "NASDAQ:"""+ticker+"""",
@@ -669,12 +668,11 @@ def make_cedears2():
         components.html(widget, height=200, scrolling=False)
         widget="""
                     <!-- TradingView Widget BEGIN -->
-                    <div class="tradingview-widget-container" style="height:100%;width:100%">
+                    <div class="tradingview-widget-container" style="height:100%;width:400">
                     <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
-                    <div class="tradingview-widget-copyright"><a href="https://es.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Siga los mercados en TradingView</span></a></div>
                     <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
                     {
-                    "autosize": true,
+                    "autosize": false,
                     "symbol": "NASDAQ:"""+ticker+"""",
                     "timezone": "America/Argentina/Buenos_Aires",
                     "theme": "light",
