@@ -615,7 +615,7 @@ def make_forex():
 
 
 def make_cedears2():
-    @st.cache_resource(show_spinner=False)
+    #@st.cache_resource(show_spinner=False)
     def plot_spy():
         widget="""
                 <!-- TradingView Widget BEGIN -->
@@ -638,7 +638,8 @@ def make_cedears2():
                 "hasSymbolTooltip": false,
                 "isMonoSize": false,
                 "width": "100%",
-                "height": "600"
+                "height": "600",
+                "borderUpColor": "white"
                 }
                 </script>
                 </div>
