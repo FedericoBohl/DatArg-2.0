@@ -293,7 +293,7 @@ def make_acciones():
     st.header('Acciones en USD')
     #@st.cache_resource(show_spinner=False)
     def iframe_acciones():
-        tradingview_widget = """
+        tradingview_widget = '''
             <!-- TradingView Widget BEGIN -->
             <div class="tradingview-widget-container">
             <div class="tradingview-widget-container__widget"></div>
@@ -343,9 +343,9 @@ def make_acciones():
             </script>
             </div>
             <!-- TradingView Widget END -->
-        """
+        '''
         components.html(tradingview_widget,height=600, scrolling=False)
-        tradingview_widget = """
+        tradingview_widget = '''
         <!-- TradingView Widget BEGIN -->
         <div class="tradingview-widget-container">
         <div class="tradingview-widget-container__widget"></div>
@@ -441,7 +441,7 @@ def make_acciones():
         </script>
         </div>
         <!-- TradingView Widget END -->
-        """
+        '''
         components.html(tradingview_widget,height=800, scrolling=False)
     iframe_acciones()
 
@@ -500,7 +500,7 @@ def make_bonds():
 def make_forex():
     #@st.cache_resource(show_spinner=False)
     def iframes():
-        tradingview_widget = """
+        tradingview_widget = '''
         <!-- TradingView Widget BEGIN -->
         <div class="tradingview-widget-container" style="width: 100%; height: 100%;">
         <div class="tradingview-widget-container__widget"></div>
@@ -532,9 +532,9 @@ def make_forex():
         </script>
         </div>
         <!-- TradingView Widget END -->
-        """
+        '''
         components.html(tradingview_widget, height=550, scrolling=True)
-        w_panel_forex_val="""<!-- TradingView Widget BEGIN -->
+        w_panel_forex_val='''<!-- TradingView Widget BEGIN -->
         <div class="tradingview-widget-container">
         <div class="tradingview-widget-container__widget"></div>
         <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>
@@ -562,7 +562,7 @@ def make_forex():
         }
         </script>
         </div>
-        <!-- TradingView Widget END -->"""
+        <!-- TradingView Widget END -->'''
         components.html(w_panel_forex_val, height=550, scrolling=True)
     iframes()
 
@@ -570,7 +570,7 @@ def make_forex():
 def make_cedears():
     #@st.cache_resource(show_spinner=False)
     def plot_spy():
-        widget="""
+        widget='''
                 <!-- TradingView Widget BEGIN -->
                 <div class="tradingview-widget-container">
                 <div class="tradingview-widget-container__widget"></div>
@@ -595,19 +595,19 @@ def make_cedears():
                 </script>
                 </div>
                 <!-- TradingView Widget END -->
-        """
+        '''
         components.html(widget, height=500, scrolling=False)
     plot_spy()
 
     #@st.cache_data(show_spinner=False)
     def analisis_spy(ticker):
-        widget="""
+        widget='''
                 <!-- TradingView Widget BEGIN -->
                 <div class="tradingview-widget-container">
                 <div class="tradingview-widget-container__widget"></div>
                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js" async>
                 {
-                "symbol": '"""+ticker+"""',
+                "symbol": "'''+ticker+'''",
                 "width": "100%",
                 "locale": "es",
                 "colorTheme": "light",
@@ -616,9 +616,9 @@ def make_cedears():
                 </script>
                 </div>
                 <!-- TradingView Widget END -->
-                """
+                '''
         components.html(widget, height=200, scrolling=False)
-        widget="""
+        widget='''
                     <!-- TradingView Widget BEGIN -->
                     <div class="tradingview-widget-container">
                     <div class="tradingview-widget-container__widget"></div>
@@ -626,7 +626,7 @@ def make_cedears():
                     {
                     "width": "100%",
                     "height": "390",
-                    "symbol": '"""+ticker+"""',
+                    "symbol": "'''+ticker+'''",
                     "interval": "D",
                     "timezone": "America/Argentina/Buenos_Aires",
                     "theme": "light",
@@ -644,11 +644,11 @@ def make_cedears():
                     </script>
                     </div>
                     <!-- TradingView Widget END -->
-                """
+                '''
         components.html(widget, height=400, scrolling=False)
         c1,c2=st.columns((0.4,0.6))
         with c1:
-            widget="""
+            widget='''
                     <!-- TradingView Widget BEGIN -->
                     <div class="tradingview-widget-container">
                     <div class="tradingview-widget-container__widget"></div>
@@ -658,7 +658,7 @@ def make_cedears():
                     "width": "100%",
                     "isTransparent": true,
                     "height": "900",
-                    "symbol": '"""+ticker+"""',
+                    "symbol": "'''+ticker+'''",
                     "showIntervalTabs": true,
                     "displayMode": "multiple",
                     "locale": "es",
@@ -667,10 +667,10 @@ def make_cedears():
                     </script>
                     </div>
                     <!-- TradingView Widget END -->
-                    """
+                    '''
             components.html(widget, height=900, scrolling=False)
         with c2:
-            widget="""
+            widget='''
                     <!-- TradingView Widget BEGIN -->
                     <div class="tradingview-widget-container">
                     <div class="tradingview-widget-container__widget"></div>
@@ -682,15 +682,15 @@ def make_cedears():
                     "width": "100%",
                     "height": "450",
                     "colorTheme": "light",
-                    "symbol": '"""+ticker+"""',
+                    "symbol": "'''+ticker+'''",
                     "locale": "es"
                     }
                     </script>
                     </div>
                     <!-- TradingView Widget END -->
-                    """
+                    '''
             components.html(widget, height=450, scrolling=False)
-            widget="""
+            widget='''
                     <!-- TradingView Widget BEGIN -->
                     <div class="tradingview-widget-container">
                     <div class="tradingview-widget-container__widget"></div>
@@ -700,13 +700,13 @@ def make_cedears():
                     "height": "450",
                     "isTransparent": true,
                     "colorTheme": "light",
-                    "symbol": '"""+ticker+"""',
+                    "symbol": "'''+ticker+'''",
                     "locale": "es"
                     }
                     </script>
                     </div>
                     <!-- TradingView Widget END -->
-                    """
+                    '''
             components.html(widget, height=450, scrolling=False)
             
     st.text_input('Buscador de equity -- Pruebe "NYSE:VIST" o "NASDAQ:GOOG"', value="NASDAQ:AAPL", key='cedear',help='Debe poner primero el exchange (ej. NYSE o NASDAQ), luego de dos puntos (":") y finalmente el activo a buscar.', placeholder='Ticker')
