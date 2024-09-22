@@ -714,7 +714,7 @@ def make_cedears():
                     <!-- TradingView Widget END -->
                     """
             components.html(widget, height=450, scrolling=True)
-    st.text_input('Ticker', value="AAPL", key='cedear', placeholder='Ticker', label_visibility='collapsed')
+    st.text_input('Buscador de NASDAQ', value="AAPL", key='cedear', placeholder='Ticker',)
     analisis_spy(S.cedear)
 
 def make_merv_web():
