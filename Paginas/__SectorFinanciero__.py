@@ -686,7 +686,7 @@ def make_cedears():
                     "largeChartUrl": "",
                     "displayMode": "adaptive",
                     "width": "100%",
-                    "height": "100%",
+                    "height": "290",
                     "colorTheme": "light",
                     "symbol": "NASDAQ:"""+ticker+"""",
                     "locale": "es"
