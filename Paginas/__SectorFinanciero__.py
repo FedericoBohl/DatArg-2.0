@@ -669,6 +669,7 @@ def make_cedears2():
                     <!-- TradingView Widget BEGIN -->
                     <div class="tradingview-widget-container">
                     <div class="tradingview-widget-container__widget"></div>
+                    <div class="tradingview-widget-copyright"><a href="https://es.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Siga los mercados en TradingView</span></a></div>
                     <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
                     {
                     "width": "100%",
