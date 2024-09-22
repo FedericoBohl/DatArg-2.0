@@ -661,9 +661,9 @@ def make_cedears():
                     <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
                     {
                     "interval": "1m",
-                    "width": 100%,
+                    "width": "100%",
                     "isTransparent": true,
-                    "height": 590,
+                    "height": "100%",
                     "symbol": "NASDAQ:"""+ticker+"""",
                     "showIntervalTabs": true,
                     "displayMode": "multiple",
