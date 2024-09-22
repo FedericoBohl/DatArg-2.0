@@ -668,10 +668,11 @@ def make_cedears2():
         components.html(widget, height=200, scrolling=False)
         widget="""
                     <!-- TradingView Widget BEGIN -->
-                    <div class="tradingview-widget-container" style="height:400;width:100%">
+                    <div class="tradingview-widget-container" style="height:400px;width:100%">
                     <div class="tradingview-widget-container__widget" style="height:calc(400px - 32px);width:100%"></div>
                     <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
                     {
+                    "autosize": true,
                     "symbol": "NASDAQ:"""+ticker+"""",
                     "timezone": "America/Argentina/Buenos_Aires",
                     "theme": "light",
