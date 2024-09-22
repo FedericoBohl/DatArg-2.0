@@ -672,7 +672,6 @@ def make_cedears2():
                     <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:400"></div>
                     <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
                     {
-                    "autosize": false,
                     "symbol": "NASDAQ:"""+ticker+"""",
                     "timezone": "America/Argentina/Buenos_Aires",
                     "theme": "light",
