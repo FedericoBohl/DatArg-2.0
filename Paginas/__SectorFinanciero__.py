@@ -596,7 +596,7 @@ def make_cedears():
                 "isZoomEnabled": false,
                 "hasSymbolTooltip": false,
                 "isMonoSize": false,
-                "width": 500,
+                "width": 100%,
                 "height": 500
                 }
                 </script>
