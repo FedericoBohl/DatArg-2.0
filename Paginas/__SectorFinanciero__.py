@@ -702,7 +702,7 @@ def make_cedears():
                     <div class="tradingview-widget-container__widget"></div>
                     <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-profile.js" async>
                     {
-                    "width": 100%,
+                    "width": "100%",
                     "height": "290",
                     "isTransparent": true,
                     "colorTheme": "light",
