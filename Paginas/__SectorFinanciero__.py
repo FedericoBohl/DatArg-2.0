@@ -567,8 +567,9 @@ def make_forex():
         components.html(w_panel_forex_val, height=550, scrolling=True)
     iframes()
 
-@st.cache_data(show_spinner=False)
+
 def make_metrics():
+    @st.cache_data(show_spinner=False)
     def get_dolar():
         url='https://dolarhoy.com/'
         response=requests.get(url)
@@ -740,11 +741,17 @@ def make_merv_web():
         make_metrics()
         bonos, acciones, cedears, forex= st.tabs(["Bonos", "Acciones",'Cedears','Forex'])
         with bonos:
-            make_bonds()
+            try:
+                make_bonds()
+            except: st.exception(Exception('🤯 Ups... Algo está andando mal. Disculpe las molestias, estamos trabajando para solucionarlo.'))
         with acciones:
-            make_acciones()
+            try:
+                make_acciones()
+            except: st.exception(Exception('🤯 Ups... Algo está andando mal. Disculpe las molestias, estamos trabajando para solucionarlo.'))
         with cedears:
-            make_cedears()
+            try:
+                make_cedears()
+            except: st.exception(Exception('🤯 Ups... Algo está andando mal. Disculpe las molestias, estamos trabajando para solucionarlo.'))
         with forex:
             make_forex()
     except Exception as e:
