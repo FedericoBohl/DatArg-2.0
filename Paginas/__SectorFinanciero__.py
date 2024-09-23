@@ -749,4 +749,6 @@ def make_merv_web():
             make_forex()
     except Exception as e:
         st.exception(e)#Exception('🤯 Ups... Algo está andando mal. Disculpe las molestias, estamos trabajando para solucionarlo.'))
+    st.divider()
+    st.caption('Ninguna de la información provista debe ser utilizada como recomendación financiera de ningún tipo. Invertir es riesgoso, actúe bajo su propia discreción.')
  
