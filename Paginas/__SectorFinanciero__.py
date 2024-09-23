@@ -587,7 +587,7 @@ def make_metrics():
     if isinstance(data,list):
         cols=st.columns(len(data),vertical_alignment='bottom')
         for i in range(len(data)):
-            cols[i].metric(data[i][0],f'${data[i][[1]]}',f'{data[i][2]}%')
+            cols[i].metric(data[i][0],f'${data[i][1]}',f'{data[i][2]}%')
 
 def make_cedears():
     #@st.cache_resource(show_spinner=False)
