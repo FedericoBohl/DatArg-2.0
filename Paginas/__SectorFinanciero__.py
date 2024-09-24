@@ -520,8 +520,8 @@ def plot_datos(data):
         cells=dict(values=[data[col] for col in data.columns],
                 fill = dict(color=['#f0f7ff', 
                                     fill_,
-                                    ['#FF8080' if var[c]<0 else ('#A5DD9B'if var[c]>0 else fill_[c]) for c in range(fill_)],
-                                    ['#FF8080' if var[c] else ('#A5DD9B'if var[c]>0 else fill_[c]) for c in range(fill_)],
+                                    ['#FF8080' if var[c]<0 else ('#A5DD9B'if var[c]>0 else fill_[c]) for c in range(len(fill_))],
+                                    ['#FF8080' if var[c] else ('#A5DD9B'if var[c]>0 else fill_[c]) for c in range(len(fill_))],
                                     fill_]),
                 line_color=['#8baed5','darkslategray'],
                 align = ['left','center'])))
