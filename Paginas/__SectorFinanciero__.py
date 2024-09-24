@@ -565,7 +565,7 @@ def make_bonds():
             t_1_nac,sob,bop=st.tabs(['Panel','Curva-Soberanos','Curva-Bopreales'])
             plot_sob,plot_bop=curva_soberanos(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])].drop(columns=['Tipo']))
             with t_1_nac:
-                st.plotly_chart(plot_datos(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])]),use_container_width=True)
+                st.plotly_chart(plot_datos(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])]),use_container_width=True,config={'displayModeBar': False})
             with sob:
                 st.plotly_chart(plot_sob,config={'displayModeBar': False},use_container_width=True)
             with bop:
@@ -577,7 +577,7 @@ def make_bonds():
         if isinstance(S.bonos,pd.DataFrame):
             st.subheader('Bonos Dollar Linked')
             t_1_ex,t_2_ex=st.tabs(['Panel','Curva'])
-            with t_1_ex: st.plotly_chart(plot_datos(S.bonos[S.bonos['Tipo'].isin(['Dollar Linked'])]),use_container_width=True)
+            with t_1_ex: st.plotly_chart(plot_datos(S.bonos[S.bonos['Tipo'].isin(['Dollar Linked'])]),use_container_width=True,config={'displayModeBar': False})
             with t_2_ex: curva_DL(S.bonos[S.bonos['Tipo'].isin(['Dollar Linked'])])
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     c1_2,c2_2=st.columns(2)
@@ -585,14 +585,14 @@ def make_bonds():
         if isinstance(S.bonos,pd.DataFrame):
             st.subheader('Bonos ajustados por CER')
             t_1_c,t_2_c=st.tabs(['Panel','Curva'])
-            with t_1_c: st.plotly_chart(plot_datos(S.bonos[S.bonos['Tipo'].isin(['Ajustable por CER'])]),use_container_width=True)
+            with t_1_c: st.plotly_chart(plot_datos(S.bonos[S.bonos['Tipo'].isin(['Ajustable por CER'])]),use_container_width=True,config={'displayModeBar': False})
             with t_2_c: curva_CER(S.bonos[S.bonos['Tipo'].isin(['Ajustable por CER'])])
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     with c2_2:
         if isinstance(S.bonos,pd.DataFrame):
             st.subheader('Lecaps')
             t_1_l,t_2_l=st.tabs(['Panel','Curva'])
-            with t_1_l: st.plotly_chart(plot_datos(S.bonos[S.bonos['Tipo'].isin(['Lecap'])]),use_container_width=True)
+            with t_1_l: st.plotly_chart(plot_datos(S.bonos[S.bonos['Tipo'].isin(['Lecap'])]),use_container_width=True,config={'displayModeBar': False})
             with t_2_l: curva_LECAPS(S.bonos[S.bonos['Tipo'].isin(['Lecap'])])
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     #with c2_2:    
