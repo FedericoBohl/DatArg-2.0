@@ -535,7 +535,7 @@ def plot_datos(data):
 def make_bonds():
     st.button('Recargar Datos',key='Recarga_datos_bonos',type='primary',use_container_width=True)
     if (not 'bonos' in S) or S.Recarga_datos_bonos:
-        S.bonos=get_ecovalores()
+        bonos=get_ecovalores()
         datasets={
                 'Bonos':'https://iol.invertironline.com/mercado/cotizaciones/argentina/bonos/todos',
                 'Letras':'https://iol.invertironline.com/mercado/cotizaciones/argentina/letras/todas',
@@ -545,11 +545,11 @@ def make_bonds():
         for k in datasets:
             iol=pd.concat([iol,load_iol(k,datasets[k])],ignore_index=True)
         iol.set_index('Ticker',inplace=True)
-        for i in S.bonos.index:
+        for i in bonos.index:
             if i in iol.index.values:
-                S.bonos.at[i,'Precio']=iol.at[i,'Precio']
-                S.bonos.at[i,'Var']=iol.at[i,'Var']
-
+                bonos.at[i,'Precio']=iol.at[i,'Precio']
+                bonos.at[i,'Var %']=iol.at[i,'Var']
+        S.bonos=bonos
         S.iol_bonos=iol
 
     c1_1,c2_1=st.columns(2)
