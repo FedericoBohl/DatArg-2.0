@@ -504,6 +504,28 @@ def make_panel_bonos(iol):
         fig_ars.update_layout(margin=dict(l=1, r=1, t=25, b=25))
         return fig_usd,fig_ars
 
+def plot_datos(data):
+    data=data[['Nombre','Precio','Var %','Valor Técnico','Int. Corrido', 'TIR','Duration','Paridad']].reset_index()
+    var=data['Var %']
+    data['Var %']=[str(i)+'%' for i in data['Var %']]
+    data['Precio']=['$'+str(i) for i in data['Precio']]
+    fig = go.Figure(data=go.Table(
+        columnwidth = [7,25,10,7,10,10,10,10,10],
+        header=dict(values=data.columns,
+                    fill = dict(color='#accbeb'),
+                    line_color='#8baed5',
+                    font=dict(color='white', size=14),
+                    ),
+        cells=dict(values=[data[col] for col in data.columns],
+                fill = dict(color=['#f0f7ff', 
+                                    ["white" if i % 2 == 0 else "lightgrey" for i in range(len(data))],
+                                    ['#ff2d5d' if c>0 else '#04b29b' for c in var],
+                                    ['#ff2d5d' if c>0 else '#04b29b' for c in var],
+                                    ["white" if i % 2 == 0 else "lightgrey" for i in range(len(data))]]),
+                line_color=['#8baed5','darkslategray'],
+                align = ['left','center'])))
+    return fig
+
 def make_bonds():
     st.button('Recargar Datos',key='Recarga_datos_bonos',type='primary',use_container_width=True)
     if (not 'bonos' in S) or S.Recarga_datos_bonos:
@@ -517,6 +539,11 @@ def make_bonds():
         for k in datasets:
             iol=pd.concat([iol,load_iol(k,datasets[k])],ignore_index=True)
         iol.set_index('Ticker',inplace=True)
+        for i in S.bonos.index:
+            if i in iol.index.values:
+                S.bonos.at[i,'Precio']=iol.at[i,'Precio']
+                S.bonos.at[i,'Var']=iol.at[i,'Var']
+
         S.iol_bonos=iol
 
     c1_1,c2_1=st.columns(2)
@@ -529,7 +556,8 @@ def make_bonds():
             st.subheader('Títulos Públicos')
             t_1_nac,sob,bop=st.tabs(['Panel','Curva-Soberanos','Curva-Bopreales'])
             plot_sob,plot_bop=curva_soberanos(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])].drop(columns=['Tipo']))
-            with t_1_nac: st.dataframe(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])].drop(columns=['Tipo']))
+            with t_1_nac:
+                st.plotly_chart(plot_datos(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])]),use_container_width=True)
             with sob:
                 st.plotly_chart(plot_sob,config={'displayModeBar': False},use_container_width=True)
             with bop:
