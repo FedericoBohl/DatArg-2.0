@@ -553,7 +553,9 @@ def make_bonds():
     except Exception as e:st.exception(e)
     with c1_1:
         st.subheader('Bonos en USD')
-        st.plotly_chart(fig_usd,config={'modeBarButtonsToRemove': ['zoom', 'pan','box select', 'lasso select','zoom in','zoom out']},use_container_width=True)
+        try:
+            st.plotly_chart(fig_usd,config={'modeBarButtonsToRemove': ['zoom', 'pan','box select', 'lasso select','zoom in','zoom out']},use_container_width=True)
+        except Exception as e:st.exception(e)
         if isinstance(S.bonos,pd.DataFrame):
             st.subheader('Títulos Públicos')
             t_1_nac,sob,bop=st.tabs(['Panel','Curva-Soberanos','Curva-Bopreales'])
