@@ -845,8 +845,9 @@ def make_cedears():
                     '''
             components.html(widget, height=450, scrolling=False)
             
-    st.text_input('Buscador de equity -- Pruebe "NYSE:VIST" o "NASDAQ:GOOG"', value="NASDAQ:AAPL", key='cedear',help='Debe poner primero el exchange (ej. NYSE o NASDAQ), luego de dos puntos (":") y finalmente el activo a buscar.', placeholder='Ticker')
-    if isinstance(S.cedear,str):
+    st.text_input('Buscador de equity -- Pruebe "NYSE:VIST" o "NASDAQ:GOOG"', key='cedear',help='Debe poner primero el exchange (ej. NYSE o NASDAQ), luego de dos puntos (":") y finalmente el activo a buscar.', placeholder='Ticker')
+    st.write(S.cedear)
+    if S.cedear!='':
         analisis_spy(S.cedear.capitalize())
 
 def make_merv_web():
