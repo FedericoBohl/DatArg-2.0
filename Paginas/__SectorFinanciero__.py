@@ -511,7 +511,7 @@ def plot_datos(data):
     data['Precio']=['$'+str(i) for i in data['Precio']]
     fill_=["white" if i % 2 == 0 else "lightgrey" for i in range(len(data))]
     fig = go.Figure(data=go.Table(
-        columnwidth = [7,25,10,7,10,10,10,10,10],
+        columnwidth = [7,25,10,10,10,10,10,10,10],
         header=dict(values=data.columns,
                     fill = dict(color='#accbeb'),
                     line_color='#8baed5',
