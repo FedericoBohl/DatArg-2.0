@@ -548,7 +548,9 @@ def make_bonds():
 
     c1_1,c2_1=st.columns(2)
     #Los dataframes deberían tener de index el ticker del bono para hacer el filtrado más simple
-    fig_usd,fig_ars=make_panel_bonos(S.iol_bonos.copy())
+    try:
+        fig_usd,fig_ars=make_panel_bonos(S.iol_bonos.copy())
+    except Exception as e:st.exception(e)
     with c1_1:
         st.subheader('Bonos en USD')
         st.plotly_chart(fig_usd,config={'modeBarButtonsToRemove': ['zoom', 'pan','box select', 'lasso select','zoom in','zoom out']},use_container_width=True)
@@ -557,7 +559,7 @@ def make_bonds():
             t_1_nac,sob,bop=st.tabs(['Panel','Curva-Soberanos','Curva-Bopreales'])
             plot_sob,plot_bop=curva_soberanos(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])].drop(columns=['Tipo']))
             with t_1_nac:
-                st.plotly_chart(plot_datos(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])]),use_container_width=True)
+                st.plotly_chart(plot_datos(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])]),use_container_width=T)
             with sob:
                 st.plotly_chart(plot_sob,config={'displayModeBar': False},use_container_width=True)
             with bop:
