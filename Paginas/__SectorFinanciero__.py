@@ -547,10 +547,11 @@ def make_bonds():
         for k in datasets:
             iol=pd.concat([iol,load_iol(k,datasets[k])],ignore_index=True)
         iol.set_index('Ticker',inplace=True)
-        for i in bonos.index:
-            if i in iol.index.values:
-                bonos.at[i,'Precio']=iol.at[i,'Precio']
-                bonos.at[i,'Var %']=iol.at[i,'Var']
+        if isinstance(bonos,pd.DataFrame):
+            for i in bonos.index:
+                if i in iol.index.values:
+                    bonos.at[i,'Precio']=iol.at[i,'Precio']
+                    bonos.at[i,'Var %']=iol.at[i,'Var']
         S.bonos=bonos
         S.iol_bonos=iol
 
