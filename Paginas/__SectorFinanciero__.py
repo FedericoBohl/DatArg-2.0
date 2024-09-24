@@ -72,34 +72,36 @@ def plot_galpones(data_now_gen : pd.DataFrame):
     st.plotly_chart(fig_merv,config={'modeBarButtonsToRemove': ['zoom', 'pan','box select', 'lasso select','zoom in','zoom out']},use_container_width=True)
     
 def get_ecovalores():
-    url='https://bonos.ecovalores.com.ar/eco/listado.php'
-    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
-    response = requests.get(url, headers=headers)
-    soup=BeautifulSoup(response.text,'html.parser')
-    tables=soup.find_all('table')
-    data=None
-    for i in range(len(tables)):
-        try:
-            table=tables[i]
-            headers = table.find_all('th')
-            header_texts = [header.get_text(strip=True) for header in headers]
-            if 'TIR' in header_texts:
-                data=[[td.text for td in tr.find_all('td')] for tr in table.find_all('tr')]
-                data=pd.DataFrame(data,columns=header_texts).dropna()
-                data.set_index('Título',inplace=True)
-                data['TIR']=[float(i.replace('.','').replace('%','').replace(',','.')) for i in data['TIR']]
-                data['Duration']=[float(i.replace(',','.')) for i in data['Duration']]
-                data['Var %']=[float(i.replace('+','').replace(',','.').replace('%','')) for i in data['Var %']]#[float(i.replace('.','').replace('%','').replace(',','.').replace('+','')) for i in data['Var %']]
-                data['Int. Corrido']=[float(i.replace('.','').replace(',','.')) for i in data['Int. Corrido']]
-                data['VT']=[float(i.replace('.','').replace(',','.')) for i in data['VT']]
-                data['Precio']=[float(i.replace('.','').replace(',','.')) for i in data['Precio']]
-                data['Vencimiento']=pd.to_datetime(data['Vencimiento'],format='%d/%m/%Y')
-                data['Próx. Vto.']=pd.to_datetime(data['Próx. Vto.'],format='%d/%m/%Y')
-                data.rename(columns={'VT':'Valor Técnico'},inplace=True)
-                break
-        except:continue
-    return data[['Nombre','Precio','Var %','Valor Técnico','Int. Corrido','TIR','Duration','Paridad','Vol %','Próx. Vto.','Vencimiento','Tipo']]
-
+    try:
+        url='https://bonos.ecovalores.com.ar/eco/listado.php'
+        headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
+        response = requests.get(url, headers=headers)
+        soup=BeautifulSoup(response.text,'html.parser')
+        tables=soup.find_all('table')
+        data=None
+        for i in range(len(tables)):
+            try:
+                table=tables[i]
+                headers = table.find_all('th')
+                header_texts = [header.get_text(strip=True) for header in headers]
+                if 'TIR' in header_texts:
+                    data=[[td.text for td in tr.find_all('td')] for tr in table.find_all('tr')]
+                    data=pd.DataFrame(data,columns=header_texts).dropna()
+                    data.set_index('Título',inplace=True)
+                    data['TIR']=[float(i.replace('.','').replace('%','').replace(',','.')) for i in data['TIR']]
+                    data['Duration']=[float(i.replace(',','.')) for i in data['Duration']]
+                    data['Var %']=[float(i.replace('+','').replace(',','.').replace('%','')) for i in data['Var %']]#[float(i.replace('.','').replace('%','').replace(',','.').replace('+','')) for i in data['Var %']]
+                    data['Int. Corrido']=[float(i.replace('.','').replace(',','.')) for i in data['Int. Corrido']]
+                    data['VT']=[float(i.replace('.','').replace(',','.')) for i in data['VT']]
+                    data['Precio']=[float(i.replace('.','').replace(',','.')) for i in data['Precio']]
+                    data['Vencimiento']=pd.to_datetime(data['Vencimiento'],format='%d/%m/%Y')
+                    data['Próx. Vto.']=pd.to_datetime(data['Próx. Vto.'],format='%d/%m/%Y')
+                    data.rename(columns={'VT':'Valor Técnico'},inplace=True)
+                    break
+            except:continue
+        return data[['Nombre','Precio','Var %','Valor Técnico','Int. Corrido','TIR','Duration','Paridad','Vol %','Próx. Vto.','Vencimiento','Tipo']]
+    except:
+        return None
 def load_iol(tipo_,url):
     response=requests.get(url)
     soup=BeautifulSoup(response.text,'html.parser')
