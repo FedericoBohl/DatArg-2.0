@@ -89,13 +89,13 @@ def get_ecovalores():
                 data.set_index('Título',inplace=True)
                 data['TIR']=[float(i.replace('.','').replace('%','').replace(',','.')) for i in data['TIR']]
                 data['Duration']=[float(i.replace(',','.')) for i in data['Duration']]
-                data['Var %']=[i.replace('+','') for i in data['Var %']]#[float(i.replace('.','').replace('%','').replace(',','.').replace('+','')) for i in data['Var %']]
+                data['Var %']=[float(i.replace('+','').replace(',','').replace('%','')) for i in data['Var %']]#[float(i.replace('.','').replace('%','').replace(',','.').replace('+','')) for i in data['Var %']]
                 data['Int. Corrido']=[float(i.replace('.','').replace(',','.')) for i in data['Int. Corrido']]
                 data['VT']=[float(i.replace('.','').replace(',','.')) for i in data['VT']]
                 data['Precio']=[float(i.replace('.','').replace(',','.')) for i in data['Precio']]
                 data['Vencimiento']=pd.to_datetime(data['Vencimiento'],format='%d/%m/%Y')
                 data['Próx. Vto.']=pd.to_datetime(data['Próx. Vto.'],format='%d/%m/%Y')
-                data=data.rename(columns={'VT':'Valor Técnico'})
+                data.rename(columns={'VT':'Valor Técnico'},inplace=True)
                 break
         except:continue
     return data[['Nombre','Precio','Var %','Valor Técnico','Int. Corrido','TIR','Duration','Paridad','Vol %','Próx. Vto.','Vencimiento','Tipo']]
@@ -559,7 +559,7 @@ def make_bonds():
             t_1_nac,sob,bop=st.tabs(['Panel','Curva-Soberanos','Curva-Bopreales'])
             plot_sob,plot_bop=curva_soberanos(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])].drop(columns=['Tipo']))
             with t_1_nac:
-                st.plotly_chart(plot_datos(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])]),use_container_width=T)
+                st.plotly_chart(plot_datos(S.bonos[S.bonos['Tipo'].isin(['Tasa Fija', 'BOPREAL'])]),use_container_width=True)
             with sob:
                 st.plotly_chart(plot_sob,config={'displayModeBar': False},use_container_width=True)
             with bop:
