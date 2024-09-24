@@ -100,6 +100,15 @@ def get_ecovalores():
         except:continue
     return data[['Nombre','Precio','Var %','Valor Técnico','Int. Corrido','TIR','Duration','Paridad','Vol %','Próx. Vto.','Vencimiento','Tipo']]
 
+def load_iol(tipo_,url):
+    response=requests.get(url)
+    soup=BeautifulSoup(response.text,'html.parser')
+    divs = soup.find_all("tr", {"data-cantidad": "1"})
+    ticker=[div.find('a').find("b").text.strip() for div in divs]
+    val=[float(div.find_all('td')[1].text.strip().replace('.','').replace(',','.')) for div in divs]
+    var=[float(div.find('span',{"data-field": "Variacion"}).text.replace('.','').replace(',','.')) for div in divs]
+    tipo=[tipo_ for div in divs]
+    return pd.DataFrame({'Ticker':ticker,'Precio':val,'Var':var,'Tipo':tipo})
 @st.cache_data(show_spinner=False)
 def curva_soberanos(data):
     sob=go.Figure()
@@ -446,13 +455,76 @@ def make_acciones():
         components.html(tradingview_widget,height=800, scrolling=False)
     iframe_acciones()
 
+def make_panel_bonos(iol):
+    data=pd.read_csv("Datos Bonos.csv",encoding='utf-8').set_index('Ticker')
+    for i in data.index:
+        if i in iol.index.values:
+            data.at[i,'Precio']=iol.at[i,'Precio']
+            data.at[i,'Var']=iol.at[i,'Var']
+    df_grouped = data[data['Monto Residual']>0].reset_index().groupby(["Tipo","Tipo-2","Ticker"])[["Monto Residual","Var","Nombre","Precio",'Moneda']].min().reset_index()
+    if not df_grouped.empty:
+        fig_usd = px.treemap(df_grouped[df_grouped['Moneda']=='U$S'], 
+                    path=[px.Constant("Bonos Argentinos"), 'Tipo',  'Tipo-2','Ticker'],
+                    values='Monto Residual',
+                    hover_name="Var",
+                    custom_data=["Nombre", 'Precio', "Var"],
+                    color='Var',
+                    range_color =[-6,6],color_continuous_scale=colorscale,
+                    labels={'Value': 'Number of Items'},
+                    color_continuous_midpoint=0)
+        fig_usd.update_traces(marker_line_width=1.5, marker_line_color='black',
+                hovertemplate="<br>".join([
+                    "<b>Nombre</b>: %{customdata[0]}",
+                    "<b>Precio (ARS)</b>: $%{customdata[1]}"
+                ])
+            )
+            
+        fig_usd.data[0].texttemplate = "<b>%{label}</b><br>%{customdata[2]}%"
+        fig_usd.update_traces(marker=dict(cornerradius=10))
+        fig_usd.update_layout(margin=dict(l=1, r=1, t=25, b=25))
+        
+        fig_ars = px.treemap(df_grouped[df_grouped['Moneda']=='$'], 
+                    path=[px.Constant("Bonos Argentinos"), 'Tipo',  'Tipo-2','Ticker'],
+                    values='Monto Residual',
+                    hover_name="Var",
+                    custom_data=["Nombre", 'Precio', "Var"],
+                    color='Var',
+                    range_color =[-6,6],color_continuous_scale=colorscale,
+                    labels={'Value': 'Number of Items'},
+                    color_continuous_midpoint=0)
+        fig_ars.update_traces(marker_line_width=1.5, marker_line_color='black',
+                hovertemplate="<br>".join([
+                    "<b>Nombre</b>: %{customdata[0]}",
+                    "<b>Precio (ARS)</b>: $%{customdata[1]}"
+                ])
+            )
+            
+        fig_ars.data[0].texttemplate = "<b>%{label}</b><br>%{customdata[2]}%"
+        fig_ars.update_traces(marker=dict(cornerradius=10))
+        fig_ars.update_layout(margin=dict(l=1, r=1, t=25, b=25))
+        return fig_usd,fig_ars
+
 def make_bonds():
     st.button('Recargar Datos',key='Recarga_datos_bonos',type='primary',use_container_width=True)
     if (not 'bonos' in S) or S.Recarga_datos_bonos:
         S.bonos=get_ecovalores()
+        datasets={
+                'Bonos':'https://iol.invertironline.com/mercado/cotizaciones/argentina/bonos/todos',
+                'Letras':'https://iol.invertironline.com/mercado/cotizaciones/argentina/letras/todas',
+                #'Obligaciones Negociables':'https://iol.invertironline.com/mercado/cotizaciones/argentina/obligaciones-negociables/todos'
+                }
+        iol=pd.DataFrame(columns=['Ticker','Precio','Var','Tipo'])
+        for k in datasets:
+            iol=pd.concat([iol,load_iol(k,datasets[k])],ignore_index=True)
+        iol.set_index('Ticker',inplace=True)
+        S.iol_bonos=iol
+
     c1_1,c2_1=st.columns(2)
     #Los dataframes deberían tener de index el ticker del bono para hacer el filtrado más simple
+    fig_usd,fig_ars=make_panel_bonos(S.iol_bonos.copy())
     with c1_1:
+        st.subheader('Bonos en USD')
+        st.plotly_chart(fig_usd,config={'modeBarButtonsToRemove': ['zoom', 'pan','box select', 'lasso select','zoom in','zoom out']},use_container_width=True)
         if isinstance(S.bonos,pd.DataFrame):
             st.subheader('Títulos Públicos')
             t_1_nac,sob,bop=st.tabs(['Panel','Curva-Soberanos','Curva-Bopreales'])
@@ -464,6 +536,8 @@ def make_bonds():
                 st.plotly_chart(plot_bop,config={'displayModeBar': False},use_container_width=True)
         else: st.exception(Exception('Error en la carga de datos desde ByMA. Disculpe las molestias, estamos trabajando para solucionarlo.'))
     with c2_1:
+        st.subheader('Bonos en ARS')
+        st.plotly_chart(fig_ars,config={'modeBarButtonsToRemove': ['zoom', 'pan','box select', 'lasso select','zoom in','zoom out']},use_container_width=True)
         if isinstance(S.bonos,pd.DataFrame):
             st.subheader('Bonos Dollar Linked')
             t_1_ex,t_2_ex=st.tabs(['Panel','Curva'])
@@ -739,7 +813,7 @@ def make_cedears():
 def make_merv_web():
     try:
         make_metrics()
-        bonos, acciones, cedears, forex= st.tabs(["Bonos", "Acciones",'Cedears','Forex'])
+        bonos, acciones, cedears, forex= st.tabs(["Bonos", "Acciones Argentinas",'Acciones Extranjeras','Forex'])
         with bonos:
             try:
                 make_bonds()
