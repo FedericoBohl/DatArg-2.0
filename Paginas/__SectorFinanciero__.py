@@ -89,7 +89,7 @@ def get_ecovalores():
                 data.set_index('Título',inplace=True)
                 data['TIR']=[float(i.replace('.','').replace('%','').replace(',','.')) for i in data['TIR']]
                 data['Duration']=[float(i.replace(',','.')) for i in data['Duration']]
-                data['Var %']=[float(i.replace('+','').replace(',','').replace('%','')) for i in data['Var %']]#[float(i.replace('.','').replace('%','').replace(',','.').replace('+','')) for i in data['Var %']]
+                data['Var %']=[float(i.replace('+','').replace(',','.').replace('%','')) for i in data['Var %']]#[float(i.replace('.','').replace('%','').replace(',','.').replace('+','')) for i in data['Var %']]
                 data['Int. Corrido']=[float(i.replace('.','').replace(',','.')) for i in data['Int. Corrido']]
                 data['VT']=[float(i.replace('.','').replace(',','.')) for i in data['VT']]
                 data['Precio']=[float(i.replace('.','').replace(',','.')) for i in data['Precio']]
@@ -521,8 +521,12 @@ def plot_datos(data):
                 fill = dict(color=['#f0f7ff', 
                                     fill_,
                                     ['#FF8080' if var[c]<0 else ('#A5DD9B'if var[c]>0 else fill_[c]) for c in range(len(fill_))],
-                                    ['#FF8080' if var[c] else ('#A5DD9B'if var[c]>0 else fill_[c]) for c in range(len(fill_))],
+                                    ['#FF8080' if var[c]<0 else ('#A5DD9B'if var[c]>0 else fill_[c]) for c in range(len(fill_))],
                                     fill_]),
+                font=dict(color=['black','black',
+                                 ['#632626' if var[c]<0 else ('#5F7161'if var[c]>0 else 'black') for c in range(len(fill_))],
+                                 ['#632626' if var[c]<0 else ('#5F7161'if var[c]>0 else 'black') for c in range(len(fill_))],
+                                 'black']),
                 line_color=['#8baed5','darkslategray'],
                 align = ['left','center'])))
     fig.update_layout(margin=dict(l=1, r=1, t=1, b=1))
