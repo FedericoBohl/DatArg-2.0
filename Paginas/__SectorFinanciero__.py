@@ -509,6 +509,7 @@ def plot_datos(data):
     var=data['Var %']
     data['Var %']=[str(i)+'%' for i in data['Var %']]
     data['Precio']=['$'+str(i) for i in data['Precio']]
+    fill_=["white" if i % 2 == 0 else "lightgrey" for i in range(len(data))]
     fig = go.Figure(data=go.Table(
         columnwidth = [7,25,10,7,10,10,10,10,10],
         header=dict(values=data.columns,
@@ -518,10 +519,10 @@ def plot_datos(data):
                     ),
         cells=dict(values=[data[col] for col in data.columns],
                 fill = dict(color=['#f0f7ff', 
-                                    ["white" if i % 2 == 0 else "lightgrey" for i in range(len(data))],
-                                    ['#ff2d5d' if c>0 else '#04b29b' for c in var],
-                                    ['#ff2d5d' if c>0 else '#04b29b' for c in var],
-                                    ["white" if i % 2 == 0 else "lightgrey" for i in range(len(data))]]),
+                                    fill_,
+                                    ['#FF8080' if var[c]<0 else ('#A5DD9B'if var[c]>0 else fill_[c]) for c in range(fill_)],
+                                    ['#FF8080' if var[c] else ('#A5DD9B'if var[c]>0 else fill_[c]) for c in range(fill_)],
+                                    fill_]),
                 line_color=['#8baed5','darkslategray'],
                 align = ['left','center'])))
     fig.update_layout(margin=dict(l=1, r=1, t=1, b=1))
