@@ -553,9 +553,7 @@ def make_bonds():
     except Exception as e:st.exception(e)
     with c1_1:
         st.subheader('Bonos en USD')
-        try:
-            st.plotly_chart(fig_usd,config={'modeBarButtonsToRemove': ['zoom', 'pan','box select', 'lasso select','zoom in','zoom out']},use_container_width=True)
-        except Exception as e:st.exception(e)
+        st.plotly_chart(fig_usd,config={'modeBarButtonsToRemove': ['zoom', 'pan','box select', 'lasso select','zoom in','zoom out']},use_container_width=True)
         if isinstance(S.bonos,pd.DataFrame):
             st.subheader('Títulos Públicos')
             t_1_nac,sob,bop=st.tabs(['Panel','Curva-Soberanos','Curva-Bopreales'])
@@ -849,7 +847,7 @@ def make_merv_web():
         with bonos:
             try:
                 make_bonds()
-            except: st.exception(Exception('🤯 Ups... Algo está andando mal. Disculpe las molestias, estamos trabajando para solucionarlo.'))
+            except Exception as e: st.exception(e)#st.exception(Exception('🤯 Ups... Algo está andando mal. Disculpe las molestias, estamos trabajando para solucionarlo.'))
         with acciones:
             try:
                 make_acciones()
