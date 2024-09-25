@@ -140,10 +140,6 @@ def load_data_map(end):
 
     df = pd.read_csv('donde-se-gasta.csv')
     df['Ubicacion geografica'] = df['Ubicacion geografica'].replace(provincias)
-    df['Presupuestado']=df['Presupuestado'].str.replace(',','').astype(float)
-    df['Ejecutado']=df['Ejecutado'].str.replace(',','').astype(float)
-    df['% Ejecutado']=df['% Ejecutado'].astype(float)
-
     df['% Presupuestado']=df['Presupuestado']/sum(df['Presupuestado'])*100
     extras=df.iloc[-4:]
     df=df.iloc[:-4]
