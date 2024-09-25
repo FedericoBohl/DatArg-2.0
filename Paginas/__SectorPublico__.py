@@ -139,13 +139,13 @@ def load_data_map(end):
         'Provincia del Neuquén':'Neuquén'}
 
     df = pd.read_csv('donde-se-gasta.csv')
-    df['Ubicacion geografica'] = df['Ubicacion geografica'].replace(provincias)
+    df['Ubicación Geográfica'] = df['Ubicación Geográfica'].replace(provincias)
     df['% Presupuestado']=df['Presupuestado']/sum(df['Presupuestado'])*100
     extras=df.iloc[-4:]
     df=df.iloc[:-4]
     geo=json.load(open('provincias.geojson', encoding='utf-8'))
     provincias_geo_df = pd.json_normalize(geo['features'])
-    df=provincias_geo_df.merge(df, left_on='properties.nombre', right_on='Ubicacion geografica')
+    df=provincias_geo_df.merge(df, left_on='properties.nombre', right_on='Ubicación Geográfica')
     return df, geo, extras
 
 @st.cache_resource(show_spinner=False)
@@ -282,7 +282,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
     # Añadir la figura del mapa al subplot
     fig.add_trace(go.Choroplethmapbox(
                     geojson=geo,  # GeoJSON con los datos geográficos
-                    locations=data['Ubicacion geografica'],  # Ubicaciones geográficas para las cuales tienes datos
+                    locations=data['Ubicación Geográfica'],  # Ubicaciones geográficas para las cuales tienes datos
                     featureidkey='properties.nombre',  # Clave que corresponde a la propiedad en geojson
                     z=data[f'% {eleccion}'],  # Datos de color
                     colorscale='Picnic',  # Escala de colores continua
@@ -316,7 +316,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                                             'value': extras[f'% {eleccion}'][25]  # Valor del umbral que indica la posición en el gauge
                                         }
                                      },
-                                title={"text": f"{extras['Ubicacion geografica'][25]}"}  # Título con el nombre de la ubicación geográfica
+                                title={"text": f"{extras['Ubicación Geográfica'][25]}"}  # Título con el nombre de la ubicación geográfica
                             ), row=1, col=1)
     fig.add_trace(go.Indicator(
                                 mode="number+gauge",  # Modo del indicador que incluye el número y el gauge
@@ -335,7 +335,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                                             'value': extras[f'% {eleccion}'][24]  # Valor del umbral que indica la posición en el gauge
                                         }
                                      },
-                                title={"text": f"{extras['Ubicacion geografica'][24]}"}  # Título con el nombre de la ubicación geográfica
+                                title={"text": f"{extras['Ubicación Geográfica'][24]}"}  # Título con el nombre de la ubicación geográfica
                             ), row=1, col=2)
     fig.add_trace(go.Indicator(
                                 mode="number+gauge",  # Modo del indicador que incluye el número y el gauge
@@ -354,7 +354,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                                             'value': extras[f'% {eleccion}'][26]  # Valor del umbral que indica la posición en el gauge
                                         }
                                      },
-                                title={"text": f"{extras['Ubicacion geografica'][26]}"}  # Título con el nombre de la ubicación geográfica
+                                title={"text": f"{extras['Ubicación Geográfica'][26]}"}  # Título con el nombre de la ubicación geográfica
                             ), row=3, col=1)
     fig.add_trace(go.Indicator(
                                 mode="number+gauge",  # Modo del indicador que incluye el número y el gauge
@@ -373,7 +373,7 @@ def make_map(data,geo,extras:pd.DataFrame,eleccion):
                                             'value': extras[f'% {eleccion}'][27]  # Valor del umbral que indica la posición en el gauge
                                         }
                                      },
-                                title={"text": f"{extras['Ubicacion geografica'][27]}"}  # Título con el nombre de la ubicación geográfica
+                                title={"text": f"{extras['Ubicación Geográfica'][27]}"}  # Título con el nombre de la ubicación geográfica
                             ), row=3, col=2)
 
     # Actualizar el layout de la figura
