@@ -51,9 +51,8 @@ try:
     )
     option_50.click()
     html = driver.page_source
-finally:
-    # Cerrar el driver
-    driver.quit()
+except:
+    pass
 
 # Parsear el contenido HTML con BeautifulSoup
 soup = BeautifulSoup(html, 'html.parser')
@@ -156,8 +155,6 @@ for i in data.index:
             t=None
     tipo2.append(t)
 data['Tipo-2']=tipo2
-
-driver=webdriver.Chrome()
 
 nombre_=[]
 descripcion_=[]
