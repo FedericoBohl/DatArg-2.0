@@ -22,6 +22,17 @@ jobs:
         run: |
           pip install selenium beautifulsoup4 pandas requests
 
+      - name: Install Google Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Install ChromeDriver
+        run: |
+          sudo apt-get install -yqq unzip
+          wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`/chromedriver_linux64.zip
+          unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
+
       - name: Run data extraction script
         run: |
           python load_CME.py
