@@ -51,42 +51,46 @@ try:
     )
     option_50.click()
     html = driver.page_source
-except:
+    # Parsear el contenido HTML con BeautifulSoup
+    soup = BeautifulSoup(html, 'html.parser')
+
+
+    # Buscar la tabla por su ID
+    tabla = soup.find('table', {'id': 'tabla-programa'})
+
+    # Inicializar una lista para almacenar los datos
+    datos = []
+
+    # Verificar si existe tbody, si no, buscar directamente en la tabla
+    if tabla.find('tbody'):
+        filas = tabla.find('tbody').find_all('tr')
+    else:
+        filas = tabla.find_all('tr')
+
+    # Recorrer todas las filas
+    for fila in filas:
+        # Extraer todas las celdas de la fila
+        celdas = fila.find_all('td')
+        # Extraer el texto de cada celda y almacenarlo en una lista
+        fila_datos = [celda.text.strip() for celda in celdas]
+        # Añadir la fila de datos a la lista principal
+        datos.append(fila_datos)
+
+    # Crear un DataFrame con los datos extraídos
+    columnas = ['Ejercicio', 'Ubicación Geográfica', 'Presupuestado', 'Ejecutado', '% Ejecutado']
+    df = pd.DataFrame(datos, columns=columnas)
+    df['Presupuestado']=[float(i.replace('.','').replace(',','.')) for i in df['Presupuestado']]
+    df['Ejecutado']=[float(i.replace('.','').replace(',','.')) for i in df['Ejecutado']]
+    df['% Ejecutado']=[float(i.replace('.','').replace(',','.')) for i in df['% Ejecutado']]
+    # Mostrar el DataFrame
+    df.to_csv("donde-se-gasta.csv")
+except Exception as e:
+    print('#######################################################################')
+    print(e)
+    print('#######################################################################')
     pass
 
-# Parsear el contenido HTML con BeautifulSoup
-soup = BeautifulSoup(html, 'html.parser')
 
-
-# Buscar la tabla por su ID
-tabla = soup.find('table', {'id': 'tabla-programa'})
-
-# Inicializar una lista para almacenar los datos
-datos = []
-
-# Verificar si existe tbody, si no, buscar directamente en la tabla
-if tabla.find('tbody'):
-    filas = tabla.find('tbody').find_all('tr')
-else:
-    filas = tabla.find_all('tr')
-
-# Recorrer todas las filas
-for fila in filas:
-    # Extraer todas las celdas de la fila
-    celdas = fila.find_all('td')
-    # Extraer el texto de cada celda y almacenarlo en una lista
-    fila_datos = [celda.text.strip() for celda in celdas]
-    # Añadir la fila de datos a la lista principal
-    datos.append(fila_datos)
-
-# Crear un DataFrame con los datos extraídos
-columnas = ['Ejercicio', 'Ubicación Geográfica', 'Presupuestado', 'Ejecutado', '% Ejecutado']
-df = pd.DataFrame(datos, columns=columnas)
-df['Presupuestado']=[float(i.replace('.','').replace(',','.')) for i in df['Presupuestado']]
-df['Ejecutado']=[float(i.replace('.','').replace(',','.')) for i in df['Ejecutado']]
-df['% Ejecutado']=[float(i.replace('.','').replace(',','.')) for i in df['% Ejecutado']]
-# Mostrar el DataFrame
-df.to_csv("donde-se-gasta.csv")
 
 #############################################################################
 def load_iol(tipo_,url):
@@ -128,86 +132,91 @@ def get_ecovalores():
         except:continue
     return data[['Nombre','Precio','Var %','Valor Técnico','Int. Corrido','TIR','Duration','Paridad','Vol %','Próx. Vto.','Vencimiento','Tipo']]
 
-datasets={
-        'Bonos':'https://iol.invertironline.com/mercado/cotizaciones/argentina/bonos/todos',
-        'Letras':'https://iol.invertironline.com/mercado/cotizaciones/argentina/letras/todas',
-        #'Obligaciones Negociables':'https://iol.invertironline.com/mercado/cotizaciones/argentina/obligaciones-negociables/todos'
-        }
-data=pd.DataFrame(columns=['Ticker','Precio','Var','Tipo'])
-for k in datasets:
-    data=pd.concat([data,load_iol(k,datasets[k])],ignore_index=True)
-data.set_index('Ticker',inplace=True)
+try:
+    datasets={
+            'Bonos':'https://iol.invertironline.com/mercado/cotizaciones/argentina/bonos/todos',
+            'Letras':'https://iol.invertironline.com/mercado/cotizaciones/argentina/letras/todas',
+            #'Obligaciones Negociables':'https://iol.invertironline.com/mercado/cotizaciones/argentina/obligaciones-negociables/todos'
+            }
+    data=pd.DataFrame(columns=['Ticker','Precio','Var','Tipo'])
+    for k in datasets:
+        data=pd.concat([data,load_iol(k,datasets[k])],ignore_index=True)
+    data.set_index('Ticker',inplace=True)
 
-ecovalores=get_ecovalores()
-for i in ecovalores.index:
-    if i in data.index.values:
-        ecovalores.at[i,'Precio']=data.at[i,'Precio']
-        ecovalores.at[i,'Var %']=data.at[i,'Var']
+    ecovalores=get_ecovalores()
+    for i in ecovalores.index:
+        if i in data.index.values:
+            ecovalores.at[i,'Precio']=data.at[i,'Precio']
+            ecovalores.at[i,'Var %']=data.at[i,'Var']
 
-tipo2=[]
-for i in data.index:
-    try:
-        t=ecovalores.loc[i]['Tipo']
-    except:
-        if i=='BPOD7':
-            t='BOPREAL'
-        else:
-            t=None
-    tipo2.append(t)
-data['Tipo-2']=tipo2
+    tipo2=[]
+    for i in data.index:
+        try:
+            t=ecovalores.loc[i]['Tipo']
+        except:
+            if i=='BPOD7':
+                t='BOPREAL'
+            else:
+                t=None
+        tipo2.append(t)
+    data['Tipo-2']=tipo2
 
-nombre_=[]
-descripcion_=[]
-ley_=[]
-isin_=[]
-moneda_=[]
-amortizacion_=[]
-intereses_=[]
-residual_=[]
+    nombre_=[]
+    descripcion_=[]
+    ley_=[]
+    isin_=[]
+    moneda_=[]
+    amortizacion_=[]
+    intereses_=[]
+    residual_=[]
 
-for ticker in data.index:
-    try:
-        driver.get(f'https://www.cohen.com.ar/Bursatil/Especie/{ticker}/MERVAL/24hs.')
-        wait = WebDriverWait(driver, 10)
-        wait.until(EC.presence_of_element_located(("id", "tablaDatosPerfil")))
-        #time.sleep(5)
-        df=[[td.text for td in tr.find_elements(By.TAG_NAME,'td')] for tr in driver.find_element("id", "tablaDatosPerfil").find_elements(By.TAG_NAME,'tr')[1:]]
-        df=pd.DataFrame(df,columns=['Dato','Val']).set_index('Dato')
-        #print(df)
-        nombre=df.loc['Denominación']['Val'] if 'Denominación' in df.index else ''
-        descripcion=df.loc['Descripción']['Val'] if 'Descripción' in df.index else ''
-        ley=df.loc['Ley']['Val'] if 'Ley' in df.index else ''
-        isin=df.loc['Código ISIN']['Val'] if 'Código ISIN' in df.index else ''
-        moneda=df.loc['Moneda de Emisión']['Val'] if 'Moneda de Emisión' in df.index else ''
-        amortizacion=df.loc['Forma Amortización']['Val'] if 'Forma Amortización' in df.index else ''
-        intereses=df.loc['Interés']['Val'] if 'Interés' in df.index else ''
-        residual=float(df.loc['Monto Residual']['Val'].replace('.','').replace(',','.')) if 'Monto Residual' in df.index else 0
-        if residual ==0:
-            residual=float(df.loc['Monto de Emisión']['Val'].replace('.','').replace(',','.')) if 'Monto de Emisión' in df.index else 0
-    except:
-        nombre=''
-        descripcion= ''
-        ley=''
-        isin=''
-        moneda=''
-        amortizacion=''
-        intereses=''
-        residual=0
-    nombre_.append(nombre)
-    descripcion_.append(descripcion)
-    ley_.append(ley)
-    isin_.append(isin)
-    moneda_.append(moneda)
-    amortizacion_.append(amortizacion)
-    intereses_.append(intereses)
-    residual_.append(residual)
-    time.sleep(3.5)
-data['Nombre']=nombre_
-data['Descripción']=descripcion_
-data['Ley']=ley_
-data['ISIN']=isin_
-data['Moneda']=moneda_
-data['Amortización']=amortizacion_
-data['Intereses']=intereses_
-data['Monto Residual']=residual_
-data.to_csv("Datos Bonos.csv")
+    for ticker in data.index:
+        try:
+            driver.get(f'https://www.cohen.com.ar/Bursatil/Especie/{ticker}/MERVAL/24hs.')
+            wait = WebDriverWait(driver, 10)
+            wait.until(EC.presence_of_element_located(("id", "tablaDatosPerfil")))
+            #time.sleep(5)
+            df=[[td.text for td in tr.find_elements(By.TAG_NAME,'td')] for tr in driver.find_element("id", "tablaDatosPerfil").find_elements(By.TAG_NAME,'tr')[1:]]
+            df=pd.DataFrame(df,columns=['Dato','Val']).set_index('Dato')
+            #print(df)
+            nombre=df.loc['Denominación']['Val'] if 'Denominación' in df.index else ''
+            descripcion=df.loc['Descripción']['Val'] if 'Descripción' in df.index else ''
+            ley=df.loc['Ley']['Val'] if 'Ley' in df.index else ''
+            isin=df.loc['Código ISIN']['Val'] if 'Código ISIN' in df.index else ''
+            moneda=df.loc['Moneda de Emisión']['Val'] if 'Moneda de Emisión' in df.index else ''
+            amortizacion=df.loc['Forma Amortización']['Val'] if 'Forma Amortización' in df.index else ''
+            intereses=df.loc['Interés']['Val'] if 'Interés' in df.index else ''
+            residual=float(df.loc['Monto Residual']['Val'].replace('.','').replace(',','.')) if 'Monto Residual' in df.index else 0
+            if residual ==0:
+                residual=float(df.loc['Monto de Emisión']['Val'].replace('.','').replace(',','.')) if 'Monto de Emisión' in df.index else 0
+        except:
+            nombre=''
+            descripcion= ''
+            ley=''
+            isin=''
+            moneda=''
+            amortizacion=''
+            intereses=''
+            residual=0
+        nombre_.append(nombre)
+        descripcion_.append(descripcion)
+        ley_.append(ley)
+        isin_.append(isin)
+        moneda_.append(moneda)
+        amortizacion_.append(amortizacion)
+        intereses_.append(intereses)
+        residual_.append(residual)
+        time.sleep(3.5)
+    data['Nombre']=nombre_
+    data['Descripción']=descripcion_
+    data['Ley']=ley_
+    data['ISIN']=isin_
+    data['Moneda']=moneda_
+    data['Amortización']=amortizacion_
+    data['Intereses']=intereses_
+    data['Monto Residual']=residual_
+    data.to_csv("Datos Bonos.csv")
+except Exception as e:
+    print('#######################################################################')
+    print(e)
+    print('#######################################################################')
