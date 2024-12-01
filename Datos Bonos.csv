@@ -1,147 +1,150 @@
 Ticker,Precio,Var,Tipo,Tipo-2,Nombre,Descripción,Ley,ISIN,Moneda,Amortización,Intereses,Monto Residual
-AE38,68870.0,-1.11,Bonos,Tasa Fija,,,,,,,,0
-AE38C,60.03,0.05,Bonos,,,,,,,,,0
-AE38D,61.23,-0.79,Bonos,,,,,,,,,0
-AL29,81200.0,0.03,Bonos,Tasa Fija,,,,,,,,0
-AL29C,70.69,0.58,Bonos,,,,,,,,,0
-AL29D,72.19,0.73,Bonos,,,,,,,,,0
-AL30,72300.0,-1.51,Bonos,Tasa Fija,,,,,,,,0
-AL30C,62.67,-1.08,Bonos,,,,,,,,,0
-AL30D,63.9,-0.91,Bonos,,,,,,,,,0
-AL35,65500.0,-1.17,Bonos,Tasa Fija,,,,,,,,0
-AL35C,56.85,-0.97,Bonos,,,,,,,,,0
-AL35D,58.2,-0.51,Bonos,,,,,,,,,0
-AL41,60690.0,-0.91,Bonos,Tasa Fija,,,,,,,,0
-AL41C,52.65,-0.49,Bonos,,,,,,,,,0
-AL41D,53.95,-0.18,Bonos,,,,,,,,,0
-BA37D,64120.0,-2.12,Bonos,Tasa Fija,,,,,,,,0
-BA37E,9300.0,0.0,Bonos,,,,,,,,,0
-BA7DC,55.65,-1.92,Bonos,,,,,,,,,0
-BA7DD,56.86,-0.24,Bonos,,,,,,,,,0
-BAO25,108.0,0.0,Bonos,,,,,,,,,0
-BB37D,59790.0,-0.05,Bonos,Tasa Fija,,,,,,,,0
-BB37E,8600.0,0.0,Bonos,,,,,,,,,0
-BB7DD,51.72,-4.75,Bonos,,,,,,,,,0
-BC37D,57100.0,-4.83,Bonos,,,,,,,,,0
-BC37E,62500.0,0.0,Bonos,,,,,,,,,0
-BDC28,110.8,3.26,Bonos,,,,,,,,,0
-BNA26,115400.0,0.43,Bonos,,,,,,,,,0
-BP27D,67.2,0.0,Bonos,,,,,,,,,0
-BPA7C,94.81,1.07,Bonos,,,,,,,,,0
-BPA7D,96.5,0.62,Bonos,,,,,,,,,0
-BPB7C,89.35,-0.72,Bonos,,,,,,,,,0
-BPB7D,91.5,0.0,Bonos,,,,,,,,,0
-BPC7C,85.0,0.0,Bonos,,,,,,,,,0
-BPC7D,87.1,0.69,Bonos,,,,,,,,,0
-BPD7C,84.0,-0.23,Bonos,,,,,,,,,0
-BPD7D,85.93,-0.76,Bonos,,,,,,,,,0
-BPJ25,75600.0,-0.65,Bonos,BOPREAL,,,,,,,,0
-BPJ5C,65.5,-0.75,Bonos,,,,,,,,,0
-BPJ5D,67.25,0.74,Bonos,,,,,,,,,0
-BPO27,69850.0,0.0,Bonos,,,,,,,,,0
-BPOA7,108500.0,-0.45,Bonos,BOPREAL,,,,,,,,0
-BPOB7,103010.0,-0.52,Bonos,BOPREAL,,,,,,,,0
-BPOC7,97650.0,0.04,Bonos,BOPREAL,,,,,,,,0
-BPOD7,96130.0,-0.84,Bonos,BOPREAL,,,,,,,,0
-BPY26,103350.0,-0.43,Bonos,BOPREAL,,,,,,,,0
-BPY6C,89.5,-0.27,Bonos,,,,,,,,,0
-BPY6D,91.48,-0.13,Bonos,,,,,,,,,0
-CO26,29400.0,0.0,Bonos,Tasa Fija,,,,,,,,0
-CO26D,25.5,-0.97,Bonos,,TD PUB.PCIA. CORDOBA 1 V.27/10/26 USD CG,Provincia de Córdoba,,ARPCDB320099,,,,0
-CUAP,22395.0,-0.37,Bonos,Ajustable por CER,,,,,,,,0
-DICP,35825.0,0.06,Bonos,Ajustable por CER,,,,,,,,0
-DIP0,35900.0,2.71,Bonos,Ajustable por CER,,,,,,,,0
-EF25D,69.0,0.29,Bonos,,,,,,,,,0
-ERF25,77100.0,-0.12,Bonos,,,,,,,,,0
-GD29,83100.0,-0.77,Bonos,Tasa Fija,,,,,,,,0
-GD29C,72.06,-0.53,Bonos,,,,,,,,,0
-GD29D,73.02,-1.12,Bonos,,,,,,,,,0
-GD30,74520.0,-1.94,Bonos,Tasa Fija,,,,,,,,0
-GD30C,64.48,-2.0,Bonos,,,,,,,,,0
-GD30D,66.1,-1.34,Bonos,,,,,,,,,0
-GD35,65550.0,-1.2,Bonos,Tasa Fija,,,,,,,,0
-GD35C,56.97,-0.62,Bonos,,,,,,,,,0
-GD35D,58.23,-0.29,Bonos,,,,,,,,,0
-GD38,71030.0,-0.79,Bonos,Tasa Fija,,,,,,,,0
-GD38C,61.63,-0.9,Bonos,,,,,,,,,0
-GD38D,63.0,-0.53,Bonos,,,,,,,,,0
-GD41,60790.0,-0.91,Bonos,Tasa Fija,,,,,,,,0
-GD41C,52.75,-0.54,Bonos,,,,,,,,,0
-GD41D,53.9,-0.59,Bonos,,,,,,,,,0
-GD46,67400.0,-0.91,Bonos,Tasa Fija,,,,,,,,0
-GD46C,58.89,0.0,Bonos,,,,,,,,,0
-GD46D,60.0,-0.92,Bonos,,,,,,,,,0
-NDT1D,67.0,0.0,Bonos,,,,,,,,,0
-NDT25,91800.0,0.32,Bonos,,,,,,,,,0
-NDT5D,81.4,1.11,Bonos,,,,,,,,,0
-PAP0,17380.0,-2.9,Bonos,Ajustable por CER,,,,,,,,0
-PARP,17920.0,0.22,Bonos,Ajustable por CER,,,,,,,,0
-PBA25,102.6,0.39,Bonos,,,,,,,,,0
-PM29C,65.0,0.0,Bonos,,,,,,,,,0
-PM29D,64.9,0.0,Bonos,,,,,,,,,0
-PMM29,73550.0,-0.18,Bonos,,,,,,,,,0
-PR17,373.0,0.94,Bonos,,,,,,,,,0
-PUL26,75530.0,0.0,Bonos,,,,,,,,,0
-S24DD,82.2,0.24,Bonos,,,,,,,,,0
-SA24D,92640.0,-0.81,Bonos,,,,,,,,,0
-T15D5,114.25,0.52,Bonos,,,,,,,,,0
-T17O5,112.3,0.44,Bonos,,,,,,,,,0
-T2V4,96500.0,0.0,Bonos,,,,,,,,,0
-T2X5,591.0,0.1,Bonos,,,,,,,,,0
-T2X5D,0.53,1.92,Bonos,,,,,,,,,0
-T4X4,584.3,0.0,Bonos,,,,,,,,,0
-T4X4D,0.49,0.0,Bonos,,,,,,,,,0
-T5X4,489.25,0.11,Bonos,,,,,,,,,0
-TC25P,5210.0,0.57,Bonos,,,,,,,,,0
-TDE25,122000.0,0.41,Bonos,,,,,,,,,0
-TFU27,61000.0,0.0,Bonos,,,,,,,,,0
-TG25,505.0,0.0,Bonos,,,,,,,,,0
-TO26,74.4,1.29,Bonos,Tasa Fija,,,,,,,,0
-TV25,97880.0,0.38,Bonos,,,,,,,,,0
-TVPA,2589.0,0.36,Bonos,,,,,,,,,0
-TVPE,11000.0,2.8,Bonos,,,,,,,,,0
-TVPP,13.5,5.3,Bonos,,,,,,,,,0
-TVPY,3900.0,0.0,Bonos,,,,,,,,,0
-TX25,974.0,0.07,Bonos,,,,,,,,,0
-TX26,1972.0,0.2,Bonos,Ajustable por CER,,,,,,,,0
-TX26D,1.78,1.71,Bonos,,,,,,,,,0
-TX28,1685.0,-0.29,Bonos,Ajustable por CER,,,,,,,,0
-TX28D,1.49,5.52,Bonos,,,,,,,,,0
-TX31,775.0,2.64,Bonos,,,,,,,,,0
-TY27P,119.45,0.0,Bonos,,,,,,,,,0
-TZV25,95100.0,-1.85,Bonos,Dollar Linked,,,,,,,,0
-TZVD5,92000.0,2.44,Bonos,,,,,,,,,0
-TZX25,184.4,0.76,Bonos,Ajustable por CER,,,,,,,,0
-TZX26,202.0,0.04,Bonos,Ajustable por CER,,,,,,,,0
-TZX27,183.0,-1.02,Bonos,Ajustable por CER,,,,,,,,0
-TZX28,168.25,-1.02,Bonos,Ajustable por CER,,,,,,,,0
-TZX6D,0.15,0.0,Bonos,,,,,,,,,0
-TZXD5,157.0,-0.34,Bonos,,,,,,,,,0
-TZXD6,142.5,-0.17,Bonos,,,,,,,,,0
-TZXD7,130.5,-0.38,Bonos,,,,,,,,,0
-TZXM5,128.75,0.35,Bonos,,,,,,,,,0
-TZXM6,122.75,-0.12,Bonos,,,,,,,,,0
-TZXM7,107.0,1.9,Bonos,,,,,,,,,0
-TZXO6,81.25,0.0,Bonos,,,,,,,,,0
-TZXY5,94.4,0.0,Bonos,,,,,,,,,0
-S11N4,107.95,0.13,Letras,,,,,,,,,0
-S29N4,130.95,0.16,Letras,Lecap,,,,,,,,0
-S13D4,121.18,0.19,Letras,,,,,,,,,0
-S17E5,120.9,0.31,Letras,,,,,,,,,0
-S31E5,156.7,0.38,Letras,Lecap,,,,,,,,0
-S28F5,139.62,0.37,Letras,Lecap,,,,,,,,0
-S14M5,109.35,0.32,Letras,,,,,,,,,0
-S31M5,132.55,0.01,Letras,Lecap,,,,,,,,0
-SM5D,0.12,-2.43,Letras,,,,,,,,,0
-S16A5,110.6,0.82,Letras,,,,,,,,,0
-S28A5,108.6,0.18,Letras,,,,,,,,,0
-S16Y5,112.8,1.07,Letras,,,,,,,,,0
-S30Y5,109.6,0.18,Letras,,,,,,,,,0
-S18J5,116.35,0.51,Letras,,,,,,,,,0
-S30J5,114.11,0.14,Letras,,,,,,,,,0
-S31L5,112.0,-0.11,Letras,,,,,,,,,0
-S15G5,109.34,0.12,Letras,,,,,,,,,0
-S29G5,116.3,0.47,Letras,,,,,,,,,0
-S12S5,115.7,0.44,Letras,,,,,,,,,0
-S30S5,114.97,-0.01,Letras,,,,,,,,,0
-BNA6D,102.9,0.39,Letras,,,,,,,,,0
+AE38,75100.0,0.26,Bonos,Tasa Fija,BONO REP. ARGENTINA USD STEP UP 2038,BONOS DE LA REPÚBLICA ARGENTINA EN DÓLARES ESTADOUNIDENSES STEP UP 2038,Nacional,ARARGE3209U2,U$S,"La amortización se efectuará en VEINTIDÓS (22) cuotas semestrales iguales el 9 de enero y el 9 de julio de cada año, con la primera cuota el 9 de julio de 2027 y la última cuota el 9 de enero de 2038. La totalidad de las condiciones definitivas de la presente emisión constan en la Resolución N° 381/2020 del Ministerio de Economía de la Nación publicada el 18.08.2020 en el Boletín Oficial.","Devengarán intereses, sobre la base de un año de 360 días integrado por 12 meses de 30 días cada uno, de acuerdo con las siguientes tasas anuales: i. Del 4 de septiembre de 2020 (inclusive) al 9 de julio de 2021 (exclusive): 0,125%. ii. Del 9 de julio de 2021 (inclusive) al 9 de julio de 2022 (exclusive): 2,00%. iii. Del 9 de julio de 2022 (inclusive) al 9 de julio de 2023 (exclusive): 3,875%. iv. Del 9 de julio de 2023 (inclusive) al 9 de julio de 2024 (exclusive): 4,25%. v. Del 9 de julio de 2024 (inclusive) al vencimiento: 5,00%.",7231447653.0
+AE38C,68.46,0.72,Bonos,,BONO REP. ARGENTINA USD STEP UP 2038,Gobierno Nacional,,ARARGE3209U2,,,,0.0
+AE38D,70.14,0.76,Bonos,,,,,,,,,0.0
+AL29,83490.0,1.59,Bonos,Tasa Fija,,,,,,,,0.0
+AL29C,75.86,1.58,Bonos,,,,,,,,,0.0
+AL29D,77.62,1.06,Bonos,,,,,,,,,0.0
+AL30,76390.0,-0.19,Bonos,Tasa Fija,,,,,,,,0.0
+AL30C,69.31,0.02,Bonos,,,,,,,,,0.0
+AL30D,71.01,-0.25,Bonos,,,,,,,,,0.0
+AL35,71680.0,0.05,Bonos,Tasa Fija,,,,,,,,0.0
+AL35C,65.09,0.37,Bonos,,,,,,,,,0.0
+AL35D,66.77,-0.08,Bonos,,,,,,,,,0.0
+AL41,67100.0,-0.54,Bonos,Tasa Fija,,,,,,,,0.0
+AL41C,61.32,0.16,Bonos,,,,,,,,,0.0
+AL41D,62.46,-0.46,Bonos,,,,,,,,,0.0
+BA37D,72000.0,0.13,Bonos,Tasa Fija,,,,,,,,0.0
+BA37E,9300.0,0.0,Bonos,,,,,,,,,0.0
+BA7DC,65.32,0.0,Bonos,,,,,,,,,0.0
+BA7DD,67.55,0.82,Bonos,,,,,,,,,0.0
+BAO25,108.0,0.0,Bonos,,,,,,,,,0.0
+BB37D,65500.0,-0.45,Bonos,Tasa Fija,,,,,,,,0.0
+BB37E,8600.0,0.0,Bonos,,,,,,,,,0.0
+BB7DD,61.3,0.16,Bonos,,,,,,,,,0.0
+BC37D,62400.0,-2.11,Bonos,,,,,,,,,0.0
+BC37E,74000.0,1.52,Bonos,,,,,,,,,0.0
+BDC28,104.95,4.37,Bonos,,,,,,,,,0.0
+BNA26,109600.0,-1.25,Bonos,,LT P NEUQUEN D1739/23 S1 CL1 V19/04/26 U$S CG,LETRAS DEL TESORO DE LA PROVINCIA DEL NEUQUEN SERIE I CLASE I CON VENCI-MIENTO EL 19.04.26 (Decr. Provincial Nro. 1739/23),Nacional,AR0700643700,U$S,"Será en cuatro cuotas iguales y consecutivas a abonarse el 19.07.2025, 19.10.2025, 19.01.2026 y 19.04.2026.","Intereses: Devengarán intereses a la tasa fija del 9,45% nominal anual. Los intereses se pagarán de la siguiente forma: (i) el primer pago operará el 19.07.2024; y (ii) luego de esa fecha, los intereses se pagarán trimestralmente los días 19.10.2024, 19.01.2025, 19.04.2025, 19.07.2025, 19.10.2025, 19.01.2026 y 19.04.2026.",99310474.0
+BP27D,67.2,0.0,Bonos,,,,,,,,,0.0
+BPA7C,94.25,0.8,Bonos,,,,,,,,,0.0
+BPA7D,96.6,0.41,Bonos,,,,,,,,,0.0
+BPB7C,89.9,-0.02,Bonos,,,,,,,,,0.0
+BPB7D,92.1,-0.13,Bonos,,,,,,,,,0.0
+BPC7C,85.11,0.54,Bonos,,,,,,,,,0.0
+BPC7D,87.0,-0.41,Bonos,,,,,,,,,0.0
+BPD7C,85.39,0.93,Bonos,,,,,,,,,0.0
+BPD7D,87.5,0.24,Bonos,,,,,,,,,0.0
+BPJ25,63480.0,-2.16,Bonos,BOPREAL,,,,,,,,0.0
+BPJ5C,57.4,-2.16,Bonos,,,,,,,,,0.0
+BPJ5D,58.8,-2.92,Bonos,,,,,,,,,0.0
+BPO27,69850.0,0.0,Bonos,,,,,,,,,0.0
+BPOA7,103830.0,0.56,Bonos,BOPREAL,,,,,,,,0.0
+BPOB7,99050.0,-0.24,Bonos,BOPREAL,,,,,,,,0.0
+BPOC7,93500.0,0.1,Bonos,BOPREAL,,,,,,,,0.0
+BPOD7,93500.0,0.33,Bonos,BOPREAL,,,,,,,,0.0
+BPY26,100550.0,0.36,Bonos,BOPREAL,,,,,,,,0.0
+BPY6C,91.77,1.21,Bonos,,,,,,,,,0.0
+BPY6D,94.01,0.66,Bonos,,,,,,,,,0.0
+CO26,28800.0,-0.34,Bonos,Tasa Fija,,,,,,,,0.0
+CO26D,26.39,1.69,Bonos,,,,,,,,,0.0
+CUAP,26610.0,0.07,Bonos,Ajustable por CER,,,,,,,,0.0
+DICP,38200.0,0.0,Bonos,Ajustable por CER,,,,,,,,0.0
+DIP0,38405.0,-1.01,Bonos,Ajustable por CER,,,,,,,,0.0
+EF25D,75.0,0.0,Bonos,,,,,,,,,0.0
+ERF25,76990.0,-2.54,Bonos,,,,,,,,,0.0
+GD29,85640.0,-0.33,Bonos,Tasa Fija,,,,,,,,0.0
+GD29C,77.57,-0.29,Bonos,,,,,,,,,0.0
+GD29D,79.26,-0.61,Bonos,,,,,,,,,0.0
+GD30,78310.0,-0.43,Bonos,Tasa Fija,,,,,,,,0.0
+GD30C,71.15,-0.19,Bonos,,,,,,,,,0.0
+GD30D,72.82,-0.41,Bonos,,,,,,,,,0.0
+GD35,71670.0,0.02,Bonos,Tasa Fija,,,,,,,,0.0
+GD35C,65.15,0.1,Bonos,,,,,,,,,0.0
+GD35D,66.76,0.08,Bonos,,,,,,,,,0.0
+GD38,76900.0,0.52,Bonos,Tasa Fija,,,,,,,,0.0
+GD38C,69.47,0.12,Bonos,,,,,,,,,0.0
+GD38D,70.95,-0.35,Bonos,,,,,,,,,0.0
+GD41,67090.0,-0.23,Bonos,Tasa Fija,,,,,,,,0.0
+GD41C,61.02,-0.21,Bonos,,,,,,,,,0.0
+GD41D,62.95,0.23,Bonos,,,,,,,,,0.0
+GD46,72040.0,0.19,Bonos,Tasa Fija,,,,,,,,0.0
+GD46C,64.97,-0.59,Bonos,,,,,,,,,0.0
+GD46D,67.29,0.71,Bonos,,,,,,,,,0.0
+NDT1D,67.0,0.0,Bonos,,"BONO PCIA. DE NEUQUEN 8,625% V. 12/05/30",TITULOS PUBLICOS,,,,,,0.0
+NDT25,89360.0,0.4,Bonos,,,,,,,,,0.0
+NDT5D,82.95,0.16,Bonos,,,,,,,,,0.0
+PAP0,21350.0,1.23,Bonos,Ajustable por CER,,,,,,,,0.0
+PARP,20375.0,-0.73,Bonos,Ajustable por CER,,,,,,,,0.0
+PBA25,106.15,0.9,Bonos,,,,,,,,,0.0
+PM29C,64.0,0.0,Bonos,,BONO PCIA.MENDOZA REGS 2.75% V.19/11/29,TITULOS PUBLICOS,,,,,,0.0
+PM29D,67.1,-0.22,Bonos,,,,,,,,,0.0
+PMM29,71800.0,0.27,Bonos,,,,,,,,,0.0
+PR17,460.0,-0.32,Bonos,,,,,,,,,0.0
+PUL26,75530.0,0.0,Bonos,,,,,,,,,0.0
+S24DD,79.0,2.93,Bonos,,,,,,,,,0.0
+SA24D,83500.0,1.62,Bonos,,,,,,,,,0.0
+T13F6,100.4,0.0,Bonos,,,,,,,,,0.0
+T15D5,123.9,-0.52,Bonos,,,,,,,,,0.0
+T17O5,120.0,-0.2,Bonos,,,,,,,,,0.0
+T2V4,96500.0,0.0,Bonos,,,,,,,,,0.0
+T2X5,617.3,0.21,Bonos,,,,,,,,,0.0
+T2X5D,0.56,-3.62,Bonos,,,,,,,,,0.0
+T4X4,584.3,0.0,Bonos,,,,,,,,,0.0
+T4X4D,0.49,0.0,Bonos,,,,,,,,,0.0
+T5X4,506.7,0.21,Bonos,,,,,,,,,0.0
+TC25P,5479.0,0.25,Bonos,,,,,,,,,0.0
+TDE25,126500.0,0.71,Bonos,,,,,,,,,0.0
+TFU27,61000.0,0.0,Bonos,,,,,,,,,0.0
+TG25,390.0,7.96,Bonos,,,,,,,,,0.0
+TO26,82.79,-0.7,Bonos,Tasa Fija,,,,,,,,0.0
+TV25,99300.0,0.5,Bonos,,,,,,,,,0.0
+TVPA,2749.0,-2.17,Bonos,,,,,,,,,0.0
+TVPE,9800.0,-1.06,Bonos,,,,,,,,,0.0
+TVPP,23.4,-8.96,Bonos,,,,,,,,,0.0
+TVPY,3580.0,-0.55,Bonos,,,,,,,,,0.0
+TX25,1056.0,1.83,Bonos,,,,,,,,,0.0
+TX26,1640.0,-0.15,Bonos,Ajustable por CER,,,,,,,,0.0
+TX26D,1.54,1.71,Bonos,,,,,,,,,0.0
+TX28,1544.5,-0.06,Bonos,Ajustable por CER,,,,,,,,0.0
+TX28D,1.45,0.13,Bonos,,,,,,,,,0.0
+TX31,840.3,-1.91,Bonos,,,,,,,,,0.0
+TY27P,119.45,0.0,Bonos,,,,,,,,,0.0
+TZV25,97700.0,0.31,Bonos,Dollar Linked,,,,,,,,0.0
+TZVD5,93000.0,0.0,Bonos,,,,,,,,,0.0
+TZX25,196.65,0.07,Bonos,Ajustable por CER,,,,,,,,0.0
+TZX26,218.0,-0.11,Bonos,Ajustable por CER,,,,,,,,0.0
+TZX27,200.1,0.75,Bonos,Ajustable por CER,,,,,,,,0.0
+TZX28,181.65,-0.54,Bonos,Ajustable por CER,,,,,,,,0.0
+TZX6D,0.2,0.0,Bonos,,,,,,,,,0.0
+TZXD5,169.0,0.29,Bonos,,,,,,,,,0.0
+TZXD6,154.6,-0.19,Bonos,,,,,,,,,0.0
+TZXD7,141.0,-0.35,Bonos,,,,,,,,,0.0
+TZXM5,135.9,0.36,Bonos,,,,,,,,,0.0
+TZXM6,132.05,-0.11,Bonos,,,,,,,,,0.0
+TZXM7,115.9,0.17,Bonos,,,,,,,,,0.0
+TZXO5,98.25,0.25,Bonos,,,,,,,,,0.0
+TZXO6,88.75,0.56,Bonos,,,,,,,,,0.0
+TZXY5,100.5,0.19,Bonos,,,,,,,,,0.0
+S13D4,125.42,0.23,Letras,,,,,,,,,0.0
+S2D4D,0.12,0.0,Letras,,,,,,,,,0.0
+S17E5,125.58,0.36,Letras,,,,,,,,,0.0
+S31E5,162.9,0.31,Letras,Lecap,,,,,,,,0.0
+S28F5,145.8,0.44,Letras,Lecap,,,,,,,,0.0
+S14M5,114.15,0.3,Letras,,,,,,,,,0.0
+S31M5,138.65,0.39,Letras,Lecap,,,,,,,,0.0
+SM5D,0.13,-6.47,Letras,,,,,,,,,0.0
+S16A5,115.2,0.3,Letras,,,,,,,,,0.0
+S28A5,113.35,0.22,Letras,,LETRAS TESORO NAC,,,,,,,0.0
+S16Y5,116.9,0.17,Letras,,,,,,,,,0.0
+S30Y5,114.99,0.29,Letras,,,,,,,,,0.0
+SJ5C,0.0,0.0,Letras,,,,,,,,,0.0
+SJ5D,0.12,-0.86,Letras,,,,,,,,,0.0
+S18J5,122.3,0.0,Letras,,,,,,,,,0.0
+S30J5,120.43,0.01,Letras,,,,,,,,,0.0
+S31L5,118.36,-0.24,Letras,,,,,,,,,0.0
+S15G5,115.8,0.08,Letras,,,,,,,,,0.0
+S29G5,123.0,-0.16,Letras,,,,,,,,,0.0
+S12S5,123.0,0.17,Letras,,,,,,,,,0.0
+S30S5,122.19,0.07,Letras,,,,,,,,,0.0
+BNA6D,104.0,0.0,Letras,,,,,,,,,0.0
