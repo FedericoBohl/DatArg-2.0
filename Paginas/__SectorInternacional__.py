@@ -596,6 +596,7 @@ def make_internacional_web():
         with st.container(border=True):get_uk(datetime.now().strftime("%Y%m%d"))
     with c2:
         with st.container(border=True):get_jp(datetime.now().strftime("%Y%m%d"))
+    '''
     with st.container(border=True):
         st.markdown("<h3 style='text-align: center;'>Canasta de Monedas de Latam</h3>", unsafe_allow_html=True)
         df,fx=load_canasta(datetime.now().strftime("%Y%m%d"))
@@ -650,3 +651,4 @@ def make_internacional_web():
             c22.metric('Chile',f"{fx['CLP'][1]:.2f} USD",delta=f'Share: {(100*fx["CLP"][0]):.2f}%',delta_color='off')
             c21.metric('México',f"{fx['MXN'][1]:.2f} USD",delta=f'Share: {(100*fx["MXN"][0]):.2f}%',delta_color='off')
         st.caption('El índice en en base Enero-2000=100 y las ponderaciones en base a la participación en el comercio mundial de cada año. La idea es crear una métrica que se asemeje al Broad Dolar Index pero con respecto a Latinoamérica.')
+    '''

@@ -121,11 +121,13 @@ def make_metrics(precios,rem):
         c11,c12,c13,c14=st.columns(4,vertical_alignment='center')
         last=precios.index[-1]
         core=precios.dropna(subset=['Nucleo'])
-        c11.metric('Inflación Mensual',value=f'{precios['IPC-InfM'][-1]*100:.2f}%',delta=f'{(precios['IPC-InfM'][-1]-precios['IPC-InfM'][-2])*100:.2f} PP',delta_color='inverse')
-        c12.metric('Inflación Interanual',value=f'{precios['IPC-InfA'][-1]*100:.2f}%',delta=f'{(precios['IPC-InfA'][-1]-precios['IPC-InfA'][-2])*100:.2f} PP',delta_color='inverse')
-        c13.metric(f'Inflación Núcleo {("("+core.index[-1].strftime("%b")+")") if core.index[-1]<last else ""}',value=f'{core['Nucleo-InfM'][-1]*100:.2f}%',delta=f'{(core['Nucleo-InfM'][-1]-core['Nucleo-InfM'][-2])*100:.2f} PP',delta_color='inverse')
+        c11.metric('Inflación Mensual',value=f"{precios['IPC-InfM'][-1]*100:.2f}%",delta=f"{(precios['IPC-InfM'][-1]-precios['IPC-InfM'][-2])*100:.2f} PP",delta_color='inverse')
+        c12.metric('Inflación Interanual',value=f"{precios['IPC-InfA'][-1]*100:.2f}%",delta=f"{(precios['IPC-InfA'][-1]-precios['IPC-InfA'][-2])*100:.2f} PP",delta_color='inverse')
+        c13.metric(f'Inflación Núcleo {("("+core.index[-1].strftime("%b")+")") if core.index[-1]<last else ""}',value=f"{core['Nucleo-InfM'][-1]*100:.2f}%",delta=f"{(core['Nucleo-InfM'][-1]-core['Nucleo-InfM'][-2])*100:.2f} PP",delta_color='inverse')
         t1=pd.Timestamp(precios.index[-1].year,precios.index[-1].month+1,1) 
-        c14.metric(f'REM para {meses_espanol[t1.month]}',f'{rem['REM'].loc[t1]*100:.2f}%',delta=f'{(rem['REM'].loc[t1]-precios['IPC-InfM'][-1])*100:.2f} PP',delta_color='inverse')
+        try:
+            c14.metric(f"REM para {meses_espanol[t1.month]}",f"{rem['REM'].loc[t1]*100:.2f}%",delta=f"{(rem['REM'].loc[t1]-precios['IPC-InfM'][-1])*100:.2f} PP",delta_color='inverse')
+        except:pass
 @st.cache_data(show_spinner=False)
 def data_selected(categoria_IPC):
     data:pd.DataFrame=S.precios.copy()
